@@ -1,0 +1,29 @@
+[
+    {
+        "id": "1",
+        "razaoSocial": "testes",
+        "cnpj": "teste",
+        "telefone": "teste",
+        "endereco": "teste",
+        "email": "testes@teste.com",
+        "moeda": "US$"
+    },
+    {
+        "id": "2",
+        "razaoSocial": "Empresa 2",
+        "cnpj": "123123123123123",
+        "telefone": "123123123123123123",
+        "endereco": "Rua aoisdoiansdio ",
+        "email": "emial@email.com",
+        "moeda": "R$"
+    },
+    {
+        "id": 3,
+        "razaoSocial": "teste empresa",
+        "cnpj": "123123123",
+        "telefone": "123123123",
+        "endereco": "rua 123123123",
+        "email": "123123@gmail.com",
+        "moeda": "US$"
+    }
+]

@@ -1,0 +1,13 @@
+[
+    {
+        "id": "serv_680784a53882b",
+        "empresa_id": 2,
+        "codigo": "BM 999.888",
+        "nome": "programação",
+        "descricao": "Serviço de programação",
+        "descricao_en": "dev",
+        "descricao_es": "dev",
+        "unidade": "UN",
+        "preco": 1000
+    }
+]

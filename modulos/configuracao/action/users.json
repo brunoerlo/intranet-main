@@ -1,0 +1,26 @@
+[
+    {
+        "id": "user_67d2ccb612fa8",
+        "nome": "Bruno Erlo",
+        "email": "dev@brazmix.com",
+        "senha": "$2y$10$JC3TVQFUVmQQx88gUtoTg.qKLKkvdgey8T\/LyLQJGYG1rvkNqKwSm",
+        "role": "admin"
+    },
+    {
+        "id": "user_67d2d8405cdb7",
+        "nome": "Paulo Aguiar",
+        "email": "paulo.aguiar@brazmix.com",
+        "senha": "$2y$10$wcJjjzp3bH7jSdEesUfrheyub7iQCd58xEN7KIRZd9f877KenI6ZK",
+        "role": "admin"
+    },
+    {
+        "id": "user_67e5a484140e0",
+        "nome": "User teste",
+        "email": "teste@brazmix.com",
+        "senha": "$2y$12$Mldg5bXeQ\/7Rx2exsLktZuA4HMA7WzAFoiziXVyKo8fLu.B24CVny",
+        "role": "user",
+        "modulos": [
+            "clientes"
+        ]
+    }
+]
