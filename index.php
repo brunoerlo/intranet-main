@@ -197,7 +197,7 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
     const modulo = this.value;
 
     mostrarSubmodulos(modulo);
-
+    /*
     if (modulo && modulosData[modulo].length > 0) {
 
         // pega o primeiro submódulo
@@ -206,7 +206,9 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
         // carrega automaticamente
         carregarSubmodulo(modulo, primeiroSubmodulo);
     }
+    */
     });
+
 
     function carregarSubmodulo(modulo, submodulo) {
         const loading = document.getElementById("loading");
