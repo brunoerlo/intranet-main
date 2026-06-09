@@ -239,7 +239,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         comecaDownloadCSV(csv);
     }
     
-    ///faz download do csv
+    //faz download do csv
     function comecaDownloadCSV(input) {
         const blob = new Blob([input], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
@@ -247,7 +247,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         //faz download ao clicar no botao
         document.getElementById('btn-exportar').addEventListener('click', () => {
             const a = document.createElement('a');
-            a.download = 'test-csv.csv'; //nome do arquivo
+            a.download = 'faturas.csv'; //nome do arquivo
             a.href = url; //pega a url que foi criada
             a.style.display = 'none'; //não mostra o download sendo feito
             document.body.appendChild(a); 
