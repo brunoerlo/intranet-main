@@ -8,7 +8,7 @@
         <div class="row g-3 mb-3">
             <div class="col-auto">
                 <label for="taxaDolar" class="form-label">Taxa do Dólar</label>
-                <input type="text" class="form-control" style="width: 150px;" name="taxaDolar" id="taxaDolar" placeholder="Ex: 5.87" required>
+                <input type="text" class="form-control" style="width: 150px;" name="taxaDolar" id="taxaDolar" placeholder="Ex: 5.8700" required>
             </div>
             <div class="col-auto">
                 <label for="notaFiscal" class="form-label">Nº da Nota Fiscal</label>

@@ -24,6 +24,11 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <button class="btn btn-outline-secondary" id="btn-imprimir" title="Imprimir">
             🖨️ Imprimir
         </button>
+
+        <!-- Exportar -->
+        <button class="btn btn-outline-secondary" id="btn-exportar" title="Exportar CSV">
+            Exportar CSV
+        </button>
     </div>
     <!-- Tabela de Produtos -->
     <div id="mostrar-impressao">
@@ -217,6 +222,36 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     printBtn.addEventListener('click', function() {
         print();
     })
+
+    fetch('./modulos/faturas/action/faturas.json')
+        .then(res => res.json())
+        .then(data => handle(data))
+
+    function handle(inputData) {
+        console.log(inputData);
+        const headers = Object.keys(inputData[0]);
+        const main = inputData.map((item) => {
+            return Object.values(item).toString();
+        });
+        const csv = [headers, ...main].join('\n');
+        comecaDownloadCSV(csv);
+    }
+
+    function comecaDownloadCSV(input) {
+        const blob = new Blob([input], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+
+        document.getElementById('btn-exportar').addEventListener('click', () => {
+            const a = document.createElement('a');
+            a.download = 'test-csv.csv';
+            a.href = url;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        });
+    }
 
 </script>
 
