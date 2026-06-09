@@ -222,11 +222,10 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     printBtn.addEventListener('click', function() {
         print();
     })
-
-    //pega o json que vai ser transformado em csv
-    fetch('./modulos/faturas/action/faturas.json')
-        .then(res => res.json())
-        .then(data => handle(data))
+    
+    //pega o json e coloca dentro de uma variavel
+    const faturas = <?= json_encode($faturas) ?>;
+    handle(faturas);
 
     //detalha como eh a formatação do csv
     function handle(inputData) {
