@@ -178,7 +178,7 @@ if (file_exists($arquivo)) {
                                     data-user='<?= json_encode($user, JSON_HEX_APOS) ?>'>
                                 Editar
                             </button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
+                            <button class="btn btn-danger btn-sm delete-btn">Excluir</button>
                         </td>
                     </tr>
                     <tr class="collapse-row" id="collapse-<?= htmlspecialchars($user['id']) ?>" style="display: none;">
@@ -221,7 +221,8 @@ if (file_exists($arquivo)) {
 </div>
 
 <script>
-  document.body.addEventListener("submit", function (event) {
+
+document.body.addEventListener("submit", function (event) {
     if (event.target.classList.contains("edit-form")) {
         event.preventDefault();
 
@@ -270,18 +271,18 @@ if (file_exists($arquivo)) {
 
 
 
-    function carregarModulosExistentes(callback) {
-        fetch('./modulos/configuracao/action/listar_modulos.php')
-            .then(response => response.json())
-            .then(data => callback(Object.keys(data)))
-            .catch(error => {
-                console.error("Erro ao carregar módulos existentes:", error);
-                callback([]);
-            });
-    }
+function carregarModulosExistentes(callback) {
+    fetch('./modulos/configuracao/action/listar_modulos.php')
+        .then(response => response.json())
+        .then(data => callback(Object.keys(data)))
+        .catch(error => {
+            console.error("Erro ao carregar módulos existentes:", error);
+            callback([]);
+        });
+}
 
-    
-    document.body.addEventListener("click", function (event) {
+
+document.body.addEventListener("click", function (event) {
     if (event.target.classList.contains("edit-btn")) {
         const btn = event.target;
         const user = JSON.parse(btn.getAttribute("data-user"));
@@ -319,4 +320,34 @@ if (file_exists($arquivo)) {
         });
     }
 });
+
+//Deletar
+document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const usuarioId = this.closest('tr').getAttribute('data-id');
+        if (confirm("Tem certeza que deseja excluir este Usuario?")) {
+            const formData = new FormData();
+            formData.append('id', usuarioId);
+
+            fetch('./modulos/configuracao/action/delete_user.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Usuario excluído com sucesso!');
+                        location.reload();
+                    } else {
+                        alert('Erro ao excluir o Usuario: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Ocorreu um erro ao tentar excluir o Usuario.');
+                });
+        }
+    });
+});
+
 </script>
