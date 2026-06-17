@@ -193,7 +193,8 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     if (typeof ordemCrescente === 'undefined') {
         var ordemCrescente = true;
     }
-    document.querySelector('th.sortable').addEventListener('click', () => {
+    
+    document.querySelector('.sortable').addEventListener('click', () => {
         const tbody = document.querySelector('#tabela-faturas tbody');
         const allRows = Array.from(tbody.querySelectorAll('tr'));
 
