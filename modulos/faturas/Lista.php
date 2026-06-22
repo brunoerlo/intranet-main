@@ -161,14 +161,10 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     });
 
     function aplicarFiltroFaturas(valorSelecionado) {
-        const linhasImportadas = document.querySelectorAll('.cliente-importado');
 
         if (valorSelecionado === 'todos') {
             linhasImportadas.forEach(l => l.style.display = '');
             linhasCadastradas.forEach(l => l.style.display = '');
-        } else if (valorSelecionado === 'importado') {
-            linhasImportadas.forEach(l => l.style.display = '');
-            linhasCadastradas.forEach(l => l.style.display = 'none');
         }
     }
 
@@ -193,7 +189,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     if (typeof ordemCrescente === 'undefined') {
         var ordemCrescente = true;
     }
-    
+
     document.querySelector('.sortable').addEventListener('click', () => {
         const tbody = document.querySelector('#tabela-faturas tbody');
         const allRows = Array.from(tbody.querySelectorAll('tr'));
@@ -220,6 +216,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
     const printBtn = document.getElementById('btn-imprimir');
     
+    //impressao
     printBtn.addEventListener('click', function() {
         print();
     })
