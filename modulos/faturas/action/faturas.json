@@ -25458,5 +25458,465 @@
         "unidadeMedida": "UN",
         "quantidade": "30",
         "preco": "133.13"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 140.021",
+        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
+        "unidadeMedida": "UN",
+        "quantidade": "16",
+        "preco": "111.31"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 616.300",
+        "descricao": "BOMBA ALTA PRESSAO 4x3 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "1",
+        "preco": "306.44"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 616.900",
+        "descricao": "BOMBA ALTA PRESSAO 6x4 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "475.00"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 617.300",
+        "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "4",
+        "preco": "532.58"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 113.005",
+        "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "167.83"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "98.20"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "237.03"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "12",
+        "preco": "308.01"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 632.100",
+        "descricao": "CAVALETE BD 5 (2 ROL 6309) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "12",
+        "preco": "218.78"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 632.400",
+        "descricao": "CAVALETE BD 6 (3 ROL 6310) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "15",
+        "preco": "265.14"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 632.500",
+        "descricao": "CAVALETE BD 8 (3 ROL 6310) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "266.29"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 101.016",
+        "descricao": "CARPETE VINIL AT 12MM1,2X12MS\/COST 3M",
+        "unidadeMedida": "RL",
+        "quantidade": "6",
+        "preco": "584.40"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 101.017",
+        "descricao": "CARPETE VINIL AT 14MM 1,2Mx12M C\/COST 3M",
+        "unidadeMedida": "RL",
+        "quantidade": "5",
+        "preco": "667.88"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 130.093",
+        "descricao": "CHAVEIRO TRENA 2 MTS C LOGO",
+        "unidadeMedida": "UN",
+        "quantidade": "500",
+        "preco": "0.01"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 127.010",
+        "descricao": "DISCO BORRACHA 3 E 4 D.E 270MM D.I 80MM",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "11.15"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 127.020",
+        "descricao": "DISCO BORRACHA 6 E 8 D.E 370MM D.I 80MM",
+        "unidadeMedida": "UN",
+        "quantidade": "75",
+        "preco": "15.53"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 112.003",
+        "descricao": "EIXO CAV BD 6 (44x560 MM) 3 ROL 6310",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "48.26"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 112.004",
+        "descricao": "EIXO CAV BD 8 (44x590 MM) 3 ROL 6310",
+        "unidadeMedida": "UN",
+        "quantidade": "40",
+        "preco": "49.50"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 628.201",
+        "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA COMPL",
+        "unidadeMedida": "UN",
+        "quantidade": "80",
+        "preco": "24.26"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 116.005",
+        "descricao": "GAXETA ALGODAO GRAFITADA QD 5\/8 CX 10 KG",
+        "unidadeMedida": "KG",
+        "quantidade": "30",
+        "preco": "8.84"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 120.095",
+        "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
+        "unidadeMedida": "MT",
+        "quantidade": "90",
+        "preco": "22.54"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 120.092",
+        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
+        "unidadeMedida": "MT",
+        "quantidade": "90",
+        "preco": "25.20"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 120.202",
+        "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM 150PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "6",
+        "preco": "146.48"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 120.093",
+        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM 150PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "6",
+        "preco": "247.16"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 124.016",
+        "descricao": "MARTELO MOINHO BMH-8 (JG C\/ 4 UN)",
+        "unidadeMedida": "JG",
+        "quantidade": "30",
+        "preco": "189.95"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 114.142",
+        "descricao": "PALETEIRA HIDR CAP 2.500 KGS",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "403.80"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 130.094",
+        "descricao": "REGUA EM PVC 20CM C LOGO",
+        "unidadeMedida": "UN",
+        "quantidade": "500",
+        "preco": "0.01"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "101.55"
+    },
+    {
+        "nomeFatura": "FAT 0443\/2026",
+        "notaFiscal": "NF 878",
+        "txDolar": "5.0511",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "133.13"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 112.014",
+        "descricao": "BUCHA EIXO BD 8 EXT",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "33.49"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 112.013",
+        "descricao": "BUCHA EIXO BD 10",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "50.09"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 621.314",
+        "descricao": "CARCACA BD 8 EXT DISCO BORR B FIXO",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "422.01"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 621.394",
+        "descricao": "CARCACA BD 10 DISC BORR B FIXO",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "1128.35"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 632.910",
+        "descricao": "CAVALETE BD 8 EXT MONTADO C\/ BUCHA",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "754.15"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 632.920",
+        "descricao": "CAVALETE BD 10 MONTADO C\/BUCHA",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "960.08"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 127.059",
+        "descricao": "DISCO BORRACHA 8 EXTR FORTE",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "20.96"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 127.060",
+        "descricao": "DISCO BORRACHA 10",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "24.30"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 112.010",
+        "descricao": "EIXO CAV BD 8 EXT P\/ BUCHA 2 ROL 6314",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "105.46"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 112.011",
+        "descricao": "EIXO CAV BD 10 P\/ BUCHA 3 ROL 6314",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "105.53"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 621.326",
+        "descricao": "FLANGE ADAPTADORA BD 10",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "158.09"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 628.500",
+        "descricao": "FLANGE AP GAX BD 10 E 8 EXT - COMPL",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "74.00"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 120.217",
+        "descricao": "MANGUEIRA SUCCAO 10x8Lx22MM 150 PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "20",
+        "preco": "348.97"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 132.038",
+        "descricao": "ROLAMENTO 6314Z 2L(EIXO BD8 EXFT) EBD 10",
+        "unidadeMedida": "UN",
+        "quantidade": "60",
+        "preco": "11.13"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 133.046",
+        "descricao": "ROTOR 8X4 CR HP150 D310 ACO FUND",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "105.56"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 133.047",
+        "descricao": "ROTOR 10X4 RT HP180 D400 ACO FUND",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "160.06"
+    },
+    {
+        "nomeFatura": "FAT 0444\/2026",
+        "notaFiscal": "NF 879",
+        "txDolar": "5.1757",
+        "codigo": "BM 621.325",
+        "descricao": "TAMPA ROLAMENTO 10 E 8 EXT",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "14.79"
     }
 ]

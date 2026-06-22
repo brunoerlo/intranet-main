@@ -17,6 +17,7 @@ $noRepeat = array_unique($nomes);
                 <th class="sortable">Fatura</th>
                 <th class="menor">Nota Fiscal</th>
                 <th class="menor">Taxa Dólar</th>
+                <th class="menor">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -26,9 +27,14 @@ $noRepeat = array_unique($nomes);
                 $taxaDolar = $faturas[$index]["txDolar"]    ?? '';
             ?>
             <tr class="table-warning linha-fatura-unica">
-                <td class="clicavel" style="cursor:pointer;"><?= htmlspecialchars($nome) ?></td>
-                <td><?= htmlspecialchars($nf) ?></td>
-                <td><?= htmlspecialchars($taxaDolar) ?></td>
+                    <td class="clicavel" style="cursor:pointer;"><?= htmlspecialchars($nome) ?></td>
+                    <td><?= htmlspecialchars($nf) ?></td>
+                    <td><?= htmlspecialchars($taxaDolar) ?></td>
+                    <td class="action-buttons text-center">
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="<?= htmlspecialchars($nome) ?>">
+                            <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -111,7 +117,7 @@ $noRepeat = array_unique($nomes);
         });
     });
 
-// Ordenação por nome de fatura (mantido do código original)
+// Ordenação por nome de fatura
     if (typeof ordemCrescente === 'undefined') {
         var ordemCrescente = true;
     }
@@ -130,6 +136,34 @@ $noRepeat = array_unique($nomes);
         rows.forEach(row => tbody.appendChild(row));
 
         ordemCrescente = !ordemCrescente;
+    });
+
+//Deletar
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const faturaId = this.getAttribute('data-id');
+
+            if (confirm("Tem certeza que deseja excluir esta fatura?")) {
+                fetch('./modulos/faturas/action/delete.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: faturaId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Fatura excluída com sucesso!');
+                        location.reload();
+                    } else {
+                        alert('Erro ao excluir a fatura: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Ocorreu um erro ao tentar excluir a fatura.');
+                });
+            }
+        });
     });
 </script>
 
