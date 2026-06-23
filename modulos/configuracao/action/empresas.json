@@ -1,29 +1,20 @@
 [
     {
-        "id": "1",
-        "razaoSocial": "testes",
-        "cnpj": "teste",
-        "telefone": "teste",
-        "endereco": "teste",
-        "email": "testes@teste.com",
-        "moeda": "US$"
-    },
-    {
-        "id": "2",
-        "razaoSocial": "Empresa 2",
-        "cnpj": "123123123123123",
-        "telefone": "123123123123123123",
-        "endereco": "Rua aoisdoiansdio ",
-        "email": "emial@email.com",
+        "id": 1,
+        "razaoSocial": "BRAZMIX EQUIPAMENTOS PARA MINERACAO LTDA",
+        "cnpj": "17903283000184",
+        "telefone": "5432299365",
+        "endereco": "CAVALIERE AMBROGIO CIPOLLA 562 A ",
+        "email": "contato@brazmix.com",
         "moeda": "R$"
     },
     {
-        "id": 3,
-        "razaoSocial": "teste empresa",
-        "cnpj": "123123123",
-        "telefone": "123123123",
-        "endereco": "rua 123123123",
-        "email": "123123@gmail.com",
+        "id": 2,
+        "razaoSocial": "BRAZMIX COMERCIAL EXPORTADORA PARA MINERACAO LTDA",
+        "cnpj": "17895838000193",
+        "telefone": "5430414312",
+        "endereco": "CAVALIERE AMBROGIO CIPOLLA 562 B",
+        "email": "contato@brazmix.com",
         "moeda": "US$"
     }
 ]

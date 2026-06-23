@@ -205,7 +205,9 @@ if (file_exists($produtosFile2)) {
                 </thead>
                 <tbody>
                     <!-- Produtos Cadastrados -->
-                    <?php foreach ($produtosCadastrados as $produto): ?>
+
+                    <?php if($produtosCadastrados != null)
+                        foreach ($produtosCadastrados as $produto): ?>
                         <tr class="produto-cadastrado" data-empresa="<?= htmlspecialchars($produto['empresa_id'] ?? '-') ?>">
                             <td><?= htmlspecialchars($produto['codigo'] ?? '-') ?></td>
                             <td><img src="modulos/produtos/action/<?= htmlspecialchars($produto['imagem'] ?? '-') ?>" style="width:50px; margin-right:30px"><?= htmlspecialchars($produto['descricao_pt'] ?? '-') ?></td>
