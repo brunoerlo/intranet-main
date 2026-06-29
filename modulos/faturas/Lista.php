@@ -5,13 +5,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     echo 'Erro ao decodificar faturas.json: ' . json_last_error_msg();
     $faturas = [];
 }
-
-$produtosJson = file_get_contents(__DIR__ . '/../produtos/action/produtos.json');
-$produtos = json_decode($produtosJson, true);
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo 'Erro ao decodificar produtos.json: ' . json_last_error_msg();
-    $produtos = [];
-}
+    
 ?>
 
 <div class="container mt-4">
@@ -42,12 +36,12 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($produtos as $p): 
-                $codigo    = $p["Item"]           ?? '';
-                $descricao = $p["Descricao"]      ?? '';
-                $unMedida  = $p["UM"]             ?? '';
-                $tipo      = $p["tipo"]           ?? '';
-                $jsonAttr  = htmlspecialchars(json_encode($p), ENT_QUOTES, 'UTF-8');
+                <?php foreach ($faturas as $f): 
+                $codigo    = $f["codigo"]           ?? '';
+                $descricao = $f["descricao"]        ?? '';
+                $unMedida  = $f["unidadeMedida"]    ?? '';
+                $tipo      = $f["tipo"]             ?? '';
+                $jsonAttr  = htmlspecialchars(json_encode($f), ENT_QUOTES, 'UTF-8');
                 ?>
                 <tr data-json="<?= $jsonAttr ?>" class="table-warning linha-fatura" style="display: none;">
                     <td class="filtravel"><?= htmlspecialchars($codigo) ?></td>
