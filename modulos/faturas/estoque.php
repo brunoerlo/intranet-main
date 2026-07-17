@@ -1,3 +1,15 @@
+<?php
+$faturasJson = file_get_contents(__DIR__ . '/action/faturas.json');
+$faturas = json_decode($faturasJson, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo 'Erro ao decodificar faturas.json: ' . json_last_error_msg();
+    $faturas = [];
+}
+
+$descricao = array_column($faturas, 'descricao');
+$noRepeat = array_unique($descricao);
+?>
+
 <div class="container-fluid mt-4">
     <div class="card">
         <div class="card-body">
@@ -10,12 +22,12 @@
                         <input type="text" class="form-control" id="numero" name="numero" required>
                     </div>
                     <div class="mb-3">
-                        <label for="descricao" class="form-label">Descrição do Produto</label>
-                        <input type="text" class="form-control" id="descricao" name="descricao" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="codigo" class="form-label">Código</label>
                         <input type="text" class="form-control" id="codigo" name="codigo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição do Produto</label>
+                        <input type="text" id="descricao" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="quantidade" class="form-label">Quantidade</label>
@@ -32,59 +44,78 @@
 </div>
 
 <script>
-document.getElementById('formCadastroEstoque').addEventListener('submit', function (event) {
-    event.preventDefault();  // Evita o envio tradicional do formulário
+    document.getElementById('formCadastroEstoque').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita o envio tradicional do formulário
 
-    // Coleta os dados do formulário
-    const formData = new FormData(this);
+        // Coleta os dados do formulário
+        const formData = new FormData(this);
 
-    // Converte os dados do FormData para um objeto simples
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
+        // Converte os dados do FormData para um objeto simples
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        // Envia os dados via AJAX
+        fetch('./modulos/faturas/action/cadastrar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Estoque cadastrado com sucesso!');
+                    document.getElementById('formCadastroEstoque').reset();
+                } else {
+                    alert('Erro ao cadastrar estoque: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao cadastrar o cliente.');
+            });
     });
 
-    // Envia os dados via AJAX
-    fetch('./modulos/faturas/action/cadastrar.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Estoque cadastrado com sucesso!');
-            document.getElementById('formCadastroCliente').reset();
-        } else {
-            alert('Erro ao cadastrar cliente: ' + data.error);
+    const campoCodigo = document.getElementById('codigo');
+    const campoDescricao = document.getElementById('descricao');
+
+    campoCodigo.addEventListener('blur', async function () {
+
+        const codigo = this.value.trim();
+
+        if (!codigo) {
+            campoDescricao.value = '';
+            return;
         }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Ocorreu um erro ao cadastrar o cliente.');
+
+        try {
+
+            const response = await fetch(
+                `./modulos/faturas/action/buscarProduto.php?codigo=${encodeURIComponent(codigo)}`
+            );
+
+            const produto = await response.json();
+
+            if (produto.encontrado) {
+                campoDescricao.value = produto.descricao;
+            } else {
+                campoDescricao.value = 'Produto não encontrado';
+            }
+
+        } catch (error) {
+            console.error(error);
+            campoDescricao.value = 'Erro ao buscar produto';
+        }
     });
-});
-
 </script>
-
-<?php
-$faturasJson = file_get_contents(__DIR__ . '/action/faturas.json');
-$faturas = json_decode($faturasJson, true);
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo 'Erro ao decodificar faturas.json: ' . json_last_error_msg();
-    $faturas = [];
-}
-
-$nomes = array_column($faturas, 'nomeFatura');
-$noRepeat = array_unique($nomes);
-?>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px;">
         <!-- Filtro -->
-        <input type="text" class="form-control" id="filtro-faturas" 
+        <input type="text" class="form-control" id="filtro-faturas"
             style="width: 400px;" placeholder="Pesquisar por código ou descrição...">
 
         <!-- Botões -->
@@ -98,7 +129,7 @@ $noRepeat = array_unique($nomes);
         </button>
     </div>
     <!-- Tabela Estoque -->
-    <div id="mostrar-impressao">      
+    <div id="mostrar-impressao">
         <table class="table table-bordered table-hover mt-3" id="tabela-faturas">
             <thead class="table-dark">
                 <tr>
@@ -110,7 +141,7 @@ $noRepeat = array_unique($nomes);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($faturas as $f): 
+                <?php foreach ($faturas as $f):
                     $nome       = $f["nomeFatura"]    ?? '';
                     $nf         = $f["notaFiscal"]    ?? '';
                     $taxaDolar  = $f["txDolar"]       ?? '';
@@ -120,22 +151,21 @@ $noRepeat = array_unique($nomes);
                     $codigo     = $f["codigo"]        ?? '';
                     $descricao  = $f["descricao"]     ?? '';
                     $jsonAttr   = htmlspecialchars(json_encode($f), ENT_QUOTES, 'UTF-8');
-                    ?>
-                <tr data-json="<?= $jsonAttr ?>" class="table-warning linha-fatura" style="display: none;">
-                    <td><?= htmlspecialchars($nome) ?></td>
-                    <td><?= htmlspecialchars($nf) ?></td>
-                    <td><?= htmlspecialchars($taxaDolar) ?></td>
-                    <td><?= htmlspecialchars($quantidade) ?></td>
-                    <td class="filtravel" style="display: none;"><?= htmlspecialchars($codigo) ?></td>
-                    <td class="filtravel" style="display: none;"><?= htmlspecialchars($descricao) ?></td>
-                    <td><?= htmlspecialchars($preco) ?></td>
-                </tr>
-                
+                ?>
+                    <tr data-json="<?= $jsonAttr ?>" class="table-warning linha-fatura" style="display: none;">
+                        <td><?= htmlspecialchars($nome) ?></td>
+                        <td><?= htmlspecialchars($nf) ?></td>
+                        <td><?= htmlspecialchars($taxaDolar) ?></td>
+                        <td><?= htmlspecialchars($quantidade) ?></td>
+                        <td class="filtravel" style="display: none;"><?= htmlspecialchars($codigo) ?></td>
+                        <td class="filtravel" style="display: none;"><?= htmlspecialchars($descricao) ?></td>
+                        <td><?= htmlspecialchars($preco) ?></td>
+                    </tr>
+
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-    
     <p id="sem-resultados" class="text-muted text-center" style="display: none;">
         Nenhum item encontrado para essa busca.
     </p>

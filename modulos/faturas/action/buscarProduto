@@ -1,0 +1,22 @@
+<?php
+
+header('Content-Type: application/json');
+
+$codigo = $_GET['codigo'] ?? '';
+
+$faturasJson = file_get_contents('faturas.json');
+$faturas = json_decode($faturasJson, true);
+
+foreach ($faturas as $produto) {
+    if ($produto['codigo'] == $codigo) {
+        echo json_encode([
+            'encontrado' => true,
+            'descricao' => $produto['descricao']
+        ]);
+        exit;
+    }
+}
+
+echo json_encode([
+    'encontrado' => false
+]);
