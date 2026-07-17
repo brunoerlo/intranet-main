@@ -6,7 +6,7 @@ $file_path = 'estoque.json';
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Verifica se os dados foram recebidos corretamente
-if (isset($data['descricao']) && isset($data['quantidade'])) {
+if (isset($data['numero']) && isset($data['descricao']) && isset($data['codigo']) && isset($data['quantidade'])) {
     // Gera um ID único para o estoque
     $data['Codigo estoque'] = uniqid('cli_', true); // Ex: cli_66147087a7f79.15609252
 
@@ -36,4 +36,5 @@ if (isset($data['descricao']) && isset($data['quantidade'])) {
     // Retorna erro caso os dados não sejam válidos
     echo json_encode(['success' => false, 'error' => 'Dados inválidos.']);
 }
+
 ?>

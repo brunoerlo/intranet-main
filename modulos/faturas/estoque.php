@@ -10,6 +10,14 @@
                         <input type="text" class="form-control" id="numero" name="numero" required>
                     </div>
                     <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição do Produto</label>
+                        <input type="text" class="form-control" id="descricao" name="descricao" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">Código</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="quantidade" class="form-label">Quantidade</label>
                         <input type="number" class="form-control" id="quantidade" name="quantidade" required>
                     </div>
