@@ -19,7 +19,7 @@ $noRepeat = array_unique($descricao);
                 <div class="tipo-grupo">
                     <div class="mb-3">
                         <label for="numero" class="form-label">Número Fatura</label>
-                        <input type="text" class="form-control" id="numero" name="numero" required>
+                        <input type="text" class="form-control" id="numero" name="numero">
                     </div>
                     <div class="mb-3">
                         <label for="codigo" class="form-label">Código</label>
@@ -27,7 +27,7 @@ $noRepeat = array_unique($descricao);
                     </div>
                     <div class="mb-3">
                         <label for="descricao" class="form-label">Descrição do Produto</label>
-                        <input type="text" id="descricao" readonly>
+                        <input type="text" class="form-control" id="descricao" name="descricao" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="quantidade" class="form-label">Quantidade</label>
@@ -112,10 +112,22 @@ $noRepeat = array_unique($descricao);
     });
 </script>
 
+<?php
+$estoqueJson = file_get_contents(__DIR__ . '/action/estoque.json');
+$estoque = json_decode($estoqueJson, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo 'Erro ao decodificar estoque.json: ' . json_last_error_msg();
+    $estoque = [];
+}
+
+$numero = array_column($estoque, 'numero');
+$noRepeatNum = array_unique($numero);
+?>
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px;">
         <!-- Filtro -->
-        <input type="text" class="form-control" id="filtro-faturas"
+        <input type="text" class="form-control" id="filtro-estoque"
             style="width: 400px;" placeholder="Pesquisar por código ou descrição...">
 
         <!-- Botões -->
@@ -127,39 +139,37 @@ $noRepeat = array_unique($descricao);
         <button class="btn btn-outline-secondary" id="btn-exportar" title="Exportar CSV">
             Exportar CSV
         </button>
+
+        <select class="btn btn-outline-secondary" id="btn-filtro">
+            <option value="">Selecione a fatura</option>
+            <?php foreach ($noRepeatNum as $nome): ?>
+                <option value="<?= htmlspecialchars($nome) ?>">
+                    <?= htmlspecialchars($nome) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
     <!-- Tabela Estoque -->
     <div id="mostrar-impressao">
-        <table class="table table-bordered table-hover mt-3" id="tabela-faturas">
+        <table class="table table-bordered table-hover mt-3" id="tabela-estoque">
             <thead class="table-dark">
                 <tr>
-                    <th class="sortable">Descrição</th>
-                    <th class="menor">NF</th>
-                    <th class="menor">Taxa Dólar</th>
-                    <th class="menor">Quantidade</th>
-                    <th class="menor">Preço</th>
+                    <th class="sortable filtravel">Descrição</th>
+                    <th class="menor" id="mostrarEstoqueSelecionados">
+                        <!-- alimentado via JS-->
+                    </th>
+                    <th class="menor">Estoque Total</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($faturas as $f):
-                    $nome       = $f["nomeFatura"]    ?? '';
-                    $nf         = $f["notaFiscal"]    ?? '';
-                    $taxaDolar  = $f["txDolar"]       ?? '';
-                    $quantidade = $f["quantidade"]    ?? '';
-                    $preco      = $f["preco"]         ?? '';
-                    $tipo       = $f["tipo"]          ?? '';
-                    $codigo     = $f["codigo"]        ?? '';
-                    $descricao  = $f["descricao"]     ?? '';
-                    $jsonAttr   = htmlspecialchars(json_encode($f), ENT_QUOTES, 'UTF-8');
+                <?php foreach ($estoque as $e):
+                    $descricao = $e["descricao"] ?? '';
+                    $numero    = $e["numero"]    ??  '';
+                    $jsonAttr  = htmlspecialchars(json_encode($e), ENT_QUOTES, 'UTF-8');
                 ?>
-                    <tr data-json="<?= $jsonAttr ?>" class="table-warning linha-fatura" style="display: none;">
-                        <td><?= htmlspecialchars($nome) ?></td>
-                        <td><?= htmlspecialchars($nf) ?></td>
-                        <td><?= htmlspecialchars($taxaDolar) ?></td>
-                        <td><?= htmlspecialchars($quantidade) ?></td>
-                        <td class="filtravel" style="display: none;"><?= htmlspecialchars($codigo) ?></td>
-                        <td class="filtravel" style="display: none;"><?= htmlspecialchars($descricao) ?></td>
-                        <td><?= htmlspecialchars($preco) ?></td>
+                    <tr data-json="<?= $jsonAttr ?>" class="table-warning linha-estoque" style="display: none;">
+                        <td><?= htmlspecialchars($descricao) ?></td>
+                        <td class="filtravel"><?= htmlspecialchars($numero) ?></td>
                     </tr>
 
                 <?php endforeach; ?>
@@ -170,3 +180,49 @@ $noRepeat = array_unique($descricao);
         Nenhum item encontrado para essa busca.
     </p>
 </div>
+
+<style>
+    th.menor { width: 120px; }
+    #tabela-estoque {width: 700px; }
+    .table th { padding: 0.3rem; vertical-align: middle; text-align: center; }
+    .action-buttons .btn { padding: 0.2rem 0.4rem; margin: right; width: 600px }
+    .exportar { display: flex; margin-right: auto; }
+    th.sortable { cursor: pointer; user-select: none; }
+    
+    @media print {
+        body * { visibility: hidden; }
+        #image, #image * { visibility: visible; }
+        #mostrar-impressao, #mostrar-impressao * { visibility: visible; }
+        #image { position: absolute; left: 0; top: 0; }
+        #mostrar-impressao { position: absolute; left: 0; top: 50px; }
+    }
+
+</style>
+
+<script>
+    document.getElementById('btn-filtro').addEventListener('change', function () {
+        const valorSelecionado = this.value; // pega o valor do select
+        const linhas = document.querySelectorAll('.linha-estoque');
+        let encontrou = false;
+
+        if (valorSelecionado == '') {
+            linhas.forEach(linha.linha.style.display = 'none');
+            document.getElementById('sem-resultados').style.display = 'none';
+            return;
+        }
+
+        linhas.forEach(function(linha) {
+            const dados = JSON.parse(linha.getAttribute('data-json'));
+
+            if (dados.numero === valorSelecionado) {
+                linha.style.display = '';
+                encontrou = true;
+            } else {
+                linha.style.display = 'none';
+            }
+        })
+
+        document.getElementById('sem-resultado').style.display = encontrou ? 'none' : 'block';
+
+    });
+</script>

@@ -86,7 +86,6 @@ $noRepeat = array_unique($codigo);
                     <td class="filtravel" style="display: none;"><?= htmlspecialchars($descricao) ?></td>
                     <td><?= htmlspecialchars($preco) ?></td>
                 </tr>
-                
                 <?php endforeach; ?>
             </tbody>
         </table>

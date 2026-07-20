@@ -4,7 +4,7 @@ $file_path = 'estoque.json';
 
 // Recebe os dados enviados via POST
 $data = json_decode(file_get_contents('php://input'), true);
-
+$numero = !empty($data['numero']) ? $data['numero'] : 'fabrica';
 // Verifica se os dados foram recebidos corretamente
 if (isset($data['numero']) && isset($data['descricao']) && isset($data['codigo']) && isset($data['quantidade'])) {
     // Gera um ID único para o estoque
