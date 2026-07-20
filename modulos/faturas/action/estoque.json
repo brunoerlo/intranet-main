@@ -1,16 +1,723 @@
 [
     {
-        "numero": "444",
-        "codigo": "BM 600.300",
-        "descricao": "ABRACADEIRA 2 BRAZMIX",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a5e06b9cd0ad9.81528043"
+        "numero": "444b",
+        "codigo": "BM 112.014",
+        "descricao": "BUCHA EIXO BD 8 EXT",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e21eaa305f1.29283144"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 112.013",
+        "descricao": "BUCHA EIXO BD 10",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e21faa64c20.38850920"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "4",
+        "Codigo estoque": "cli_6a5e220e758316.92325038"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 621.314",
+        "descricao": "CARCACA BD 8 EXT DISCO BORR B FIXO",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e2223e55f46.22903521"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 632.910",
+        "descricao": "CAVALETE BD 8 EXT MONTADO C\/ BUCHA",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e223aef1ab7.89166831"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 632.920",
+        "descricao": "CAVALETE BD 10 MONTADO C\/BUCHA",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e2244a67856.86659139"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 127.060",
+        "descricao": "DISCO BORRACHA 10",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e226a93aea7.06503368"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 127.059",
+        "descricao": "DISCO BORRACHA 8 EXTR FORTE",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e227b3794d6.11145464"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 109.000",
+        "descricao": "DUREPOXI 100 GRS 48UN\/CX",
+        "quantidade": "392",
+        "Codigo estoque": "cli_6a5e228ccd6d46.28481868"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 112.010",
+        "descricao": "EIXO CAV BD 8 EXT P\/ BUCHA 2 ROL 6314",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e229ba1ad93.24685354"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 112.011",
+        "descricao": "EIXO CAV BD 10 P\/ BUCHA 3 ROL 6314",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e22bd925ec2.57285355"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 621.326 ",
+        "descricao": "FLANGE ADAPTADORA BD 10",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e22d16198c2.65393251"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 628.500",
+        "descricao": "FLANGE AP GAX BD 10 E 8 EXT - COMPL",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e22e163e906.15837576"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 120.217",
+        "descricao": "MANGUEIRA SUCCAO 10x8Lx22MM 150 PSI - 2MT",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e22f06ac6b2.58450012"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 132.038",
+        "descricao": "ROLAMENTO 6314Z 2L(EIXO BD8 EXFT) EBD 10",
+        "quantidade": "60",
+        "Codigo estoque": "cli_6a5e2307c25853.42836377"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 133.047",
+        "descricao": "ROTOR 10X4 RT HP180 D400 ACO FUND",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e232d1f02a4.29577576"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 133.046",
+        "descricao": "ROTOR 8X4 CR HP150 D310 ACO FUND",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e233e578873.38210987"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 621.325",
+        "descricao": "TAMPA ROLAMENTO 10 E 8 EXT",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e234eabbc26.03678002"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12MM",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a5e2361112c04.28444523"
+    },
+    {
+        "numero": "444b",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a5e236b9bcc77.59826601"
     },
     {
         "numero": "445",
-        "codigo": "BM 632.910",
-        "descricao": "CAVALETE BD 8 EXT MONTADO C\/ BUCHA",
-        "quantidade": "4",
-        "Codigo estoque": "cli_6a5e1883137174.52589227"
+        "codigo": "600.300",
+        "descricao": "ABRACADEIRA 2 BRAZMIX",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e23e45dcd28.98248604"
+    },
+    {
+        "numero": "445",
+        "codigo": "600.400",
+        "descricao": "ABRACADEIRA 2.1\/2 BRAZMIX",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a5e23f22aa898.05343483"
+    },
+    {
+        "numero": "445",
+        "codigo": "600.500",
+        "descricao": "ABRACADEIRA 3 BRAZMIX",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5e23fc43b290.05252662"
+    },
+    {
+        "numero": "445",
+        "codigo": "600.600",
+        "descricao": "ABRACADEIRA 4 BRAZMIX",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a5e24120c7108.97688984"
+    },
+    {
+        "numero": "445",
+        "codigo": "621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "150",
+        "Codigo estoque": "cli_6a5e24315c5943.63620996"
+    },
+    {
+        "numero": "445",
+        "codigo": "113.005",
+        "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
+        "quantidade": "35",
+        "Codigo estoque": "cli_6a5e2484643870.89481228"
+    },
+    {
+        "numero": "445",
+        "codigo": "620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e2491247c95.41307913"
+    },
+    {
+        "numero": "445",
+        "codigo": "620.503",
+        "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e24b0c379b2.94208416"
+    },
+    {
+        "numero": "445",
+        "codigo": "622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e24c3e6a0c9.24705896"
+    },
+    {
+        "numero": "445",
+        "codigo": "621.303",
+        "descricao": "CARCACA BD 8  DISCO FUND (B FIXO)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e24d41f93d4.25179378"
+    },
+    {
+        "numero": "445",
+        "codigo": "621.306",
+        "descricao": "CARCACA BD 8 DIAMANTE DISCO BORR (B FIX)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e24de023499.82551280"
+    },
+    {
+        "numero": "445",
+        "codigo": "101.000",
+        "descricao": "CARPETE LISO MULTI 2x35=70M\u00b2 10\/12 MM ( 04  rolos)",
+        "quantidade": "140",
+        "Codigo estoque": "cli_6a5e24e92ee7f8.77115921"
+    },
+    {
+        "numero": "445",
+        "codigo": "101.001",
+        "descricao": "CARPETE TARIS\/EMBOR 2x24=48M\u00b2 10\/12 MM (10 rolos)",
+        "quantidade": "144",
+        "Codigo estoque": "cli_6a5e24f2f0f2b5.11116808"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.011",
+        "descricao": "CORDA 12 MM TRANC AZUL MESCLA 1276 (RL 185 MT\/18 KG)  RODOCORDAS POLIESTER 35 ROLOS",
+        "quantidade": "2310",
+        "Codigo estoque": "cli_6a5e2500320715.98862689"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.015",
+        "descricao": "CORDA 14 MM TRAN VERM C\/ MESCLA - RODOCORDAS 1193 (22 KG)  - 30 ROLOS",
+        "quantidade": "3200",
+        "Codigo estoque": "cli_6a5e250c559b83.06657300"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.014",
+        "descricao": "CORDA 3,5 MM TR POL BRANCA (RL 140 MT \/ 1,3 KG) RODO - 30 RL",
+        "quantidade": "5619",
+        "Codigo estoque": "cli_6a5e2517d9abb1.38392868"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.008",
+        "descricao": "CORDA 4 MM TR POL BRANCA (RL 420 MT \/ 5 KG) RODO - 30 RL",
+        "quantidade": "3752",
+        "Codigo estoque": "cli_6a5e2524766358.69655316"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.006",
+        "descricao": "CORDA 5 MM TRANC BRANCA 981 (RL 300MT\/5 KG) RODOCORDAS POLIESTER  - 50 ROLOS",
+        "quantidade": "6200",
+        "Codigo estoque": "cli_6a5e254adaddd3.49429268"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.009",
+        "descricao": "CORDA 6 MM TRANC AMARELA 1244 (RL 180 MT\/5 KG) RODOCORDAS POLIESTER  - 100 ROLOS",
+        "quantidade": "27016",
+        "Codigo estoque": "cli_6a5e25573a0e99.44372597"
+    },
+    {
+        "numero": "445",
+        "codigo": "145.010",
+        "descricao": "CORDA 8 MM TRANC AZUL\/M 1274 RODO (12,5 KG) -   25 Rls",
+        "quantidade": "7560",
+        "Codigo estoque": "cli_6a5e2563193ef8.75689255"
+    },
+    {
+        "numero": "445",
+        "codigo": "621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 F.",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a5e256fd067a2.32235814"
+    },
+    {
+        "numero": "445",
+        "codigo": "117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "27",
+        "Codigo estoque": "cli_6a5e25ac117f92.08187430"
+    },
+    {
+        "numero": "445",
+        "codigo": "612.303",
+        "descricao": "MANGOTE BICO JATO BRAZMIX",
+        "quantidade": "60",
+        "Codigo estoque": "cli_6a5e25b80bf555.99015995"
+    },
+    {
+        "numero": "445",
+        "codigo": "120.095",
+        "descricao": "MANG B. PRETO 2 1\/2\" (3L x 7MM) 100 PSI RL 18 MT  (15 RLS)",
+        "quantidade": "90",
+        "Codigo estoque": "cli_6a5e25c253dbf7.96028382"
+    },
+    {
+        "numero": "445",
+        "codigo": "138.001",
+        "descricao": "MEIOES PROFISSIONAIS - COLORIDOS  TAM 39 A 44",
+        "quantidade": "1254",
+        "Codigo estoque": "cli_6a5e25d2a30716.85916484"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.006",
+        "descricao": "NIPLE C\/ROSCA VALVULA PE 2",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e25fc2fe420.55369434"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.008",
+        "descricao": "NIPLE C\/ROSCA VALVULA PE 3",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e2609191fa5.83661208"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.009",
+        "descricao": "NIPLE C\/ROSCA VALVULA PE 4",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e261501ede7.48388686"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.010",
+        "descricao": "NIPLE C\/ROSCA VALVULA DE PE 5",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e261ea6a718.68148875"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.011",
+        "descricao": "NIPLE C\/ROSCA VALVULA DE PE 6",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e262b18be68.98297682"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.012",
+        "descricao": "NIPLE C\/ROSCA VALVULA DE PE 8",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e2635be0f24.40157375"
+    },
+    {
+        "numero": "445",
+        "codigo": "125.028",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 10",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5e263f2e16c1.33184635"
+    },
+    {
+        "numero": "445",
+        "codigo": "612.304",
+        "descricao": "PONTEIRA 1\" BICO JATO BRAZMIX",
+        "quantidade": "60",
+        "Codigo estoque": "cli_6a5e264ad70385.45958947"
+    },
+    {
+        "numero": "445",
+        "codigo": "113.013",
+        "descricao": "SUPORTE PARA CADINHO NR 05 -",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5e2658a7b004.66892194"
+    },
+    {
+        "numero": "445",
+        "codigo": "135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12MM",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5e2664542b77.48074423"
+    },
+    {
+        "numero": "445",
+        "codigo": "135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5e266aba86e9.80193615"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.004",
+        "descricao": "VALVULA  PE 2",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e267510f082.18161959"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.005",
+        "descricao": "VALVULA PE 3",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e26829b1c26.64287322"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.006",
+        "descricao": "VALVULA PE 4",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e268ca53378.20158486"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.007",
+        "descricao": "VALVULA DE PE 5",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e2694d96e05.85787756"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.008",
+        "descricao": "VALVULA DE PE 6",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e269ece35b9.24118303"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.009",
+        "descricao": "VALVULA PE 8",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e26a69176c8.35869968"
+    },
+    {
+        "numero": "445",
+        "codigo": "137.016",
+        "descricao": "VALVULA PE 10",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5e26b0d5dc65.48218917"
+    },
+    {
+        "numero": "445",
+        "codigo": "620.501",
+        "descricao": "APERTA GAXETA 5",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e2fb83204a1.54201737"
+    },
+    {
+        "numero": "445",
+        "codigo": "620.006",
+        "descricao": "FLANGE AP GAXETA 3 E 4",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e2fcb3e88d7.28347813"
+    },
+    {
+        "numero": "445",
+        "codigo": "621.111",
+        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "quantidade": "159",
+        "Codigo estoque": "cli_6a5e2fd8a63892.37856468"
+    },
+    {
+        "numero": "445",
+        "codigo": "612.002",
+        "descricao": "NIPLE ALUMINIO BJ 2.1\/2",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5e2fe864b5f2.07729953"
+    },
+    {
+        "numero": "445",
+        "codigo": "612.302",
+        "descricao": "NIPLE ALUMINIO BJ 3",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5e2ff24d30b3.16161622"
+    },
+    {
+        "numero": "446",
+        "codigo": "620.501",
+        "descricao": "APERTA GAXETA 5",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e31901e6742.59886112"
+    },
+    {
+        "numero": "446",
+        "codigo": "621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "12",
+        "Codigo estoque": "cli_6a5e319dc70645.97889081"
+    },
+    {
+        "numero": "446",
+        "codigo": "616.000",
+        "descricao": "BOMBA ALTA PRESSAO 3x2 ROTOR FECHADO",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5e31a9345e29.32028552"
+    },
+    {
+        "numero": "446",
+        "codigo": "140.021",
+        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e31b4a54946.78359902"
+    },
+    {
+        "numero": "446",
+        "codigo": "620.503",
+        "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e31ca7f6824.53631039"
+    },
+    {
+        "numero": "446",
+        "codigo": "620.003",
+        "descricao": "CARCACA BD 3 (BC MOVEL)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e31e72a53a4.56370209"
+    },
+    {
+        "numero": "446",
+        "codigo": "621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5e31fa735083.91298235"
+    },
+    {
+        "numero": "446",
+        "codigo": "621.104",
+        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
+        "quantidade": "8",
+        "Codigo estoque": "cli_6a5e3208038dc9.57156032"
+    },
+    {
+        "numero": "446",
+        "codigo": "107.001",
+        "descricao": "CORREIA LAMINADA 8 LONAS PAN-100 2",
+        "quantidade": "300",
+        "Codigo estoque": "cli_6a5e3214da97c4.22836679"
+    },
+    {
+        "numero": "446",
+        "codigo": "620.006",
+        "descricao": "FLANGE AP GAXETA 3 E 4",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e321ff19cc0.09722105"
+    },
+    {
+        "numero": "446",
+        "codigo": "117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "28",
+        "Codigo estoque": "cli_6a5e33e0e6fdf7.16924319"
+    },
+    {
+        "numero": "446",
+        "codigo": "140.062",
+        "descricao": "JUNTA MOTOR MWM D229 3 CIL 71607EFPSD",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e33ec663c19.61506194"
+    },
+    {
+        "numero": "446",
+        "codigo": "140.063",
+        "descricao": "JUNTA MOTOR MWM D229 4 CIL 71206EFPSD",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e33f5f18bc2.60671260"
+    },
+    {
+        "numero": "446",
+        "codigo": "140.064",
+        "descricao": "JUNTA MOTOR MWM D229 6 CILSABO71106EFPSD",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e33ffe46443.64337748"
+    },
+    {
+        "numero": "446",
+        "codigo": "140.066",
+        "descricao": "JUNTA MOTOR MWM X10 6 CIL SABO 80279",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a5e342778fb17.42759331"
+    },
+    {
+        "numero": "446",
+        "codigo": "120.092",
+        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
+        "quantidade": "90",
+        "Codigo estoque": "cli_6a5e343acc1bf7.27871415"
+    },
+    {
+        "numero": "446",
+        "codigo": "120.093",
+        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
+        "quantidade": "6",
+        "Codigo estoque": "cli_6a5e3445999e04.51961805"
+    },
+    {
+        "numero": "446",
+        "codigo": "131.008",
+        "descricao": "REDUCAO VINCADA 3x2.1\/2",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5e345022e646.56478739"
+    },
+    {
+        "numero": "446",
+        "codigo": "131.019",
+        "descricao": "REDUCAO VINCADA 6x4",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5e345ba89d23.73559728"
+    },
+    {
+        "numero": "446",
+        "codigo": "132.000",
+        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e346a60c1d7.26294183"
+    },
+    {
+        "numero": "446",
+        "codigo": "132.001",
+        "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e3489605102.64929358"
+    },
+    {
+        "numero": "446",
+        "codigo": "132.002",
+        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "36",
+        "Codigo estoque": "cli_6a5e34a0e12bf8.82582650"
+    },
+    {
+        "numero": "446",
+        "codigo": "620.007",
+        "descricao": "TAMPA ROLAMENTO 3 E 4",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e34adb782b9.71951367"
+    },
+    {
+        "numero": "446",
+        "codigo": "621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "26",
+        "Codigo estoque": "cli_6a5e34c4baa5e5.91201338"
+    },
+    {
+        "numero": "446",
+        "codigo": "135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5e34d3be9e95.13793781"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.131",
+        "descricao": "UNIAO Y VINC 6x3x3",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a5e34e14b8f19.26350402"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.123",
+        "descricao": "UNIAO Y VINC 6x4x4",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e34fbaf4507.82925341"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.101",
+        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e35116671c1.73443106"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.101",
+        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e3528177891.52228520"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.103",
+        "descricao": "UNIAO Y VINCADA 3x3x3",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a5e3535e5baf2.62618491"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.106",
+        "descricao": "UNIAO Y VINCADA 4x3x3",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a5e35403130d8.06424671"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.105",
+        "descricao": "UNIAO Y VINCADA 4x4x4",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5e354a310946.26130266"
+    },
+    {
+        "numero": "446",
+        "codigo": "140.170",
+        "descricao": "JUNTA MOTOR MWM X10 4 CIL SPAAL 711040",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e364411f259.23418232"
+    },
+    {
+        "numero": "446",
+        "codigo": "136.134",
+        "descricao": "UNIAO Y VINC 6x6x6",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a5e36531bce33.41388044"
+    },
+    {
+        "numero": "",
+        "codigo": "136.101",
+        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5e370ec78382.53286817"
     }
 ]

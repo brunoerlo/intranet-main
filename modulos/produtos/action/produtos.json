@@ -8734,6 +8734,17 @@
         "empresa_id": "1"
     },
     {
+        "Item": "  BM 621.111",
+        "Descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "00,00000",
+        "NCM": "8413.91.90",
+        "Peso Liquido": "0,000000",
+        "Vlr Total": "00,00",
+        "empresa_id": "1"
+    },
+    {
         "Item": "  BM 628.200",
         "Descricao": "FLANGE AP GAXETA 6 E 8 COMPL",
         "Descricao Complementar": "",
@@ -9713,6 +9724,17 @@
         "empresa_id": "1"
     },
     {
+        "Item": "  BM 117.000",
+        "Descricao": "GRAXEIRA BICO RETO 1/8 ROSCA GAS (CAVALETES)",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "00,0000",
+        "NCM": "8479.89.99",    
+        "Peso Liquido": "150",
+        "Vlr Total": "0.39",
+        "empresa_id": "1"
+    },
+    {
         "Item": "  BM 140.058",
         "Descricao": "GRAXEIRA MANUAL 500 GR HL500 S\/EXTFLEX",
         "Descricao Complementar": "",
@@ -10040,6 +10062,17 @@
         "NCM": "8484.90.00",
         "Peso Liquido": "1,840000",
         "Vlr Total": "388,24",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "  BM 140.170",
+        "Descricao": "JUNTA MOTOR MWM X10 4 CIL SPAAL 711040",
+        "Descricao Complementar": "",
+        "UM": "JG",
+        "Preco Venda": "00,00000",
+        "NCM": "8484.90.00",
+        "Peso Liquido": "0,000000",
+        "Vlr Total": "000,00",
         "empresa_id": "1"
     },
     {
@@ -17234,6 +17267,17 @@
         "NCM": "7307.19.10",
         "Peso Liquido": "2,900000",
         "Vlr Total": "54,69",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "  BM 136.134",
+        "Descricao": "UNIAO Y VINC 6x6x6",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "00,00000",
+        "NCM": "7307.19.10",
+        "Peso Liquido": "0,000000",
+        "Vlr Total": "0,00",
         "empresa_id": "1"
     },
     {
