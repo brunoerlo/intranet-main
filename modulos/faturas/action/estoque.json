@@ -714,10 +714,612 @@
         "Codigo estoque": "cli_6a5e36531bce33.41388044"
     },
     {
-        "numero": "",
-        "codigo": "136.101",
-        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
+        "numero": "447",
+        "codigo": "621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "13",
+        "Codigo estoque": "cli_6a5f571bb17197.29387985"
+    },
+    {
+        "numero": "447",
+        "codigo": "113.006",
+        "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
+        "quantidade": "144",
+        "Codigo estoque": "cli_6a5f5729d11c35.69317348"
+    },
+    {
+        "numero": "447",
+        "codigo": "621.104",
+        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
+        "quantidade": "12",
+        "Codigo estoque": "cli_6a5f573ada1c61.25185250"
+    },
+    {
+        "numero": "447",
+        "codigo": "117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "28",
+        "Codigo estoque": "cli_6a5f57509bce28.43528364"
+    },
+    {
+        "numero": "447",
+        "codigo": "616.305",
+        "descricao": "JUNTA BOR B A PRESSAO 5x4\/6x4\/6x5\/8x6",
         "quantidade": "10",
-        "Codigo estoque": "cli_6a5e370ec78382.53286817"
+        "Codigo estoque": "cli_6a5f5763af9ea0.47816362"
+    },
+    {
+        "numero": "447",
+        "codigo": "120.095",
+        "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
+        "quantidade": "90",
+        "Codigo estoque": "cli_6a5f5773c70444.11981331"
+    },
+    {
+        "numero": "447",
+        "codigo": "120.092",
+        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
+        "quantidade": "90",
+        "Codigo estoque": "cli_6a5f577e8a7dd3.68908302"
+    },
+    {
+        "numero": "447",
+        "codigo": "120.202",
+        "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM TRSMA 150PSI",
+        "quantidade": "6",
+        "Codigo estoque": "cli_6a5f578a07b8b3.79377919"
+    },
+    {
+        "numero": "447",
+        "codigo": "120.093",
+        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
+        "quantidade": "6",
+        "Codigo estoque": "cli_6a5f579b0dd988.07313880"
+    },
+    {
+        "numero": "447",
+        "codigo": "612.304",
+        "descricao": "PONTEIRA BICO JATO 1",
+        "quantidade": "95",
+        "Codigo estoque": "cli_6a5f57ae449f44.79820039"
+    },
+    {
+        "numero": "447",
+        "codigo": "132.000",
+        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f57bed91f93.26539411"
+    },
+    {
+        "numero": "447",
+        "codigo": "132.001",
+        "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5f57c9931919.37337916"
+    },
+    {
+        "numero": "447",
+        "codigo": "132.002",
+        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "39",
+        "Codigo estoque": "cli_6a5f57d4b2d475.56992984"
+    },
+    {
+        "numero": "447",
+        "codigo": "620.007",
+        "descricao": "TAMPA ROLAMENTO 3 E 4",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f57e979d4b5.52169235"
+    },
+    {
+        "numero": "447",
+        "codigo": "621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "26",
+        "Codigo estoque": "cli_6a5f57f6e72e33.75809601"
+    },
+    {
+        "numero": "448",
+        "codigo": "616.300",
+        "descricao": "BOMBA ALTA PRESSAO 4x3 ROTOR FECHADO",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f5812973cf0.46324089"
+    },
+    {
+        "numero": "448",
+        "codigo": "616.900",
+        "descricao": "BOMBA ALTA PRESSAO 6x4 ROTOR FECHADO",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5f6496d82a79.52754212"
+    },
+    {
+        "numero": "448",
+        "codigo": "617.300",
+        "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f64a5d89951.07112526"
+    },
+    {
+        "numero": "448",
+        "codigo": "140.021",
+        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f64b2ec4e55.92741067"
+    },
+    {
+        "numero": "448",
+        "codigo": "620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5f64c88a7168.70337108"
+    },
+    {
+        "numero": "448",
+        "codigo": "622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5f64d7196b89.02948964"
+    },
+    {
+        "numero": "448",
+        "codigo": "622.005",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5f64e26bd6e9.48200132"
+    },
+    {
+        "numero": "448",
+        "codigo": "621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5f64eceab8e2.02270114"
+    },
+    {
+        "numero": "448",
+        "codigo": "101.000",
+        "descricao": "CARPETE LISO MULTI 2x35=70M2 10\/12 MM",
+        "quantidade": "210",
+        "Codigo estoque": "cli_6a5f64f9255791.41397875"
+    },
+    {
+        "numero": "448",
+        "codigo": "101.001",
+        "descricao": "CARPETE TARIS\/EMBOR 2x24=48M2 10\/12 MM",
+        "quantidade": "144",
+        "Codigo estoque": "cli_6a5f6502a29f23.95423769"
+    },
+    {
+        "numero": "448",
+        "codigo": "131.008",
+        "descricao": "REDUCAO VINCADA 3x2.1\/2",
+        "quantidade": "35",
+        "Codigo estoque": "cli_6a5f652548b8b4.73668071"
+    },
+    {
+        "numero": "448",
+        "codigo": "131.009",
+        "descricao": "REDUCAO VINCADA 4x3",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f652e701c56.95632609"
+    },
+    {
+        "numero": "448",
+        "codigo": "131.010",
+        "descricao": "REDUCAO VINCADA 5x4",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f653daab2a4.99672598"
+    },
+    {
+        "numero": "448",
+        "codigo": "131.011",
+        "descricao": "REDUCAO VINCADA 6x5",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5f655a1ef811.93949889"
+    },
+    {
+        "numero": "448",
+        "codigo": "131.012",
+        "descricao": "REDUCAO VINCADA 8x6",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f6566be7285.58980741"
+    },
+    {
+        "numero": "449",
+        "codigo": "620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5f6595a94ea1.62914604"
+    },
+    {
+        "numero": "449",
+        "codigo": "622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f65a674a9c4.84245877"
+    },
+    {
+        "numero": "449",
+        "codigo": "622.005",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f65b39e1056.08574565"
+    },
+    {
+        "numero": "449",
+        "codigo": "621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f65bf3e5309.17915327"
+    },
+    {
+        "numero": "449",
+        "codigo": "621.306",
+        "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f65d3c7b1a1.96359119"
+    },
+    {
+        "numero": "449",
+        "codigo": "621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5f66015c6991.49899499"
+    },
+    {
+        "numero": "449",
+        "codigo": "117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5f6612dd78e5.45137829"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.001",
+        "descricao": "APERTA GAXETA 3 E 4",
+        "quantidade": "258",
+        "Codigo estoque": "cli_6a5f6670d3d354.10193338"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "87",
+        "Codigo estoque": "cli_6a5f66809f3679.84136820"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.102",
+        "descricao": "BOCAL RECALQUE BD 4",
+        "quantidade": "194",
+        "Codigo estoque": "cli_6a5f66904378c1.48151760"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "621.309",
+        "descricao": "BOCAL SUCCAO BD 8",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f66b2350846.75767056"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.103",
+        "descricao": "CARCACA BD 4  (BC MOVEL)",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a5f66c507eee4.71418063"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a5f66d0de6fe3.20239577"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a5f670ccb5949.98821808"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "622.903",
+        "descricao": "CARCACA BD 8 SUCCAO 8 SAI 8",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f6719cf6958.75215362"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "621.104",
+        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
+        "quantidade": "27",
+        "Codigo estoque": "cli_6a5f672b105e65.81105812"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.005",
+        "descricao": "DISCO PROT CAV BD 3 E 4 FUNDIDO",
+        "quantidade": "160",
+        "Codigo estoque": "cli_6a5f673b8f0969.51642689"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
+        "quantidade": "65",
+        "Codigo estoque": "cli_6a5f6746c44749.46652283"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "621.305",
+        "descricao": "DISCO PROT CAV BD 8 FUNDIDO",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f6753a68928.09206716"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.006",
+        "descricao": "FLANGE AP GAXETA 3 E 4",
+        "quantidade": "285",
+        "Codigo estoque": "cli_6a5f6774c9fc18.03721317"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "112",
+        "Codigo estoque": "cli_6a5f6781df8e63.90829713"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "132.000",
+        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "170",
+        "Codigo estoque": "cli_6a5f67955ccc65.76206771"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "132.002",
+        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "81",
+        "Codigo estoque": "cli_6a5f67a4a4df83.52100126"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "133.001",
+        "descricao": "ROTOR 4x3 RT HP70x20\/24 D180x12,7 MM",
+        "quantidade": "270",
+        "Codigo estoque": "cli_6a5f67b6619087.63857895"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "133.015",
+        "descricao": "ROTOR 6x3 RT HP120x20\/24 D275x12,7 MM",
+        "quantidade": "55",
+        "Codigo estoque": "cli_6a5f67c001acd2.70244665"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "133.020",
+        "descricao": "ROTOR 8x3 RT HP130x25,4 D310x12,7 MM",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f67ca362db4.97676525"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "620.007",
+        "descricao": "TAMPA ROLAMENTO 3 E 4",
+        "quantidade": "170",
+        "Codigo estoque": "cli_6a5f67d7c8dff3.11851072"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "54",
+        "Codigo estoque": "cli_6a5f67e430a558.12891620"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "600.500",
+        "descricao": "ABRACADEIRA 3 BRAZMIX",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a5f6817db71a2.47902245"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "600.800",
+        "descricao": "ABRACADEIRA 6 BRAZMIX",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a5f682a183556.26449231"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f68379ca976.09201061"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "619.101",
+        "descricao": "BOMBA AP MC 4x3 R\/F 6 PAS DUTO SAI FLANG",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f6843e6dfe9.75567000"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f684e48f1d3.72246411"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.104",
+        "descricao": "DISCO FIX 12F C\/ROSCA MWM (LD CAV)",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f685df0de14.90695349"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.103",
+        "descricao": "DISCO FIX 12F PAS MWM (LD MOTOR)",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f687aaad205.24057986"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.603",
+        "descricao": "DISCO FIX 6 F PAS M-790\/NSB-18 TOY",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f6887843315.08930687"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.604",
+        "descricao": "DISCO FIX 6F C\/ROSCA M-790\/NSB-18 TOY",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f6896a8e0e6.88638705"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f68a07057c2.63166388"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "112.000",
+        "descricao": "EIXO CAV BD 3 E 4 (38x430MM) 2 ROL 6208",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f68ab08c136.66456995"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "112.003",
+        "descricao": "EIXO CAV BD 6 (44x560 MM) 3 ROL 6310",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f68ba0d51f2.40713938"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.101",
+        "descricao": "FLANGE LD CAV 12F BD 5 - 6 E 8 D44 (MWM)",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f68cae9c825.15528094"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.601",
+        "descricao": "FLANGE LD CAV 6F BD 3 E 4 D38",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f68daa95b53.23888929"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "624.102",
+        "descricao": "FLANGE LD MOT 12F MWM",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f68fb043982.40683343"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "625.402",
+        "descricao": "FLANGE LD MOT 6F TOYAMA TDW 18\/22 HP",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f690ea23f20.53369987"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "116.003",
+        "descricao": "GAXETA ALGODAO GRAFITADA QD 3\/8 CX 5 KG",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a5f69535955c6.75821772"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "3",
+        "Codigo estoque": "cli_6a5f695ce76526.93481777"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "120.006",
+        "descricao": "MANGUEIRA B PRETO 3(2Lx7MM)TRA75PSI",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a5f6967db34e7.74653631"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "132.000",
+        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "4",
+        "Codigo estoque": "cli_6a5f69ad8fdcf9.38199961"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "132.002",
+        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "3",
+        "Codigo estoque": "cli_6a5f69b551ce82.49777629"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "133.018",
+        "descricao": "ROTOR 6x4 RT HP120x20\/24 D275x12,5MM",
+        "quantidade": "1",
+        "Codigo estoque": "cli_6a5f69c3998533.51362325"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "620.007",
+        "descricao": "TAMPA ROLAMENTO 3 E 4",
+        "quantidade": "4",
+        "Codigo estoque": "cli_6a5f69ce1107a0.22481640"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a5f69d9e3e679.16181194"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "quantidade": "12",
+        "Codigo estoque": "cli_6a5f69e3bb8066.43138734"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "136.009",
+        "descricao": "UNIAO RETA VINCADA 3x3",
+        "quantidade": "8",
+        "Codigo estoque": "cli_6a5f69f0e9e060.23772982"
+    },
+    {
+        "numero": "KALA",
+        "codigo": "644.200",
+        "descricao": "UNIAO RETA VINCADA 6x6",
+        "quantidade": "12",
+        "Codigo estoque": "cli_6a5f69f928cc50.06403828"
+    },
+    {
+        "numero": "450",
+        "codigo": "621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "24",
+        "Codigo estoque": "cli_6a5f6a1a4bff31.34525526"
+    },
+    {
+        "numero": "451",
+        "codigo": "621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "26",
+        "Codigo estoque": "cli_6a5f6a2aa5df68.79273174"
     }
 ]
