@@ -5,19 +5,20 @@ $faturas = json_decode($faturasJson, true) ?? [];
 $estoqueJson = file_get_contents(__DIR__ . '/action/estoque.json');
 $estoque = json_decode($estoqueJson, true) ?? [];
 
-// Pega os números de fatura únicos (exceto "fabrica")
+// Pega os números de fatura únicos (exceto "Fábrica")
 $numeros = array_unique(array_column($estoque, 'numero'));
-$faturasBotoes = array_filter($numeros, fn($n) => $n !== 'fabrica');
+$faturasBotoes = array_filter($numeros, fn($n) => $n !== 'Fábrica');
 sort($faturasBotoes);
 
 // Monta estrutura: descricao => [ numero => quantidade ]
 $tabela = [];
 foreach ($estoque as $e) {
+    $cod  = $e['codigo']    ?? '';
     $desc = $e['descricao'] ?? '';
     $num  = $e['numero']    ?? '';
     $qtd  = (int)($e['quantidade'] ?? 0);
-    if (!isset($tabela[$desc])) $tabela[$desc] = [];
-    $tabela[$desc][$num] = $qtd;
+    if (!isset($tabela[$desc])) $tabela[$desc] = ['codigo' => $cod, 'quantidades' => []];
+    $tabela[$desc]['quantidades'][$num] = $qtd;
 }
 ksort($tabela);
 ?>
@@ -64,7 +65,7 @@ ksort($tabela);
             </button>
         <?php endforeach; ?>
         <button class="btn btn-outline-secondary btn-sm btn-fatura" 
-                data-fatura="fabrica"
+                data-fatura="Fábrica"
                 style="flex-shrink:0;">
             Fábrica
         </button>
@@ -75,17 +76,27 @@ ksort($tabela);
         <table class="table table-bordered table-hover mt-2" id="tabela-estoque">
             <thead class="table-dark" id="thead-estoque">
                 <tr>
-                    <th>Descrição</th>
+                    <th style="width: 200px" >Descrição</th>
+                    <th>Código</th>
                     <!-- colunas de fatura inseridas via JS -->
                     <th id="th-total">Estoque Total</th>
                 </tr>
             </thead>
             <tbody id="tbody-estoque">
-                <?php foreach ($tabela as $desc => $quantidades): 
+                <?php foreach ($tabela as $desc => $item):
+                    $cod = $item['codigo'];
+                    $quantidades = $item['quantidades'];
                     $totalGeral = array_sum($quantidades);
-                    $jsonAttr = htmlspecialchars(json_encode(['descricao' => $desc, 'quantidades' => $quantidades, 'total' => $totalGeral]), ENT_QUOTES, 'UTF-8');
+
+                    $jsonAttr = htmlspecialchars(json_encode([
+                        'codigo' => $cod,
+                        'descricao' => $desc,
+                        'quantidades' => $quantidades,
+                        'total' => $totalGeral
+                    ]), ENT_QUOTES, 'UTF-8');
                 ?>
                 <tr class="table-warning linha-estoque" data-json="<?= $jsonAttr ?>" style="display:none;">
+                    <td><?= htmlspecialchars($cod) ?></td>
                     <td><?= htmlspecialchars($desc) ?></td>
                     <!-- colunas de quantidade inseridas via JS -->
                     <td class="td-total"><?= $totalGeral ?></td>
@@ -142,12 +153,18 @@ function renderizarTabela() {
     const semResultados = document.getElementById('sem-resultados');
 
     // Reconstrói o cabeçalho
-    thead.innerHTML = '<th>Descrição</th>';
+    thead.innerHTML = `<th>Código</th>
+                       <th>Descrição</th>`;
+
     faturasSelecionadas.forEach(fatura => {
         const th = document.createElement('th');
-        th.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
+        th.textContent = fatura === 'Fábrica'
+            ? 'Fábrica'
+            : fatura;
+
         thead.appendChild(th);
     });
+
     const thTotal = document.createElement('th');
     thTotal.textContent = 'Estoque Total';
     thead.appendChild(thTotal);
@@ -180,7 +197,7 @@ function renderizarTabela() {
         // Remove células antigas de fatura (mantém só descrição e total)
         const tds = linha.querySelectorAll('td');
         // Limpa tudo exceto o primeiro (descrição)
-        while (linha.children.length > 1) linha.removeChild(linha.lastChild);
+        while (linha.children.length > 2) linha.removeChild(linha.lastChild);
 
         let total = 0;
         faturasSelecionadas.forEach(fatura => {
