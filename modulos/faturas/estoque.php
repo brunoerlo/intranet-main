@@ -59,17 +59,19 @@ ksort($tabela);
         <span class="text-muted me-2" style="font-size:13px; flex-shrink:0;">Filtrar faturas:</span>
         <?php foreach ($faturasBotoes as $num): ?>
             <button class="btn btn-outline-primary btn-sm btn-fatura"
-                    data-fatura="<?= htmlspecialchars($num) ?>"
-                    style="flex-shrink:0;">
+                data-fatura="<?= htmlspecialchars($num) ?>"
+                style="flex-shrink:0;">
                 <?= htmlspecialchars($num) ?>
             </button>
         <?php endforeach; ?>
         <button class="btn btn-outline-secondary btn-sm btn-fatura"
-                data-fatura="fabrica"
-                style="flex-shrink:0;">
+            data-fatura="fabrica"
+            style="flex-shrink:0;">
             Fábrica
         </button>
     </div>
+
+    <div id="acoes-faturas"></div>
 
     <!-- Tabela dinâmica -->
     <div id="mostrar-impressao" style="overflow-x: auto;">
@@ -83,7 +85,7 @@ ksort($tabela);
                 </tr>
             </thead>
             <tbody id="tbody-estoque">
-                <?php foreach ($tabela as $desc => $dados): 
+                <?php foreach ($tabela as $desc => $dados):
                     $totalGeral = array_sum($dados['quantidades']);
                     $jsonAttr = htmlspecialchars(json_encode([
                         'codigo'      => $dados['_codigo'],
@@ -92,12 +94,12 @@ ksort($tabela);
                         'total'       => $totalGeral
                     ]), ENT_QUOTES, 'UTF-8');
                 ?>
-                <tr class="table-warning linha-estoque" data-json="<?= $jsonAttr ?>" style="display:none;">
-                    <td><?= htmlspecialchars($desc) ?></td>
-                    <td><?= htmlspecialchars($dados['_codigo']) ?></td>
-                    <!-- colunas de quantidade inseridas via JS -->
-                    <td class="td-total"><?= $totalGeral ?></td>
-                </tr>
+                    <tr class="table-warning linha-estoque" data-json="<?= $jsonAttr ?>" style="display:none;">
+                        <td><?= htmlspecialchars($desc) ?></td>
+                        <td><?= htmlspecialchars($dados['_codigo']) ?></td>
+                        <!-- colunas de quantidade inseridas via JS -->
+                        <td class="td-total"><?= $totalGeral ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -109,139 +111,253 @@ ksort($tabela);
 </div>
 
 <style>
-    #tabela-estoque th, #tabela-estoque td { text-align: center; padding: 0.3rem 0.5rem; vertical-align: middle; }
-    #tabela-estoque td:first-child, #tabela-estoque th:first-child { text-align: left; min-width: 250px; }
-    .btn-fatura.ativo { background-color: #0d6efd; color: white; border-color: #0d6efd; }
+    #tabela-estoque th,
+    #tabela-estoque td {
+        text-align: center;
+        padding: 0.3rem 0.5rem;
+        vertical-align: middle;
+    }
+
+    #tabela-estoque td:first-child,
+    #tabela-estoque th:first-child {
+        text-align: left;
+        min-width: 250px;
+    }
+
+    .btn-fatura.ativo {
+        background-color: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
+    }
+
     @media print {
-        body * { visibility: hidden; }
-        #mostrar-impressao, #mostrar-impressao * { visibility: visible; }
-        #mostrar-impressao { position: absolute; left: 0; top: 0; }
+        body * {
+            visibility: hidden;
+        }
+
+        #mostrar-impressao,
+        #mostrar-impressao * {
+            visibility: visible;
+        }
+
+        #mostrar-impressao {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
     }
 </style>
 
 <script>
-const dadosEstoque = <?= json_encode($tabela) ?>;
-let faturasSelecionadas = [];
+    //FORMULÁRIO
+    // Busca descrição ao digitar código
+    const campoCodigo = document.getElementById('codigo');
+    const campoDescricao = document.getElementById('descricao');
 
-document.querySelectorAll('.btn-fatura').forEach(btn => {
-    btn.addEventListener('click', function () {
-        const fatura = this.dataset.fatura;
-
-        if (faturasSelecionadas.includes(fatura)) {
-            faturasSelecionadas = faturasSelecionadas.filter(f => f !== fatura);
-            this.classList.remove('ativo');
-        } else {
-            faturasSelecionadas.push(fatura);
-            this.classList.add('ativo');
-        }
-
-        renderizarTabela();
-    });
-});
-
-function renderizarTabela() {
-    const thead = document.getElementById('tr-thead');
-    const linhas = document.querySelectorAll('.linha-estoque');
-    const semResultados = document.getElementById('sem-resultados');
-
-    // Reconstrói o cabeçalho mantendo Descrição e Código fixos
-    thead.innerHTML = '<th>Descrição</th><th>Código</th>';
-    faturasSelecionadas.forEach(fatura => {
-        const th = document.createElement('th');
-        th.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
-        thead.appendChild(th);
-    });
-    const thTotal = document.createElement('th');
-    thTotal.textContent = 'Estoque Total';
-    thead.appendChild(thTotal);
-
-    // Sem nenhuma fatura selecionada — esconde tudo
-    if (faturasSelecionadas.length === 0) {
-        linhas.forEach(l => l.style.display = 'none');
-        semResultados.style.display = 'none';
-        return;
-    }
-
-    let encontrou = false;
-
-    linhas.forEach(linha => {
-        const dados = JSON.parse(linha.getAttribute('data-json'));
-        const quantidades = dados.quantidades;
-
-        // Verifica se essa linha tem pelo menos uma das faturas selecionadas
-        const temDados = faturasSelecionadas.some(f => quantidades[f] !== undefined);
-
-        if (!temDados) {
-            linha.style.display = 'none';
+    campoCodigo.addEventListener('blur', async function() {
+        const codigo = this.value.trim();
+        if (!codigo) {
+            campoDescricao.value = '';
             return;
         }
 
-        linha.style.display = '';
-        encontrou = true;
-
-        // Mantém as duas primeiras células (descrição e código) e reconstrói o resto
-        const descricaoTd = linha.children[0].outerHTML;
-        const codigoTd = linha.children[1].outerHTML;
-        linha.innerHTML = descricaoTd + codigoTd;
-
-        let total = 0;
-        faturasSelecionadas.forEach(fatura => {
-            const td = document.createElement('td');
-            const qtd = quantidades[fatura];
-            td.textContent = qtd !== undefined ? qtd : '-';
-            if (qtd) total += parseInt(qtd);
-            linha.appendChild(td);
-        });
-
-        const tdTotal = document.createElement('td');
-        tdTotal.textContent = total;
-        linha.appendChild(tdTotal);
+        try {
+            const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=  BM ${encodeURIComponent(codigo)}`);
+            const produto = await response.json();
+            campoDescricao.value = produto.encontrado ? produto.descricao : 'Produto não encontrado';
+        } catch (error) {
+            campoDescricao.value = 'Erro ao buscar produto';
+        }
     });
 
-    semResultados.style.display = encontrou ? 'none' : 'block';
-}
+    // Submit do formulário
+    document.getElementById('formCadastroEstoque').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        fetch('./modulos/faturas/action/cadastrar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Estoque cadastrado com sucesso!');
+                    document.getElementById('formCadastroEstoque').reset();
+                    location.reload();
+                } else {
+                    alert('Erro ao cadastrar estoque: ' + data.error);
+                }
+            })
+            .catch(() => alert('Ocorreu um erro ao cadastrar.'));
+    });
 </script>
 
 <script>
-// Busca descrição ao digitar código
-const campoCodigo = document.getElementById('codigo');
-const campoDescricao = document.getElementById('descricao');
+    //LISTA DE FATURAS E AÇÕES
 
-campoCodigo.addEventListener('blur', async function () {
-    const codigo = this.value.trim();
-    if (!codigo) { campoDescricao.value = ''; return; }
+    function atualizarListaAcoes() {
+        // limpa a div
+        const container = document.getElementById('acoes-fatura');
+        container.innerHTML = '';
 
-    try {
-        const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=  BM ${encodeURIComponent(codigo)}`);
-        const produto = await response.json();
-        campoDescricao.value = produto.encontrado ? produto.descricao : 'Produto não encontrado';
-    } catch (error) {
-        campoDescricao.value = 'Erro ao buscar produto';
+        // percorre todas as faturas selecionadas
+        faturasSelecionadas.forEach(fatura => {
+            const linha = document.createElement('div');
+            const nome = document.createElement('span');
+            const acoes = document.createElement('button');
+
+            // adiciona tudo na div
+            nome.textContent = fatura;
+            editar.innerHTML = '<i class="bi bi-pencil"></i>';
+            excluir.innerHTML = '<i class="bi bi-trash"></i>';
+
+            acoes.appendChild(editar);
+            acoes.appendChild(excluir);
+
+            // adiciona parte das linhas
+            linha.appendChild(nome);
+            linha.appendChild(acoes);
+            // adiciona linha
+            container.appendChild(linha);
+
+            console.log(linha);
+
+            editar.addEventListener('click', () => {
+                editarFatura(fatura);
+            });
+
+            excluir.addEventListener('click', () => {
+                removerFatura(fatura);
+            });
+        })
     }
-});
 
-// Submit do formulário
-document.getElementById('formCadastroEstoque').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => { data[key] = value; });
+    function editarFatura() {
 
-    fetch('./modulos/faturas/action/cadastrar.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.success) {
-            alert('Estoque cadastrado com sucesso!');
-            document.getElementById('formCadastroEstoque').reset();
-            location.reload();
-        } else {
-            alert('Erro ao cadastrar estoque: ' + data.error);
+    }
+
+    function removerFatura() {
+        document.querySelectorAll('.bi-trash').forEach(button => {
+            button.addEventListener('click', function() {
+                const faturaId = this.getAttribute('data-id');
+
+                if (confirm("Tem certeza que deseja excluir esta fatura?")) {
+                    fetch('./modulos/faturas/action/estoque.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: faturaId
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Fatura excluída com sucesso!');
+                                location.reload();
+                            } else {
+                                alert('Erro ao excluir a fatura: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro:', error);
+                            alert('Ocorreu um erro ao tentar excluir a fatura.');
+                        });
+                }
+            });
+        });
+    }
+</script>
+
+<script>
+    //TABELA
+    const dadosEstoque = <?= json_encode($tabela) ?>;
+    let faturasSelecionadas = [];
+
+    document.querySelectorAll('.btn-fatura').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const fatura = this.dataset.fatura;
+
+            if (faturasSelecionadas.includes(fatura)) {
+                faturasSelecionadas = faturasSelecionadas.filter(f => f !== fatura);
+                this.classList.remove('ativo');
+            } else {
+                faturasSelecionadas.push(fatura);
+                this.classList.add('ativo');
+            }
+
+            renderizarTabela();
+        });
+    });
+
+    function renderizarTabela() {
+        const thead = document.getElementById('tr-thead');
+        const linhas = document.querySelectorAll('.linha-estoque');
+        const semResultados = document.getElementById('sem-resultados');
+
+        // Reconstrói o cabeçalho mantendo Descrição e Código fixos
+        thead.innerHTML = '<th>Descrição</th><th>Código</th>';
+        faturasSelecionadas.forEach(fatura => {
+            const th = document.createElement('th');
+            th.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
+            thead.appendChild(th);
+        });
+        const thTotal = document.createElement('th');
+        thTotal.textContent = 'Estoque Total';
+        thead.appendChild(thTotal);
+
+        // Sem nenhuma fatura selecionada — esconde tudo
+        if (faturasSelecionadas.length === 0) {
+            linhas.forEach(l => l.style.display = 'none');
+            semResultados.style.display = 'none';
+            return;
         }
-    })
-    .catch(() => alert('Ocorreu um erro ao cadastrar.'));
-});
+
+        let encontrou = false;
+
+        linhas.forEach(linha => {
+            const dados = JSON.parse(linha.getAttribute('data-json'));
+            const quantidades = dados.quantidades;
+
+            // Verifica se essa linha tem pelo menos uma das faturas selecionadas
+            const temDados = faturasSelecionadas.some(f => quantidades[f] !== undefined);
+
+            if (!temDados) {
+                linha.style.display = 'none';
+                return;
+            }
+
+            linha.style.display = '';
+            encontrou = true;
+
+            // Mantém as duas primeiras células (descrição e código) e reconstrói o resto
+            const descricaoTd = linha.children[0].outerHTML;
+            const codigoTd = linha.children[1].outerHTML;
+            linha.innerHTML = descricaoTd + codigoTd;
+
+            let total = 0;
+            faturasSelecionadas.forEach(fatura => {
+                const td = document.createElement('td');
+                const qtd = quantidades[fatura];
+                td.textContent = qtd !== undefined ? qtd : '-';
+                if (qtd) total += parseInt(qtd);
+                linha.appendChild(td);
+            });
+
+            const tdTotal = document.createElement('td');
+            tdTotal.textContent = total;
+            linha.appendChild(tdTotal);
+        });
+
+        semResultados.style.display = encontrou ? 'none' : 'block';
+    }
 </script>

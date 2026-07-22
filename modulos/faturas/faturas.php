@@ -21,21 +21,21 @@ $noRepeat = array_unique($nomes);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($noRepeat as $nome): 
+            <?php foreach ($noRepeat as $nome):
                 $index = array_search($nome, array_column($faturas, 'nomeFatura'));
                 $nf        = $faturas[$index]["notaFiscal"] ?? '';
                 $taxaDolar = $faturas[$index]["txDolar"]    ?? '';
             ?>
-            <tr class="table-warning linha-fatura-unica">
+                <tr class="table-warning linha-fatura-unica">
                     <td class="clicavel" style="cursor:pointer;"><?= htmlspecialchars($nome) ?></td>
                     <td><?= htmlspecialchars($nf) ?></td>
                     <td><?= htmlspecialchars($taxaDolar) ?></td>
                     <td class="action-buttons text-center">
                         <button class="btn btn-danger btn-sm delete-btn" data-id="<?= htmlspecialchars($nome) ?>">
                             <i class="fa-solid fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
+                        </button>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
@@ -70,22 +70,37 @@ $noRepeat = array_unique($nomes);
 </div>
 
 <style>
-    th.menor { width: 120px; }
-    #tabela-faturas-unicas { width: 600px; }
-    .table th { padding: 0.3rem; vertical-align: middle; text-align: center; }
-    th.sortable, th.clicavel { cursor: pointer; user-select: none; }
+    th.menor {
+        width: 120px;
+    }
+
+    #tabela-faturas-unicas {
+        width: 600px;
+    }
+
+    .table th {
+        padding: 0.3rem;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    th.sortable,
+    th.clicavel {
+        cursor: pointer;
+        user-select: none;
+    }
 </style>
 
 <script>
-// Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
+    // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
     const todosOsItensFaturas = <?= json_encode($faturas) ?>;
 
-    document.querySelectorAll('.linha-fatura-unica').forEach(function (linhaFatura) {
-        linhaFatura.addEventListener('click', function () {
+    document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
+        linhaFatura.addEventListener('click', function() {
             const nomeClicado = this.querySelector('.clicavel').textContent.trim();
 
             // Filtra só os itens que pertencem a essa fatura
-            const itensDaFatura = todosOsItensFaturas.filter(function (item) {
+            const itensDaFatura = todosOsItensFaturas.filter(function(item) {
                 return item.nomeFatura === nomeClicado;
             });
 
@@ -96,7 +111,7 @@ $noRepeat = array_unique($nomes);
             if (itensDaFatura.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhum produto encontrado.</td></tr>';
             } else {
-                itensDaFatura.forEach(function (item) {
+                itensDaFatura.forEach(function(item) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${item.codigo ?? ''}</td>
@@ -117,7 +132,7 @@ $noRepeat = array_unique($nomes);
         });
     });
 
-// Ordenação por nome de fatura
+    // Ordenação por nome de fatura
     if (typeof ordemCrescente === 'undefined') {
         var ordemCrescente = true;
     }
@@ -138,30 +153,34 @@ $noRepeat = array_unique($nomes);
         ordemCrescente = !ordemCrescente;
     });
 
-//Deletar
+    //Deletar
     document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function () {
+        button.addEventListener('click', function() {
             const faturaId = this.getAttribute('data-id');
 
             if (confirm("Tem certeza que deseja excluir esta fatura?")) {
                 fetch('./modulos/faturas/action/delete.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: faturaId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Fatura excluída com sucesso!');
-                        location.reload();
-                    } else {
-                        alert('Erro ao excluir a fatura: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Ocorreu um erro ao tentar excluir a fatura.');
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: faturaId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Fatura excluída com sucesso!');
+                            location.reload();
+                        } else {
+                            alert('Erro ao excluir a fatura: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Ocorreu um erro ao tentar excluir a fatura.');
+                    });
             }
         });
     });
