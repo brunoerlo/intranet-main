@@ -111,40 +111,14 @@ ksort($tabela);
 </div>
 
 <style>
-    #tabela-estoque th,
-    #tabela-estoque td {
-        text-align: center;
-        padding: 0.3rem 0.5rem;
-        vertical-align: middle;
-    }
-
-    #tabela-estoque td:first-child,
-    #tabela-estoque th:first-child {
-        text-align: left;
-        min-width: 250px;
-    }
-
-    .btn-fatura.ativo {
-        background-color: #0d6efd;
-        color: white;
-        border-color: #0d6efd;
-    }
+    #tabela-estoque th, #tabela-estoque td { text-align: center; padding: 0.3rem 0.5rem; vertical-align: middle; }
+    #tabela-estoque td:first-child, #tabela-estoque th:first-child { text-align: left; min-width: 250px; }
+    .btn-fatura.ativo { background-color: #0d6efd; color: white; border-color: #0d6efd; }
 
     @media print {
-        body * {
-            visibility: hidden;
-        }
-
-        #mostrar-impressao,
-        #mostrar-impressao * {
-            visibility: visible;
-        }
-
-        #mostrar-impressao {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
+        body * { visibility: hidden; }
+        #mostrar-impressao, #mostrar-impressao * { visibility: visible; }
+        #mostrar-impressao { position: absolute; left: 0; top: 0; }
     }
 </style>
 
@@ -241,7 +215,61 @@ ksort($tabela);
     }
 
     function editarFatura() {
+        document.querySelectorAll('.bi-pencil').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr'); // linha com os dados
+                const editRow = row.nextElementSibling; // linha com o formulário
 
+                if (editRow && editRow.classList.contains('edit-row')) {
+                    const form = editRow.querySelector('.edit-form');
+                    if (!form) return;
+
+                    // Pega os dados do atributo data-json da linha
+                    const jsonData = JSON.parse(row.getAttribute('data-json'));
+
+                    // Preenche os campos do formulário
+                    form.elements['codigo'].value = jsonData['codigo'] || '';
+                    form.elements['descricao'].value = jsonData['descricao'] || '';
+                    form.elements['quantidade'].value = jsonData['quantidade'] || '';
+
+                    // Exibe a linha do formulário
+                    editRow.style.display = 'table-row';
+                }
+            });
+        });
+
+        // CANCELAR EDIÇÃO
+        document.querySelectorAll('.cancel-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const editRow = this.closest('.edit-row');
+                editRow.style.display = 'none';
+            });
+        });
+
+        // SALVAR EDIÇÃO
+        document.querySelectorAll('.edit-form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('./modulos/faturas/action/update.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Cliente atualizado com sucesso!');
+                            location.reload();
+                        } else {
+                            alert('Erro ao atualizar o cliente: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Ocorreu um erro ao tentar atualizar o cliente.');
+                    });
+            });
+        });
     }
 
     function removerFatura() {
