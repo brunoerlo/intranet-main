@@ -73,6 +73,21 @@ ksort($tabela);
 
     <div id="acoes-faturas"></div>
 
+    <!-- ============ MODAL ============ -->
+    <div class="modal fade" id="modalEditarEstoque" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Fatura<span id="modalnomeFatura"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-form" id="modalFormulario">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Tabela dinâmica -->
     <div id="mostrar-impressao" style="overflow-x: auto;">
         <table class="table table-bordered table-hover mt-2" id="tabela-estoque">
@@ -111,14 +126,40 @@ ksort($tabela);
 </div>
 
 <style>
-    #tabela-estoque th, #tabela-estoque td { text-align: center; padding: 0.3rem 0.5rem; vertical-align: middle; }
-    #tabela-estoque td:first-child, #tabela-estoque th:first-child { text-align: left; min-width: 250px; }
-    .btn-fatura.ativo { background-color: #0d6efd; color: white; border-color: #0d6efd; }
+    #tabela-estoque th,
+    #tabela-estoque td {
+        text-align: center;
+        padding: 0.3rem 0.5rem;
+        vertical-align: middle;
+    }
+
+    #tabela-estoque td:first-child,
+    #tabela-estoque th:first-child {
+        text-align: left;
+        min-width: 250px;
+    }
+
+    .btn-fatura.ativo {
+        background-color: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
+    }
 
     @media print {
-        body * { visibility: hidden; }
-        #mostrar-impressao, #mostrar-impressao * { visibility: visible; }
-        #mostrar-impressao { position: absolute; left: 0; top: 0; }
+        body * {
+            visibility: hidden;
+        }
+
+        #mostrar-impressao,
+        #mostrar-impressao * {
+            visibility: visible;
+        }
+
+        #mostrar-impressao {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
     }
 </style>
 
@@ -179,26 +220,30 @@ ksort($tabela);
 
     function atualizarListaAcoes() {
         // limpa a div
-        const container = document.getElementById('acoes-fatura');
+        const container = document.getElementById('acoes-faturas');
         container.innerHTML = '';
+
 
         // percorre todas as faturas selecionadas
         faturasSelecionadas.forEach(fatura => {
             const linha = document.createElement('div');
             const nome = document.createElement('span');
-            const acoes = document.createElement('button');
-
-            // adiciona tudo na div
-            nome.textContent = fatura;
-            editar.innerHTML = '<i class="bi bi-pencil"></i>';
-            excluir.innerHTML = '<i class="bi bi-trash"></i>';
+            const editar = document.createElement('button');
+            const excluir = document.createElement('button');
+            const acoes = document.createElement('span');
 
             acoes.appendChild(editar);
             acoes.appendChild(excluir);
+            // adiciona tudo na div
 
-            // adiciona parte das linhas
+            nome.textContent = fatura;
+            editar.innerHTML = '<i class="bi bi-pencil-fill btn btn-danger excluir"></i>';
+            excluir.innerHTML = '<i class="bi bi-trash-fill btn btn-warning deletar"></i>';
+
+            // adiciona span na div
             linha.appendChild(nome);
             linha.appendChild(acoes);
+
             // adiciona linha
             container.appendChild(linha);
 
@@ -214,29 +259,25 @@ ksort($tabela);
         })
     }
 
-    function editarFatura() {
-        document.querySelectorAll('.bi-pencil').forEach(button => {
-            button.addEventListener('click', function() {
-                const row = this.closest('tr'); // linha com os dados
-                const editRow = row.nextElementSibling; // linha com o formulário
+    function editarFatura(fatura) {
+        const row = this.closest('div'); // linha com os dados
+        const editRow = row.nextElementSibling; // linha com o formulário
 
-                if (editRow && editRow.classList.contains('edit-row')) {
-                    const form = editRow.querySelector('.edit-form');
-                    if (!form) return;
+        if (editRow && editRow.classList.contains('edit-row')) {
+            const form = editRow.querySelector('.edit-form');
+            if (!form) return;
 
-                    // Pega os dados do atributo data-json da linha
-                    const jsonData = JSON.parse(row.getAttribute('data-json'));
+            // Pega os dados do atributo data-json da linha
+            const jsonData = JSON.parse(row.getAttribute('data-json'));
 
-                    // Preenche os campos do formulário
-                    form.elements['codigo'].value = jsonData['codigo'] || '';
-                    form.elements['descricao'].value = jsonData['descricao'] || '';
-                    form.elements['quantidade'].value = jsonData['quantidade'] || '';
+            // Preenche os campos do formulário
+            form.elements['codigo'].value = jsonData['codigo'] || '';
+            form.elements['descricao'].value = jsonData['descricao'] || '';
+            form.elements['quantidade'].value = jsonData['quantidade'] || '';
 
-                    // Exibe a linha do formulário
-                    editRow.style.display = 'table-row';
-                }
-            });
-        });
+            // Exibe a linha do formulário
+            editRow.style.display = 'table-row';
+        }
 
         // CANCELAR EDIÇÃO
         document.querySelectorAll('.cancel-btn').forEach(button => {
@@ -272,38 +313,71 @@ ksort($tabela);
         });
     }
 
-    function removerFatura() {
-        document.querySelectorAll('.bi-trash').forEach(button => {
-            button.addEventListener('click', function() {
-                const faturaId = this.getAttribute('data-id');
+    function removerFatura(fatura) {
+        const faturaId = this.getAttribute('data-id');
 
-                if (confirm("Tem certeza que deseja excluir esta fatura?")) {
-                    fetch('./modulos/faturas/action/estoque.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                id: faturaId
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert('Fatura excluída com sucesso!');
-                                location.reload();
-                            } else {
-                                alert('Erro ao excluir a fatura: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erro:', error);
-                            alert('Ocorreu um erro ao tentar excluir a fatura.');
-                        });
-                }
-            });
+        if (confirm("Tem certeza que deseja excluir esta fatura?")) {
+            fetch('./modulos/faturas/action/estoque.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: faturaId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Fatura excluída com sucesso!');
+                        location.reload();
+                    } else {
+                        alert('Erro ao excluir a fatura: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Ocorreu um erro ao tentar excluir a fatura.');
+                });
+        }
+    }
+</script>
+
+<script>
+    //MODAL
+    const linhaEditar = <?= json_encode($estoque) ?>;
+
+    // Monta as linhas do modal
+    const edicao = document.getElementById('modalFormulario');
+    edicao.innerHTML = '';
+
+    if (itensEditar.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhuma fatura encontrada.</td></tr>';
+    } else {
+        itensEditar.forEach(function(item) {
+            const form = document.createElement('div');
+            form.innerHTML = `
+                        <label for="numero" class="form-label">Nome da Fatura</label>
+                        <input type="text" class="form-control" id="numero" name="numero">
+
+                        <label for="codigo" class="form-label">Código</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" required>
+
+                        <label for="descricao" class="form-label">Descrição do Produto</label>
+                        <input type="text" class="form-control" id="descricao" name="descricao" readonly>
+
+                        <label for="quantidade" class="form-label">Quantidade</label>
+                        <input type="number" class="form-control" id="quantidade" name="quantidade" required>
+                    `;
+            edicao.appendChild(form);
         });
     }
+
+    document.getElementById('modalNomeFatura').textContent = botaoClicado;
+
+    // Abre o modal (Bootstrap)
+    const modal = new bootstrap.Modal(document.getElementById('modalEditarEstoque'));
+    modal.show();
 </script>
 
 <script>
@@ -324,6 +398,7 @@ ksort($tabela);
             }
 
             renderizarTabela();
+            atualizarListaAcoes();
         });
     });
 
