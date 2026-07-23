@@ -12,6 +12,9 @@ if (!file_exists($estoquePath)) {
 // Carrega os arquivos JSON
 $estoque = json_decode(file_get_contents($estoquePath), true);
 
+// Recebe os dados do corpo da requisição
+$data = json_decode(file_get_contents("php://input"), true);
+
 // Verifica se os dados foram enviados corretamente
 if (!isset($data['Codigo estoque'])) {
     echo json_encode(['success' => false, 'message' => 'Código do estoque não especificado.']);
@@ -24,16 +27,17 @@ $encontrado = false;
 //Atualiza fatura do estoque selecionado ===
 
 foreach ($estoque as &$e) {
-    if ($e['Codigo estoque'] === $codigoEstoque) {
-        $e['numero']     = $data['numero']      ?? $e['numero'];
-        $e['codigo']     = $data['codigo']      ?? $e['codigo'];
-        $e['descricao']  = $data['descricao']   ?? $e['descricao'];
-        $e['quantidade'] = $data['quantidade']  ?? $e['quantidade'];
+    if (($e['Codigo estoque'] ?? '') === $codigoEstoque) {
+        if (isset($data['numero']))     $e['numero']     = $data['numero'];
+        if (isset($data['codigo']))     $e['codigo']     = $data['codigo'];
+        if (isset($data['descricao']))  $e['descricao']  = $data['descricao'];
+        if (isset($data['quantidade'])) $e['quantidade'] = $data['quantidade'];
 
         $encontrado = true;
         break;
     }
 }
+unset($e);
 
 if (!$encontrado) {
     echo json_encode(['success' => false, 'message' => 'Registro não encontrado.']);

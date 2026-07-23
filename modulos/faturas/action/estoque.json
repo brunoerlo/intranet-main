@@ -1,13 +1,6 @@
 [
     {
         "numero": "446",
-        "codigo": "BM 620.501",
-        "descricao": "APERTA GAXETA 5",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a5e31901e6742.59886112"
-    },
-    {
-        "numero": "446",
         "codigo": "BM 621.101",
         "descricao": "APERTA GAXETA 6 - 8",
         "quantidade": "12",
@@ -170,7 +163,7 @@
     {
         "numero": "446",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a5e34d3be9e95.13793781"
     },
@@ -814,7 +807,7 @@
     {
         "numero": "KALA",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "12",
         "Codigo estoque": "cli_6a5f69e3bb8066.43138734"
     },
@@ -831,19 +824,5 @@
         "descricao": "UNIAO RETA VINCADA 6x6",
         "quantidade": "12",
         "Codigo estoque": "cli_6a5f69f928cc50.06403828"
-    },
-    {
-        "numero": "450",
-        "codigo": "BM 621.107",
-        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
-        "quantidade": "24",
-        "Codigo estoque": "cli_6a5f6a1a4bff31.34525526"
-    },
-    {
-        "numero": "451",
-        "codigo": "BM 621.107",
-        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
-        "quantidade": "26",
-        "Codigo estoque": "cli_6a5f6a2aa5df68.79273174"
     }
 ]

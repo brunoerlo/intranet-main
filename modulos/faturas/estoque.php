@@ -7,18 +7,27 @@ $numeros = array_unique(array_column($estoque, 'numero'));
 $faturasBotoes = array_filter($numeros, fn($n) => $n !== 'fabrica');
 sort($faturasBotoes);
 
-// Monta estrutura: descricao => [ _codigo => ..., quantidades => [ numero => qtd ] ]
+// Monta estrutura: descricao => [ _codigo => ..., quantidades => [ numero => qtd ], itens => [...] ]
 $tabela = [];
 foreach ($estoque as $e) {
     $cod  = $e['codigo']    ?? '';
     $desc = $e['descricao'] ?? '';
     $num  = $e['numero']    ?? '';
     $qtd  = (int)($e['quantidade'] ?? 0);
+    $id   = $e['Codigo estoque'] ?? '';
 
     if (!isset($tabela[$desc])) {
-        $tabela[$desc] = ['_codigo' => $cod, 'quantidades' => []];
+        $tabela[$desc] = ['_codigo' => $cod, 'quantidades' => [], 'itens' => []];
     }
     $tabela[$desc]['quantidades'][$num] = $qtd;
+    // Guarda cada item individual para edição/exclusão
+    $tabela[$desc]['itens'][] = [
+        'id'         => $id,
+        'numero'     => $num,
+        'codigo'     => $cod,
+        'descricao'  => $desc,
+        'quantidade' => $qtd
+    ];
 }
 ksort($tabela);
 ?>
@@ -73,16 +82,16 @@ ksort($tabela);
 
     <div id="acoes-faturas"></div>
 
-    <!-- ============ MODAL ============ -->
+    <!-- MODAL EDITAR -->
     <div class="modal fade" id="modalEditarEstoque" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Fatura<span id="modalnomeFatura"></span></h5>
+                    <h5 class="modal-title">Editar Fatura: <span id="modalNomeFatura"></span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
-                <div class="modal-form" id="modalFormulario">
-                    
+                <div class="modal-body" id="modalFormulario">
+                    <!-- Conteúdo inserido via JS -->
                 </div>
             </div>
         </div>
@@ -106,6 +115,7 @@ ksort($tabela);
                         'codigo'      => $dados['_codigo'],
                         'descricao'   => $desc,
                         'quantidades' => $dados['quantidades'],
+                        'itens'       => $dados['itens'],
                         'total'       => $totalGeral
                     ]), ENT_QUOTES, 'UTF-8');
                 ?>
@@ -145,6 +155,22 @@ ksort($tabela);
         border-color: #0d6efd;
     }
 
+    #acoes-faturas .acao-fatura {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        margin-bottom: 4px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border: 1px solid #dee2e6;
+    }
+
+    #acoes-faturas .acao-fatura span {
+        font-weight: 500;
+        flex: 1;
+    }
+
     @media print {
         body * {
             visibility: hidden;
@@ -164,8 +190,7 @@ ksort($tabela);
 </style>
 
 <script>
-    //FORMULÁRIO
-    // Busca descrição ao digitar código
+    // ===================== FORMULÁRIO DE CADASTRO =====================
     const campoCodigo = document.getElementById('codigo');
     const campoDescricao = document.getElementById('descricao');
 
@@ -177,7 +202,7 @@ ksort($tabela);
         }
 
         try {
-            const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=  BM ${encodeURIComponent(codigo)}`);
+            const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=${encodeURIComponent(codigo)}`);
             const produto = await response.json();
             campoDescricao.value = produto.encontrado ? produto.descricao : 'Produto não encontrado';
         } catch (error) {
@@ -216,38 +241,30 @@ ksort($tabela);
 </script>
 
 <script>
-    //LISTA DE FATURAS E AÇÕES
+    // DADOS E ESTADO
+    const dadosEstoque = <?= json_encode($tabela) ?>;
+    const todosItensEstoque = <?= json_encode($estoque) ?>;
+    let faturasSelecionadas = [];
 
+    // LISTA DE AÇÕES POR FATURA
     function atualizarListaAcoes() {
-        // limpa a div
         const container = document.getElementById('acoes-faturas');
         container.innerHTML = '';
 
-
-        // percorre todas as faturas selecionadas
         faturasSelecionadas.forEach(fatura => {
             const linha = document.createElement('div');
+            linha.className = 'acao-fatura';
+
             const nome = document.createElement('span');
+            nome.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
+
             const editar = document.createElement('button');
+            editar.className = 'btn btn-sm btn-warning';
+            editar.innerHTML = '<i class="bi bi-pencil-fill"></i> Editar';
+
             const excluir = document.createElement('button');
-            const acoes = document.createElement('span');
-
-            acoes.appendChild(editar);
-            acoes.appendChild(excluir);
-            // adiciona tudo na div
-
-            nome.textContent = fatura;
-            editar.innerHTML = '<i class="bi bi-pencil-fill btn btn-danger excluir"></i>';
-            excluir.innerHTML = '<i class="bi bi-trash-fill btn btn-warning deletar"></i>';
-
-            // adiciona span na div
-            linha.appendChild(nome);
-            linha.appendChild(acoes);
-
-            // adiciona linha
-            container.appendChild(linha);
-
-            console.log(linha);
+            excluir.className = 'btn btn-sm btn-danger';
+            excluir.innerHTML = '<i class="bi bi-trash-fill"></i> Excluir';
 
             editar.addEventListener('click', () => {
                 editarFatura(fatura);
@@ -256,135 +273,147 @@ ksort($tabela);
             excluir.addEventListener('click', () => {
                 removerFatura(fatura);
             });
-        })
+
+            linha.appendChild(nome);
+            linha.appendChild(editar);
+            linha.appendChild(excluir);
+            container.appendChild(linha);
+        });
     }
 
+    // EDITAR FATURA (MODAL) 
     function editarFatura(fatura) {
-        const row = this.closest('div'); // linha com os dados
-        const editRow = row.nextElementSibling; // linha com o formulário
+        // Filtra os itens dessa fatura
+        const itensFatura = todosItensEstoque.filter(item => item.numero === fatura);
 
-        if (editRow && editRow.classList.contains('edit-row')) {
-            const form = editRow.querySelector('.edit-form');
-            if (!form) return;
+        const modalBody = document.getElementById('modalFormulario');
+        document.getElementById('modalNomeFatura').textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
 
-            // Pega os dados do atributo data-json da linha
-            const jsonData = JSON.parse(row.getAttribute('data-json'));
+        if (itensFatura.length === 0) {
+            modalBody.innerHTML = '<p class="text-center text-muted p-3">Nenhum item encontrado para esta fatura.</p>';
+        } else {
+            let html = '<div class="table-responsive"><table class="table table-sm table-bordered">';
+            html += '<thead class="table-light"><tr><th>Código</th><th>Descrição</th><th>Quantidade</th><th>Ações</th></tr></thead><tbody>';
 
-            // Preenche os campos do formulário
-            form.elements['codigo'].value = jsonData['codigo'] || '';
-            form.elements['descricao'].value = jsonData['descricao'] || '';
-            form.elements['quantidade'].value = jsonData['quantidade'] || '';
-
-            // Exibe a linha do formulário
-            editRow.style.display = 'table-row';
-        }
-
-        // CANCELAR EDIÇÃO
-        document.querySelectorAll('.cancel-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const editRow = this.closest('.edit-row');
-                editRow.style.display = 'none';
+            itensFatura.forEach(item => {
+                const itemId = item['Codigo estoque'] || '';
+                html += `
+                    <tr data-item-id="${itemId}">
+                        <td>${item.codigo || ''}</td>
+                        <td>${item.descricao || ''}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm edit-qtd"
+                                   value="${item.quantidade || 0}" style="width:80px; display:inline-block;">
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-success btn-salvar-item" title="Salvar">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger btn-excluir-item" title="Excluir item">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
             });
-        });
 
-        // SALVAR EDIÇÃO
-        document.querySelectorAll('.edit-form').forEach(form => {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-                fetch('./modulos/faturas/action/update.php', {
+            html += '</tbody></table></div>';
+            modalBody.innerHTML = html;
+
+            // Bind botões de salvar
+            modalBody.querySelectorAll('.btn-salvar-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tr = this.closest('tr');
+                    const itemId = tr.getAttribute('data-item-id');
+                    const novaQtd = tr.querySelector('.edit-qtd').value;
+
+                    fetch('./modulos/faturas/action/update.php', {
                         method: 'POST',
-                        body: formData
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            'Codigo estoque': itemId,
+                            'quantidade': novaQtd
+                        })
                     })
-                    .then(response => response.json())
+                    .then(r => r.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Cliente atualizado com sucesso!');
+                            alert('Item atualizado com sucesso!');
                             location.reload();
                         } else {
-                            alert('Erro ao atualizar o cliente: ' + data.message);
+                            alert('Erro ao atualizar: ' + (data.message || 'Erro desconhecido'));
                         }
                     })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Ocorreu um erro ao tentar atualizar o cliente.');
-                    });
-            });
-        });
-    }
-
-    function removerFatura(fatura) {
-        const faturaId = this.getAttribute('data-id');
-
-        if (confirm("Tem certeza que deseja excluir esta fatura?")) {
-            fetch('./modulos/faturas/action/estoque.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        id: faturaId
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Fatura excluída com sucesso!');
-                        location.reload();
-                    } else {
-                        alert('Erro ao excluir a fatura: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Ocorreu um erro ao tentar excluir a fatura.');
+                    .catch(() => alert('Erro de conexão ao atualizar.'));
                 });
+            });
+
+            // Bind botões de excluir item individual
+            modalBody.querySelectorAll('.btn-excluir-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!confirm('Tem certeza que deseja excluir este item?')) return;
+
+                    const tr = this.closest('tr');
+                    const itemId = tr.getAttribute('data-item-id');
+
+                    fetch('./modulos/faturas/action/delete.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: itemId })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Item excluído com sucesso!');
+                            location.reload();
+                        } else {
+                            alert('Erro ao excluir: ' + (data.message || 'Erro desconhecido'));
+                        }
+                    })
+                    .catch(() => alert('Erro de conexão ao excluir.'));
+                });
+            });
         }
-    }
-</script>
 
-<script>
-    //MODAL
-    const linhaEditar = <?= json_encode($estoque) ?>;
-
-    // Monta as linhas do modal
-    const edicao = document.getElementById('modalFormulario');
-    edicao.innerHTML = '';
-
-    if (itensEditar.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhuma fatura encontrada.</td></tr>';
-    } else {
-        itensEditar.forEach(function(item) {
-            const form = document.createElement('div');
-            form.innerHTML = `
-                        <label for="numero" class="form-label">Nome da Fatura</label>
-                        <input type="text" class="form-control" id="numero" name="numero">
-
-                        <label for="codigo" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" required>
-
-                        <label for="descricao" class="form-label">Descrição do Produto</label>
-                        <input type="text" class="form-control" id="descricao" name="descricao" readonly>
-
-                        <label for="quantidade" class="form-label">Quantidade</label>
-                        <input type="number" class="form-control" id="quantidade" name="quantidade" required>
-                    `;
-            edicao.appendChild(form);
-        });
+        // Abre o modal (Bootstrap)
+        const modal = new bootstrap.Modal(document.getElementById('modalEditarEstoque'));
+        modal.show();
     }
 
-    document.getElementById('modalNomeFatura').textContent = botaoClicado;
+    // REMOVER FATURA INTEIRA
+    function removerFatura(fatura) {
+        const itensFatura = todosItensEstoque.filter(item => item.numero === fatura);
 
-    // Abre o modal (Bootstrap)
-    const modal = new bootstrap.Modal(document.getElementById('modalEditarEstoque'));
-    modal.show();
-</script>
+        if (itensFatura.length === 0) {
+            alert('Nenhum item encontrado para esta fatura.');
+            return;
+        }
 
-<script>
-    //TABELA
-    const dadosEstoque = <?= json_encode($tabela) ?>;
-    let faturasSelecionadas = [];
+        if (!confirm(`Tem certeza que deseja excluir TODOS os ${itensFatura.length} itens da fatura "${fatura === 'fabrica' ? 'Fábrica' : fatura}"?`)) {
+            return;
+        }
 
+        // Coleta todos os IDs para excluir
+        const ids = itensFatura.map(item => item['Codigo estoque']).filter(Boolean);
+
+        fetch('./modulos/faturas/action/delete.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ids: ids })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                alert('Fatura excluída com sucesso!');
+                location.reload();
+            } else {
+                alert('Erro ao excluir fatura: ' + (data.message || 'Erro desconhecido'));
+            }
+        })
+        .catch(() => alert('Erro de conexão ao excluir fatura.'));
+    }
+
+    // BOTÕES DE FATURA
     document.querySelectorAll('.btn-fatura').forEach(btn => {
         btn.addEventListener('click', function() {
             const fatura = this.dataset.fatura;
@@ -402,6 +431,7 @@ ksort($tabela);
         });
     });
 
+    // RENDERIZAR TABELA
     function renderizarTabela() {
         const thead = document.getElementById('tr-thead');
         const linhas = document.querySelectorAll('.linha-estoque');
@@ -464,3 +494,5 @@ ksort($tabela);
         semResultados.style.display = encontrou ? 'none' : 'block';
     }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
