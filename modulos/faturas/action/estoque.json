@@ -163,7 +163,7 @@
     {
         "numero": "446",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a5e34d3be9e95.13793781"
     },
@@ -807,7 +807,7 @@
     {
         "numero": "KALA",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
         "quantidade": "12",
         "Codigo estoque": "cli_6a5f69e3bb8066.43138734"
     },
@@ -824,5 +824,12 @@
         "descricao": "UNIAO RETA VINCADA 6x6",
         "quantidade": "12",
         "Codigo estoque": "cli_6a5f69f928cc50.06403828"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "600.500",
+        "descricao": "ABRACADEIRA 3 BRAZMIX",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a6375915bd862.52202201"
     }
 ]

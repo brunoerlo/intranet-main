@@ -4,7 +4,7 @@ $estoque = json_decode($estoqueJson, true) ?? [];
 
 // Pega os números de fatura únicos (exceto "fabrica")
 $numeros = array_unique(array_column($estoque, 'numero'));
-$faturasBotoes = array_filter($numeros, fn($n) => $n !== 'fabrica');
+$faturasBotoes = array_filter($numeros, fn($n) => $n !== 'fabrica' && $n !== 'sobra');
 sort($faturasBotoes);
 
 // Monta estrutura: descricao => [ _codigo => ..., quantidades => [ numero => qtd ], itens => [...] ]
@@ -73,11 +73,6 @@ ksort($tabela);
                 <?= htmlspecialchars($num) ?>
             </button>
         <?php endforeach; ?>
-        <button class="btn btn-outline-secondary btn-sm btn-fatura"
-            data-fatura="fabrica"
-            style="flex-shrink:0;">
-            Fábrica
-        </button>
     </div>
 
     <div id="acoes-faturas"></div>
@@ -105,6 +100,8 @@ ksort($tabela);
                     <th>Descrição</th>
                     <th>Código</th>
                     <!-- colunas de fatura inseridas via JS -->
+                    <th>Fábrica</th>
+                    <th>Sobra</th>
                     <th>Estoque Total</th>
                 </tr>
             </thead>
@@ -444,6 +441,15 @@ ksort($tabela);
             th.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
             thead.appendChild(th);
         });
+
+        const thFabrica = document.createElement('th');
+        thFabrica.textContent = 'Fábrica';
+        thead.appendChild(thFabrica);
+
+        const thSobra = document.createElement('th');
+        thSobra.textContent = 'Sobra';
+        thead.appendChild(thSobra);
+
         const thTotal = document.createElement('th');
         thTotal.textContent = 'Estoque Total';
         thead.appendChild(thTotal);
@@ -472,11 +478,11 @@ ksort($tabela);
             linha.style.display = '';
             encontrou = true;
 
-            // Mantém as duas primeiras células (descrição e código) e reconstrói o resto
+            // Mantem as duas primeiras celulas (descricao e codigo) e reconstroi o resto
             const descricaoTd = linha.children[0].outerHTML;
             const codigoTd = linha.children[1].outerHTML;
             linha.innerHTML = descricaoTd + codigoTd;
-
+                                
             let total = 0;
             faturasSelecionadas.forEach(fatura => {
                 const td = document.createElement('td');
@@ -485,7 +491,16 @@ ksort($tabela);
                 if (qtd) total += parseInt(qtd);
                 linha.appendChild(td);
             });
+            const qtdFabrica = quantidades['fabrica'] ?? '-';
+            const tdFabrica = document.createElement('td');
+            tdFabrica.textContent = qtdFabrica;
+            linha.appendChild(tdFabrica)
 
+            const qtdSobra = quantidades['sobra'] ?? '-';
+            const tdSobra = document.createElement('td');
+            tdSobra.textContent = qtdSobra;
+            linha.appendChild(tdSobra);
+            
             const tdTotal = document.createElement('td');
             tdTotal.textContent = total;
             linha.appendChild(tdTotal);
