@@ -80,7 +80,6 @@ ksort($tabela);
         </button>
     </div>
 
-    
     <div id="acoes-faturas"></div>
 
     <!-- MODAL EDITAR -->
@@ -203,7 +202,7 @@ ksort($tabela);
         }
 
         try {
-            const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=${encodeURIComponent(codigo)}`);
+            const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=BM ${encodeURIComponent(codigo)}`);
             const produto = await response.json();
             campoDescricao.value = produto.encontrado ? produto.descricao : 'Produto não encontrado';
         } catch (error) {
