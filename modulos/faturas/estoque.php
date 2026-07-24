@@ -80,6 +80,7 @@ ksort($tabela);
         </button>
     </div>
 
+    
     <div id="acoes-faturas"></div>
 
     <!-- MODAL EDITAR -->
