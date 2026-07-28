@@ -1,262 +1,10 @@
 [
     {
-        "numero": "446",
-        "codigo": "BM 621.101",
-        "descricao": "APERTA GAXETA 6 - 8",
-        "quantidade": "12",
-        "Codigo estoque": "cli_6a5e319dc70645.97889081"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 616.000",
-        "descricao": "BOMBA ALTA PRESSAO 3x2 ROTOR FECHADO",
-        "quantidade": "1",
-        "Codigo estoque": "cli_6a5e31a9345e29.32028552"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 140.021",
-        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e31b4a54946.78359902"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 620.503",
-        "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a5e31ca7f6824.53631039"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 620.003",
-        "descricao": "CARCACA BD 3 (BC MOVEL)",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a5e31e72a53a4.56370209"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 621.303",
-        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
-        "quantidade": "30",
-        "Codigo estoque": "cli_6a5e31fa735083.91298235"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 621.104",
-        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
-        "quantidade": "8",
-        "Codigo estoque": "cli_6a5e3208038dc9.57156032"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 107.001",
-        "descricao": "CORREIA LAMINADA 8 LONAS PAN-100 2",
-        "quantidade": "300",
-        "Codigo estoque": "cli_6a5e3214da97c4.22836679"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 620.006",
-        "descricao": "FLANGE AP GAXETA 3 E 4",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a5e321ff19cc0.09722105"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 117.000",
-        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
-        "quantidade": "28",
-        "Codigo estoque": "cli_6a5e33e0e6fdf7.16924319"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 140.062",
-        "descricao": "JUNTA MOTOR MWM D229 3 CIL 71607EFPSD",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a5e33ec663c19.61506194"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 140.063",
-        "descricao": "JUNTA MOTOR MWM D229 4 CIL 71206EFPSD",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e33f5f18bc2.60671260"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 140.064",
-        "descricao": "JUNTA MOTOR MWM D229 6 CILSABO71106EFPSD",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e33ffe46443.64337748"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 140.066",
-        "descricao": "JUNTA MOTOR MWM X10 6 CIL SABO 80279",
-        "quantidade": "15",
-        "Codigo estoque": "cli_6a5e342778fb17.42759331"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 120.092",
-        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
-        "quantidade": "90",
-        "Codigo estoque": "cli_6a5e343acc1bf7.27871415"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 120.093",
-        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
-        "quantidade": "6",
-        "Codigo estoque": "cli_6a5e3445999e04.51961805"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 131.008",
-        "descricao": "REDUCAO VINCADA 3x2.1\/2",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a5e345022e646.56478739"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 131.019",
-        "descricao": "REDUCAO VINCADA 6x4",
-        "quantidade": "30",
-        "Codigo estoque": "cli_6a5e345ba89d23.73559728"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 132.000",
-        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e346a60c1d7.26294183"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 132.001",
-        "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a5e3489605102.64929358"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 132.002",
-        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
-        "quantidade": "36",
-        "Codigo estoque": "cli_6a5e34a0e12bf8.82582650"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 620.007",
-        "descricao": "TAMPA ROLAMENTO 3 E 4",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e34adb782b9.71951367"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 621.107",
-        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
-        "quantidade": "26",
-        "Codigo estoque": "cli_6a5e34c4baa5e5.91201338"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
-        "quantidade": "30",
-        "Codigo estoque": "cli_6a5e34d3be9e95.13793781"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.131",
-        "descricao": "UNIAO Y VINC 6x3x3",
-        "quantidade": "15",
-        "Codigo estoque": "cli_6a5e34e14b8f19.26350402"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.123",
-        "descricao": "UNIAO Y VINC 6x4x4",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e34fbaf4507.82925341"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.101",
-        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e35116671c1.73443106"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.101",
-        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e3528177891.52228520"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.103",
-        "descricao": "UNIAO Y VINCADA 3x3x3",
-        "quantidade": "15",
-        "Codigo estoque": "cli_6a5e3535e5baf2.62618491"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.106",
-        "descricao": "UNIAO Y VINCADA 4x3x3",
-        "quantidade": "25",
-        "Codigo estoque": "cli_6a5e35403130d8.06424671"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.105",
-        "descricao": "UNIAO Y VINCADA 4x4x4",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a5e354a310946.26130266"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 140.170",
-        "descricao": "JUNTA MOTOR MWM X10 4 CIL SPAAL 711040",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a5e364411f259.23418232"
-    },
-    {
-        "numero": "446",
-        "codigo": "BM 136.134",
-        "descricao": "UNIAO Y VINC 6x6x6",
-        "quantidade": "15",
-        "Codigo estoque": "cli_6a5e36531bce33.41388044"
-    },
-    {
-        "numero": "447",
-        "codigo": "BM 621.101",
-        "descricao": "APERTA GAXETA 6 - 8",
-        "quantidade": "13",
-        "Codigo estoque": "cli_6a5f571bb17197.29387985"
-    },
-    {
         "numero": "447",
         "codigo": "BM 113.006",
         "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
         "quantidade": "144",
         "Codigo estoque": "cli_6a5f5729d11c35.69317348"
-    },
-    {
-        "numero": "447",
-        "codigo": "BM 621.104",
-        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
-        "quantidade": "12",
-        "Codigo estoque": "cli_6a5f573ada1c61.25185250"
-    },
-    {
-        "numero": "447",
-        "codigo": "BM 117.000",
-        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
-        "quantidade": "28",
-        "Codigo estoque": "cli_6a5f57509bce28.43528364"
     },
     {
         "numero": "447",
@@ -346,14 +94,14 @@
         "numero": "448",
         "codigo": "BM 616.900",
         "descricao": "BOMBA ALTA PRESSAO 6x4 ROTOR FECHADO",
-        "quantidade": "5",
+        "quantidade": "7",
         "Codigo estoque": "cli_6a5f6496d82a79.52754212"
     },
     {
         "numero": "448",
         "codigo": "BM 617.300",
         "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
-        "quantidade": "2",
+        "quantidade": "3",
         "Codigo estoque": "cli_6a5f64a5d89951.07112526"
     },
     {
@@ -430,14 +178,14 @@
         "numero": "448",
         "codigo": "BM 131.011",
         "descricao": "REDUCAO VINCADA 6x5",
-        "quantidade": "10",
+        "quantidade": "20",
         "Codigo estoque": "cli_6a5f655a1ef811.93949889"
     },
     {
         "numero": "448",
         "codigo": "BM 131.012",
         "descricao": "REDUCAO VINCADA 8x6",
-        "quantidade": "20",
+        "quantidade": "35",
         "Codigo estoque": "cli_6a5f6566be7285.58980741"
     },
     {
@@ -477,13 +225,6 @@
     },
     {
         "numero": "449",
-        "codigo": "BM 621.105",
-        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
-        "quantidade": "30",
-        "Codigo estoque": "cli_6a5f66015c6991.49899499"
-    },
-    {
-        "numero": "449",
         "codigo": "BM 117.000",
         "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
         "quantidade": "100",
@@ -493,7 +234,7 @@
         "numero": "CAMILO 002",
         "codigo": "BM 620.001",
         "descricao": "APERTA GAXETA 3 E 4",
-        "quantidade": "258",
+        "quantidade": "285",
         "Codigo estoque": "cli_6a5f6670d3d354.10193338"
     },
     {
@@ -827,9 +568,555 @@
     },
     {
         "numero": "sobra",
-        "codigo": "600.500",
+        "codigo": "BM 600.500",
         "descricao": "ABRACADEIRA 3 BRAZMIX",
         "quantidade": "10",
         "Codigo estoque": "cli_6a6375915bd862.52202201"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 600.300",
+        "descricao": "ABRACADEIRA 2 BRAZMIX",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a68935ac39fa9.32321016"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 600.400",
+        "descricao": "ABRACADEIRA 2.1\/2 BRAZMIX",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a68936405c862.64760037"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 600.500",
+        "descricao": "ABRACADEIRA 3 BRAZMIX",
+        "quantidade": "200",
+        "Codigo estoque": "cli_6a689370321c82.96882288"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 600.600",
+        "descricao": "ABRACADEIRA 4 BRAZMIX",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a68937a4e2b54.32030918"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 620.501",
+        "descricao": "APERTA GAXETA 5",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a6894086d1043.01309786"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a68941fb0ad38.64891992"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "quantidade": "12",
+        "Codigo estoque": "cli_6a689436d6cfb5.96875804"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 109.000",
+        "descricao": "DUREPOXI 100 GRS 48UN\/CX",
+        "quantidade": "808",
+        "Codigo estoque": "cli_6a6894528a00a7.03356352"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 620.006",
+        "descricao": "FLANGE AP GAXETA 3 E 4",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a68946ba88308.75771302"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 620.514",
+        "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a6894eeb374f4.72289912"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 612.303",
+        "descricao": "MANGOTE ALUMINIO BJ",
+        "quantidade": "95",
+        "Codigo estoque": "cli_6a689587bff3a0.93287251"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 612.002",
+        "descricao": "NIPLE ALUMINIO BJ 2.1\/2",
+        "quantidade": "45",
+        "Codigo estoque": "cli_6a6895d93101d7.81880217"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 612.302",
+        "descricao": "NIPLE ALUMINIO BJ 3",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a6895e21b0c23.23568174"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 125.011",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 6",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a6895f1ded347.14440298"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 125.012",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 8",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a689621bedf72.50818000"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "quantidade": "70",
+        "Codigo estoque": "cli_6a689657071c37.37840776"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "quantidade": "70",
+        "Codigo estoque": "cli_6a68965fefe943.30487632"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 137.008",
+        "descricao": "VALVULA PE 6",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a68966a082695.70031251"
+    },
+    {
+        "numero": "447",
+        "codigo": "BM 137.009",
+        "descricao": "VALVULA PE 8",
+        "quantidade": "10",
+        "Codigo estoque": "cli_6a6896735c7f19.00632280"
+    },
+    {
+        "numero": "448",
+        "codigo": "BM 124.016",
+        "descricao": "MARTELO MOINHO BMH-8 (JG C\/ 4 UN)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a6897a4efd504.60569151"
+    },
+    {
+        "numero": "448",
+        "codigo": "BM 124.021",
+        "descricao": "REVEST MOINHO BM3 LAT COMPL (06 PCS)",
+        "quantidade": "7",
+        "Codigo estoque": "cli_6a6897ba7944d6.90343368"
+    },
+    {
+        "numero": "448",
+        "codigo": "BM 124.022",
+        "descricao": "REVEST MOINHO BM3 SUP COMPL (5 PCS)",
+        "quantidade": "7",
+        "Codigo estoque": "cli_6a6897c4b9fc15.07462876"
+    },
+    {
+        "numero": "448",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a6897faafbd91.45175908"
+    },
+    {
+        "numero": "448",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a689804321f30.06607502"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 140.060",
+        "descricao": "BICO ACOPLADOR EXT RIGIDA BOMBA GRAXA",
+        "quantidade": "250",
+        "Codigo estoque": "cli_6a68983bc10c30.83474819"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 140.077",
+        "descricao": "BOMBA MANUAL P\/GRAXA 4 KG HYDRONLUZ",
+        "quantidade": "36",
+        "Codigo estoque": "cli_6a68984753c288.96432312"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 140.088",
+        "descricao": "BOMBA MANUAL P\/GRAXA 7 KG HYDRONLUBZ8484",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a689852244265.41837008"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 140.150",
+        "descricao": "EXTENSAO FLEXIVEL  BOMBA GRAXA",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a6898bd5549b4.09324977"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 140.058",
+        "descricao": "GRAXEIRA MANUAL 500 GR HL500 S\/EXTFLEX",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a6898e86b0f00.83955887"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 140.151",
+        "descricao": "GRAXEIRA MANUAL 500 GR HL501",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a6898f5545113.70261271"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a689901bb1171.47302446"
+    },
+    {
+        "numero": "449",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a689909da2d97.31593362"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 604.100",
+        "descricao": "ANEL VEDACAO BD 4 (KIT C\/ 5)",
+        "quantidade": "100",
+        "Codigo estoque": "cli_6a6899d596e370.07430619"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 604.900",
+        "descricao": "ANEL VEDACAO BD 6.1\/2 C\/BOCALSUC(KITC\/5)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a689b9403d8d0.05031106"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 620.004",
+        "descricao": "CAVALETE BD 3 E 4",
+        "quantidade": "85",
+        "Codigo estoque": "cli_6a689bdd732860.40652120"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 112.000",
+        "descricao": "EIXO CAV BD 3 E 4 (38x430MM) 2 ROL 6208",
+        "quantidade": "335",
+        "Codigo estoque": "cli_6a689c1c6bfd69.36653616"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 112.003",
+        "descricao": "EIXO CAV BD 6 (44x560 MM) 3 ROL 6310",
+        "quantidade": "65",
+        "Codigo estoque": "cli_6a689c33ad9aa2.20016434"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 112.004",
+        "descricao": "EIXO CAV BD 8 (44x590 MM) 3 ROL 6310",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a689c3d2439c2.32325539"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 621.111",
+        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "quantidade": "49",
+        "Codigo estoque": "cli_6a689c578bde73.83885226"
+    },
+    {
+        "numero": "CAMILO 002",
+        "codigo": "BM 300.138",
+        "descricao": "PRISIONEIRO M14x185MM",
+        "quantidade": "300",
+        "Codigo estoque": "cli_6a689cc58f6bb0.61780093"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 620.501",
+        "descricao": "APERTA GAXETA 5",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a689d5f19a738.39224121"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a689d684125e6.82383405"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 107.001",
+        "descricao": "CORREIA LAMINADA 8 LONAS PAN-100 2",
+        "quantidade": "500",
+        "Codigo estoque": "cli_6a689d7c1a57a7.90387907"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a689d88adf084.40282308"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 620.514",
+        "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a689d96ab79f7.29114136"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 621.111",
+        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "quantidade": "22",
+        "Codigo estoque": "cli_6a689da362a704.07029191"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 124.016",
+        "descricao": "MARTELO MOINHO BMH-8 (JG C\/ 4 UN)",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a689daff0d888.04972863"
+    },
+    {
+        "numero": "450",
+        "codigo": "BM 621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "24",
+        "Codigo estoque": "cli_6a689dbbd02630.35404406"
+    },
+    {
+        "numero": "451",
+        "codigo": "BM 620.501",
+        "descricao": "APERTA GAXETA 5",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a689dd5a11333.66035759"
+    },
+    {
+        "numero": "452",
+        "codigo": "BM 620.503",
+        "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a689dea6f84d7.32124160"
+    },
+    {
+        "numero": "451",
+        "codigo": "BM 620.514",
+        "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
+        "quantidade": "5",
+        "Codigo estoque": "cli_6a689e01328786.36713158"
+    },
+    {
+        "numero": "451",
+        "codigo": "BM 621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "26",
+        "Codigo estoque": "cli_6a689e11019236.64790655"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.501",
+        "descricao": "APERTA GAXETA 5",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a689e26eae8e3.77174242"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.101",
+        "descricao": "APERTA GAXETA 6 - 8",
+        "quantidade": "41",
+        "Codigo estoque": "cli_6a689e328ba7c5.06465663"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "quantidade": "80",
+        "Codigo estoque": "cli_6a689e41a9a0e6.18264800"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.503",
+        "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
+        "quantidade": "11",
+        "Codigo estoque": "cli_6a689e52c97265.14161073"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "quantidade": "60",
+        "Codigo estoque": "cli_6a689e6dc25d89.80665028"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a689e7a2807d5.55004383"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.306",
+        "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a689e861d9169.09577276"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.104",
+        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
+        "quantidade": "40",
+        "Codigo estoque": "cli_6a689e9244afe7.38566576"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
+        "quantidade": "7",
+        "Codigo estoque": "cli_6a689e9e64ae70.22443010"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.305",
+        "descricao": "DISCO PROT CAV BD 8 FUNDIDO",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a689eb3385f50.26718877"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 112.004",
+        "descricao": "EIXO CAV BD 8 (44x590 MM) 3 ROL 6310",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a689ebe0ba5d0.01175781"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.006",
+        "descricao": "FLANGE AP GAXETA 3 E 4",
+        "quantidade": "20",
+        "Codigo estoque": "cli_6a689eca09e389.37930501"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.514",
+        "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
+        "quantidade": "25",
+        "Codigo estoque": "cli_6a689ed60ae041.59029082"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.106",
+        "descricao": "FLANGE AP GAXETA 6 E 8",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a689ee1a1ed45.38970238"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.111",
+        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "quantidade": "13",
+        "Codigo estoque": "cli_6a689eee612452.56060635"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
+        "quantidade": "30",
+        "Codigo estoque": "cli_6a689efcc27996.33431082"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 115.039",
+        "descricao": "PORCA SEXT M14x2.0 PO DIN 934",
+        "quantidade": "12",
+        "Codigo estoque": "cli_6a689f0d74aa34.31933355"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 132.000",
+        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "60",
+        "Codigo estoque": "cli_6a689f1a5dd3d6.71817236"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 132.001",
+        "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "36",
+        "Codigo estoque": "cli_6a689f26bd7085.82794856"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 132.002",
+        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
+        "quantidade": "117",
+        "Codigo estoque": "cli_6a689f3c9f7046.26548326"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 133.019",
+        "descricao": "ROTOR 8x4 RT HP130x25,4 D300x12,7 MM",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6a689f4f4fc6a1.87061311"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.007",
+        "descricao": "TAMPA ROLAMENTO 3 E 4",
+        "quantidade": "40",
+        "Codigo estoque": "cli_6a689f5e13b5c3.42123465"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 620.507",
+        "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
+        "quantidade": "40",
+        "Codigo estoque": "cli_6a689f69a6f7d3.38430234"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 621.107",
+        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
+        "quantidade": "54",
+        "Codigo estoque": "cli_6a689f739158d2.25283594"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "quantidade": "15",
+        "Codigo estoque": "cli_6a689f8a5b2c87.65012552"
+    },
+    {
+        "numero": "sobra",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "quantidade": "50",
+        "Codigo estoque": "cli_6a689f935150b7.70276376"
     }
 ]

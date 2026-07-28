@@ -8723,6 +8723,17 @@
         "empresa_id": "1"
     },
     {
+        "Item": "BM 620.514",
+        "Descricao": "FLANGE AP GAXETA 5 COM ROSCA",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "54,42000",
+        "NCM": "8413.91.90",
+        "Peso Liquido": "4,800000",
+        "Vlr Total": "54,42",
+        "empresa_id": "1"
+    },
+    {
         "Item": "BM 621.106",
         "Descricao": "FLANGE AP GAXETA 6 E 8",
         "Descricao Complementar": "",
@@ -14048,6 +14059,17 @@
     },
     {
         "Item": "BM 115.043",
+        "Descricao": "PRISIONEIRO M14x185MM",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "0,00000",
+        "NCM": "7318.15.00",
+        "Peso Liquido": "0,185000",
+        "Vlr Total": "0,00",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "BM 300.138",
         "Descricao": "PRISIONEIRO M14x185MM",
         "Descricao Complementar": "",
         "UM": "UN",
