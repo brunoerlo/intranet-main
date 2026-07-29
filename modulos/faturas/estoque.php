@@ -248,12 +248,23 @@ ksort($tabela);
         const container = document.getElementById('acoes-faturas');
         container.innerHTML = '';
 
-        faturasSelecionadas.forEach(fatura => {
+        const lista = [...new Set([
+            ...faturasSelecionadas,
+            "fabrica",
+            "sobra"
+        ])];
+
+        lista.forEach(fatura => {
             const linha = document.createElement('div');
             linha.className = 'acao-fatura';
 
             const nome = document.createElement('span');
-            nome.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
+            nome.textContent =
+                fatura === "fabrica" //if fatura igual estritamente (em valor e tipo) com 'fabrica'
+                    ? "Fábrica"      // entao mostra 'Fábrica'
+                    : fatura === "sobra" //if fatura é estritamente igual a 'sobra'
+                    ? "Sobra"        // então mostra 'Sobra'
+                    : fatura;        // senão fatura mantem igual
 
             const editar = document.createElement('button');
             editar.className = 'btn btn-sm btn-warning';
@@ -433,7 +444,7 @@ ksort($tabela);
         const thead = document.getElementById('tr-thead');
         const linhas = document.querySelectorAll('.linha-estoque');
         const semResultados = document.getElementById('sem-resultados');
-
+        
         // Reconstrói o cabeçalho mantendo Descrição e Código fixos
         thead.innerHTML = '<th>Descrição</th><th>Código</th>';
         faturasSelecionadas.forEach(fatura => {
@@ -454,43 +465,47 @@ ksort($tabela);
         thTotal.textContent = 'Estoque Total';
         thead.appendChild(thTotal);
 
-        // Sem nenhuma fatura selecionada — esconde tudo
-        if (faturasSelecionadas.length === 0) {
-            linhas.forEach(l => l.style.display = 'none');
-            semResultados.style.display = 'none';
-            return;
-        }
-
         let encontrou = false;
-
+        
         linhas.forEach(linha => {
             const dados = JSON.parse(linha.getAttribute('data-json'));
             const quantidades = dados.quantidades;
 
-            // Verifica se essa linha tem pelo menos uma das faturas selecionadas
-            const temDados = faturasSelecionadas.some(f => quantidades[f] !== undefined);
+            const total = calcularTotal(quantidades);
+            const possuiFaturaSelecionada = faturasSelecionadas.some(f => quantidades[f] !== undefined);
+            
+            let mostrarLinha = true;
+            if (faturasSelecionadas.length === 0) {
+                if (total === 0) {
+                    mostrarLinha = false;
+                }
+                
+            } else {
+                if (!possuiFaturaSelecionada) {
+                    mostrarLinha = false;
+                }
+            }
 
-            if (!temDados) {
+            if (!mostrarLinha) {
                 linha.style.display = 'none';
                 return;
             }
 
             linha.style.display = '';
             encontrou = true;
-
+                
             // Mantem as duas primeiras celulas (descricao e codigo) e reconstroi o resto
             const descricaoTd = linha.children[0].outerHTML;
             const codigoTd = linha.children[1].outerHTML;
             linha.innerHTML = descricaoTd + codigoTd;
-                                
-            let total = 0;
+
             faturasSelecionadas.forEach(fatura => {
                 const td = document.createElement('td');
                 const qtd = quantidades[fatura];
                 td.textContent = qtd !== undefined ? qtd : '-';
-                if (qtd) total += parseInt(qtd);
                 linha.appendChild(td);
-            });
+            });     
+
             const qtdFabrica = quantidades['fabrica'] ?? '-';
             const tdFabrica = document.createElement('td');
             tdFabrica.textContent = qtdFabrica;
@@ -504,10 +519,19 @@ ksort($tabela);
             const tdTotal = document.createElement('td');
             tdTotal.textContent = total;
             linha.appendChild(tdTotal);
+
         });
 
         semResultados.style.display = encontrou ? 'none' : 'block';
     }
+
+    function calcularTotal(quantidades) {
+        let total = 0;
+        Object.values(quantidades).forEach(valor => {
+            total += parseInt(valor) || 0;
+        });
+        return total;
+    }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">//icones e modal</script>

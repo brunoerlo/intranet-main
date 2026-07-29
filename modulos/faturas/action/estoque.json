@@ -548,7 +548,7 @@
     {
         "numero": "KALA",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "12",
         "Codigo estoque": "cli_6a5f69e3bb8066.43138734"
     },
@@ -681,14 +681,14 @@
     {
         "numero": "447",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "70",
         "Codigo estoque": "cli_6a689657071c37.37840776"
     },
     {
         "numero": "447",
         "codigo": "BM 135.010",
-        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "70",
         "Codigo estoque": "cli_6a68965fefe943.30487632"
     },
@@ -730,14 +730,14 @@
     {
         "numero": "448",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a6897faafbd91.45175908"
     },
     {
         "numero": "448",
         "codigo": "BM 135.010",
-        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a689804321f30.06607502"
     },
@@ -786,14 +786,14 @@
     {
         "numero": "449",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a689901bb1171.47302446"
     },
     {
         "numero": "449",
         "codigo": "BM 135.010",
-        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a689909da2d97.31593362"
     },
@@ -1108,14 +1108,14 @@
     {
         "numero": "sobra",
         "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "15",
         "Codigo estoque": "cli_6a689f8a5b2c87.65012552"
     },
     {
         "numero": "sobra",
         "codigo": "BM 135.010",
-        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m\u00b3)",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "50",
         "Codigo estoque": "cli_6a689f935150b7.70276376"
     }
