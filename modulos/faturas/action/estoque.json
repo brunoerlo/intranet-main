@@ -842,7 +842,7 @@
     {
         "numero": "CAMILO 002",
         "codigo": "BM 621.111",
-        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "49",
         "Codigo estoque": "cli_6a689c578bde73.83885226"
     },
@@ -891,7 +891,7 @@
     {
         "numero": "450",
         "codigo": "BM 621.111",
-        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "22",
         "Codigo estoque": "cli_6a689da362a704.07029191"
     },
@@ -1038,7 +1038,7 @@
     {
         "numero": "sobra",
         "codigo": "BM 621.111",
-        "descricao": " FLANGE AP GAXETA 6 E 8 COM ROSCA",
+        "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "13",
         "Codigo estoque": "cli_6a689eee612452.56060635"
     },
