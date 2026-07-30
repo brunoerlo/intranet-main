@@ -28,7 +28,7 @@ $encontrado = false;
 
 foreach ($estoque as &$e) {
     if (($e['Codigo estoque'] ?? '') === $codigoEstoque) {
-        if (isset($data['numero']))     $e['numero']     = $data['numero'];
+        if (isset($data['nome']))       $e['nome']       = $data['nome'];
         if (isset($data['codigo']))     $e['codigo']     = $data['codigo'];
         if (isset($data['descricao']))  $e['descricao']  = $data['descricao'];
         if (isset($data['quantidade'])) $e['quantidade'] = $data['quantidade'];
