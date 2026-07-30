@@ -2,28 +2,27 @@
 $estoqueJson = file_get_contents(__DIR__ . '/action/estoque.json');
 $estoque = json_decode($estoqueJson, true) ?? [];
 
-// Pega os números de fatura únicos (exceto "fabrica")
-$numeros = array_unique(array_column($estoque, 'numero'));
-$faturasBotoes = array_filter($numeros, fn($n) => $n !== 'fabrica' && $n !== 'sobra');
+$nomes = array_unique(array_column($estoque, 'nome'));
+$faturasBotoes = array_filter($nomes, fn($n) => $n !== 'sobra');
 sort($faturasBotoes);
 
-// Monta estrutura: descricao => [ _codigo => ..., quantidades => [ numero => qtd ], itens => [...] ]
+// Monta estrutura: descricao => [ _codigo => ..., quantidades => [ nome => qtd ], itens => [...] ]
 $tabela = [];
 foreach ($estoque as $e) {
     $cod  = $e['codigo']    ?? '';
     $desc = $e['descricao'] ?? '';
-    $num  = $e['numero']    ?? '';
+    $nome = $e['nome']      ?? '';
     $qtd  = (int)($e['quantidade'] ?? 0);
     $id   = $e['Codigo estoque'] ?? '';
 
     if (!isset($tabela[$desc])) {
         $tabela[$desc] = ['_codigo' => $cod, 'quantidades' => [], 'itens' => []];
     }
-    $tabela[$desc]['quantidades'][$num] = $qtd;
+    $tabela[$desc]['quantidades'][$nome] = $qtd;
     // Guarda cada item individual para edição/exclusão
     $tabela[$desc]['itens'][] = [
         'id'         => $id,
-        'numero'     => $num,
+        'nome'       => $nome,
         'codigo'     => $cod,
         'descricao'  => $desc,
         'quantidade' => $qtd
@@ -39,8 +38,8 @@ ksort($tabela);
             <form id="formCadastroEstoque">
                 <div class="tipo-grupo">
                     <div class="mb-3">
-                        <label for="numero" class="form-label">Nome da Fatura <small class="text-muted">(deixe vazio para Fábrica)</small></label>
-                        <input type="text" class="form-control" id="numero" name="numero">
+                        <label for="nome" class="form-label">Nome da Fatura></label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
                     </div>
                     <div class="mb-3">
                         <label for="codigo" class="form-label">Código</label>
@@ -66,11 +65,11 @@ ksort($tabela);
     <!-- Botões de fatura -->
     <div class="mb-3 d-flex align-items-center gap-2" style="overflow-x: auto; white-space: nowrap; padding-bottom: 6px; max-width: 100%;">
         <span class="text-muted me-2" style="font-size:13px; flex-shrink:0;">Filtrar faturas:</span>
-        <?php foreach ($faturasBotoes as $num): ?>
+        <?php foreach ($faturasBotoes as $nome): ?>
             <button class="btn btn-outline-primary btn-sm btn-fatura"
-                data-fatura="<?= htmlspecialchars($num) ?>"
+                data-fatura="<?= htmlspecialchars($nome) ?>"
                 style="flex-shrink:0;">
-                <?= htmlspecialchars($num) ?>
+                <?= htmlspecialchars($nome) ?>
             </button>
         <?php endforeach; ?>
     </div>
@@ -100,7 +99,6 @@ ksort($tabela);
                     <th>Descrição</th>
                     <th>Código</th>
                     <!-- colunas de fatura inseridas via JS -->
-                    <th>Fábrica</th>
                     <th>Sobra</th>
                     <th>Estoque Total</th>
                 </tr>
@@ -187,7 +185,7 @@ ksort($tabela);
 </style>
 
 <script>
-    // ===================== FORMULÁRIO DE CADASTRO =====================
+    //FORMULÁRIO DE CADASTRO
     const campoCodigo = document.getElementById('codigo');
     const campoDescricao = document.getElementById('descricao');
 
@@ -250,7 +248,6 @@ ksort($tabela);
 
         const lista = [...new Set([
             ...faturasSelecionadas,
-            "fabrica",
             "sobra"
         ])];
 
@@ -260,9 +257,7 @@ ksort($tabela);
 
             const nome = document.createElement('span');
             nome.textContent =
-                fatura === "fabrica" //if fatura igual estritamente (em valor e tipo) com 'fabrica'
-                    ? "Fábrica"      // entao mostra 'Fábrica'
-                    : fatura === "sobra" //if fatura é estritamente igual a 'sobra'
+                fatura === "sobra"   //if fatura é estritamente igual a 'sobra'
                     ? "Sobra"        // então mostra 'Sobra'
                     : fatura;        // senão fatura mantem igual
 
@@ -292,16 +287,23 @@ ksort($tabela);
     // EDITAR FATURA (MODAL) 
     function editarFatura(fatura) {
         // Filtra os itens dessa fatura
-        const itensFatura = todosItensEstoque.filter(item => item.numero === fatura);
+        const itensFatura = todosItensEstoque.filter(item => item.nome === fatura);
 
         const modalBody = document.getElementById('modalFormulario');
-        document.getElementById('modalNomeFatura').textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
+        document.getElementById('modalNomeFatura').textContent = fatura
 
         if (itensFatura.length === 0) {
             modalBody.innerHTML = '<p class="text-center text-muted p-3">Nenhum item encontrado para esta fatura.</p>';
         } else {
+            itensFatura.sort((a, b) => {
+                return a.descricao.localeCompare(b.descricao, 'pt-BR', {
+                    sensitivity: 'base'
+                });
+            })  
+            
             let html = '<div class="table-responsive"><table class="table table-sm table-bordered">';
             html += '<thead class="table-light"><tr><th>Código</th><th>Descrição</th><th>Quantidade</th><th>Ações</th></tr></thead><tbody>';
+            
 
             itensFatura.forEach(item => {
                 const itemId = item['Codigo estoque'] || '';
@@ -390,14 +392,14 @@ ksort($tabela);
 
     // REMOVER FATURA INTEIRA
     function removerFatura(fatura) {
-        const itensFatura = todosItensEstoque.filter(item => item.numero === fatura);
+        const itensFatura = todosItensEstoque.filter(item => item.nome === fatura);
 
         if (itensFatura.length === 0) {
             alert('Nenhum item encontrado para esta fatura.');
             return;
         }
 
-        if (!confirm(`Tem certeza que deseja excluir TODOS os ${itensFatura.length} itens da fatura "${fatura === 'fabrica' ? 'Fábrica' : fatura}"?`)) {
+        if (!confirm(`Tem certeza que deseja excluir TODOS os ${itensFatura.length} itens da fatura "${fatura}"?`)) {
             return;
         }
 
@@ -431,6 +433,12 @@ ksort($tabela);
                 this.classList.remove('ativo');
             } else {
                 faturasSelecionadas.push(fatura);
+                faturasSelecionadas.sort((a, b) => {
+                    return a.localeCompare(b, undefined, {
+                        numeric: true,
+                        sensitivity: 'base'
+                    });
+                });
                 this.classList.add('ativo');
             }
 
@@ -449,13 +457,9 @@ ksort($tabela);
         thead.innerHTML = '<th>Descrição</th><th>Código</th>';
         faturasSelecionadas.forEach(fatura => {
             const th = document.createElement('th');
-            th.textContent = fatura === 'fabrica' ? 'Fábrica' : fatura;
+            th.textContent = fatura;
             thead.appendChild(th);
         });
-
-        const thFabrica = document.createElement('th');
-        thFabrica.textContent = 'Fábrica';
-        thead.appendChild(thFabrica);
 
         const thSobra = document.createElement('th');
         thSobra.textContent = 'Sobra';
@@ -506,11 +510,6 @@ ksort($tabela);
                 linha.appendChild(td);
             });     
 
-            const qtdFabrica = quantidades['fabrica'] ?? '-';
-            const tdFabrica = document.createElement('td');
-            tdFabrica.textContent = qtdFabrica;
-            linha.appendChild(tdFabrica)
-
             const qtdSobra = quantidades['sobra'] ?? '-';
             const tdSobra = document.createElement('td');
             tdSobra.textContent = qtdSobra;
@@ -534,4 +533,4 @@ ksort($tabela);
     }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">//icones e modal</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
