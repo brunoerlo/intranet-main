@@ -3,13 +3,10 @@
 $file_path = 'estoque.json';
 
 // Recebe os dados enviados via POST
-$data = json_decode(file_get_contents('php://input'), true);
-if (empty($data['numero'])) {
-    $data['numero'] = 'fabrica';
-}   
+$data = json_decode(file_get_contents('php://input'), true); 
 
 $codigo = trim($data['codigo']);
-//insere o BM na frente do codigo digitado
+
 if (!str_starts_with($codigo, 'BM ')) {
     $codigo = 'BM ' . $codigo;
 }
@@ -17,7 +14,7 @@ if (!str_starts_with($codigo, 'BM ')) {
 $data['codigo'] = $codigo;
 
 // Verifica se os dados foram recebidos corretamente
-if (isset($data['numero']) && isset($data['descricao']) && isset($data['codigo']) && isset($data['quantidade'])) {
+if (isset($data['nome']) && isset($data['descricao']) && isset($data['codigo']) && isset($data['quantidade'])) {
     // Gera um ID único para o estoque
     $data['Codigo estoque'] = uniqid('cli_', true); // Ex: cli_66147087a7f79.15609252
 
