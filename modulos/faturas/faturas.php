@@ -188,7 +188,7 @@ $noRepeat = array_unique($nomes);
 
     // Ordenação por nome de fatura
     if (typeof ordemCrescente === 'undefined') {
-        var ordemCrescente = true;
+        let ordemCrescente = true;
     }
 
     document.querySelector('.sortable').addEventListener('click', () => {
@@ -227,7 +227,7 @@ $noRepeat = array_unique($nomes);
                     .then(data => {
                         if (data.success) {
                             alert('Fatura excluída com sucesso!');
-                            location.reload();
+                            linha.remove();
                         } else {
                             alert('Erro ao excluir a fatura: ' + data.message);
                         }
