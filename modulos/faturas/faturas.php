@@ -47,13 +47,17 @@ $noRepeat = array_unique($nomes);
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Produtos da fatura: <span id="modalNomeFatura"></span></h5>
+                <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir" style="margin-left: auto;">
+                    🖨️ Imprimir
+                </button>
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
                 <table class="table table-bordered table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th>Código</th>
+                            <th style="width: 120px;">Código</th>
                             <th>Descrição</th>
                             <th>UN</th>
                             <th>Quantidade</th>
@@ -89,28 +93,42 @@ $noRepeat = array_unique($nomes);
         cursor: pointer;
         user-select: none;
     }
+
+    @media print {
+        body * { visibility: hidden; }
+        #image, #image * { visibility: visible; }
+        .modal-body, .modal-body * { visibility: visible; }
+        #image { position: absolute; left: 0; top: 0; }
+        .modal-body { position: absolute; left: 0; top: 50px; }
+    }
 </style>
 
 <script>
     // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
     const todosOsItensFaturas = <?= json_encode($faturas) ?>;
 
+    
     document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
         linhaFatura.addEventListener('click', function() {
             const nomeClicado = this.querySelector('.clicavel').textContent.trim();
-
+            
             // Filtra só os itens que pertencem a essa fatura
             const itensDaFatura = todosOsItensFaturas.filter(function(item) {
                 return item.nomeFatura === nomeClicado;
             });
-
+            
             // Monta as linhas do modal
             const tbody = document.getElementById('modalProdutosBody');
             tbody.innerHTML = '';
-
+            
             if (itensDaFatura.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhum produto encontrado.</td></tr>';
             } else {
+                itensDaFatura.sort((a, b) => {
+                    return a.descricao.localeCompare(b.descricao, 'pt-BR', {
+                        sensitivity: 'base'
+                    });
+                })  
                 itensDaFatura.forEach(function(item) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -184,6 +202,15 @@ $noRepeat = array_unique($nomes);
             }
         });
     });
+</script>
+
+<script>
+    const printBtn = document.getElementById('btn-print');
+    
+    //impressao
+    printBtn.addEventListener('click', function() {
+        print();
+    })
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
