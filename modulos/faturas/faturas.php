@@ -21,17 +21,25 @@ $noRepeat = array_unique($nomes);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($noRepeat as $nome):
-                $index = array_search($nome, array_column($faturas, 'nomeFatura'));
-                $nf        = $faturas[$index]["notaFiscal"] ?? '';
-                $taxaDolar = $faturas[$index]["txDolar"]    ?? '';
-            ?>
+            <?php
+            $faturasUnicas = [];
+
+            foreach ($faturas as $fatura) {
+                $nome = $fatura['nomeFatura'];
+
+                if (!isset($faturasUnicas[$nome])) {
+                    $faturasUnicas[$nome] = $fatura;
+                }
+            }
+
+            foreach ($faturasUnicas as $fatura): ?>
                 <tr class="table-warning linha-fatura-unica">
-                    <td class="clicavel" style="cursor:pointer;"><?= htmlspecialchars($nome) ?></td>
-                    <td><?= htmlspecialchars($nf) ?></td>
-                    <td><?= htmlspecialchars($taxaDolar) ?></td>
+                    <td class="clicavel"><?= htmlspecialchars($fatura['nomeFatura']) ?></td>
+                    <td><?= htmlspecialchars($fatura['notaFiscal'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($fatura['txDolar'] ?? '') ?></td>
                     <td class="action-buttons text-center">
-                        <button class="btn btn-danger btn-sm delete-btn" data-id="<?= htmlspecialchars($nome) ?>">
+                        <button class="btn btn-danger btn-sm delete-btn"
+                            data-id="<?= htmlspecialchars($fatura['nomeFatura']) ?>">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>
@@ -95,11 +103,31 @@ $noRepeat = array_unique($nomes);
     }
 
     @media print {
-        body * { visibility: hidden; }
-        #image, #image * { visibility: visible; }
-        .modal-body, .modal-body * { visibility: visible; }
-        #image { position: absolute; left: 0; top: 0; }
-        .modal-body { position: absolute; left: 0; top: 50px; }
+        body * {
+            visibility: hidden;
+        }
+
+        #image,
+        #image * {
+            visibility: visible;
+        }
+
+        .modal-body,
+        .modal-body * {
+            visibility: visible;
+        }
+
+        #image {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .modal-body {
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
     }
 </style>
 
@@ -107,20 +135,28 @@ $noRepeat = array_unique($nomes);
     // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
     const todosOsItensFaturas = <?= json_encode($faturas) ?>;
 
-    
+ 
+
     document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
         linhaFatura.addEventListener('click', function() {
             const nomeClicado = this.querySelector('.clicavel').textContent.trim();
-            
-            // Filtra só os itens que pertencem a essa fatura
-            const itensDaFatura = todosOsItensFaturas.filter(function(item) {
-                return item.nomeFatura === nomeClicado;
+
+            const faturasAgrupadas = {};
+
+            todosOsItensFaturas.forEach(item => {
+                if (!faturasAgrupadas[item.nomeFatura]) {
+                    faturasAgrupadas[item.nomeFatura] = [];
+                }
+
+                faturasAgrupadas[item.nomeFatura].push(item);
             });
-            
+
+            const itensDaFatura = faturasAgrupadas[nomeClicado] || [];
+
             // Monta as linhas do modal
             const tbody = document.getElementById('modalProdutosBody');
             tbody.innerHTML = '';
-            
+
             if (itensDaFatura.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhum produto encontrado.</td></tr>';
             } else {
@@ -128,7 +164,7 @@ $noRepeat = array_unique($nomes);
                     return a.descricao.localeCompare(b.descricao, 'pt-BR', {
                         sensitivity: 'base'
                     });
-                })  
+                })
                 itensDaFatura.forEach(function(item) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -173,7 +209,8 @@ $noRepeat = array_unique($nomes);
 
     //Deletar
     document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e){
+            e.stopPropagation();
             const faturaId = this.getAttribute('data-id');
 
             if (confirm("Tem certeza que deseja excluir esta fatura?")) {
@@ -206,7 +243,7 @@ $noRepeat = array_unique($nomes);
 
 <script>
     const printBtn = document.getElementById('btn-print');
-    
+
     //impressao
     printBtn.addEventListener('click', function() {
         print();
