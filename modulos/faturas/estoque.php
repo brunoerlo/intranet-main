@@ -38,7 +38,7 @@ ksort($tabela);
             <form id="formCadastroEstoque">
                 <div class="tipo-grupo">
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome da Fatura></label>
+                        <label for="nome" class="form-label">Nome da Fatura</label>
                         <input type="text" class="form-control" id="nome" name="nome" required>
                     </div>
                     <div class="mb-3">
@@ -531,6 +531,10 @@ ksort($tabela);
         });
         return total;
     }
+
+    renderizarTabela();
+    atualizarListaAcoes();
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
