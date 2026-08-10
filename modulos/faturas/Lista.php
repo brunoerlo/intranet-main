@@ -34,8 +34,8 @@ $noRepeat = array_unique($codigo);
         <table class="table table-bordered table-hover mt-3 pesquisa" id="tabela-produtos">
             <thead class="table-dark">  
                 <tr>
-                    <th class="menor">Código</th>
-                    <th class="descricao">Descrição</th>
+                    <th class="menor sortable">Código</th>
+                    <th class="descricao sortable">Descrição</th>
                     <th class="menor">UN</th>
                 </tr>
             </thead>
@@ -181,32 +181,51 @@ $noRepeat = array_unique($codigo);
 
     inicializarFiltroFaturas();
 
-    if (typeof ordemCrescente === 'undefined') {
-        var ordemCrescente = true;
-    }
+    // Ordenação por coluna — funciona para ambas as tabelas
+    document.querySelectorAll('th.sortable').forEach(th => {
+        th.dataset.order = 'none'; // none, asc, desc
 
-    document.querySelector('.sortable').addEventListener('click', () => {
-        const tbody = document.querySelector('#tabela-faturas tbody');
-        const allRows = Array.from(tbody.querySelectorAll('tr'));
+        th.addEventListener('click', function () {
+            const table = this.closest('table');
+            const tbody = table.querySelector('tbody');
+            const headerRow = this.parentElement;
+            const colIndex = Array.from(headerRow.children).indexOf(this);
+            const rows = Array.from(tbody.querySelectorAll('tr'));
 
-        const rowPairs = [];
-        for (let i = 0; i < allRows.length; i += 2) {
-            rowPairs.push([allRows[i], allRows[i + 1]]);
-        }
+            // Determinar direção: none→asc, asc→desc, desc→asc
+            const currentOrder = this.dataset.order;
+            const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
 
-        rowPairs.sort((a, b) => {
-            const nomeA = a[0].children[0].textContent.trim().toLowerCase();
-            const nomeB = b[0].children[0].textContent.trim().toLowerCase();
-            return ordemCrescente ? nomeA.localeCompare(nomeB) : nomeB.localeCompare(nomeA);
+            // Limpar indicadores de todas as colunas da mesma tabela
+            headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
+                otherTh.dataset.order = 'none';
+                otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
+            });
+
+            // Definir nova direção e indicador visual
+            this.dataset.order = newOrder;
+            this.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
+
+            // Ordenar as linhas pela coluna clicada
+            rows.sort((a, b) => {
+                const cellA = (a.children[colIndex]?.textContent || '').trim().toLowerCase();
+                const cellB = (b.children[colIndex]?.textContent || '').trim().toLowerCase();
+
+                // Tentar comparação numérica se ambos forem números
+                const numA = parseFloat(cellA.replace(',', '.'));
+                const numB = parseFloat(cellB.replace(',', '.'));
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return newOrder === 'asc' ? numA - numB : numB - numA;
+                }
+
+                return newOrder === 'asc'
+                    ? cellA.localeCompare(cellB, 'pt-BR')
+                    : cellB.localeCompare(cellA, 'pt-BR');
+            });
+
+            // Reinserir as linhas ordenadas
+            rows.forEach(row => tbody.appendChild(row));
         });
-
-        tbody.innerHTML = '';
-        rowPairs.forEach(pair => {
-            tbody.appendChild(pair[0]);
-            tbody.appendChild(pair[1]);
-        });
-
-        ordemCrescente = !ordemCrescente;
     });
 
     const printBtn = document.getElementById('btn-imprimir');
