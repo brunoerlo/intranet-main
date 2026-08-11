@@ -1,48 +1,58 @@
 <?php
-// Define o caminho para o arquivo JSON
-$file_path = 'estoque.json';
+
+header('Content-Type: application/json');
+
+$file_path = __DIR__ . '/estoque.json';
 
 // Recebe os dados enviados via POST
-$data = json_decode(file_get_contents('php://input'), true); 
+$data = json_decode(file_get_contents('php://input'), true);
 
+// Valida os dados recebidos
+if (!isset($data['nome']) || !isset($data['descricao']) || !isset($data['codigo']) || !isset($data['quantidade'])) {
+    echo json_encode(['success' => false, 'error' => 'Dados inválidos.']);
+    exit;
+}
+
+// Normaliza o código
 $codigo = trim($data['codigo']);
-
 if (!str_starts_with($codigo, 'BM ')) {
     $codigo = 'BM ' . $codigo;
 }
-
 $data['codigo'] = $codigo;
 
-// Verifica se os dados foram recebidos corretamente
-if (isset($data['nome']) && isset($data['descricao']) && isset($data['codigo']) && isset($data['quantidade'])) {
-    // Gera um ID único para o estoque
-    $data['Codigo estoque'] = uniqid('cli_', true); // Ex: cli_66147087a7f79.15609252
-
-    // Lê os dados existentes do arquivo JSON
-    if (file_exists($file_path)) {
-        $json_data = file_get_contents($file_path);
-        $estoque = json_decode($json_data, true);
-    } else {
-        $estoque = [];
-    }
-
-    // Adiciona o novo estoque aos dados
-    $estoque[] = $data;
-
-    // Salva os dados de volta no arquivo JSON
-    if (file_put_contents($file_path, json_encode($estoque, JSON_PRETTY_PRINT))) {
-        // Retorna uma resposta de sucesso
-        echo json_encode([
-            'success' => true,
-            'codigo_estoque' => $data['Codigo estoque']
-        ]);
-    } else {
-        // Retorna uma resposta de erro
-        echo json_encode(['success' => false, 'error' => 'Não foi possível salvar os dados.']);
-    }
+// Carrega o estoque existente
+if (file_exists($file_path)) {
+    $estoque = json_decode(file_get_contents($file_path), true) ?? [];
 } else {
-    // Retorna erro caso os dados não sejam válidos
-    echo json_encode(['success' => false, 'error' => 'Dados inválidos.']);
+    $estoque = [];
+}
+
+$jaExiste = false;
+
+// Procura um item com mesmo código E mesma fatura (nome)
+foreach ($estoque as &$item) {
+    if ($item['codigo'] === $data['codigo'] && $item['nome'] === $data['nome']) {
+        $item['quantidade'] = (int)$item['quantidade'] + (int)$data['quantidade'];
+        $jaExiste = true;
+        break;
+    }
+}
+unset($item); // Boa prática após foreach com referência
+
+// Se não existir, cria um novo registro
+if (!$jaExiste) {
+    $data['Codigo estoque'] = uniqid('cli_', true);
+    $estoque[] = $data;
+}
+
+// Salva de volta no arquivo
+if (file_put_contents($file_path, json_encode($estoque, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    echo json_encode([
+        'success' => true,
+        'message' => $jaExiste ? 'Quantidade somada ao item existente.' : 'Novo item cadastrado.'
+    ]);
+} else {
+    echo json_encode(['success' => false, 'error' => 'Não foi possível salvar os dados.']);
 }
 
 ?>
