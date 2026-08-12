@@ -8777,6 +8777,17 @@
         "Vlr Total": "0,00",
         "empresa_id": "1"
     },
+        {
+        "Item": "BM 621.326",
+        "Descricao": "FLANGE AP GAXETA BD 10",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "0,00000",
+        "NCM": "8413.91.90",
+        "Peso Liquido": "0,000000",
+        "Vlr Total": "0,00",
+        "empresa_id": "1"
+    },
     {
         "Item": "BM 616.320",
         "Descricao": "FLANGE B A PRESSAO 3x2 \/ 4x3",
@@ -11547,6 +11558,17 @@
         "NCM": "4009.31.00",
         "Peso Liquido": "19,310000",
         "Vlr Total": "429,41",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "BM 120.217",
+        "Descricao": "MANGUEIRA SUCCAO 10x8Lx22MM 150PSI - 2MT",
+        "Descricao Complementar": "",
+        "UM": "MT",
+        "Preco Venda": "0,00000",
+        "NCM": "??",
+        "Peso Liquido": "0,0000",
+        "Vlr Total": "0,00",
         "empresa_id": "1"
     },
     {
@@ -16112,6 +16134,50 @@
         "NCM": "8454.20.90",
         "Peso Liquido": "0,520000",
         "Vlr Total": "60,00",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "BM 113.046",
+        "Descricao": "CADINHO REDONDO NR 5 (CERAMICA)",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "00,00000",
+        "NCM": "6903.20.10",
+        "Peso Liquido": "0,00000",
+        "Vlr Total": "00,00",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "BM 113.047",
+        "Descricao": "CADINHO REDONDO NR 6 (CERAMICA)",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "00,00000",
+        "NCM": "6903.20.10",
+        "Peso Liquido": "0,00000",
+        "Vlr Total": "00,00",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "BM 113.050",
+        "Descricao": "PORTA CADINHO REDONDO (CAD NR. 5)",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "0,00000",
+        "NCM": "8454.20.90",
+        "Peso Liquido": "0,000000",
+        "Vlr Total": "0,00",
+        "empresa_id": "1"
+    },
+    {
+        "Item": "BM 113.049",
+        "Descricao": "PORTA CADINHO REDONDO GRANDE (CAD NR. 6)",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "0,000",
+        "NCM": "8454.20.90",
+        "Peso Liquido": "0,000000",
+        "Vlr Total": "0,00",
         "empresa_id": "1"
     },
     {
