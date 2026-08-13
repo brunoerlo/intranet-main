@@ -216,7 +216,61 @@ $noRepeat = array_unique($nomes);
             }
         });
     });
+    
+        function ordenacaoAlfabetica(tabela) {
+        // Ordenação
+        tabela.querySelector('thead').closest('thead').addEventListener('click', function (e) {
+            const th = e.target.closest('th.sortable');
+            if (!th) return;
 
+            const table = th.closest('table');
+            const tbody = table.querySelector('tbody');
+            const headerRow = th.parentElement;
+            const colIndex = Array.from(headerRow.children).indexOf(th);
+
+            // Pegar somente linhas visíveis
+            const rows = Array.from(tbody.querySelectorAll('tr')).filter(
+                row => row.style.display !== 'none'
+            );
+
+            // Determinar direção: none→asc, asc→desc, desc→asc
+            const currentOrder = th.dataset.order || 'none';
+            const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
+
+            // Limpar indicadores de todas as colunas da mesma tabela
+            headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
+                otherTh.dataset.order = 'none';
+                otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
+            });
+
+            // Definir nova direção e indicador visual
+            th.dataset.order = newOrder;
+            th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
+
+            // Ordenar as linhas pela coluna clicada
+            rows.sort((a, b) => {
+                const cellA = (a.children[colIndex]?.textContent || '').trim().toLowerCase();
+                const cellB = (b.children[colIndex]?.textContent || '').trim().toLowerCase();
+
+                // Tentar comparação numérica se ambos forem números
+                const numA = parseFloat(cellA.replace(',', '.'));
+                const numB = parseFloat(cellB.replace(',', '.'));
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return newOrder === 'asc' ? numA - numB : numB - numA;
+                }
+
+                return newOrder === 'asc'
+                    ? cellA.localeCompare(cellB, 'pt-BR')
+                    : cellB.localeCompare(cellA, 'pt-BR');
+            });
+
+            // Reinserir as linhas ordenadas
+            rows.forEach(row => tbody.appendChild(row));
+        });
+    }       
+
+    ordenacaoAlfabetica(document.getElementById('tabela-faturas-unicas'));
+    ordenacaoAlfabetica(document.getElementById('modalProdutosFatura').querySelector('table'));
 </script>
 
 <script>
