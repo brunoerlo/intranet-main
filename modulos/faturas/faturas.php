@@ -13,9 +13,9 @@ $noRepeat = array_unique($nomes);
 <div class="container mt-4">
     <table class="table table-bordered table-hover mt-3" id="tabela-faturas-unicas">
         <thead class="table-dark">
-            <tr>
+            <tr id="th-thead">
                 <th class="sortable">Fatura</th>
-                <th class="menor">Nota Fiscal</th>
+                <th class="menor sortable">Nota Fiscal</th>
                 <th class="menor">Taxa Dólar</th>
                 <th class="menor">Ações</th>
             </tr>
@@ -65,8 +65,8 @@ $noRepeat = array_unique($nomes);
                 <table class="table table-bordered table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th style="width: 120px;">Código</th>
-                            <th>Descrição</th>
+                            <th style="width: 120px;" class="sortable">Código</th>
+                            <th class="sortable">Descrição</th>
                             <th>UN</th>
                             <th>Quantidade</th>
                             <th>Preço</th>
@@ -134,9 +134,7 @@ $noRepeat = array_unique($nomes);
 <script>
     // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
     const todosOsItensFaturas = <?= json_encode($faturas) ?>;
-
- 
-
+    
     document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
         linhaFatura.addEventListener('click', function() {
             const nomeClicado = this.querySelector('.clicavel').textContent.trim();
@@ -168,8 +166,8 @@ $noRepeat = array_unique($nomes);
                 itensDaFatura.forEach(function(item) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td>${item.codigo ?? ''}</td>
-                        <td>${item.descricao ?? ''}</td>
+                        <td class="sortable">${item.codigo ?? ''}</td>
+                        <td class="sortable">${item.descricao ?? ''}</td>
                         <td>${item.unidadeMedida ?? ''}</td>
                         <td>${item.quantidade ?? ''}</td>
                         <td>${item.preco ?? ''}</td>
@@ -184,27 +182,6 @@ $noRepeat = array_unique($nomes);
             const modal = new bootstrap.Modal(document.getElementById('modalProdutosFatura'));
             modal.show();
         });
-    });
-
-    // Ordenação por nome de fatura
-    if (typeof ordemCrescente === 'undefined') {
-        let ordemCrescente = true;
-    }
-
-    document.querySelector('.sortable').addEventListener('click', () => {
-        const tbody = document.querySelector('#tabela-faturas-unicas tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-
-        rows.sort((a, b) => {
-            const nomeA = a.children[0].textContent.trim().toLowerCase();
-            const nomeB = b.children[0].textContent.trim().toLowerCase();
-            return ordemCrescente ? nomeA.localeCompare(nomeB) : nomeB.localeCompare(nomeA);
-        });
-
-        tbody.innerHTML = '';
-        rows.forEach(row => tbody.appendChild(row));
-
-        ordemCrescente = !ordemCrescente;
     });
 
     //Deletar
@@ -239,6 +216,7 @@ $noRepeat = array_unique($nomes);
             }
         });
     });
+
 </script>
 
 <script>
@@ -248,6 +226,7 @@ $noRepeat = array_unique($nomes);
     printBtn.addEventListener('click', function() {
         print();
     })
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
