@@ -61,7 +61,7 @@ $noRepeat = array_unique($nomes);
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="show-print">
                 <table class="table table-bordered table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -103,30 +103,81 @@ $noRepeat = array_unique($nomes);
     }
 
     @media print {
-        body * {
-            visibility: hidden;
+        /* Esconde o sidebar e a navbar */
+        #sidebar,
+        nav.navbar,
+        #loading,
+        #tabela-faturas-unicas,
+        .container.mt-4 {
+            display: none !important;
         }
 
-        #image,
-        #image * {
-            visibility: visible;
+        /* Cadeia de ancestrais do modal: tudo precisa ser visível e sem overflow */
+        body,
+        .content,
+        #modulo-content {
+            display: block !important;
+            visibility: visible !important;
+            position: static !important;
+            overflow: visible !important;
+            height: auto !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        .modal-body,
-        .modal-body * {
-            visibility: visible;
+        /* Modal visível e no fluxo normal */
+        #modalProdutosFatura {
+            display: block !important;
+            position: static !important;
+            overflow: visible !important;
+            opacity: 1 !important;
         }
 
+        .modal-backdrop {
+            display: none !important;
+        }
+
+        .modal-dialog {
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .modal-content {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Esconde header do modal e botões na impressão */
+        .modal-header {
+            display: none !important;
+        }
+
+        /* Tabela flui naturalmente entre páginas */
+        #show-print {
+            overflow: visible !important;
+        }
+
+        #show-print table {
+            width: 100% !important;
+            page-break-inside: auto !important;
+        }
+
+        #show-print tr {
+            page-break-inside: avoid !important;
+            page-break-after: auto !important;
+        }
+
+        #show-print thead {
+            display: table-header-group !important;
+        }
+
+        /* Logo para impressão */
         #image {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .modal-body {
-            position: absolute;
-            left: 0;
-            top: 50px;
+            display: block !important;
+            position: static !important;
+            margin-bottom: 10px;
         }
     }
 </style>
@@ -134,7 +185,7 @@ $noRepeat = array_unique($nomes);
 <script>
     // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
     const todosOsItensFaturas = <?= json_encode($faturas) ?>;
-    
+
     document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
         linhaFatura.addEventListener('click', function() {
             const nomeClicado = this.querySelector('.clicavel').textContent.trim();
@@ -186,7 +237,7 @@ $noRepeat = array_unique($nomes);
 
     //Deletar
     document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function(e){
+        button.addEventListener('click', function(e) {
             e.stopPropagation();
             const faturaId = this.getAttribute('data-id');
 
@@ -216,10 +267,10 @@ $noRepeat = array_unique($nomes);
             }
         });
     });
-    
-        function ordenacaoAlfabetica(tabela) {
+
+    function ordenacaoAlfabetica(tabela) {
         // Ordenação
-        tabela.querySelector('thead').closest('thead').addEventListener('click', function (e) {
+        tabela.querySelector('thead').closest('thead').addEventListener('click', function(e) {
             const th = e.target.closest('th.sortable');
             if (!th) return;
 
@@ -259,15 +310,15 @@ $noRepeat = array_unique($nomes);
                     return newOrder === 'asc' ? numA - numB : numB - numA;
                 }
 
-                return newOrder === 'asc'
-                    ? cellA.localeCompare(cellB, 'pt-BR')
-                    : cellB.localeCompare(cellA, 'pt-BR');
+                return newOrder === 'asc' ?
+                    cellA.localeCompare(cellB, 'pt-BR') :
+                    cellB.localeCompare(cellA, 'pt-BR');
             });
 
             // Reinserir as linhas ordenadas
             rows.forEach(row => tbody.appendChild(row));
         });
-    }       
+    }
 
     ordenacaoAlfabetica(document.getElementById('tabela-faturas-unicas'));
     ordenacaoAlfabetica(document.getElementById('modalProdutosFatura').querySelector('table'));
@@ -279,8 +330,7 @@ $noRepeat = array_unique($nomes);
     //impressao
     printBtn.addEventListener('click', function() {
         print();
-    })
-
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
