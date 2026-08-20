@@ -5610,6 +5610,17 @@
         "empresa_id": "1"
     },
     {
+        "Item": "BM 621.314",
+        "Descricao": "CARCACA BD 8 EXT DISCO BORR B FIXO",
+        "Descricao Complementar": "",
+        "UM": "UN",
+        "Preco Venda": "0,00000",
+        "NCM": "8413.91.90",
+        "Peso Liquido": "156,000000",
+        "Vlr Total": "0,00",
+        "empresa_id": "1"
+    },
+    {
         "Item": "BM 621.315",
         "Descricao": "CARCACA BD 8 ENTR 6 SAI 6 D FU (B FIXO)",
         "Descricao Complementar": "",
