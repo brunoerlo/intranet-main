@@ -30,8 +30,18 @@ asort($nomes);
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="cliente" class="form-label">Cliente</label>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="cliente" class="form-label">Cliente</label>
+                            <div class="form-check">
+                                <label for="consolidado" class="form-check-label">Consolidado?</label>
+                                <input type="checkbox" class="form-check-input" name="consolidado" id="consolidado">
+                            </div>
+                        </div>
                         <input type="text" class="form-control" name="cliente" id="cliente" required>
+                        <div id="divNomeConsolidado" class="mb-3 d-none">
+                            <label for="nomeConsolidado" class="form-label">Nome Consolidado</label>
+                            <input type="text" class="form-control" name="nomeConsolidado" id="nomeConsolidado">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="data" class="form-label">Estufagem</label>
@@ -41,10 +51,10 @@ asort($nomes);
                         <label for="ctr" class="form-label">CTR</label>
                         <select class="form-select" name="ctr" id="ctr" required>
                             <option value="" disabled selected>Escolha forma de envio</option>
-                            <option value="ctr20">'20</option>
-                            <option value="ctr40">'40</option>
-                            <option value="rod">Rodoviário</option>
-                            <option value="aereo">Aéreo</option>
+                            <option value="'20">'20</option>
+                            <option value="'40">'40</option>
+                            <option value="Rodoviário">Rodoviário</option>
+                            <option value="Aéreo">Aéreo</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -63,6 +73,23 @@ asort($nomes);
 </div>
 
 <script>
+    const checkConsolidado = document.getElementById('consolidado');
+    const divNomeConsolidado = document.getElementById('divNomeConsolidado');
+    const inputNomeConsolidado = document.getElementById('nomeConsolidado');
+
+    checkConsolidado.addEventListener('change', function() {
+        if(this.checked) {
+            divNomeConsolidado.classList.remove('d-none');
+            inputNomeConsolidado.required = true;
+            inputNomeConsolidado.focus(); // Para ir direto para essa linha preencher os dados
+        } else {
+            divNomeConsolidado.classList.add('d-none');
+            inputNomeConsolidado.required = false;
+            inputNomeConsolidado.value = '';
+        }   
+    });
+
+
     document.getElementById('formularioQuadro').addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(this);
@@ -91,3 +118,42 @@ asort($nomes);
             .catch(() => alert('Ocorreu um erro ao cadastrar.'));
     })
 </script>
+
+<div>
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th class="sortable">Fatura</th>
+                <th>Cliente</th>
+                <th>Consolidado</th>
+                <th>Estufagem</th>
+                <th>CTR</th>
+                <th>Porto</th>
+                <th>Booking</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($quadro as $q): 
+                $jsonAttr = json_encode([
+                    'nome'        => $q["nomeFatura"]      ?? '',
+                    'cliente'     => $q["cliente"]         ?? '',
+                    'consolidado' => $q["nomeConsolidado"] ?? '',
+                    'data'        => $q["data"]            ?? '',
+                    'ctr'         => $q["ctr"]             ?? '',
+                    'porto'       => $q["porto"]           ?? '',
+                    'booking'     => $q["booking"]         ?? '',
+                ]);
+                ?>
+            <tr>
+                <td><?= htmlspecialchars($q['nomeFatura'] ?? '') ?></td>
+                <td><?= htmlspecialchars($q['cliente'] ?? '') ?></td>
+                <td><?= htmlspecialchars($q['nomeConsolidado'] ?? '') ?></td>
+                <td><?= htmlspecialchars($q['data'] ?? '') ?></td>
+                <td><?= htmlspecialchars($q['ctr'] ?? '') ?></td>
+                <td><?= htmlspecialchars($q['porto'] ?? '') ?></td>
+                <td><?= htmlspecialchars($q['booking'] ?? '') ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>  
