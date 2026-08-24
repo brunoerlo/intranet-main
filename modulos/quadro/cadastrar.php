@@ -64,6 +64,30 @@ asort($nomes);
 
 <script>
     document.getElementById('formularioQuadro').addEventListener('submit', function(event) {
-        // CADASTRAR.PHP
+        event.preventDefault();
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        fetch('./modulos/quadro/action/cadastrar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Cadastro efetuado com sucesso!');
+                    document.getElementById('formularioQuadro').reset();
+                    location.reload();
+                } else {    
+                    alert('Erro ao efetuar cadastro: ' + data.error);
+                }
+            })
+            .catch(() => alert('Ocorreu um erro ao cadastrar.'));
     })
 </script>
