@@ -1,14 +1,14 @@
 <?php
-$quadroJson = file_get_contents('./modulos/faturas/action/estoque.json');
+$caminhoEstoque = './modulos/faturas/action/estoque.json';
+$listaFaturas = file_exists($caminhoEstoque) ? file_get_contents($caminhoEstoque) : '[]';
+$lFaturas = json_decode($listaFaturas, true) ?? [];
+
+$nomes = array_unique(array_column($lFaturas, 'nome'));
+asort($nomes);  
+
+$caminhoQuadro = './modulos/quadro/action/quadro.json';
+$quadroJson = file_exists($caminhoQuadro) ? file_get_contents($caminhoQuadro) : '[]';
 $quadro = json_decode($quadroJson, true) ?? [];
-
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo 'Erro ao decodificar estoque.json: ' . json_last_error_msg();
-    $estoque = [];
-}
-
-$nomes = array_unique(array_column($quadro, 'nome'));
-asort($nomes);
 ?>  
 <!-- Formulario -->
 <div class="container-fluid mt-4">
@@ -73,6 +73,8 @@ asort($nomes);
 </div>
 
 <script>
+    //document.getElementById('nomeFatura').addEventListener('')
+
     const checkConsolidado = document.getElementById('consolidado');
     const divNomeConsolidado = document.getElementById('divNomeConsolidado');
     const inputNomeConsolidado = document.getElementById('nomeConsolidado');
@@ -122,38 +124,91 @@ asort($nomes);
 <div>
     <table class="table table-bordered table-hover mt-3">
         <thead class="table-dark">
-            <tr>
-                <th class="sortable">Fatura</th>
+            <tr style="text-align: center;">
+                <th class="sortable" style="width: 120px;">Fatura</th>
                 <th>Cliente</th>
                 <th>Consolidado</th>
                 <th>Estufagem</th>
                 <th>CTR</th>
                 <th>Porto</th>
                 <th>Booking</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($quadro as $q): 
-                $jsonAttr = json_encode([
-                    'nome'        => $q["nomeFatura"]      ?? '',
-                    'cliente'     => $q["cliente"]         ?? '',
-                    'consolidado' => $q["nomeConsolidado"] ?? '',
-                    'data'        => $q["data"]            ?? '',
-                    'ctr'         => $q["ctr"]             ?? '',
-                    'porto'       => $q["porto"]           ?? '',
-                    'booking'     => $q["booking"]         ?? '',
-                ]);
+                $nome        = $q["nomeFatura"]      ?? '';
+                $cliente     = $q["cliente"]         ?? '';
+                $consolidado = !empty($q["nomeConsolidado"]) ? $q["nomeConsolidado"] : (!empty($q["consolidado"]) ? 'Sim' : 'Não');
+                $data        = $q["data"]            ?? '';
+                $ctr         = $q["ctr"]             ?? '';
+                $porto       = $q["porto"]           ?? '';
+                $booking     = $q["booking"]         ?? '';
+                $jsonAttr   = htmlspecialchars(json_encode($q), ENT_QUOTES, 'UTF-8');
+                
+                // Converte a data para d/m/Y
+                $dataObj = !empty($data) ? DateTime::createFromFormat('Y-m-d',$data) : false;
+                $dataExibicao = ($dataObj && $dataObj->format('Y-m-d') === $data) 
+                    ? $dataObj->format('d/m/Y') : ($data ?: '-'); 
                 ?>
-            <tr>
-                <td><?= htmlspecialchars($q['nomeFatura'] ?? '') ?></td>
-                <td><?= htmlspecialchars($q['cliente'] ?? '') ?></td>
-                <td><?= htmlspecialchars($q['nomeConsolidado'] ?? '') ?></td>
-                <td><?= htmlspecialchars($q['data'] ?? '') ?></td>
-                <td><?= htmlspecialchars($q['ctr'] ?? '') ?></td>
-                <td><?= htmlspecialchars($q['porto'] ?? '') ?></td>
-                <td><?= htmlspecialchars($q['booking'] ?? '') ?></td>
+             <tr data-json="<?= $jsonAttr ?>" class="table-warning">
+                <td><?= htmlspecialchars($nome) ?></td>
+                <td><?= htmlspecialchars($cliente) ?></td>
+                <td><?= htmlspecialchars($consolidado) ?></td>
+                <td><?= htmlspecialchars($dataExibicao) ?></td>
+                <td><?= htmlspecialchars($ctr) ?></td>
+                <td><?= htmlspecialchars($porto) ?></td>
+                <td><?= htmlspecialchars($booking) ?></td>
+                <td class="action-buttons text-center" style="width: 100px;">
+                    <div class="d-inline-flex gap-1">
+                        <button class="btn btn-warning btn-sm edit-cad-btn" data-id="<?= htmlspecialchars($q['id'] ?? '') ?>">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="<?= htmlspecialchars($q['id'] ?? '') ?>">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
-</div>  
+</div> 
+
+<script>
+    document.querySelectorAll('.edit-cad-btn').forEach(button =>{
+        button.addEventListener('click', function() {   
+    })
+        
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(button =>{
+        button.addEventListener('click', function() {
+            const faturaId = this.getAttribute('data-id');
+            if (confirm("Tem certeza que deseja excluir esta fatura?")) {
+                fetch('./modulos/quadro/action/delete.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: faturaId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Fatura excluída com sucesso!');
+                            location.reload();
+                        } else {
+                            alert('Erro ao excluir fatura: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Ocorreu um erro ao tentar excluir a fatura.');
+                    });
+            }
+        });
+    })
+</script>
