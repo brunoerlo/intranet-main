@@ -279,7 +279,8 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
         carregarPorHash();
     });
 </script>
-
+<!-- Bootstrap 5 Bundle JS (inclui Popper para Collapse, Modais, Dropdowns, etc.) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Coloque antes de qualquer script que usa jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
