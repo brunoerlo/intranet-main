@@ -1,0 +1,112 @@
+[
+    {
+        "nomeFatura": "449",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "MWM",
+        "data": "2026-09-08",
+        "ctr": "20'",
+        "porto": "ITJ",
+        "booking": "SAOG45180600",
+        "id": 1
+    },
+    {
+        "nomeFatura": "001 LETHEM",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "-",
+        "data": "2026-09-18",
+        "ctr": "40'",
+        "porto": "NVT",
+        "booking": "LA0514839",
+        "id": 2
+    },
+    {
+        "nomeFatura": "450",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "BAMBOZZI",
+        "data": "2026-09-21",
+        "ctr": "40'",
+        "porto": "ITJ",
+        "booking": "SAOG48476300",
+        "id": 3
+    },
+    {
+        "nomeFatura": "003 CAMILO",
+        "cliente": "CAMILO",
+        "nomeConsolidado": "-",
+        "data": "SET S4",
+        "ctr": "40'",
+        "porto": "RIG",
+        "booking": "SEM BOOKING",
+        "id": 4
+    },
+    {
+        "nomeFatura": "001 LINTERL",
+        "cliente": "ASTILKO-UR",
+        "nomeConsolidado": "-",
+        "data": "-",
+        "ctr": "Rodoviário",
+        "porto": "CHUÍ",
+        "booking": "SEM BOOKING",
+        "id": 5
+    },
+    {
+        "nomeFatura": "451",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "",
+        "data": "OUT S1",
+        "ctr": "20'",
+        "porto": "ITJ",
+        "booking": "SEM BOOKING",
+        "id": 6
+    },
+    {
+        "nomeFatura": "452",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "",
+        "data": "OUT S3",
+        "ctr": "20'",
+        "porto": "ITJ",
+        "booking": "SEM BOOKING",
+        "id": 7
+    },
+    {
+        "nomeFatura": "453",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "",
+        "data": "OUT S4",
+        "ctr": "20'",
+        "porto": "ITJ",
+        "booking": "SEM BOOKING",
+        "id": 8
+    },
+    {
+        "nomeFatura": "455",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "",
+        "data": "DEZ S1",
+        "ctr": "40'",
+        "porto": "ITJ",
+        "booking": "SEM BOOKING",
+        "id": 9
+    },
+    {
+        "nomeFatura": "456",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "",
+        "data": "DEZ S1",
+        "ctr": "40'",
+        "porto": "ITJ",
+        "booking": "SEM BOOKING",
+        "id": 10
+    },
+    {
+        "nomeFatura": "457",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "",
+        "data": "DEZ S2",
+        "ctr": "40'",
+        "porto": "ITJ",
+        "booking": "SEM BOOKING",
+        "id": 11
+    }
+]
