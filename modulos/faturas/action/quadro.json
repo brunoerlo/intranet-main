@@ -10,8 +10,8 @@
         "id": 1
     },
     {
-        "nomeFatura": "001 LETHEM",
-        "cliente": "JOHIL",
+        "nomeFatura": "001",
+        "cliente": "JOHIL LETHEM",
         "nomeConsolidado": "-",
         "data": "2026-09-18",
         "ctr": "40'",
@@ -30,7 +30,7 @@
         "id": 3
     },
     {
-        "nomeFatura": "003 CAMILO",
+        "nomeFatura": "003",
         "cliente": "CAMILO",
         "nomeConsolidado": "-",
         "data": "SET S4",
@@ -44,8 +44,8 @@
         "cliente": "ASTILKO-UR",
         "nomeConsolidado": "-",
         "data": "-",
-        "ctr": "Rodoviário",
-        "porto": "CHUÍ",
+        "ctr": "Rodovi\u00e1rio",
+        "porto": "CHU\u00cd",
         "booking": "SEM BOOKING",
         "id": 5
     },

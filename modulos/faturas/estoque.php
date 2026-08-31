@@ -2,27 +2,48 @@
 $estoqueJson = file_get_contents(__DIR__ . '/action/estoque.json');
 $estoque = json_decode($estoqueJson, true) ?? [];
 
-$nomes = array_unique(array_column($estoque, 'nome'));
-$faturasBotoes = array_filter($nomes, fn($n) => $n !== 'sobra');
+$faturasBotoes = [];
+foreach ($estoque as $e) {
+    $nome = trim($e['nome'] ?? '');
+    $cliente = trim($e['cliente'] ?? '');
+    if ($nome === '' || strtolower($nome) === 'sobra') {
+        continue;
+    }
+
+    if ($cliente === 'JOHIL') {
+        $label = $nome;
+    } else {
+        $label = $cliente !== '' ? "{$nome} - {$cliente}" : $nome;
+    }
+    
+    if (!in_array($label, $faturasBotoes, true)) {
+        $faturasBotoes[] = $label;
+    }
+}
 sort($faturasBotoes);
 
 // Monta estrutura: descricao => [ _codigo => ..., quantidades => [ nome => qtd ], itens => [...] ]
 $tabela = [];
 foreach ($estoque as $e) {
     $cod  = $e['codigo']    ?? '';
+    $cliente = $e['cliente'] ?? '';
     $desc = $e['descricao'] ?? '';
     $nome = $e['nome']      ?? '';
     $qtd  = (int)($e['quantidade'] ?? 0);
     $id   = $e['Codigo estoque'] ?? '';
 
+    $label = ($cliente !== '' && strtolower($nome) !== 'sobra') ? "{$nome} - {$cliente}" : $nome;
+
     if (!isset($tabela[$desc])) {
         $tabela[$desc] = ['_codigo' => $cod, 'quantidades' => [], 'itens' => []];
     }
-    $tabela[$desc]['quantidades'][$nome] = $qtd;
+    $tabela[$desc]['quantidades'][$label] = $qtd;
     // Guarda cada item individual para edição/exclusão
     $tabela[$desc]['itens'][] = [
         'id'         => $id,
         'nome'       => $nome,
+        'cliente'    => $cliente,
+        'label'      => $label,
         'codigo'     => $cod,
         'descricao'  => $desc,
         'quantidade' => $qtd
@@ -40,6 +61,10 @@ ksort($tabela);
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome da Fatura</label>
                         <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cliente" class="form-label">Cliente</label>
+                        <input type="text" class="form-control" id="cliente" name="cliente" required>
                     </div>
                     <div class="mb-3">
                         <label for="codigo" class="form-label">Código</label>
@@ -292,8 +317,13 @@ ksort($tabela);
 
     // EDITAR FATURA (MODAL) 
     function editarFatura(fatura) {
-        // Filtra os itens dessa fatura
-        const itensFatura = todosItensEstoque.filter(item => item.nome === fatura);
+        // Filtra os itens dessa fatura / combinação fatura-cliente
+        const itensFatura = todosItensEstoque.filter(item => {
+            const nome = (item.nome || '').trim();
+            const cliente = (item.cliente || '').trim();
+            const label = (cliente !== '' && nome.toLowerCase() !== 'sobra') ? `${nome} - ${cliente}` : nome;
+            return label === fatura || nome === fatura;
+        });
 
         const modalBody = document.getElementById('modalFormulario');
         document.getElementById('modalNomeFatura').textContent = fatura
@@ -302,7 +332,7 @@ ksort($tabela);
             modalBody.innerHTML = '<p class="text-center text-muted p-3">Nenhum item encontrado para esta fatura.</p>';
         } else {
             itensFatura.sort((a, b) => {
-                return a.descricao.localeCompare(b.descricao, 'pt-BR', {
+                return (a.descricao || '').localeCompare(b.descricao || '', 'pt-BR', {
                     sensitivity: 'base'
                 });
             })
@@ -404,7 +434,12 @@ ksort($tabela);
 
     // REMOVER FATURA INTEIRA
     function removerFatura(fatura) {
-        const itensFatura = todosItensEstoque.filter(item => item.nome === fatura);
+        const itensFatura = todosItensEstoque.filter(item => {
+            const nome = (item.nome || '').trim();
+            const cliente = (item.cliente || '').trim();
+            const label = (cliente !== '' && nome.toLowerCase() !== 'sobra') ? `${nome} - ${cliente}` : nome;
+            return label === fatura || nome === fatura;
+        });
 
         if (itensFatura.length === 0) {
             alert('Nenhum item encontrado para esta fatura.');

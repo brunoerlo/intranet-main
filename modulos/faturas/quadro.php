@@ -4,11 +4,34 @@ $listaFaturas = file_exists($caminhoEstoque) ? file_get_contents($caminhoEstoque
 $lFaturas = json_decode($listaFaturas, true) ?? [];
 
 $nomes = array_unique(array_column($lFaturas, 'nome'));
-asort($nomes);  
+asort($nomes);
+
+$clientes = array_unique(array_column($lFaturas, 'cliente'));
+asort($clientes);
 
 $caminhoQuadro = './modulos/faturas/action/quadro.json';
 $quadroJson = file_exists($caminhoQuadro) ? file_get_contents($caminhoQuadro) : '[]';
 $quadro = json_decode($quadroJson, true) ?? [];
+
+$faturas = [];
+foreach ($lFaturas as $e) {
+    $nome = trim($e['nome'] ?? '');
+    $cliente = trim($e['cliente'] ?? '');
+    if ($nome === '' || strtolower($nome) === 'sobra') {
+        continue;
+    }
+
+    if ($cliente === 'JOHIL') {
+        $label = $nome;
+    } else {
+        $label = $cliente !== '' ? "{$nome} - {$cliente}" : $nome;
+    }
+    
+    if (!in_array($label, $faturas, true)) {
+        $faturas[] = $label;
+    }
+}
+sort($faturas);
 ?>
 
 <!-- Formulario -->
@@ -25,11 +48,11 @@ $quadro = json_decode($quadroJson, true) ?? [];
                         <label for="nomeFatura" class="form-label">Fatura</label>
                         <select class="form-select" name="nomeFatura" id="nomeFatura" required>
                             <option value="" disabled selected>Escolha a fatura</option>
-                            <?php foreach ($nomes as $nome): ?>
+                            <?php foreach ($faturas as $nome): ?>
                                 <?php if ($nome !== 'sobra'): ?>
-                                <option value="<?= htmlspecialchars($nome) ?>">
+                                <option value="<?= htmlspecialchars(explode(' - ', $nome)[0]) ?>">
                                     <?= htmlspecialchars($nome) ?>
-                                </option>
+                                </option>   
                                 <?php endif; endforeach; ?>
                         </select>
                     </div>
@@ -42,7 +65,14 @@ $quadro = json_decode($quadroJson, true) ?? [];
                                     <input type="checkbox" class="form-check-input" name="consolidado" id="consolidado">
                                 </div>
                             </div>
-                            <input type="text" class="form-control" name="cliente" id="cliente" required>
+                            <select class="form-select" name="cliente" id="cliente" required>
+                                <option value="" disabled selected>Escolha o Cliente</option>
+                                <?php foreach ($clientes as $c): ?>
+                                    <option value="<?= htmlspecialchars($c) ?>">
+                                        <?= htmlspecialchars($c) ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                            </select>
                             <div id="divNomeConsolidado" class="mb-3 d-none">
                                 <label for="nomeConsolidado" class="form-label">Nome Consolidado</label>
                                 <input type="text" class="form-control" name="nomeConsolidado" id="nomeConsolidado">
@@ -191,9 +221,9 @@ $quadro = json_decode($quadroJson, true) ?? [];
                                 <label class="form-label mb-0 small">Fatura</label>
                                 <select class="form-select form-select-sm" name="nomeFatura" required>
                                     <option value="" disabled>Escolha</option>
-                                    <?php foreach ($nomes as $nomeOpt): ?>
+                                    <?php foreach ($faturas as $nomeOpt): ?>
                                         <?php if ($nomeOpt !== 'sobra'): ?>
-                                        <option value="<?= htmlspecialchars($nomeOpt) ?>" <?= ($nomeOpt === $nome) ? 'selected' : '' ?>>
+                                        <option value="<?= htmlspecialchars(explode(' - ', $nomeOpt)[0]) ?>" <?= ($nomeOpt === $nome || explode(' - ', $nomeOpt)[0] === $nome) ? 'selected' : '' ?>>
                                             <?= htmlspecialchars($nomeOpt) ?>
                                         </option>
                                         <?php endif; endforeach; ?>
@@ -201,7 +231,14 @@ $quadro = json_decode($quadroJson, true) ?? [];
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label mb-0 small">Cliente</label>
-                                <input type="text" class="form-control form-control-sm" name="cliente" value="<?= htmlspecialchars($cliente) ?>" required>
+                                <select class="form-select" name="cliente" id="cliente" required>
+                                    <option value="" disabled selected>Escolha o Cliente</option>
+                                    <?php foreach ($clientes as $c): ?>
+                                        <option value="<?= htmlspecialchars($c) ?>">
+                                            <?= htmlspecialchars($c) ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label mb-0 small">Consolidado</label>

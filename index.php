@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Versão do Sistema
+define('APP_VERSION', '1.0.0');
+
 // Verifica se o usuário está logado
 if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
@@ -73,6 +76,9 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
             padding: 20px; 
             margin-left: 250px; /* Espaço padrão para o sidebar */
             transition: all 0.3s ease; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .content.expanded {
@@ -120,10 +126,15 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
             </div>
         </div>
 
-        <div class="mt-auto">
-            <a href="./logout.php" class="text-light d-flex align-items-center p-2">
+        <div class="mt-auto pt-2 border-top border-secondary">
+            <a href="./logout.php" class="text-light d-flex align-items-center p-2 text-decoration-none">
                 <i class="fas fa-sign-out-alt me-2"></i> Sair
             </a>
+            <div class="text-center pb-1">
+                <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50 font-monospace" style="font-size: 0.75rem;">
+                    v<?= APP_VERSION ?>
+                </span>
+            </div>
         </div>
     </div>
 
@@ -138,10 +149,21 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
             </div>
         </div>
 
-        <div class="mt-4" id="modulo-content">
+        <div class="mt-4 flex-grow-1" id="modulo-content">
             <h2>Bem-vindo, <?php echo htmlspecialchars($usuario["nome"]); ?></h2>
             <p>Selecione um módulo e um submódulo para visualizar o conteúdo.</p>
         </div>
+
+        <footer class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center text-muted small flex-wrap gap-2">
+            <div>
+                &copy; <?php echo date("Y"); ?> <strong>Brazmix</strong> &bull; Todos os direitos reservados.
+            </div>
+            <div>
+                <span class="badge bg-dark text-light border px-2 py-1 font-monospace">
+                    <i class="bi bi-tag-fill text-warning me-1"></i> Versão <?= APP_VERSION ?>
+                </span>
+            </div>
+        </footer>
     </div>
 
 <script>

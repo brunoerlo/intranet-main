@@ -1,6 +1,7 @@
 [
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 620.303",
         "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
         "quantidade": "100",
@@ -8,6 +9,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "20",
@@ -15,6 +17,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 622.005",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
         "quantidade": "20",
@@ -22,6 +25,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 621.303",
         "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
         "quantidade": "20",
@@ -29,6 +33,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 621.306",
         "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
         "quantidade": "20",
@@ -36,6 +41,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 117.000",
         "descricao": "GRAXEIRA BICO RETO 1\/8 ROSCA GAS (CAVALETES)",
         "quantidade": "100",
@@ -43,6 +49,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 140.060",
         "descricao": "BICO ACOPLADOR EXT RIGIDA BOMBA GRAXA",
         "quantidade": "250",
@@ -50,6 +57,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 140.077",
         "descricao": "BOMBA MANUAL P\/GRAXA 4 KG HYDRONLUZ",
         "quantidade": "36",
@@ -57,6 +65,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 140.088",
         "descricao": "BOMBA MANUAL P\/GRAXA 7 KG HYDRONLUBZ8484",
         "quantidade": "20",
@@ -64,6 +73,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 140.150",
         "descricao": "EXTENSAO FLEXIVEL  BOMBA GRAXA",
         "quantidade": "50",
@@ -71,6 +81,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 140.058",
         "descricao": "GRAXEIRA MANUAL 500 GR HL500 S\/EXTFLEX",
         "quantidade": "15",
@@ -78,6 +89,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 140.151",
         "descricao": "GRAXEIRA MANUAL 500 GR HL501",
         "quantidade": "20",
@@ -85,6 +97,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 135.004",
         "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "30",
@@ -92,6 +105,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 135.010",
         "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "30",
@@ -99,6 +113,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 620.501",
         "descricao": "APERTA GAXETA 5",
         "quantidade": "15",
@@ -106,6 +121,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.101",
         "descricao": "APERTA GAXETA 6 - 8",
         "quantidade": "62",
@@ -113,6 +129,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.105",
         "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
         "quantidade": "30",
@@ -120,6 +137,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 620.514",
         "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
         "quantidade": "",
@@ -127,6 +145,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.107",
         "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
         "quantidade": "24",
@@ -134,6 +153,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.501",
         "descricao": "APERTA GAXETA 5",
         "quantidade": "5",
@@ -141,6 +161,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 620.503",
         "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
         "quantidade": "5",
@@ -148,6 +169,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.514",
         "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
         "quantidade": "5",
@@ -155,6 +177,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 621.107",
         "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
         "quantidade": "26",
@@ -162,6 +185,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 127.020",
         "descricao": "DISCO BORRACHA 6 E 8 D.E 370MM D.I 80MM",
         "quantidade": "100",
@@ -169,6 +193,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 127.010",
         "descricao": "DISCO BORRACHA 3 E 4 D.E 270MM D.I 80MM",
         "quantidade": "100",
@@ -239,6 +264,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 620.514",
         "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
         "quantidade": "15",
@@ -246,6 +272,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.514",
         "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
         "quantidade": "5",
@@ -295,6 +322,7 @@
     },
     {
         "nome": "449",
+        "cliente": "JOHIL",
         "codigo": "BM 113.006",
         "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
         "quantidade": "288",
@@ -309,6 +337,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 620.503",
         "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
         "quantidade": "5",
@@ -337,6 +366,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 612.303",
         "descricao": "MANGOTE ALUMINIO BJ",
         "quantidade": "165",
@@ -344,6 +374,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 612.302",
         "descricao": "NIPLE ALUMINIO BJ 3",
         "quantidade": "90",
@@ -351,6 +382,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 612.002",
         "descricao": "NIPLE ALUMINIO BJ 2.1\/2",
         "quantidade": "75",
@@ -358,6 +390,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 138.001",
         "descricao": "MEIOES COLORIDOS PROFISSIONAL TAM39 A 42",
         "quantidade": "1254",
@@ -365,6 +398,7 @@
     },
     {
         "nome": "454",
+        "cliente": "JOHIL",
         "codigo": "BM 621.303",
         "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
         "quantidade": "18",
@@ -372,6 +406,7 @@
     },
     {
         "nome": "454",
+        "cliente": "JOHIL",
         "codigo": "BM 621.306",
         "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
         "quantidade": "25",
@@ -379,6 +414,7 @@
     },
     {
         "nome": "454",
+        "cliente": "JOHIL",
         "codigo": "BM 107.001",
         "descricao": "CORREIA LAMINADA 8 LONAS PAN-100 2",
         "quantidade": "500",
@@ -386,6 +422,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.111",
         "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": 62,
@@ -421,6 +458,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 113.006",
         "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
         "quantidade": "432",
@@ -428,6 +466,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 113.012",
         "descricao": "RILHEIRA 4 DIV 50 GR\/100 GR\/250 GR\/500 G",
         "quantidade": "26",
@@ -435,6 +474,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 113.013",
         "descricao": "SUPORTE PARA CADINHO NR 05",
         "quantidade": "50",
@@ -442,6 +482,7 @@
     },
     {
         "nome": "454",
+        "cliente": "JOHIL",
         "codigo": "BM 124.014",
         "descricao": "MARTELO MOINHO BM-3",
         "quantidade": "75",
@@ -449,6 +490,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 120.095",
         "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
         "quantidade": "90",
@@ -456,6 +498,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 120.095",
         "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
         "quantidade": "90",
@@ -463,6 +506,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 120.092",
         "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
         "quantidade": "90",
@@ -470,6 +514,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 120.092",
         "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
         "quantidade": "90",
@@ -477,6 +522,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 120.202",
         "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM TRSMA 150PSI",
         "quantidade": "6",
@@ -484,6 +530,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 120.202",
         "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM TRSMA 150PSI",
         "quantidade": "6",
@@ -491,6 +538,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 120.093",
         "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
         "quantidade": "6",
@@ -498,6 +546,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 120.093",
         "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
         "quantidade": "6",
@@ -505,6 +554,7 @@
     },
     {
         "nome": "453",
+        "cliente": "JOHIL",
         "codigo": "BM 120.093",
         "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
         "quantidade": "30",
@@ -512,6 +562,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 132.000",
         "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "40",
@@ -519,6 +570,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 132.001",
         "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -526,6 +578,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 132.002",
         "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "39",
@@ -533,6 +586,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 132.001",
         "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -540,6 +594,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 132.002",
         "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "36",
@@ -547,6 +602,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 113.049",
         "descricao": "PORTA CADINHO REDONDO GRANDE (CAD NR. 6)",
         "quantidade": "25",
@@ -554,6 +610,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 113.050",
         "descricao": "PORTA CADINHO REDONDO (CAD NR. 5)",
         "quantidade": "25",
@@ -561,6 +618,7 @@
     },
     {
         "nome": "453",
+        "cliente": "JOHIL",
         "codigo": "BM 120.217",
         "descricao": "MANGUEIRA SUCCAO 10x8Lx22MM 150PSI - 2MT",
         "quantidade": "20",
@@ -568,6 +626,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 113.005",
         "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
         "quantidade": "40",
@@ -575,6 +634,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 113.005",
         "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
         "quantidade": "35",
@@ -582,6 +642,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 113.046",
         "descricao": "CADINHO REDONDO NR 5 (CERAMICA)",
         "quantidade": "100",
@@ -589,6 +650,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 113.047",
         "descricao": "CADINHO REDONDO NR 6 (CERAMICA)",
         "quantidade": "100",
@@ -596,6 +658,7 @@
     },
     {
         "nome": "453",
+        "cliente": "JOHIL",
         "codigo": "BM 133.046",
         "descricao": "ROTOR 8X4 RT HP150 D310 ACO FUND",
         "quantidade": "20",
@@ -603,6 +666,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.104",
         "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
         "quantidade": "12",
@@ -610,6 +674,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 621.104",
         "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
         "quantidade": "13",
@@ -617,6 +682,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 124.033",
         "descricao": "BARRA GRELHA BMX-3 375x38x10x1MM",
         "quantidade": "1568",
@@ -624,6 +690,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 124.004",
         "descricao": "BARRA GRELHA BMX-2 295x32x8x0,6MM",
         "quantidade": "300",
@@ -631,6 +698,7 @@
     },
     {
         "nome": "453",
+        "cliente": "JOHIL",
         "codigo": "BM 621.326",
         "descricao": "FLANGE AP GAXETA BD 10",
         "quantidade": "10",
@@ -638,6 +706,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.001",
         "descricao": "APERTA GAXETA 3 E 4",
         "quantidade": "20",
@@ -645,6 +714,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 621.101",
         "descricao": "APERTA GAXETA 6 - 8",
         "quantidade": "13",
@@ -652,6 +722,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "35",
@@ -659,6 +730,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "40",
@@ -666,6 +738,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "10",
@@ -673,6 +746,7 @@
     },
     {
         "nome": "003",
+        "cliente": "CAMILO",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "51",
@@ -680,6 +754,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.004",
         "descricao": "CAVALETE BD 3 E 4",
         "quantidade": "20",
@@ -687,6 +762,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 124.004",
         "descricao": "BARRA GRELHA BMX-2 295x32x8x0,6MM",
         "quantidade": "200",
@@ -694,6 +770,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 124.033",
         "descricao": "BARRA GRELHA BMX-3 375x38x10x1MM",
         "quantidade": "1568",
@@ -701,6 +778,7 @@
     },
     {
         "nome": "453",
+        "cliente": "JOHIL",
         "codigo": "BM 621.391",
         "descricao": "CARCACA BD 10 DISC FUND B FIXO",
         "quantidade": "20",
@@ -708,6 +786,7 @@
     },
     {
         "nome": "003",
+        "cliente": "CAMILO",
         "codigo": "BM 620.303",
         "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
         "quantidade": "25",
@@ -715,20 +794,23 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.303",
         "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
         "quantidade": "30",
         "Codigo estoque": "cli_6a845807d065f4.29132154"
     },
     {
-        "nome": "001 LETHEM",
+        "nome": "001",
+        "cliente": "JOHIL LETHEM",
         "codigo": "BM 620.503",
         "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
         "quantidade": "10",
         "Codigo estoque": "cli_6a84588952e7d1.07376305"
     },
     {
-        "nome": "001 LETHEM",
+        "nome": "001",
+        "cliente": "JOHIL LETHEM",
         "codigo": "BM 622.005",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
         "quantidade": "50",
@@ -736,6 +818,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 622.005",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
         "quantidade": "5",
@@ -743,6 +826,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 622.005",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
         "quantidade": "5",
@@ -750,6 +834,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.303",
         "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
         "quantidade": "5",
@@ -757,13 +842,15 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 621.303",
         "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
         "quantidade": "10",
         "Codigo estoque": "cli_6a8459bf43ba36.24752463"
     },
     {
-        "nome": "001 LETHEM",
+        "nome": "001",
+        "cliente": "JOHIL LETHEM",
         "codigo": "BM 621.306",
         "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
         "quantidade": "20",
@@ -771,6 +858,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 621.306",
         "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
         "quantidade": "12",
@@ -778,20 +866,23 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 621.306",
         "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
         "quantidade": "10",
         "Codigo estoque": "cli_6a845b2dacb625.84591193"
     },
     {
-        "nome": "001 LETHEM",
+        "nome": "001",
+        "cliente": "JOHIL LETHEM",
         "codigo": "BM 632.910",
         "descricao": "CAVALETE BD 8 EXTRA FORTE MONTADO",
         "quantidade": "12",
         "Codigo estoque": "cli_6a845c2e0bf457.57079235"
     },
     {
-        "nome": "001 LETHEM",
+        "nome": "001",
+        "cliente": "JOHIL LETHEM",
         "codigo": "BM 628.500",
         "descricao": "FLANGE AP GAX BD 8 EX FOT E BD 10 COMPL",
         "quantidade": "10",
@@ -799,6 +890,7 @@
     },
     {
         "nome": "453",
+        "cliente": "JOHIL",
         "codigo": "BM 628.500",
         "descricao": "FLANGE AP GAX BD 8 EX FOT E BD 10 COMPL",
         "quantidade": "10",
@@ -806,6 +898,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 621.111",
         "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "13",
@@ -813,6 +906,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 116.005",
         "descricao": "GAXETA ALGODAO GRAFITADA QD 5\/8 CX 10 KG",
         "quantidade": "300",
@@ -820,6 +914,7 @@
     },
     {
         "nome": "452",
+        "cliente": "JOHIL",
         "codigo": "BM 138.001",
         "descricao": "MEIOES COLORIDOS PROFISSIONAL TAM39 A 42",
         "quantidade": "1800",
@@ -827,6 +922,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.007",
         "descricao": "TAMPA ROLAMENTO 3 E 4",
         "quantidade": "40",
@@ -834,6 +930,7 @@
     },
     {
         "nome": "450",
+        "cliente": "JOHIL",
         "codigo": "BM 620.507",
         "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
         "quantidade": "10",
@@ -841,6 +938,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 620.507",
         "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
         "quantidade": "10",
@@ -848,6 +946,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 135.000",
         "descricao": "TUBO PEBD 5.80 MT 4x6.0MM (0,075 m³)",
         "quantidade": "20",
@@ -855,6 +954,7 @@
     },
     {
         "nome": "451",
+        "cliente": "JOHIL",
         "codigo": "BM 135.004",
         "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "20",
@@ -862,6 +962,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.303",
         "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
         "quantidade": "20",
@@ -869,6 +970,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.303",
         "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
         "quantidade": "20",
@@ -876,6 +978,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.303",
         "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
         "quantidade": "20",
@@ -883,6 +986,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "20",
@@ -890,6 +994,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "20",
@@ -897,6 +1002,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "20",
@@ -904,6 +1010,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.004",
         "descricao": "CAVALETE BD 3 E 4",
         "quantidade": "5",
@@ -911,6 +1018,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.004",
         "descricao": "CAVALETE BD 3 E 4",
         "quantidade": "5",
@@ -918,6 +1026,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.004",
         "descricao": "CAVALETE BD 3 E 4",
         "quantidade": "5",
@@ -925,6 +1034,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 132.000",
         "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -932,6 +1042,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 132.000",
         "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -939,6 +1050,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 132.000",
         "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -946,6 +1058,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.007",
         "descricao": "TAMPA ROLAMENTO 3 E 4",
         "quantidade": "10",
@@ -953,6 +1066,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.007",
         "descricao": "TAMPA ROLAMENTO 3 E 4",
         "quantidade": "10",
@@ -960,6 +1074,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.007",
         "descricao": "TAMPA ROLAMENTO 3 E 4",
         "quantidade": "10",
@@ -967,6 +1082,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.006",
         "descricao": "FLANGE AP GAXETA 3 E 4",
         "quantidade": "5",
@@ -974,6 +1090,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.006",
         "descricao": "FLANGE AP GAXETA 3 E 4",
         "quantidade": "5",
@@ -981,6 +1098,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.006",
         "descricao": "FLANGE AP GAXETA 3 E 4",
         "quantidade": "5",
@@ -988,6 +1106,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.001",
         "descricao": "APERTA GAXETA 3 E 4",
         "quantidade": "5",
@@ -995,6 +1114,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.001",
         "descricao": "APERTA GAXETA 3 E 4",
         "quantidade": "5",
@@ -1002,6 +1122,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.001",
         "descricao": "APERTA GAXETA 3 E 4",
         "quantidade": "5",
@@ -1009,6 +1130,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.504",
         "descricao": "CAVALETE BD 5 (2 ROL 6309)",
         "quantidade": "5",
@@ -1016,6 +1138,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.504",
         "descricao": "CAVALETE BD 5 (2 ROL 6309)",
         "quantidade": "5",
@@ -1023,6 +1146,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 132.001",
         "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -1030,6 +1154,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 132.001",
         "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -1037,6 +1162,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 132.001",
         "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "10",
@@ -1044,6 +1170,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.507",
         "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
         "quantidade": "10",
@@ -1051,6 +1178,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.507",
         "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
         "quantidade": "10",
@@ -1058,6 +1186,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.507",
         "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
         "quantidade": "10",
@@ -1065,6 +1194,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.506",
         "descricao": "FLANGE AP GAXETA 5",
         "quantidade": "5",
@@ -1072,6 +1202,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.506",
         "descricao": "FLANGE AP GAXETA 5",
         "quantidade": "5",
@@ -1079,6 +1210,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.506",
         "descricao": "FLANGE AP GAXETA 5",
         "quantidade": "5",
@@ -1086,6 +1218,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 620.501",
         "descricao": "APERTA GAXETA 5",
         "quantidade": "5",
@@ -1093,6 +1226,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 620.501",
         "descricao": "APERTA GAXETA 5",
         "quantidade": "5",
@@ -1100,6 +1234,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 620.501",
         "descricao": "APERTA GAXETA 5",
         "quantidade": "5",
@@ -1114,6 +1249,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 621.104",
         "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
         "quantidade": "5",
@@ -1121,6 +1257,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 621.104",
         "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
         "quantidade": "5",
@@ -1128,6 +1265,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 621.104",
         "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
         "quantidade": "5",
@@ -1135,6 +1273,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 132.002",
         "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "15",
@@ -1142,6 +1281,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 132.002",
         "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "15",
@@ -1149,6 +1289,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 132.002",
         "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
         "quantidade": "15",
@@ -1156,6 +1297,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 621.107",
         "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
         "quantidade": "10",
@@ -1163,6 +1305,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 621.107",
         "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
         "quantidade": "10",
@@ -1170,6 +1313,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 621.107",
         "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
         "quantidade": "10",
@@ -1177,6 +1321,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 621.111",
         "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "5",
@@ -1184,6 +1329,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 621.111",
         "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "5",
@@ -1191,6 +1337,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 621.111",
         "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
         "quantidade": "5",
@@ -1198,6 +1345,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 621.101",
         "descricao": "APERTA GAXETA 6 - 8",
         "quantidade": "5",
@@ -1205,6 +1353,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 621.101",
         "descricao": "APERTA GAXETA 6 - 8",
         "quantidade": "5",
@@ -1212,6 +1361,7 @@
     },
     {
         "nome": "457",
+        "cliente": "JOHIL",
         "codigo": "BM 621.101",
         "descricao": "APERTA GAXETA 6 - 8",
         "quantidade": "5",
@@ -1219,6 +1369,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 135.004",
         "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "40",
@@ -1226,6 +1377,7 @@
     },
     {
         "nome": "455",
+        "cliente": "JOHIL",
         "codigo": "BM 135.010",
         "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "40",
@@ -1233,6 +1385,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 135.004",
         "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
         "quantidade": "5",
@@ -1240,6 +1393,7 @@
     },
     {
         "nome": "456",
+        "cliente": "JOHIL",
         "codigo": "BM 135.010",
         "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
         "quantidade": "40",
