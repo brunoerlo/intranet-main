@@ -2,6 +2,8 @@
 
 header('Content-Type: application/json');
 
+require_once __DIR__ . '/../../../logger.php';
+
 $file_path = __DIR__ . '/estoque.json';
 
 // Recebe os dados enviados via POST

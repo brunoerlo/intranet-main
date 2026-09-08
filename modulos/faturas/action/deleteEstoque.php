@@ -53,26 +53,6 @@ if (isset($data['ids']) || (isset($data['id']) && !isset($data['id_tipo']))) {
         exit;
     }
 
-    // Se não encontrou no estoque, tenta no faturas.json (compatibilidade com faturas.php)
-    $faturasImportadasPath = __DIR__ . '/faturas.json';
-    if (file_exists($faturasImportadasPath)) {
-        $faturasImportadas = json_decode(file_get_contents($faturasImportadasPath), true);
-        $faturaId = $idsParaExcluir[0]; // faturas.php envia um único id (nomeFatura)
-
-        $faturasFiltradasImportadas = array_filter($faturasImportadas, function ($fatura) use ($faturaId) {
-            return $fatura["nomeFatura"] !== $faturaId;
-        });
-
-        if (count($faturasFiltradasImportadas) < count($faturasImportadas)) {
-            if (file_put_contents($faturasImportadasPath, json_encode(array_values($faturasFiltradasImportadas), JSON_PRETTY_PRINT))) {
-                echo json_encode(['success' => true, 'message' => 'Fatura deletada.']);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Erro ao excluir faturas.']);
-            }
-            exit;
-        }
-    }
-
     echo json_encode(['success' => false, 'message' => 'Nenhum item encontrado com o(s) ID(s) fornecido(s).']);
     exit;
 }

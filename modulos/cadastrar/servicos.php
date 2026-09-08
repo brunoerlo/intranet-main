@@ -1,5 +1,5 @@
 <?php
-$empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
+$empresasPath = __DIR__ . '/../../action/configuracao/empresas.json';
 $empresasMoeda = [];
 $empresasRazao = [];
 
@@ -33,7 +33,7 @@ if (file_exists($empresasPath)) {
             <select class="form-select" id="empresa_id" name="empresa_id" required>
                 <option value="">Selecione a empresa</option>
                 <?php
-                $empresasPath = __DIR__ . '/../configuracao/action/empresas.json'; // ajuste depois se necessário
+                $empresasPath = __DIR__ . '/../cadastrar/action/configuracao/empresas.json'; // ajuste depois se necessário
                 if (file_exists($empresasPath)) {
                     $empresas = json_decode(file_get_contents($empresasPath), true);
                     foreach ($empresas as $empresa) {
@@ -88,7 +88,7 @@ if (file_exists($empresasPath)) {
 <div class="container mt-5">
     <h3>Serviços Cadastrados</h3>
     <?php
-    $arquivo = __DIR__ . '/action/servicos.json';
+    $arquivo = __DIR__ . '/action/servicos/servicos.json';
     if (file_exists($arquivo)) {
         $servicos = json_decode(file_get_contents($arquivo), true);
         if (!empty($servicos)) {
@@ -121,7 +121,7 @@ document.getElementById("formServico").addEventListener("submit", function(e) {
 
     const formData = new FormData(this);
 
-    fetch('./modulos/servicos/action/salvar_servico.php', {
+    fetch('./modulos/cadastrar/action/servicos/salvar_servico.php', {
         method: 'POST',
         body: formData
     })
@@ -146,7 +146,7 @@ document.getElementById("formServico").addEventListener("submit", function(e) {
 function excluirServico(id) {
     if (!confirm("Tem certeza que deseja excluir este serviço?")) return;
 
-    fetch('./modulos/servicos/action/excluir_servico.php', {
+    fetch('./modulos/cadastrar/action/servicos/excluir_servico.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id })

@@ -15,7 +15,7 @@ foreach ($estoque as $e) {
     } else {
         $label = $cliente !== '' ? "{$nome} - {$cliente}" : $nome;
     }
-    
+
     if (!in_array($label, $faturasBotoes, true)) {
         $faturasBotoes[] = $label;
     }
@@ -32,8 +32,11 @@ foreach ($estoque as $e) {
     $qtd  = (int)($e['quantidade'] ?? 0);
     $id   = $e['Codigo estoque'] ?? '';
 
-    $label = ($cliente !== '' && strtolower($nome) !== 'sobra') ? "{$nome} - {$cliente}" : $nome;
-
+    if ($cliente === 'JOHIL') {
+        $label = $nome;
+    } else {
+        $label = ($cliente !== '' && strtolower($nome) !== 'sobra') ? "{$nome} - {$cliente}" : $nome;
+    }
     if (!isset($tabela[$desc])) {
         $tabela[$desc] = ['_codigo' => $cod, 'quantidades' => [], 'itens' => []];
     }
@@ -53,8 +56,11 @@ ksort($tabela);
 ?>
 <!-- Formulário -->
 <div class="container-fluid mt-4">
-    <div class="card">
-        <div class="card-body">
+    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstoque" aria-expanded="false" aria-controls="collapseEstoque">
+        <i class="fa-solid fa-plus"></i> Novo Estoque
+    </button>
+    <div class="collapse" id="collapseEstoque">
+        <div class="card card-body">
             <h4>NOVO ESTOQUE</h4>
             <form id="formCadastroEstoque">
                 <div class="tipo-grupo">
@@ -404,7 +410,7 @@ ksort($tabela);
                     const tr = this.closest('tr');
                     const itemId = tr.getAttribute('data-item-id');
 
-                    fetch('./modulos/faturas/action/delete.php', {
+                    fetch('./modulos/faturas/action/deleteEstoque.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -453,7 +459,7 @@ ksort($tabela);
         // Coleta todos os IDs para excluir
         const ids = itensFatura.map(item => item['Codigo estoque']).filter(Boolean);
 
-        fetch('./modulos/faturas/action/delete.php', {
+        fetch('./modulos/faturas/action/deleteEstoque.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -587,7 +593,7 @@ ksort($tabela);
     atualizarListaAcoes();
 
     // Event delegation no thead — sobrevive ao rebuild do renderizarTabela()
-    document.getElementById('tr-thead').closest('thead').addEventListener('click', function (e) {
+    document.getElementById('tr-thead').closest('thead').addEventListener('click', function(e) {
         const th = e.target.closest('th.sortable');
         if (!th) return;
 
@@ -627,14 +633,12 @@ ksort($tabela);
                 return newOrder === 'asc' ? numA - numB : numB - numA;
             }
 
-            return newOrder === 'asc'
-                ? cellA.localeCompare(cellB, 'pt-BR')
-                : cellB.localeCompare(cellA, 'pt-BR');
+            return newOrder === 'asc' ?
+                cellA.localeCompare(cellB, 'pt-BR') :
+                cellB.localeCompare(cellA, 'pt-BR');
         });
 
         // Reinserir as linhas ordenadas
         rows.forEach(row => tbody.appendChild(row));
     });
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

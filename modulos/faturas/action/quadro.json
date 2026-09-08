@@ -40,12 +40,12 @@
         "id": 4
     },
     {
-        "nomeFatura": "001 LINTERL",
-        "cliente": "ASTILKO-UR",
+        "nomeFatura": "001",
+        "cliente": "LINTERL-UR",
         "nomeConsolidado": "-",
         "data": "-",
-        "ctr": "Rodovi\u00e1rio",
-        "porto": "CHU\u00cd",
+        "ctr": "Rodoviário",
+        "porto": "CHUÍ",
         "booking": "SEM BOOKING",
         "id": 5
     },
@@ -103,7 +103,7 @@
         "nomeFatura": "457",
         "cliente": "JOHIL",
         "nomeConsolidado": "",
-        "data": "DEZ S2",
+        "data": "DEZ S1",
         "ctr": "40'",
         "porto": "ITJ",
         "booking": "SEM BOOKING",

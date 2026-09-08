@@ -9,328 +9,379 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 $nomes = array_column($faturas, 'nomeFatura');
 $noRepeat = array_unique($nomes);
 ?>
+<div class="container-fluid mt-4">
+    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportar" aria-expanded="false" aria-controls="collapseImportar">
+        <i class="fa-solid fa-plus"></i> Novo Cadastro
+    </button>
+    <div class="collapse" id="collapseImportar">
+        <div class="card card-body" style="max-width: 850px;">
+            <h2>Importar Faturas</h2>
+            <form id="importForm" class="mt-4" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="csvFile" class="form-label">Escolha o arquivo CSV:</label>
+                    <input class="form-control" type="file" name="csvFile" id="csvFile" accept=".csv" style="width: 800px;">
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-auto">
+                        <label for="taxaDolar" class="form-label">Taxa do Dólar</label>
+                        <input type="text" class="form-control" style="width: 150px;" name="taxaDolar" id="taxaDolar" placeholder="Ex: 5.8700" required>
+                    </div>
+                    <div class="col-auto">
+                        <label for="notaFiscal" class="form-label">Nº da Nota Fiscal</label>
+                        <input type="text" class="form-control" style="width: 150px;" name="notaFiscal" id="notaFiscal" placeholder="Ex: 12345" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Importar</button>
+            </form>
+            <div id="result" class="mt-3"></div>
+        </div>
+    </div>
 
-<div class="container mt-4">
-    <table class="table table-bordered table-hover mt-3" id="tabela-faturas-unicas">
-        <thead class="table-dark">
-            <tr id="th-thead">
-                <th class="sortable">Fatura</th>
-                <th class="menor sortable">Nota Fiscal</th>
-                <th class="menor">Taxa Dólar</th>
-                <th class="menor">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $faturasUnicas = [];
+    <script>
+        document.getElementById('importForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-            foreach ($faturas as $fatura) {
-                $nome = $fatura['nomeFatura'];
+            const formData = new FormData(this);
 
-                if (!isset($faturasUnicas[$nome])) {
-                    $faturasUnicas[$nome] = $fatura;
-                }
-            }
+            fetch('./modulos/faturas/action/importar_faturas.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    if (data.status === 'success') {
+                        resultDiv.innerHTML = '<div class="alert alert-success">Fatura importada com sucesso!</div>';
+                        location.reload();
+                    } else if (data.error) {
+                        resultDiv.innerHTML = `<div class="alert alert-danger">Erro ao importar fatura: ${data.error}</div>`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = `<div class="alert alert-danger">Erro ao importar fatura: ${error.message}</div>`;
+                });
+        });
+    </script>
 
-            foreach ($faturasUnicas as $fatura): ?>
-                <tr class="table-warning linha-fatura-unica">
-                    <td class="clicavel"><?= htmlspecialchars($fatura['nomeFatura']) ?></td>
-                    <td><?= htmlspecialchars($fatura['notaFiscal'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($fatura['txDolar'] ?? '') ?></td>
-                    <td class="action-buttons text-center">
-                        <button class="btn btn-danger btn-sm delete-btn"
-                            data-id="<?= htmlspecialchars($fatura['nomeFatura']) ?>">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
+    <div class="container mt-4">
+        <table class="table table-bordered table-hover mt-3" id="tabela-faturas-unicas">
+            <thead class="table-dark">
+                <tr id="th-thead">
+                    <th class="sortable">Fatura</th>
+                    <th class="menor sortable">Nota Fiscal</th>
+                    <th class="menor">Taxa Dólar</th>
+                    <th class="menor">Ações</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <?php
+                $faturasUnicas = [];
 
-<!-- ============ MODAL ============ -->
-<div class="modal fade" id="modalProdutosFatura" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Produtos da fatura: <span id="modalNomeFatura"></span></h5>
-                <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir" style="margin-left: auto;">
-                    🖨️ Imprimir
-                </button>
+                foreach ($faturas as $fatura) {
+                    $nome = $fatura['nomeFatura'];
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body" id="show-print">
-                <table class="table table-bordered table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th style="width: 120px;" class="sortable">Código</th>
-                            <th class="sortable">Descrição</th>
-                            <th>UN</th>
-                            <th>Quantidade</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead>
-                    <tbody id="modalProdutosBody">
-                        <!-- preenchido via JS -->
-                    </tbody>
-                </table>
+                    if (!isset($faturasUnicas[$nome])) {
+                        $faturasUnicas[$nome] = $fatura;
+                    }
+                }
+
+                foreach ($faturasUnicas as $fatura): ?>
+                    <tr class="table-warning linha-fatura-unica">
+                        <td class="clicavel"><?= htmlspecialchars($fatura['nomeFatura']) ?></td>
+                        <td><?= htmlspecialchars($fatura['notaFiscal'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($fatura['txDolar'] ?? '') ?></td>
+                        <td class="action-buttons text-center">
+                            <button class="btn btn-danger btn-sm delete-btn"
+                                data-id="<?= htmlspecialchars($fatura['nomeFatura']) ?>">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ============ MODAL ============ -->
+    <div class="modal fade" id="modalProdutosFatura" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Produtos da fatura: <span id="modalNomeFatura"></span></h5>
+                    <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir" style="margin-left: auto;">
+                        🖨️ Imprimir
+                    </button>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body" id="show-print">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 120px;" class="sortable">Código</th>
+                                <th class="sortable">Descrição</th>
+                                <th>UN</th>
+                                <th>Quantidade</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalProdutosBody">
+                            <!-- preenchido via JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-    th.menor {
-        width: 120px;
-    }
-
-    #tabela-faturas-unicas {
-        width: 600px;
-    }
-
-    .table th {
-        padding: 0.3rem;
-        vertical-align: middle;
-        text-align: center;
-    }
-
-    th.sortable,
-    th.clicavel {
-        cursor: pointer;
-        user-select: none;
-    }
-
-    @media print {
-        /* Esconde o sidebar e a navbar */
-        #sidebar,
-        nav.navbar,
-        #loading,
-        #tabela-faturas-unicas,
-        .container.mt-4 {
-            display: none !important;
+    <style>
+        th.menor {
+            width: 120px;
         }
 
-        /* Cadeia de ancestrais do modal: tudo precisa ser visível e sem overflow */
-        body,
-        .content,
-        #modulo-content {
-            display: block !important;
-            visibility: visible !important;
-            position: static !important;
-            overflow: visible !important;
-            height: auto !important;
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+        #tabela-faturas-unicas {
+            width: 600px;
         }
 
-        /* Modal visível e no fluxo normal */
-        #modalProdutosFatura {
-            display: block !important;
-            position: static !important;
-            overflow: visible !important;
-            opacity: 1 !important;
+        .table th {
+            padding: 0.3rem;
+            vertical-align: middle;
+            text-align: center;
         }
 
-        .modal-backdrop {
-            display: none !important;
+        th.sortable,
+        th.clicavel {
+            cursor: pointer;
+            user-select: none;
         }
 
-        .modal-dialog {
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+        @media print {
+
+            /* Esconde o sidebar e a navbar */
+            #sidebar,
+            nav.navbar,
+            #loading,
+            #tabela-faturas-unicas,
+            .container.mt-4 {
+                display: none !important;
+            }
+
+            /* Cadeia de ancestrais do modal: tudo precisa ser visível e sem overflow */
+            body,
+            .content,
+            #modulo-content {
+                display: block !important;
+                visibility: visible !important;
+                position: static !important;
+                overflow: visible !important;
+                height: auto !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Modal visível e no fluxo normal */
+            #modalProdutosFatura {
+                display: block !important;
+                position: static !important;
+                overflow: visible !important;
+                opacity: 1 !important;
+            }
+
+            .modal-backdrop {
+                display: none !important;
+            }
+
+            .modal-dialog {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .modal-content {
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Esconde header do modal e botões na impressão */
+            .modal-header {
+                display: none !important;
+            }
+
+            /* Tabela flui naturalmente entre páginas */
+            #show-print {
+                overflow: visible !important;
+            }
+
+            #show-print table {
+                width: 100% !important;
+                page-break-inside: auto !important;
+            }
+
+            #show-print tr {
+                page-break-inside: avoid !important;
+                page-break-after: auto !important;
+            }
+
+            #show-print thead {
+                display: table-header-group !important;
+            }
+
+            /* Logo para impressão */
+            #image {
+                display: block !important;
+                position: static !important;
+                margin-bottom: 10px;
+            }
         }
+    </style>
 
-        .modal-content {
-            border: none !important;
-            box-shadow: none !important;
-        }
+    <script>
+        // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
+        const todosOsItensFaturas = <?= json_encode($faturas) ?>;
 
-        /* Esconde header do modal e botões na impressão */
-        .modal-header {
-            display: none !important;
-        }
+        document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
+            linhaFatura.addEventListener('click', function() {
+                const nomeClicado = this.querySelector('.clicavel').textContent.trim();
 
-        /* Tabela flui naturalmente entre páginas */
-        #show-print {
-            overflow: visible !important;
-        }
+                const faturasAgrupadas = {};
 
-        #show-print table {
-            width: 100% !important;
-            page-break-inside: auto !important;
-        }
+                todosOsItensFaturas.forEach(item => {
+                    if (!faturasAgrupadas[item.nomeFatura]) {
+                        faturasAgrupadas[item.nomeFatura] = [];
+                    }
 
-        #show-print tr {
-            page-break-inside: avoid !important;
-            page-break-after: auto !important;
-        }
+                    faturasAgrupadas[item.nomeFatura].push(item);
+                });
 
-        #show-print thead {
-            display: table-header-group !important;
-        }
+                const itensDaFatura = faturasAgrupadas[nomeClicado] || [];
 
-        /* Logo para impressão */
-        #image {
-            display: block !important;
-            position: static !important;
-            margin-bottom: 10px;
-        }
-    }
-</style>
+                // Monta as linhas do modal
+                const tbody = document.getElementById('modalProdutosBody');
+                tbody.innerHTML = '';
 
-<script>
-    // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
-    const todosOsItensFaturas = <?= json_encode($faturas) ?>;
-
-    document.querySelectorAll('.linha-fatura-unica').forEach(function(linhaFatura) {
-        linhaFatura.addEventListener('click', function() {
-            const nomeClicado = this.querySelector('.clicavel').textContent.trim();
-
-            const faturasAgrupadas = {};
-
-            todosOsItensFaturas.forEach(item => {
-                if (!faturasAgrupadas[item.nomeFatura]) {
-                    faturasAgrupadas[item.nomeFatura] = [];
-                }
-
-                faturasAgrupadas[item.nomeFatura].push(item);
-            });
-
-            const itensDaFatura = faturasAgrupadas[nomeClicado] || [];
-
-            // Monta as linhas do modal
-            const tbody = document.getElementById('modalProdutosBody');
-            tbody.innerHTML = '';
-
-            if (itensDaFatura.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhum produto encontrado.</td></tr>';
-            } else {
-                itensDaFatura.sort((a, b) => {
-                    return a.descricao.localeCompare(b.descricao, 'pt-BR', {
-                        sensitivity: 'base'
-                    });
-                })
-                itensDaFatura.forEach(function(item) {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
+                if (itensDaFatura.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">Nenhum produto encontrado.</td></tr>';
+                } else {
+                    itensDaFatura.sort((a, b) => {
+                        return a.descricao.localeCompare(b.descricao, 'pt-BR', {
+                            sensitivity: 'base'
+                        });
+                    })
+                    itensDaFatura.forEach(function(item) {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
                         <td class="sortable">${item.codigo ?? ''}</td>
                         <td class="sortable">${item.descricao ?? ''}</td>
                         <td>${item.unidadeMedida ?? ''}</td>
                         <td>${item.quantidade ?? ''}</td>
                         <td>${item.preco ?? ''}</td>
                     `;
-                    tbody.appendChild(tr);
-                });
-            }
-
-            document.getElementById('modalNomeFatura').textContent = nomeClicado;
-
-            // Abre o modal (Bootstrap)
-            const modal = new bootstrap.Modal(document.getElementById('modalProdutosFatura'));
-            modal.show();
-        });
-    });
-
-    //Deletar
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const faturaId = this.getAttribute('data-id');
-
-            if (confirm("Tem certeza que deseja excluir esta fatura?")) {
-                fetch('./modulos/faturas/action/delete.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: faturaId
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Fatura excluída com sucesso!');
-                            linha.remove();
-                        } else {
-                            alert('Erro ao excluir a fatura: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Ocorreu um erro ao tentar excluir a fatura.');
+                        tbody.appendChild(tr);
                     });
-            }
-        });
-    });
-
-    function ordenacaoAlfabetica(tabela) {
-        // Ordenação
-        tabela.querySelector('thead').closest('thead').addEventListener('click', function(e) {
-            const th = e.target.closest('th.sortable');
-            if (!th) return;
-
-            const table = th.closest('table');
-            const tbody = table.querySelector('tbody');
-            const headerRow = th.parentElement;
-            const colIndex = Array.from(headerRow.children).indexOf(th);
-
-            // Pegar somente linhas visíveis
-            const rows = Array.from(tbody.querySelectorAll('tr')).filter(
-                row => row.style.display !== 'none'
-            );
-
-            // Determinar direção: none→asc, asc→desc, desc→asc
-            const currentOrder = th.dataset.order || 'none';
-            const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
-
-            // Limpar indicadores de todas as colunas da mesma tabela
-            headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
-                otherTh.dataset.order = 'none';
-                otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
-            });
-
-            // Definir nova direção e indicador visual
-            th.dataset.order = newOrder;
-            th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
-
-            // Ordenar as linhas pela coluna clicada
-            rows.sort((a, b) => {
-                const cellA = (a.children[colIndex]?.textContent || '').trim().toLowerCase();
-                const cellB = (b.children[colIndex]?.textContent || '').trim().toLowerCase();
-
-                // Tentar comparação numérica se ambos forem números
-                const numA = parseFloat(cellA.replace(',', '.'));
-                const numB = parseFloat(cellB.replace(',', '.'));
-                if (!isNaN(numA) && !isNaN(numB)) {
-                    return newOrder === 'asc' ? numA - numB : numB - numA;
                 }
 
-                return newOrder === 'asc' ?
-                    cellA.localeCompare(cellB, 'pt-BR') :
-                    cellB.localeCompare(cellA, 'pt-BR');
+                document.getElementById('modalNomeFatura').textContent = nomeClicado;
+
+                // Abre o modal (Bootstrap)
+                const modal = new bootstrap.Modal(document.getElementById('modalProdutosFatura'));
+                modal.show();
             });
-
-            // Reinserir as linhas ordenadas
-            rows.forEach(row => tbody.appendChild(row));
         });
-    }
 
-    ordenacaoAlfabetica(document.getElementById('tabela-faturas-unicas'));
-    ordenacaoAlfabetica(document.getElementById('modalProdutosFatura').querySelector('table'));
-</script>
+        //Deletar
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const faturaId = this.getAttribute('data-id');
+                const linha = this.closest('tr');
 
-<script>
-    const printBtn = document.getElementById('btn-print');
+                if (confirm("Tem certeza que deseja excluir esta fatura?")) {
+                    fetch('./modulos/faturas/action/deleteFaturas.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                nomeFatura: faturaId
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Fatura excluída com sucesso!');
+                                if (linha) linha.remove();
+                                location.reload();
+                            } else {
+                                alert('Erro ao excluir a fatura: ' + data.message);
+                            }
+                        })
+                        .catch(() => alert('Ocorreu um erro ao excluir a fatura.'));
+                }
+            });
+        });
 
-    //impressao
-    printBtn.addEventListener('click', function() {
-        print();
-    });
-</script>
+        function ordenacaoAlfabetica(tabela) {
+            // Ordenação
+            tabela.querySelector('thead').closest('thead').addEventListener('click', function(e) {
+                const th = e.target.closest('th.sortable');
+                if (!th) return;
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                const table = th.closest('table');
+                const tbody = table.querySelector('tbody');
+                const headerRow = th.parentElement;
+                const colIndex = Array.from(headerRow.children).indexOf(th);
+
+                // Pegar somente linhas visíveis
+                const rows = Array.from(tbody.querySelectorAll('tr')).filter(
+                    row => row.style.display !== 'none'
+                );
+
+                // Determinar direção: none→asc, asc→desc, desc→asc
+                const currentOrder = th.dataset.order || 'none';
+                const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
+
+                // Limpar indicadores de todas as colunas da mesma tabela
+                headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
+                    otherTh.dataset.order = 'none';
+                    otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
+                });
+
+                // Definir nova direção e indicador visual
+                th.dataset.order = newOrder;
+                th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
+
+                // Ordenar as linhas pela coluna clicada
+                rows.sort((a, b) => {
+                    const cellA = (a.children[colIndex]?.textContent || '').trim().toLowerCase();
+                    const cellB = (b.children[colIndex]?.textContent || '').trim().toLowerCase();
+
+                    // Tentar comparação numérica se ambos forem números
+                    const numA = parseFloat(cellA.replace(',', '.'));
+                    const numB = parseFloat(cellB.replace(',', '.'));
+                    if (!isNaN(numA) && !isNaN(numB)) {
+                        return newOrder === 'asc' ? numA - numB : numB - numA;
+                    }
+
+                    return newOrder === 'asc' ?
+                        cellA.localeCompare(cellB, 'pt-BR') :
+                        cellB.localeCompare(cellA, 'pt-BR');
+                });
+
+                // Reinserir as linhas ordenadas
+                rows.forEach(row => tbody.appendChild(row));
+            });
+        }
+
+        ordenacaoAlfabetica(document.getElementById('tabela-faturas-unicas'));
+        ordenacaoAlfabetica(document.getElementById('modalProdutosFatura').querySelector('table'));
+    </script>
+
+    <script>
+        const printBtn = document.getElementById('btn-print');
+
+        //impressao
+        printBtn.addEventListener('click', function() {
+            print();
+        });
+    </script>

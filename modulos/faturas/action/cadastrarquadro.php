@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 // Define o caminho para o arquivo JSON
 $file_path = __DIR__ . '/quadro.json';
 
