@@ -430,6 +430,6 @@ FodyWeavers.xsd
 modulos/faturas/action/estoque.json
 modulos/faturas/action/faturas.json
 estudo.js
-modulos/cadastrar/action/configuracao/users.json
-modulos/cadastrar/action/configuracao/tokens.json
+modulos/configuracao/action/users.json
+modulos/configuracao/action/tokens.json
 modulos/cadastrar/action/clientes/clientes.json

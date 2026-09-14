@@ -1,8 +1,10 @@
 <?php
-
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../../logger.php';
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
 
 $file_path = __DIR__ . '/estoque.json';
 
@@ -49,10 +51,12 @@ if (!$jaExiste) {
 
 // Salva de volta no arquivo
 if (file_put_contents($file_path, json_encode($estoque, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    registrarLog($usuario, 'faturas', 'cadastrar', "Cadastrou a fatura {$data['nome']} do estoque");  
     echo json_encode([
         'success' => true,
         'message' => $jaExiste ? 'Quantidade somada ao item existente.' : 'Novo item cadastrado.'
-    ]);
+        ]);
+        
 } else {
     echo json_encode(['success' => false, 'error' => 'Não foi possível salvar os dados.']);
 }

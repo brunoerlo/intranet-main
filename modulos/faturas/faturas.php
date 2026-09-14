@@ -11,7 +11,7 @@ $noRepeat = array_unique($nomes);
 ?>
 <div class="container-fluid mt-4">
     <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportar" aria-expanded="false" aria-controls="collapseImportar">
-        <i class="fa-solid fa-plus"></i> Novo Cadastro
+        <i class="fa-solid fa-plus"></i> Nova Importação
     </button>
     <div class="collapse" id="collapseImportar">
         <div class="card card-body" style="max-width: 850px;">

@@ -1,15 +1,5 @@
 [
     {
-        "nomeFatura": "449",
-        "cliente": "JOHIL",
-        "nomeConsolidado": "MWM",
-        "data": "2026-09-08",
-        "ctr": "20'",
-        "porto": "ITJ",
-        "booking": "SAOG45180600",
-        "id": 1
-    },
-    {
         "nomeFatura": "001",
         "cliente": "JOHIL LETHEM",
         "nomeConsolidado": "-",
@@ -40,23 +30,13 @@
         "id": 4
     },
     {
-        "nomeFatura": "001",
-        "cliente": "LINTERL-UR",
-        "nomeConsolidado": "-",
-        "data": "-",
-        "ctr": "Rodoviário",
-        "porto": "CHUÍ",
-        "booking": "SEM BOOKING",
-        "id": 5
-    },
-    {
         "nomeFatura": "451",
         "cliente": "JOHIL",
         "nomeConsolidado": "",
-        "data": "OUT S1",
+        "data": "05\/10\/2026",
         "ctr": "20'",
         "porto": "ITJ",
-        "booking": "SEM BOOKING",
+        "booking": "SAOG52669900",
         "id": 6
     },
     {

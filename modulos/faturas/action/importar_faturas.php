@@ -113,15 +113,20 @@ if (isset($_FILES['pdfFile']) && $_FILES['pdfFile']['error'] === UPLOAD_ERR_OK) 
         $bom = fread($handle, 3);
         if ($bom !== "\xEF\xBB\xBF") rewind($handle);
 
-        $nomeFatura = 'FATURA PROFORMA';
-        $headers    = null;
-        $produtos   = [];
+        $nomeFatura      = 'FATURA PROFORMA';
+        $numeroFaturaRaw = null; // número cru da fatura (ex: "449"), usado depois pra achar no quadro/estoque
+        $headers         = null;
+        $produtos        = [];
 
         while (($row = fgetcsv($handle, 0, ';')) !== false) {
-            // Pega nome da fatura — linha que contém "JOHIL"
+            // Pega o número da fatura — célula isolada no formato "449-26"
+            // (aceita opcionalmente um prefixo tipo "JOHIL 449-26")
             foreach ($row as $cell) {
-                if (preg_match('/JOHIL\s+(\d+)-(\d+)/i', trim($cell), $m)) {
-                    $nomeFatura = 'FAT ' . '0' . $m[1] . '/20' . $m[2];
+                $cellTrim = trim($cell);
+                if ($cellTrim === '') continue;
+                if (preg_match('/^(?:[A-Z]+\s+)?(\d{1,4})-(\d{2,4})$/i', $cellTrim, $m)) {
+                    $nomeFatura      = 'FAT ' . '0' . $m[1] . '/20' . $m[2];
+                    $numeroFaturaRaw = $m[1];
                     break;
                 }
             }
@@ -178,6 +183,63 @@ if (isset($_FILES['pdfFile']) && $_FILES['pdfFile']['error'] === UPLOAD_ERR_OK) 
             exit();
         }
 
-        echo json_encode(['status' => 'success', 'message' => count($produtos) . ' produtos importados com sucesso.']);
+        // ============================================================
+        // Remove do quadro.json e do estoque.json a fatura que acabou
+        // de ser importada, casando pelo número cru (ex: "449")
+        // ============================================================
+        $removidoQuadro  = 0;
+        $removidoEstoque = 0;
+
+        if (!empty($numeroFaturaRaw)) {
+            $removidoQuadro  = removerCorrespondencias(__DIR__ . '/quadro.json', 'nomeFatura', $numeroFaturaRaw);
+            $removidoEstoque = removerCorrespondencias(__DIR__ . '/estoque.json', 'nome', $numeroFaturaRaw);
+        }
+
+        $mensagem = count($produtos) . ' produtos importados com sucesso.';
+        if ($removidoQuadro > 0 || $removidoEstoque > 0) {
+            $mensagem .= " ({$removidoQuadro} item(ns) removido(s) do quadro, {$removidoEstoque} do estoque)";
+        } elseif (empty($numeroFaturaRaw)) {
+            $mensagem .= ' Aviso: não foi possível identificar o número da fatura no CSV, nada foi removido do quadro/estoque.';
+        }
+
+        echo json_encode(['status' => 'success', 'message' => $mensagem]);
     }
+
+/**
+ * Remove do arquivo JSON informado todos os registros cujo campo
+ * indicado corresponda ao número da fatura (comparação exata como
+ * string, e também numérica pra ignorar zeros à esquerda, ex:
+ * "001" === "1").
+ *
+ * @return int Quantidade de registros removidos.
+ */
+function removerCorrespondencias(string $caminhoJson, string $campo, string $numeroFaturaRaw): int
+{
+    if (!file_exists($caminhoJson)) {
+        return 0;
+    }
+
+    $itens = json_decode(file_get_contents($caminhoJson), true) ?? [];
+    $totalAntes = count($itens);
+
+    $itensFiltrados = array_filter($itens, function ($item) use ($campo, $numeroFaturaRaw) {
+        $valor = trim((string)($item[$campo] ?? ''));
+
+        if ($valor === $numeroFaturaRaw) {
+            return false; // remove (igual como string)
+        }
+        if (is_numeric($valor) && is_numeric($numeroFaturaRaw) && (int)$valor === (int)$numeroFaturaRaw) {
+            return false; // remove (igual numericamente, ex: "001" vs "1")
+        }
+        return true; // mantém
+    });
+
+    $totalRemovidos = $totalAntes - count($itensFiltrados);
+
+    if ($totalRemovidos > 0) {
+        file_put_contents($caminhoJson, json_encode(array_values($itensFiltrados), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    return $totalRemovidos;
+}
 ?>

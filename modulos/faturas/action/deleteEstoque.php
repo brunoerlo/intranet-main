@@ -1,6 +1,10 @@
 <?php
-
 header('Content-Type: application/json');
+
+require_once dirname(__DIR__, 3) . '/logger.php';
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
 
 // Recebe os dados do corpo da requisição
 $data = json_decode(file_get_contents("php://input"), true);
@@ -42,6 +46,7 @@ if (isset($data['ids']) || (isset($data['id']) && !isset($data['id_tipo']))) {
 
     if ($totalRemovidos > 0) {
         if (file_put_contents($estoquePath, json_encode(array_values($estoqueFiltrado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+            registrarLog($usuario, 'faturas', 'deletar', "Deletou a fatura {$data['nome']} do estoque");
             echo json_encode([
                 'success' => true,
                 'message' => $totalRemovidos . ' item(ns) excluído(s) com sucesso.',

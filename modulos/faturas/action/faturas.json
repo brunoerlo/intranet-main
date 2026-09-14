@@ -27548,5 +27548,165 @@
         "unidadeMedida": "PR",
         "quantidade": "75",
         "preco": "40.58"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 140.060",
+        "descricao": "BICO ACOPLADOR EXT RIGIDA BOMBA GRAXA",
+        "unidadeMedida": "UN",
+        "quantidade": "250",
+        "preco": "2.66"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 140.077",
+        "descricao": "BOMBA MANUAL P\/GRAXA 4 KG HYDRONLUZ",
+        "unidadeMedida": "UN",
+        "quantidade": "36",
+        "preco": "41.63"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 140.088",
+        "descricao": "BOMBA MANUAL P\/GRAXA 7 KG HYDRONLUBZ8484",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "47.12"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 113.006",
+        "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
+        "unidadeMedida": "UN",
+        "quantidade": "288",
+        "preco": "5.17"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "98.20"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "237.08"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 622.005",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "246.17"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "308.01"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 621.306",
+        "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "344.29"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 140.150",
+        "descricao": "EXTENSAO FLEXIVEL  BOMBA GRAXA",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "5.19"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 R GAS",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "0.42"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 140.058",
+        "descricao": "GRAXEIRA MANUAL 500 GR HL500 S\/EXTFLEX",
+        "unidadeMedida": "UN",
+        "quantidade": "15",
+        "preco": "22.25"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 140.151",
+        "descricao": "GRAXEIRA MANUAL 500 GR HL501",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "25.05"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "101.55"
+    },
+    {
+        "nomeFatura": "FAT 0449\/2026",
+        "notaFiscal": "NF 910",
+        "txDolar": "5.1999",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "133.13"
+    },
+    {
+        "nomeFatura": "FAT 0449 A\/2026",
+        "notaFiscal": "NF 911",
+        "txDolar": "5.181",
+        "codigo": "BM 130.095",
+        "descricao": "3D DREDGING PUMP MINIATURE",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "22.34"
     }
 ]

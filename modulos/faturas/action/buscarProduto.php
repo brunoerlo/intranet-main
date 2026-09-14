@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 $codigo = $_GET['codigo'] ?? '';
 
-$faturasJson = file_get_contents(__DIR__ . '/../../produtos/action/produtos.json');
+$faturasJson = file_get_contents(__DIR__ . '/../../cadastrar/action/produtos/produtos.json');
 $faturas = json_decode($faturasJson, true);
 
 foreach ($faturas as $produto) {

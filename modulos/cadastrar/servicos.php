@@ -1,5 +1,5 @@
 <?php
-$empresasPath = __DIR__ . '/../../action/configuracao/empresas.json';
+$empresasPath = __DIR__ . '/../../configuracao/action/empresas.json';
 $empresasMoeda = [];
 $empresasRazao = [];
 
@@ -33,7 +33,7 @@ if (file_exists($empresasPath)) {
             <select class="form-select" id="empresa_id" name="empresa_id" required>
                 <option value="">Selecione a empresa</option>
                 <?php
-                $empresasPath = __DIR__ . '/../cadastrar/action/configuracao/empresas.json'; // ajuste depois se necessário
+                $empresasPath = __DIR__ . '/../configuracao/action/empresas.json'; // ajuste depois se necessário
                 if (file_exists($empresasPath)) {
                     $empresas = json_decode(file_get_contents($empresasPath), true);
                     foreach ($empresas as $empresa) {

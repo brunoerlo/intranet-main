@@ -1,7 +1,7 @@
 <?php
 
 function registrarLog(string $usuario, string $modulo, string $acao, string $detalhes): bool {
-    $logDir = __DIR__ . '/../logs';
+    $logDir = __DIR__ . '/logs';
     $logFile = $logDir . '/atividades.csv';
 
     if (!is_dir($logDir)) {

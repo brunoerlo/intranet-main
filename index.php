@@ -318,7 +318,7 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
         });
     </script>
 
-    <script>
+    <script> // Script de verificação de versão para dar reload automático
         (function() {
             const VERSION_URL = '/version.json';
             const CHECK_INTERVAL = 5 * 60 * 1000; // 5 minutos, ajusta como quiser
