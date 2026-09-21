@@ -1,6 +1,10 @@
 <?php
 header('Content-Type: application/json');
+
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
 session_start();
+$usuario = isset($_SESSION["usuario"]["nome"]) ? $_SESSION["usuario"]["nome"] : "Sistema (via token)";
 
 $usersFile = './users.json';
 $tokensFile = './tokens.json';
@@ -54,16 +58,14 @@ if (file_exists($tokensFile)) {
     $tokens = json_decode(file_get_contents($tokensFile), true);
     
     if (isset($tokens[$userId])) {
-        // Remove apenas o token que foi utilizado
-        array_shift($tokens[$userId]); // Remove o primeiro token da lista
-        if (empty($tokens[$userId])) {
-            unset($tokens[$userId]); // Remove a chave se não houver mais tokens
-        }
+        // Remove o token utilizado
+        unset($tokens[$userId]);
         file_put_contents($tokensFile, json_encode($tokens, JSON_PRETTY_PRINT));
     }
 }
 
 // Responde ao AJAX com sucesso
+registrarLog($user['nome'], 'configuracao', 'usuario', 'editar', "Alterou a senha");
 echo json_encode(["status" => "success", "message" => "Senha redefinida com sucesso!"]);
 exit;
 ?>

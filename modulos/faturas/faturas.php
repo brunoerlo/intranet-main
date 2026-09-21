@@ -63,11 +63,11 @@ $noRepeat = array_unique($nomes);
         });
     </script>
 
-    <div class="container mt-4">
-        <table class="table table-bordered table-hover mt-3" id="tabela-faturas-unicas">
+    <div class="table-responsive shadow-sm rounded mb-4">
+        <table class="table table-striped table-hover table-bordered align-middle mb-0" style="max-width: 700px; text-align: center;">
             <thead class="table-dark">
                 <tr id="th-thead">
-                    <th class="sortable">Fatura</th>
+                    <th class="sortable" style="width: 120px;">Fatura</th>
                     <th class="menor sortable">Nota Fiscal</th>
                     <th class="menor">Taxa Dólar</th>
                     <th class="menor">Ações</th>
@@ -86,7 +86,7 @@ $noRepeat = array_unique($nomes);
                 }
 
                 foreach ($faturasUnicas as $fatura): ?>
-                    <tr class="table-warning linha-fatura-unica">
+                    <tr class=" linha-fatura-unica">
                         <td class="clicavel"><?= htmlspecialchars($fatura['nomeFatura']) ?></td>
                         <td><?= htmlspecialchars($fatura['notaFiscal'] ?? '') ?></td>
                         <td><?= htmlspecialchars($fatura['txDolar'] ?? '') ?></td>
@@ -115,7 +115,7 @@ $noRepeat = array_unique($nomes);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body" id="show-print">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-striped table-hover table-bordered align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
                                 <th style="width: 120px;" class="sortable">Código</th>

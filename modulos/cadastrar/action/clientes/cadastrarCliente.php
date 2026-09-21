@@ -1,6 +1,15 @@
 <?php
+header('Content-Type: application/json');
+
 // Define o caminho para o arquivo JSON
-$file_path = 'clientes_cadastrados.json';
+$file_path = __DIR__ . '/clientes_cadastrados.json';
+
+require_once dirname(__DIR__, 4) . '/logger.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$usuario = $_SESSION["usuario"]["nome"] ?? 'desconhecido';
 
 // Recebe os dados enviados via POST
 $data = json_decode(file_get_contents('php://input'), true);
@@ -23,6 +32,7 @@ if (isset($data['tipo']) && isset($data['email']) && isset($data['telefone'])) {
 
     // Salva os dados de volta no arquivo JSON
     if (file_put_contents($file_path, json_encode($clientes, JSON_PRETTY_PRINT))) {
+        registrarLog($usuario, 'cadastrar', 'clientes', 'cadastrar', "Cadastrou o cliente {$data['nomeCompleto']}");
         // Retorna uma resposta de sucesso
         echo json_encode([
             'success' => true,

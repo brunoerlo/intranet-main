@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"] ?? "Desconhecido";
+
 use Smalot\PdfParser\Parser;
 // ============================================================
 // PDF
@@ -201,7 +206,7 @@ if (isset($_FILES['pdfFile']) && $_FILES['pdfFile']['error'] === UPLOAD_ERR_OK) 
         } elseif (empty($numeroFaturaRaw)) {
             $mensagem .= ' Aviso: não foi possível identificar o número da fatura no CSV, nada foi removido do quadro/estoque.';
         }
-
+        registrarLog($usuario, 'faturas', 'lista', 'importar', "Importou a fatura {$nomeFatura}");
         echo json_encode(['status' => 'success', 'message' => $mensagem]);
     }
 

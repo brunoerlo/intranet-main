@@ -2,6 +2,11 @@
 
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"] ?? "Desconhecido";
+
 $quadroPath = __DIR__ . '/quadro.json';
 
 // Verifica se os arquivos existem
@@ -23,7 +28,15 @@ if (!isset($data['id'])) {
 }
 
 $faturaId = $data['id'];
-$faturaDeletada = false;
+
+// Captura o item que será removido (antes de filtrar)
+$itemDeletado = null;
+foreach ($itensQuadro as $quadro) {
+    if ((string)$quadro['id'] === (string)$faturaId) {
+        $itemDeletado = $quadro;
+        break;
+    }
+}
 
 $itensQuadroFiltrado = array_filter($itensQuadro, function ($quadro) use ($faturaId) {
     return (string)$quadro["id"] !== (string)$faturaId;
@@ -31,6 +44,7 @@ $itensQuadroFiltrado = array_filter($itensQuadro, function ($quadro) use ($fatur
 
 if (count($itensQuadroFiltrado) < count($itensQuadro)) {
     if (file_put_contents($quadroPath, json_encode(array_values($itensQuadroFiltrado), JSON_PRETTY_PRINT))) {
+        registrarLog($usuario, 'faturas', 'quadro', 'deletar', "Deletou a fatura {$itemDeletado['nomeFatura']} - {$itemDeletado['cliente']} do quadro");
         echo json_encode(['success' => true, 'message' => 'Fatura deletada do quadro.']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Erro ao salvar.']);

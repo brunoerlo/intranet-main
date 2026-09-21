@@ -2,6 +2,11 @@
 
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 4) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 $clientesImportadosPath = __DIR__ . '/clientes.json';
 $clientesCadastradosPath = __DIR__ . '/clientes_cadastrados.json';
 
@@ -25,15 +30,25 @@ if (!isset($data['id'])) {
 }
 
 $clienteId = $data['id'];
-$clienteDeletado = false;
 
 // === FLUXO 1: Deleta do clientes importados ===
+
+// Captura o cliente antes de filtrar
+$itemDeletado = null;
+foreach ($clientesImportados as $cliente) {
+    if (($cliente['Codigo Cliente'] ?? '') === $clienteId) {
+        $itemDeletado = $cliente;
+        break;
+    }
+}
+
 $clientesFiltradosImportados = array_filter($clientesImportados, function ($cliente) use ($clienteId) {
-    return $cliente["Cliente"] !== $clienteId;
+    return ($cliente["Codigo Cliente"] ?? '') !== $clienteId;
 });
 
 if (count($clientesFiltradosImportados) < count($clientesImportados)) {
     if (file_put_contents($clientesImportadosPath, json_encode(array_values($clientesFiltradosImportados), JSON_PRETTY_PRINT))) {
+        registrarLog($usuario, 'cadastrar', 'clientes', 'deletar', "Deletou o cliente {$itemDeletado['nomeCompleto']}");
         echo json_encode(['success' => true, 'message' => 'Cliente deletado dos importados.']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Erro ao salvar clientes importados.']);
@@ -42,12 +57,23 @@ if (count($clientesFiltradosImportados) < count($clientesImportados)) {
 }
 
 // === FLUXO 2: Deleta do clientes cadastrados ===
+
+// Captura o cliente antes de filtrar
+$itemDeletado = null;
+foreach ($clientesCadastrados as $cliente) {
+    if ($cliente['Codigo Cliente'] === $clienteId) {
+        $itemDeletado = $cliente;
+        break;
+    }
+}
+
 $clientesFiltradosCadastrados = array_filter($clientesCadastrados, function ($cliente) use ($clienteId) {
     return $cliente["Codigo Cliente"] !== $clienteId;
 });
 
 if (count($clientesFiltradosCadastrados) < count($clientesCadastrados)) {
     if (file_put_contents($clientesCadastradosPath, json_encode(array_values($clientesFiltradosCadastrados), JSON_PRETTY_PRINT))) {
+        registrarLog($usuario, 'cadastrar', 'clientes', 'deletar', "Deletou o cliente {$itemDeletado['nomeCompleto']}");
         echo json_encode(['success' => true, 'message' => 'Cliente deletado dos cadastrados.']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Erro ao salvar clientes cadastrados.']);

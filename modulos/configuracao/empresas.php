@@ -76,8 +76,8 @@
                             <td>${empresa.email}</td>
                             <td>${empresa.moeda}</td>
                             <td>
-                                <button class="btn btn-sm btn-warning btn-editar">✏️</button>
-                                <button class="btn btn-sm btn-danger btn-excluir">🗑️</button>
+                                <button class="btn btn-sm btn-warning btn-editar"><i class="bi bi-pencil-fill"></i></button>
+                                <button class="btn btn-sm btn-danger btn-excluir"><i class="bi bi-trash-fill"></i></button>
                             </td>
                         </tr>
                     `);

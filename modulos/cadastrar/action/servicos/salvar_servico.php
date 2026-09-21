@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 4) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 // Caminho para o arquivo JSON
 $arquivo = __DIR__ . '/servicos.json';
 
@@ -42,6 +47,7 @@ $servicos[] = [
 
 // Salva de volta no arquivo
 if (file_put_contents($arquivo, json_encode($servicos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    registrarLog($usuario, 'cadastrar', 'servicos', 'cadastrar', "Cadastrou o serviço {$nome}");
     echo json_encode(['success' => true]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Erro ao salvar o arquivo.']);

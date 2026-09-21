@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"] ?? "Desconhecido";
+
 $quadroPath = __DIR__ . '/quadro.json';
 
 // Verifica se os arquivos existem
@@ -24,19 +29,38 @@ if (!isset($data['id'])) {
 
 $id = $data['id'];
 $encontrado = false;
+$itemEditado = null;
+$detalhesMudanca = "";
 
 //Atualiza fatura do estoque selecionado ===
 
 foreach ($quadro as &$q) {
     if (($q['id'] ?? '') == $id) {
-        if (isset($data['nomeFatura']))       $q['nomeFatura']       = $data['nomeFatura'];
-        if (isset($data['cliente']))     $q['cliente']     = $data['cliente'];
-        if (isset($data['nomeConsolidado']))  $q['nomeConsolidado']  = $data['nomeConsolidado'];
-        if (isset($data['data'])) $q['data'] = $data['data'];
-        if (isset($data['ctr'])) $q['ctr'] = $data['ctr'];
-        if (isset($data['porto'])) $q['porto'] = $data['porto'];
-        if (isset($data['booking'])) $q['booking'] = $data['booking'];
-
+        $mudancas = [];
+        
+        $campos = [
+            'nomeFatura' => 'Fatura',
+            'cliente' => 'Cliente',
+            'nomeConsolidado' => 'Consolidado',
+            'data' => 'Estufagem',
+            'ctr' => 'CTR',
+            'porto' => 'Porto',
+            'booking' => 'Booking'
+        ];
+        
+        foreach ($campos as $key => $label) {
+            if (isset($data[$key])) {
+                $valorAntigo = $q[$key] ?? '';
+                $valorNovo = $data[$key];
+                if ($valorAntigo !== $valorNovo) {
+                    $mudancas[] = "$label: de '$valorAntigo' para '$valorNovo'";
+                    $q[$key] = $valorNovo;
+                }
+            }
+        }
+        
+        $itemEditado = $q;
+        $detalhesMudanca = !empty($mudancas) ? implode(' | ', $mudancas) : "Nenhuma alteração de valor";
         $encontrado = true;
         break;
     }
@@ -49,6 +73,7 @@ if (!$encontrado) {
 }
 
 if (file_put_contents($quadroPath, json_encode($quadro, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    registrarLog($usuario, 'faturas', 'quadro', 'editar', "Editou a fatura {$itemEditado['nomeFatura']} - {$itemEditado['cliente']}. Alterações: $detalhesMudanca");
     echo json_encode(['success' => true, 'message' => 'Quadro atualizado com sucesso.']);
 } else {
     echo json_encode(['success' => false, 'message' => 'Falha ao salvar o arquivo.']);

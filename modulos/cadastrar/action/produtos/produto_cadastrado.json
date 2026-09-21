@@ -1,0 +1,14 @@
+[
+    {
+        "codigo": "BM 621.314" /* Item */,
+        "descricao_pt": "Teste" /* Descricao */,
+        "descricao_en": "teste" /* Descricao Complementar */,
+        "descricao_es": "teste" /* Nao tem */,
+        "unidade": "UN"    /* UM */,
+        /* Preco Venda */
+        "ncm": "1111.11.11" /* NCM */,
+        "peso": 0   /* Peso Liquido */,
+        "preco": "" /* Vlr Total */,
+        "empresa_id": "1"
+    }
+]

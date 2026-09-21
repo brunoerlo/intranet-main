@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once dirname(__DIR__, 3) . '/logger.php';   
 
 $arquivo = __DIR__ . '/users.json';
 
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "role" => $user["role"],
                     "modulos" => $modulos
                 ];
-                
+                registrarLog($user['nome'], 'configuracao', 'login', 'entrar', "Fez Login");
                 header("Location: ../../../index.php");
                 exit();
             }

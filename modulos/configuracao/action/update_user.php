@@ -1,4 +1,9 @@
 <?php
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 $arquivo = __DIR__ . "/users.json";
 $usuarios = [];
 
@@ -14,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuarios = json_decode(file_get_contents($arquivo), true) ?? [];
     }
 
+    $itemEditado = null;
     foreach ($usuarios as &$user) {
         if ($user['id'] === $input['id']) {
             $user['nome'] = $input['nome'];
@@ -25,11 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 unset($user['modulos']);
             }
+
+            $itemEditado = $user;
             break;
         }
     }
+    unset($user);
 
     file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    registrarLog($usuario, 'configuracao', 'usuario', 'editar', "Editou o usuario {$itemEditado['nome']}");
     echo json_encode(["sucesso" => "Usuário atualizado com sucesso."]);
 } else {
     http_response_code(405);

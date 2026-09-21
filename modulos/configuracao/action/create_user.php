@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 $arquivo = __DIR__ . '/users.json';
 
 // Recebe os dados via POST
@@ -45,4 +50,5 @@ $usuarios[] = $novoUsuario;
 // Salva os dados no arquivo JSON
 file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT));
 
+registrarLog($usuario, 'configuracao', 'usuario', 'criar', "Criou o usuario {$novoUsuario['nome']}");
 echo json_encode(["success" => true, "id" => $id]);

@@ -22,6 +22,7 @@ $codigo = trim($data['codigo']);
 if (!str_starts_with($codigo, 'BM ')) {
     $codigo = 'BM ' . $codigo;
 }
+
 $data['codigo'] = $codigo;
 
 // Carrega o estoque existente
@@ -35,7 +36,7 @@ $jaExiste = false;
 
 // Procura um item com mesmo código E mesma fatura (nome)
 foreach ($estoque as &$item) {
-    if ($item['codigo'] === $data['codigo'] && $item['nome'] === $data['nome']) {
+    if ($item['codigo'] === $data['codigo'] && $item['nome'] === $data['nome'] && $item['cliente'] === $data['cliente']) {
         $item['quantidade'] = (int)$item['quantidade'] + (int)$data['quantidade'];
         $jaExiste = true;
         break;
@@ -51,7 +52,7 @@ if (!$jaExiste) {
 
 // Salva de volta no arquivo
 if (file_put_contents($file_path, json_encode($estoque, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-    registrarLog($usuario, 'faturas', 'cadastrar', "Cadastrou a fatura {$data['nome']} do estoque");  
+    registrarLog($usuario, 'faturas', 'estoque', 'cadastrar', "Cadastrou o item {$data['codigo']}(quantidade: {$data['quantidade']}) na fatura {$data['nome']} - {$data['cliente']} no estoque");  
     echo json_encode([
         'success' => true,
         'message' => $jaExiste ? 'Quantidade somada ao item existente.' : 'Novo item cadastrado.'

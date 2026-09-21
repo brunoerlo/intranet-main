@@ -427,9 +427,19 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+modulos - bkp1
 modulos/faturas/action/estoque.json
 modulos/faturas/action/faturas.json
 estudo.js
 modulos/configuracao/action/users.json
 modulos/configuracao/action/tokens.json
 modulos/cadastrar/action/clientes/clientes.json
+ARRUMAR.TXT
+modulos/faturas/action/quadro.json
+modulos/faturas/action/estoque.json
+modulos/configuracao/action/logs.json
+modulos/configuracao/action/empresas.json
+modulos/cadastrar/action/produtos/produto_cadastrado.json
+modulos/cadastrar/action/clientes/clientes.json
+modulos/cadastrar/action/clientes/clientes_cadastrados.json

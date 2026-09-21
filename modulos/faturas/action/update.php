@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"] ?? "Desconhecido";
+
 $estoquePath = __DIR__ . '/estoque.json';
 
 // Verifica se os arquivos existem
@@ -23,6 +28,7 @@ if (!isset($data['Codigo estoque'])) {
 
 $codigoEstoque = $data['Codigo estoque'];
 $encontrado = false;
+$itemEditado = null;
 
 //Atualiza fatura do estoque selecionado ===
 
@@ -33,6 +39,7 @@ foreach ($estoque as &$e) {
         if (isset($data['descricao']))  $e['descricao']  = $data['descricao'];
         if (isset($data['quantidade'])) $e['quantidade'] = $data['quantidade'];
 
+        $itemEditado = $e;
         $encontrado = true;
         break;
     }
@@ -45,6 +52,7 @@ if (!$encontrado) {
 }
 
 if (file_put_contents($estoquePath, json_encode($estoque, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    registrarLog($usuario, 'faturas', 'estoque', 'editar', "Editou o item {$itemEditado['codigo']} (quantidade: {$itemEditado['quantidade']}) na fatura {$itemEditado['nome']}");
     echo json_encode(['success' => true, 'message' => 'Estoque atualizado com sucesso.']);
 } else {
     echo json_encode(['success' => false, 'message' => 'Falha ao salvar o arquivo.']);

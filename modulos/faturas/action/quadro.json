@@ -3,21 +3,11 @@
         "nomeFatura": "001",
         "cliente": "JOHIL LETHEM",
         "nomeConsolidado": "-",
-        "data": "2026-09-18",
+        "data": "2026-09-19",
         "ctr": "40'",
         "porto": "NVT",
         "booking": "LA0514839",
         "id": 2
-    },
-    {
-        "nomeFatura": "450",
-        "cliente": "JOHIL",
-        "nomeConsolidado": "BAMBOZZI",
-        "data": "2026-09-21",
-        "ctr": "40'",
-        "porto": "ITJ",
-        "booking": "SAOG48476300",
-        "id": 3
     },
     {
         "nomeFatura": "003",
@@ -88,5 +78,16 @@
         "porto": "ITJ",
         "booking": "SEM BOOKING",
         "id": 11
+    },
+    {
+        "nomeFatura": "450",
+        "cliente": "JOHIL",
+        "nomeConsolidado": "BAMBOZZI",
+        "data": "21\/09\/2026",
+        "ctr": "40'",
+        "porto": "ITJ",
+        "booking": "SAOG48476300",
+        "consolidado": false,
+        "id": 12
     }
 ]

@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 4) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 $arquivo = __DIR__ . '/servicos.json';
 $input = json_decode(file_get_contents('php://input'), true);
 
@@ -17,6 +22,15 @@ if (!file_exists($arquivo)) {
 }
 
 $servicos = json_decode(file_get_contents($arquivo), true);
+
+$itemDeletado = null;
+foreach ($servicos as $s) {
+    if ($s['id'] === $id) {
+        $itemDeletado = $s;
+        break;
+    }
+}
+
 $filtrados = array_filter($servicos, fn($s) => $s['id'] !== $id);
 
 if (count($filtrados) === count($servicos)) {
@@ -25,4 +39,6 @@ if (count($filtrados) === count($servicos)) {
 }
 
 file_put_contents($arquivo, json_encode(array_values($filtrados), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+registrarLog($usuario, 'cadastrar', 'servicos', 'excluir', "Excluiu o serviço {$itemDeletado['nome']}");
 echo json_encode(['success' => true]);

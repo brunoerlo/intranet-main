@@ -1169,7 +1169,7 @@
         "cliente": "JOHIL",
         "codigo": "BM 135.010",
         "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
-        "quantidade": "40",
+        "quantidade": "5",
         "Codigo estoque": "cli_6a85a1b5354a15.08175790"
     },
     {
@@ -1305,7 +1305,7 @@
         "cliente": "JOHIL LETHEM",
         "codigo": "BM 621.104",
         "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
-        "quantidade": "10",
+        "quantidade": 17,
         "Codigo estoque": "cli_6a95bc6f426f13.11791877"
     },
     {
@@ -1745,7 +1745,7 @@
         "cliente": "JOHIL LETHEM",
         "codigo": "BM 621.314",
         "descricao": "CARCACA BD 8 EXT DISCO BORR B FIXO",
-        "quantidade": "20",
+        "quantidade": 21,
         "Codigo estoque": "cli_6a96de06a9d1f1.13277851"
     },
     {
@@ -1787,5 +1787,21 @@
         "descricao": "MARTELO MOINHO BM-3",
         "quantidade": "75",
         "Codigo estoque": "cli_6a9aad917e03e7.56901843"
+    },
+    {
+        "nome": "450",
+        "cliente": "JOHIL",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
+        "quantidade": "35",
+        "Codigo estoque": "cli_6aaa9ac9dd2b72.31419541"
+    },
+    {
+        "nome": "001",
+        "cliente": "BRUNO",
+        "codigo": "BM 621.314",
+        "descricao": "CARCACA BD 8 EXT DISCO BORR B FIXO",
+        "quantidade": "2",
+        "Codigo estoque": "cli_6aad1da56282c0.55955624"
     }
 ]

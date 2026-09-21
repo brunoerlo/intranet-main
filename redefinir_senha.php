@@ -45,12 +45,14 @@ if (!$tokens) {
 // Procura pelo token dentro do JSON
 $userId = null;
 
-foreach ($tokens as $id => $tokenList) {
-    foreach ($tokenList as $index => $data) {
-
-        if ($data === $token) {
+foreach ($tokens as $id => $data) {
+    if (isset($data['token']) && $data['token'] === $token) {
+        // Verifica se o token expirou
+        if (isset($data['expira']) && strtotime($data['expira']) > time()) {
             $userId = $id;
-            break 2; // Sai dos dois loops
+            break;
+        } else {
+            die('<div class="text-center mt-5 text-danger">Token expirado.</div>');
         }
     }
 }

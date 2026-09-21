@@ -123,8 +123,8 @@ ksort($tabela);
     </div>
 
     <!-- Tabela dinâmica -->
-    <div id="mostrar-impressao" style="overflow-x: auto;">
-        <table class="table table-bordered table-hover mt-2" id="tabela-estoque">
+    <div class="table-responsive shadow-sm rounded mb-3">
+        <table class="table table-striped table-hover table-bordered align-middle mb-0">
             <thead class="table-dark">
                 <tr id="tr-thead">
                     <th class="sortable">Código</th>
@@ -145,7 +145,7 @@ ksort($tabela);
                         'total'       => $totalGeral
                     ]), ENT_QUOTES, 'UTF-8');
                 ?>
-                    <tr class="table-warning linha-estoque" data-json="<?= $jsonAttr ?>" style="display:none;">
+                    <tr class="linha-estoque" data-json="<?= $jsonAttr ?>" style="display:none;">
                         <td><?= htmlspecialchars($dados['_codigo']) ?></td>
                         <td><?= htmlspecialchars($desc) ?></td>
                         <!-- colunas de quantidade inseridas via JS -->
@@ -343,7 +343,7 @@ ksort($tabela);
                 });
             })
 
-            let html = '<div class="table-responsive"><table class="table table-sm table-bordered">';
+            let html = '<div class="table-responsive shadow-sm rounded mb-3"><table class="table table-sm table-bordered">';
             html += '<thead class="table-light"><tr><th>Código</th><th>Descrição</th><th>Quantidade</th><th>Ações</th></tr></thead><tbody>';
 
 

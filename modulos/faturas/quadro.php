@@ -33,13 +33,122 @@ foreach ($lFaturas as $e) {
     }
 }
 ksort($faturas); // ordena pelas chaves (labels)
+
+$faturasJson = file_exists(__DIR__ . '/action/faturas.json') ? file_get_contents(__DIR__ . '/action/faturas.json') : '[]';
+$faturasHistorico = json_decode($faturasJson, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    $faturasHistorico = [];
+}
+$codigo = array_column($faturasHistorico, 'codigo');
+$noRepeat = array_unique($codigo);
 ?>
 
 <!-- Formulario -->
 <div class="container-fluid mt-4">
-    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuadro" aria-expanded="false" aria-controls="collapseQuadro">
-        <i class="fa-solid fa-plus"></i> Novo Cadastro
-    </button>
+
+    <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuadro" aria-expanded="false" aria-controls="collapseQuadro">
+            <i class="fa-solid fa-plus"></i> Novo Cadastro
+        </button>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaturas" aria-expanded="false" aria-controls="collapseFaturas">
+            <i class="fa-solid fa-clock-rotate-left"></i> Ver Histórico
+        </button>
+    </div>
+
+    <!-- Container Histórico Movid para Cima -->
+    <div class="collapse mb-4" id="collapseFaturas">
+        <div class="card card-body shadow-sm">
+            <h4 class="mb-3">HISTÓRICO</h4>
+            <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px;">
+                <!-- Filtro -->
+                <input type="text" class="form-control" id="filtro-faturas"
+                    style="width: 400px;" placeholder="Pesquisar por código ou descrição...">
+
+                <!-- Botões -->
+                <button class="btn btn-outline-secondary" id="btn-imprimir" title="Imprimir">
+                    🖨️ Imprimir
+                </button>
+
+                <!-- Exportar -->
+                <button class="btn btn-outline-secondary" id="btn-exportar" title="Exportar CSV">
+                    Exportar CSV
+                </button>
+            </div>
+            <!-- Tabela de Produtos -->
+            <div id="mostrar-impressao">
+
+                <div class="table-responsive shadow-sm rounded mb-4" style="max-width: 700px;">
+                    <table class="table table-striped table-hover table-bordered align-middle mb-0 pesquisa" id="tabela-produtos">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="menor sortable">Código</th>
+                                <th class="descricao sortable">Descrição</th>
+                                <th class="menor">UN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($noRepeat as $nome):
+                                $index = array_search($nome, array_column($faturasHistorico, 'codigo'));
+                                $descricao        = $faturasHistorico[$index]["descricao"]        ?? '';
+                                $unidadeMedida    = $faturasHistorico[$index]["unidadeMedida"]    ?? '';
+                            ?>
+                                <tr class=" linha-fatura" style="display: none;">
+                                    <td class="filtravel"><?= htmlspecialchars($nome) ?></td>
+                                    <td class="filtravel"><?= htmlspecialchars($descricao) ?></td>
+                                    <td><?= htmlspecialchars($unidadeMedida) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tabela de Faturas -->
+                <div class="table-responsive shadow-sm rounded mb-4" style="max-width: 700px;">
+                    <table class="table table-striped table-hover table-bordered align-middle mb-0" id="tabela-faturas">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="sortable">Fatura</th>
+                                <th class="menor">NF</th>
+                                <th class="menor">Taxa Dólar</th>
+                                <th class="menor">Quantidade</th>
+                                <th class="menor">Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($faturasHistorico as $f):
+                                $nome       = $f["nomeFatura"]    ?? '';
+                                $nf         = $f["notaFiscal"]    ?? '';
+                                $taxaDolar  = $f["txDolar"]       ?? '';
+                                $quantidade = $f["quantidade"]    ?? '';
+                                $preco      = $f["preco"]         ?? '';
+                                $tipo       = $f["tipo"]          ?? '';
+                                $codigo     = $f["codigo"]        ?? '';
+                                $descricao  = $f["descricao"]     ?? '';
+                                $jsonAttr   = htmlspecialchars(json_encode($f), ENT_QUOTES, 'UTF-8');
+                            ?>
+                                <tr data-json="<?= $jsonAttr ?>" class=" linha-fatura" style="display: none;">
+                                    <td><?= htmlspecialchars($nome) ?></td>
+                                    <td><?= htmlspecialchars($nf) ?></td>
+                                    <td><?= htmlspecialchars($taxaDolar) ?></td>
+                                    <td><?= htmlspecialchars($quantidade) ?></td>
+                                    <td class="filtravel" style="display: none;"><?= htmlspecialchars($codigo) ?></td>
+                                    <td class="filtravel" style="display: none;"><?= htmlspecialchars($descricao) ?></td>
+                                    <td><?= htmlspecialchars($preco) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="max-width: 700px;">
+                <p id="sem-resultados" class="text-muted text-center" style="display: none;">
+                    Nenhum item encontrado para essa busca.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="collapse" id="collapseQuadro">
         <div class="card card-body">
             <h4>NOVO CADASTRO</h4>
@@ -47,61 +156,45 @@ ksort($faturas); // ordena pelas chaves (labels)
                 <div class="tipo-grupo">
                     <div class="mb-3">
                         <label for="nomeFatura" class="form-label">Fatura</label>
-                        <select class="form-select" name="nomeFatura" id="nomeFatura" required>
-                            <option value="" disabled selected>Escolha a fatura</option>
-                            <?php foreach ($faturas as $label => $valorNome): ?>
-                                <option value="<?= htmlspecialchars($valorNome) ?>">
-                                    <?= htmlspecialchars($label) ?>
-                                </option>
-                            <?php endforeach; ?>
+                        <input type="text" class="form-control" name="nomeFatura" id="nomeFatura">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="cliente" class="form-label">Cliente</label>
+                            <div class="form-check">
+                                <label for="consolidado" class="form-check-label">Consolidado?</label>
+                                <input type="checkbox" class="form-check-input" name="consolidado" id="consolidado">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" name="cliente" id="cliente">
+                        <div id="divNomeConsolidado" class="mb-3 d-none">
+                            <label for="nomeConsolidado" class="form-label">Nome Consolidado</label>
+                            <input type="text" class="form-control" name="nomeConsolidado" id="nomeConsolidado">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Estufagem</label>
+                        <input type="text" class="form-control" name="data" id="data" placeholder="Ex: 14/09/2026 ou SET S4">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ctr" class="form-label">CTR</label>
+                        <select class="form-select" name="ctr" id="ctr" required>
+                            <option value="" disabled selected>Escolha forma de envio</option>
+                            <option value="20'">20'</option>
+                            <option value="40'">40'</option>
+                            <option value="Rodoviário">Rodoviário</option>
+                            <option value="Aéreo">Aéreo</option>
                         </select>
                     </div>
-                    <div class="d-none" id="dados">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <label for="cliente" class="form-label">Cliente</label>
-                                <div class="form-check">
-                                    <label for="consolidado" class="form-check-label">Consolidado?</label>
-                                    <input type="checkbox" class="form-check-input" name="consolidado" id="consolidado">
-                                </div>
-                            </div>
-                            <select class="form-select" name="cliente" id="cliente" required>
-                                <option value="" disabled selected>Escolha o Cliente</option>
-                                <?php foreach ($clientes as $c): ?>
-                                    <option value="<?= htmlspecialchars($c) ?>">
-                                        <?= htmlspecialchars($c) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div id="divNomeConsolidado" class="mb-3 d-none">
-                                <label for="nomeConsolidado" class="form-label">Nome Consolidado</label>
-                                <input type="text" class="form-control" name="nomeConsolidado" id="nomeConsolidado">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="data" class="form-label">Estufagem</label>
-                            <input type="text" class="form-control" name="data" id="data" placeholder="Ex: 14/09/2026 ou SET S4">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ctr" class="form-label">CTR</label>
-                            <select class="form-select" name="ctr" id="ctr" required>
-                                <option value="" disabled selected>Escolha forma de envio</option>
-                                <option value="20'">20'</option>
-                                <option value="40'">40'</option>
-                                <option value="Rodoviário">Rodoviário</option>
-                                <option value="Aéreo">Aéreo</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="porto" class="form-label">Porto</label>
-                            <input type="text" class="form-control" name="porto" id="porto" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="booking" class="form-label">Booking</label>
-                            <input type="text" class="form-control" name="booking" id="booking" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <div class="mb-3">
+                        <label for="porto" class="form-label">Porto</label>
+                        <input type="text" class="form-control" name="porto" id="porto" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="booking" class="form-label">Booking</label>
+                        <input type="text" class="form-control" name="booking" id="booking" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
             </form>
         </div>
@@ -109,14 +202,6 @@ ksort($faturas); // ordena pelas chaves (labels)
 </div>
 
 <script>
-    const faturaSelecionada = document.getElementById('nomeFatura')
-
-    faturaSelecionada.addEventListener('change', function() {
-        if (this.value !== '') {
-            document.getElementById('dados').classList.remove('d-none');
-        }
-    })
-
     const checkConsolidado = document.getElementById('consolidado');
     const divNomeConsolidado = document.getElementById('divNomeConsolidado');
     const inputNomeConsolidado = document.getElementById('nomeConsolidado');
@@ -165,14 +250,14 @@ ksort($faturas); // ordena pelas chaves (labels)
     })
 </script>
 
-<div>
-    <table class="table table-bordered table-hover mt-3">
+<div class="table-responsive shadow-sm rounded mb-3">
+    <table class="table table-striped table-hover table-bordered align-middle mb-0">
         <thead class="table-dark">
             <tr id="tr-thead" style="text-align: center;">
                 <th class="sortable" style="width: 120px;">Fatura</th>
                 <th>Cliente</th>
                 <th>Consolidado</th>
-                <th class="sortable">Estufagem</th>
+                <th class="sortable ordenaPadrao">Estufagem</th>
                 <th>CTR</th>
                 <th>Porto</th>
                 <th>Booking</th>
@@ -204,7 +289,7 @@ ksort($faturas); // ordena pelas chaves (labels)
                     }
                 }
             ?>
-                <tr data-json="<?= $jsonAttr ?>" class="table-warning">
+                <tr data-json="<?= $jsonAttr ?>" class="">
                     <td class="linhaQuadro"><?= htmlspecialchars($nome) ?></td>
                     <td class="linhaQuadro"><?= htmlspecialchars($cliente) ?></td>
                     <td class="linhaQuadro"><?= htmlspecialchars($consolidado) ?></td>
@@ -230,25 +315,11 @@ ksort($faturas); // ordena pelas chaves (labels)
                             <div class="row g-2 align-items-center">
                                 <div class="col-md-2">
                                     <label class="form-label mb-0 small">Fatura</label>
-                                    <select class="form-select form-select-sm" name="nomeFatura" required>
-                                        <option value="" disabled>Escolha</option>
-                                        <?php foreach ($faturas as $labelOpt => $valorNomeOpt): ?>
-                                            <option value="<?= htmlspecialchars($valorNomeOpt) ?>" <?= ($valorNomeOpt === $nome) ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($labelOpt) ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" class="form-control" name="nomeFatura" value="<?= htmlspecialchars($nomeFatura) ?>">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label mb-0 small">Cliente</label>
-                                    <select class="form-select form-select-sm" name="cliente" required>
-                                        <option value="" disabled>Escolha o Cliente</option>
-                                        <?php foreach ($clientes as $c): ?>
-                                            <option value="<?= htmlspecialchars($c) ?>" <?= ($c === $cliente) ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($c) ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" class="form-control" name="cliente" value="<?= htmlspecialchars($cliente) ?>">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label mb-0 small">Consolidado</label>
@@ -412,7 +483,7 @@ ksort($faturas); // ordena pelas chaves (labels)
                 const colIndex = Array.from(headerRow.children).indexOf(th);
 
                 // Pegar somente linhas de dados principais (não as edit-row)
-                const rows = Array.from(tbody.querySelectorAll('tr.table-warning'));
+                const rows = Array.from(tbody.querySelectorAll('tr:not(.edit-row)'));
 
                 // Determinar direção: none→asc, asc→desc, desc→asc
                 const currentOrder = th.dataset.order || 'none';
@@ -467,11 +538,9 @@ ksort($faturas); // ordena pelas chaves (labels)
                             const match = str.match(/S(\d+)/);
                             if (match) semana = parseInt(match[1], 10);
 
-                            // Assume 2026 como ano base para as semanas alinharem com as datas completas.
-                            // Isso converte "OUT S1" para 20261001, que será maior que 08/09/2026 (20260908)
-                            // Usa o ano corrente em vez de fixo, evita virar lixo ano que vem
                             const anoAtual = new Date().getFullYear();
-                            return anoAtual * 10000 + (num * 100) + semana;
+                            // +40 é para priorizar datas que já estão definidas
+                            return anoAtual * 10000 + (num * 100) + 40 + semana;
                         }
                     }
 
@@ -486,8 +555,15 @@ ksort($faturas); // ordena pelas chaves (labels)
                     // Ordenação por data (dd/mm/yyyy)
                     const dateA = obterValorOrdenacao(cellA);
                     const dateB = obterValorOrdenacao(cellB);
-                    if (dateA && dateB) {
-                        return newOrder === 'asc' ? dateA - dateB : dateB - dateA;
+                    if (dateA !== null || dateB !== null) {
+                        const valA = dateA || 0;
+                        const valB = dateB || 0;
+                        
+                        // Joga as faturas sem data de estufagem sempre para o final da lista
+                        if (valA === 0 && valB !== 0) return 1;
+                        if (valB === 0 && valA !== 0) return -1;
+                        
+                        return newOrder === 'asc' ? valA - valB : valB - valA;
                     }
 
                     // Comparação numérica
@@ -518,6 +594,14 @@ ksort($faturas); // ordena pelas chaves (labels)
             });
         }
     }
+
+    // Ordenar automaticamente a coluna com a classe 'ordenaPadrao' logo após carregar o componente
+    setTimeout(() => {
+        const colunaPadrao = document.querySelector('.ordenaPadrao');
+        if (colunaPadrao) {
+            colunaPadrao.click();
+        }
+    }, 0);
 </script>
 
 <?php
@@ -528,102 +612,9 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     $faturas = [];
 }
 
-$codigo = array_column($faturas, 'codigo');
-
+$codigo = array_column($faturasHistorico, 'codigo');
 $noRepeat = array_unique($codigo);
-
 ?>
-
-<div class="container mt-4">
-    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaturas" aria-expanded="false" aria-controls="collapseFaturas">
-        <i class="fa-solid fa-plus"></i> Ver Histórico
-    </button>
-    <div class="collapse" id="collapseFaturas">
-
-
-        <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px;">
-            <!-- Filtro -->
-            <input type="text" class="form-control" id="filtro-faturas"
-                style="width: 400px;" placeholder="Pesquisar por código ou descrição...">
-
-            <!-- Botões -->
-            <button class="btn btn-outline-secondary" id="btn-imprimir" title="Imprimir">
-                🖨️ Imprimir
-            </button>
-
-            <!-- Exportar -->
-            <button class="btn btn-outline-secondary" id="btn-exportar" title="Exportar CSV">
-                Exportar CSV
-            </button>
-        </div>
-        <!-- Tabela de Produtos -->
-        <div id="mostrar-impressao">
-
-            <table class="table table-bordered table-hover mt-3 pesquisa" id="tabela-produtos">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="menor sortable">Código</th>
-                        <th class="descricao sortable">Descrição</th>
-                        <th class="menor">UN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($noRepeat as $nome):
-                        $index = array_search($nome, array_column($faturas, 'codigo'));
-                        $descricao        = $faturas[$index]["descricao"]        ?? '';
-                        $unidadeMedida    = $faturas[$index]["unidadeMedida"]    ?? '';
-                    ?>
-                        <tr class="table-warning linha-fatura" style="display: none;">
-                            <td class="filtravel"><?= htmlspecialchars($nome) ?></td>
-                            <td class="filtravel"><?= htmlspecialchars($descricao) ?></td>
-                            <td><?= htmlspecialchars($unidadeMedida) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-
-            <!-- Tabela de Faturas -->
-            <table class="table table-bordered table-hover mt-3" id="tabela-faturas">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="sortable">Fatura</th>
-                        <th class="menor">NF</th>
-                        <th class="menor">Taxa Dólar</th>
-                        <th class="menor">Quantidade</th>
-                        <th class="menor">Preço</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($faturas as $f):
-                        $nome       = $f["nomeFatura"]    ?? '';
-                        $nf         = $f["notaFiscal"]    ?? '';
-                        $taxaDolar  = $f["txDolar"]       ?? '';
-                        $quantidade = $f["quantidade"]    ?? '';
-                        $preco      = $f["preco"]         ?? '';
-                        $tipo       = $f["tipo"]          ?? '';
-                        $codigo     = $f["codigo"]        ?? '';
-                        $descricao  = $f["descricao"]     ?? '';
-                        $jsonAttr   = htmlspecialchars(json_encode($f), ENT_QUOTES, 'UTF-8');
-                    ?>
-                        <tr data-json="<?= $jsonAttr ?>" class="table-warning linha-fatura" style="display: none;">
-                            <td><?= htmlspecialchars($nome) ?></td>
-                            <td><?= htmlspecialchars($nf) ?></td>
-                            <td><?= htmlspecialchars($taxaDolar) ?></td>
-                            <td><?= htmlspecialchars($quantidade) ?></td>
-                            <td class="filtravel" style="display: none;"><?= htmlspecialchars($codigo) ?></td>
-                            <td class="filtravel" style="display: none;"><?= htmlspecialchars($descricao) ?></td>
-                            <td><?= htmlspecialchars($preco) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-        <p id="sem-resultados" class="text-muted text-center" style="display: none;">
-            Nenhum item encontrado para essa busca.
-        </p>
-    </div>
-</div>
 
 <style>
     th.menor {
@@ -790,7 +781,7 @@ $noRepeat = array_unique($codigo);
     const btnExportar = document.getElementById('btn-exportar');
     if (btnExportar) {
         btnExportar.addEventListener('click', () => {
-            const faturasData = <?= json_encode($faturas) ?>;
+            const faturasData = <?= json_encode($faturasHistorico) ?>;
             if (!Array.isArray(faturasData) || faturasData.length === 0) {
                 alert('Nenhuma fatura disponível para exportar.');
                 return;
@@ -815,6 +806,7 @@ $noRepeat = array_unique($codigo);
             URL.revokeObjectURL(url);
         });
     }
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

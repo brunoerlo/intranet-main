@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 $data = $_POST;
 
 $arquivo = __DIR__ . '/empresas.json';
@@ -23,4 +28,5 @@ if ($resultado === false) {
     exit;
 }
 
+registrarLog($usuario, 'configuracao', 'empresa', 'criar', "Criou a empresa {$data['razaoSocial']}");
 echo json_encode(['status' => 'sucesso', 'mensagem' => 'Empresa criada com sucesso']);

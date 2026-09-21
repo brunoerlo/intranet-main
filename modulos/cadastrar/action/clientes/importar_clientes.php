@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 4) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] === UPLOAD_ERR_OK) {
     $csvFile = $_FILES['csvFile']['tmp_name'];
     $handle = fopen($csvFile, 'r');
@@ -41,7 +46,7 @@ if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] === UPLOAD_ERR_OK) 
         echo json_encode(['status' => 'error', 'error' => 'Falha ao salvar o arquivo JSON.']);
         exit();
     }
-
+    registrarLog($usuario, 'cadastrar', 'clientes', 'importar', "Importou o(s) cliente(s)");
     echo json_encode(['status' => 'success', 'message' => 'Clientes importados com sucesso.']);
 } else {
     echo json_encode(['status' => 'error', 'error' => 'Nenhum arquivo CSV foi enviado ou ocorreu um erro no upload.']);

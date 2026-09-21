@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"] ?? "Desconhecido";
+
 // Define o caminho para o arquivo JSON
 $file_path = __DIR__ . '/quadro.json';
 
@@ -31,6 +36,7 @@ if (isset($data['nomeFatura']) && isset($data['cliente']) && isset($data['porto'
         
     // Salva os dados de volta no arquivo JSON
     if (file_put_contents($file_path, json_encode($quadro, JSON_PRETTY_PRINT))) {
+        registrarLog($usuario, 'faturas', 'quadro', 'cadastrar', "Cadastrou uma fatura {$data['nomeFatura']} - {$data['cliente']} no quadro");    
         // Retorna uma resposta de sucesso
         echo json_encode([
             'success' => true,

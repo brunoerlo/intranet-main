@@ -1,5 +1,5 @@
 <?php
-$empresasPath = __DIR__ . '/../../configuracao/action/empresas.json';
+$empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
 $empresasMoeda = [];
 $empresasRazao = [];
 

@@ -2,6 +2,11 @@
 
 header('Content-Type: application/json');
 
+require_once dirname(__DIR__, 3) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"] ?? "Desconhecido";
+
 $faturasPath = __DIR__ . '/faturas.json';
 
 // Verifica se os arquivos existem
@@ -31,6 +36,7 @@ $faturasFiltrado = array_filter($faturas, function ($fatura) use ($faturaId) {
 
 if (count($faturasFiltrado) < count($faturas)) {
     if (file_put_contents($faturasPath, json_encode(array_values($faturasFiltrado), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+        registrarLog($usuario, 'faturas', 'lista', 'deletar', "Deletou a fatura {$data['nomeFatura']} do histórico");
         echo json_encode(['success' => true, 'message' => 'Fatura deletada do quadro.']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Erro ao salvar fatura.']);

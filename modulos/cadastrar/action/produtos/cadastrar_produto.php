@@ -4,8 +4,13 @@ function limpar($str) {
     return trim(htmlspecialchars($str));
 }
 
+require_once dirname(__DIR__, 4) . '/logger.php';   
+
+session_start();
+$usuario = $_SESSION["usuario"]["nome"];
+
 // Validação de campos obrigatórios (incluindo empresa_id)
-$campos = ['empresa_id', 'codigo', 'descricao_pt', 'descricao_en', 'descricao_es', 'unidade', 'ncm', 'peso', 'preco'];
+$campos = ['empresa_id', 'codigo', 'descricao_pt', 'descricao_en', 'descricao_es', 'unidade', 'ncm'];
 foreach ($campos as $campo) {
     if (empty($_POST[$campo])) {
         die("Erro: campo '$campo' é obrigatório.");
@@ -21,8 +26,8 @@ $produto = [
     'descricao_es' => limpar($_POST['descricao_es']),
     'unidade'      => limpar($_POST['unidade']),
     'ncm'          => limpar($_POST['ncm']),
-    'peso'         => floatval($_POST['peso']),
-    'preco'        => limpar($_POST['preco']),
+    'peso'         => floatval($_POST['peso']) ?? '-',
+    'preco'        => limpar($_POST['preco']) ?? '-',
 ];
 
 // Tratamento da imagem
@@ -65,6 +70,7 @@ $produtos[] = $produto;
 
 // Salva de volta no JSON
 if (file_put_contents($jsonPath, json_encode($produtos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    registrarLog($usuario, 'cadastrar', 'produtos', 'cadastrar', "Cadastrou o produto {$produto['descricao_pt']}");
     echo "Produto cadastrado com sucesso!";
 } else {
     echo "Erro ao salvar os dados no arquivo JSON.";
