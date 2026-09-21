@@ -443,3 +443,4 @@ modulos/configuracao/action/empresas.json
 modulos/cadastrar/action/produtos/produto_cadastrado.json
 modulos/cadastrar/action/clientes/clientes.json
 modulos/cadastrar/action/clientes/clientes_cadastrados.json
+modulos/configuracao/action/SMTP_config.json
