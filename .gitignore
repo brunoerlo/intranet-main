@@ -428,7 +428,6 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-modulos - bkp1
 modulos/faturas/action/estoque.json
 modulos/faturas/action/faturas.json
 estudo.js
@@ -444,3 +443,4 @@ modulos/cadastrar/action/produtos/produto_cadastrado.json
 modulos/cadastrar/action/clientes/clientes.json
 modulos/cadastrar/action/clientes/clientes_cadastrados.json
 modulos/configuracao/action/SMTP_config.json
+recuperacaoprodutos.json

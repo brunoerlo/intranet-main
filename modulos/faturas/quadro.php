@@ -3,12 +3,6 @@ $caminhoEstoque = './modulos/faturas/action/estoque.json';
 $listaFaturas = file_exists($caminhoEstoque) ? file_get_contents($caminhoEstoque) : '[]';
 $lFaturas = json_decode($listaFaturas, true) ?? [];
 
-$nomes = array_unique(array_column($lFaturas, 'nome'));
-asort($nomes);
-
-$clientes = array_unique(array_column($lFaturas, 'cliente'));
-asort($clientes);
-
 $caminhoQuadro = './modulos/faturas/action/quadro.json';
 $quadroJson = file_exists($caminhoQuadro) ? file_get_contents($caminhoQuadro) : '[]';
 $quadro = json_decode($quadroJson, true) ?? [];
@@ -39,26 +33,28 @@ $faturasHistorico = json_decode($faturasJson, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     $faturasHistorico = [];
 }
+
+sort($faturasHistorico);
 $codigo = array_column($faturasHistorico, 'codigo');
 $noRepeat = array_unique($codigo);
+        
 ?>
 
 <!-- Formulario -->
 <div class="container-fluid mt-4">
 
     <div class="d-flex gap-2 mb-3">
-        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuadro" aria-expanded="false" aria-controls="collapseQuadro">
+        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuadro" aria-expanded="false" aria-controls="collapseQuadro" id="botaoCadastro">
             <i class="fa-solid fa-plus"></i> Novo Cadastro
         </button>
-        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaturas" aria-expanded="false" aria-controls="collapseFaturas">
+        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaturas" aria-expanded="false" aria-controls="collapseFaturas" id="botaoHistorico">
             <i class="fa-solid fa-clock-rotate-left"></i> Ver Histórico
         </button>
     </div>
 
-    <!-- Container Histórico Movid para Cima -->
     <div class="collapse mb-4" id="collapseFaturas">
         <div class="card card-body shadow-sm">
-            <h4 class="mb-3">HISTÓRICO</h4>
+            <h4 class="mb-3">CONSULTA HISTÓRICO DE FATURAS</h4>
             <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px;">
                 <!-- Filtro -->
                 <input type="text" class="form-control" id="filtro-faturas"
@@ -78,7 +74,7 @@ $noRepeat = array_unique($codigo);
             <div id="mostrar-impressao">
 
                 <div class="table-responsive shadow-sm rounded mb-4" style="max-width: 700px;">
-                    <table class="table table-striped table-hover table-bordered align-middle mb-0 pesquisa" id="tabela-produtos">
+                    <table class="table table-hover table-bordered align-middle mb-0 pesquisa" id="tabela-produtos">
                         <thead class="table-dark">
                             <tr>
                                 <th class="menor sortable">Código</th>
@@ -104,7 +100,7 @@ $noRepeat = array_unique($codigo);
 
                 <!-- Tabela de Faturas -->
                 <div class="table-responsive shadow-sm rounded mb-4" style="max-width: 700px;">
-                    <table class="table table-striped table-hover table-bordered align-middle mb-0" id="tabela-faturas">
+                    <table class="table table-hover table-bordered align-middle mb-0" id="tabela-faturas">
                         <thead class="table-dark">
                             <tr>
                                 <th class="sortable">Fatura</th>
@@ -115,7 +111,7 @@ $noRepeat = array_unique($codigo);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($faturasHistorico as $f):
+                            <?php foreach (array_reverse($faturasHistorico) as $f):
                                 $nome       = $f["nomeFatura"]    ?? '';
                                 $nf         = $f["notaFiscal"]    ?? '';
                                 $taxaDolar  = $f["txDolar"]       ?? '';
@@ -126,7 +122,7 @@ $noRepeat = array_unique($codigo);
                                 $descricao  = $f["descricao"]     ?? '';
                                 $jsonAttr   = htmlspecialchars(json_encode($f), ENT_QUOTES, 'UTF-8');
                             ?>
-                                <tr data-json="<?= $jsonAttr ?>" class=" linha-fatura" style="display: none;">
+                                <tr data-json="<?= $jsonAttr ?>" class="linha-fatura" style="display: none;">
                                     <td><?= htmlspecialchars($nome) ?></td>
                                     <td><?= htmlspecialchars($nf) ?></td>
                                     <td><?= htmlspecialchars($taxaDolar) ?></td>
@@ -251,7 +247,7 @@ $noRepeat = array_unique($codigo);
 </script>
 
 <div class="table-responsive shadow-sm rounded mb-3">
-    <table class="table table-striped table-hover table-bordered align-middle mb-0">
+    <table class="table table-hover table-bordered align-middle mb-0">
         <thead class="table-dark">
             <tr id="tr-thead" style="text-align: center;">
                 <th class="sortable" style="width: 120px;">Fatura</th>
@@ -558,11 +554,11 @@ $noRepeat = array_unique($codigo);
                     if (dateA !== null || dateB !== null) {
                         const valA = dateA || 0;
                         const valB = dateB || 0;
-                        
+
                         // Joga as faturas sem data de estufagem sempre para o final da lista
                         if (valA === 0 && valB !== 0) return 1;
                         if (valB === 0 && valA !== 0) return -1;
-                        
+
                         return newOrder === 'asc' ? valA - valB : valB - valA;
                     }
 
@@ -685,6 +681,33 @@ $noRepeat = array_unique($codigo);
 </style>
 
 <script>
+    const btnCadastro = document.getElementById('botaoCadastro');
+    if (btnCadastro) {
+        btnCadastro.addEventListener('click', function() {
+            // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
+            if (this.style.backgroundColor === 'grey') {
+                this.style.backgroundColor = '';
+                this.style.borderColor = '';
+            } else {
+                this.style.backgroundColor = 'grey';
+                this.style.borderColor = 'grey';
+            }
+        });
+    }
+
+    const btnHistorico = document.getElementById('botaoHistorico');
+    if (btnHistorico) {
+        btnHistorico.addEventListener('click', function() {
+            if (this.style.backgroundColor === 'grey') {
+                this.style.backgroundColor = '';
+                this.style.borderColor = '';
+            } else {
+                this.style.backgroundColor = 'grey';
+                this.style.borderColor = 'grey';
+            }
+        });
+    }
+
     document.getElementById('filtro-faturas').addEventListener('input', function() {
         const termo = this.value.toLowerCase().trim();
         const linhas = document.querySelectorAll('.linha-fatura');
@@ -806,7 +829,6 @@ $noRepeat = array_unique($codigo);
             URL.revokeObjectURL(url);
         });
     }
-
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

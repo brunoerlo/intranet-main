@@ -1,9 +1,8 @@
 <?php
-session_start();
-$usuario = isset($_SESSION["usuario"]["nome"]);
 require_once __DIR__ . '/logger.php';  
-registrarLog($usuario, 'configuracao', 'logout', 'sair', "Fez Logout");
-session_destroy();
+session_start();
+registrarLog($_SESSION["usuario"]["nome"], 'configuracao', 'logout', 'sair', "Fez Logout");
 header("Location: /login.php");
+session_destroy();
 exit();
 ?>

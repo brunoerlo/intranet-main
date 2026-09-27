@@ -1,22 +1,12 @@
 [
     {
-        "nomeFatura": "001",
-        "cliente": "JOHIL LETHEM",
-        "nomeConsolidado": "-",
-        "data": "2026-09-19",
-        "ctr": "40'",
-        "porto": "NVT",
-        "booking": "LA0514839",
-        "id": 2
-    },
-    {
         "nomeFatura": "003",
         "cliente": "CAMILO",
         "nomeConsolidado": "-",
-        "data": "SET S4",
+        "data": "OUT S1",
         "ctr": "40'",
         "porto": "RIG",
-        "booking": "SEM BOOKING",
+        "booking": "-",
         "id": 4
     },
     {
@@ -33,20 +23,20 @@
         "nomeFatura": "452",
         "cliente": "JOHIL",
         "nomeConsolidado": "",
-        "data": "OUT S3",
+        "data": "03\/11\/2026",
         "ctr": "20'",
         "porto": "ITJ",
-        "booking": "SEM BOOKING",
+        "booking": "SAOG56896800",
         "id": 7
     },
     {
         "nomeFatura": "453",
         "cliente": "JOHIL",
         "nomeConsolidado": "",
-        "data": "OUT S4",
-        "ctr": "20'",
+        "data": "03\/11\/2026",
+        "ctr": "40'",
         "porto": "ITJ",
-        "booking": "SEM BOOKING",
+        "booking": "SAOG56433900",
         "id": 8
     },
     {
@@ -56,7 +46,7 @@
         "data": "DEZ S1",
         "ctr": "40'",
         "porto": "ITJ",
-        "booking": "SEM BOOKING",
+        "booking": "-",
         "id": 9
     },
     {
@@ -66,7 +56,7 @@
         "data": "DEZ S1",
         "ctr": "40'",
         "porto": "ITJ",
-        "booking": "SEM BOOKING",
+        "booking": "-",
         "id": 10
     },
     {
@@ -76,18 +66,7 @@
         "data": "DEZ S1",
         "ctr": "40'",
         "porto": "ITJ",
-        "booking": "SEM BOOKING",
+        "booking": "-",
         "id": 11
-    },
-    {
-        "nomeFatura": "450",
-        "cliente": "JOHIL",
-        "nomeConsolidado": "BAMBOZZI",
-        "data": "21\/09\/2026",
-        "ctr": "40'",
-        "porto": "ITJ",
-        "booking": "SAOG48476300",
-        "consolidado": false,
-        "id": 12
     }
 ]

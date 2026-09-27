@@ -138,63 +138,61 @@ if (file_exists($empresasPath)) {
 
 <!-- Importar -->
 
-<div class="container mt-5">
-
-    <div class="collapse" id="collapseImportarProduto">
-        <div class="card card-body">
-            <h2>Importar Produtos</h2>
-            <form id="importForm" class="mt-4" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="empresa_id" class="form-label">Selecione a Empresa:</label>
-                    <select class="form-select" name="empresa_id" id="empresa_id" required>
-                        <option value="">-- Selecione --</option>
-                        <?php
-                        $empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
-                        if (file_exists($empresasPath)) {
-                            $empresas = json_decode(file_get_contents($empresasPath), true);
-                            foreach ($empresas as $empresa) {
-                                echo "<option value=\"{$empresa['id']}\">{$empresa['razaoSocial']}</option>";
-                            }
+<div class="collapse" id="collapseImportarProduto">
+    <div class="card card-body">
+        <h2>Importar Produtos</h2>
+        <form id="importForm" class="mt-4" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="empresa_id" class="form-label">Selecione a Empresa:</label>
+                <select class="form-select" name="empresa_id" id="empresa_id" required>
+                    <option value="">-- Selecione --</option>
+                    <?php
+                    $empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
+                    if (file_exists($empresasPath)) {
+                        $empresas = json_decode(file_get_contents($empresasPath), true);
+                        foreach ($empresas as $empresa) {
+                            echo "<option value=\"{$empresa['id']}\">{$empresa['razaoSocial']}</option>";
                         }
-                        ?>
-                    </select>
-                </div>
+                    }
+                    ?>
+                </select>
+            </div>
 
-                <div class="mb-3">
-                    <label for="csvFile" class="form-label">Escolha o arquivo CSV:</label>
-                    <input class="form-control" type="file" name="csvFile" id="csvFile" accept=".csv" required>
-                </div>
+            <div class="mb-3">
+                <label for="csvFile" class="form-label">Escolha o arquivo CSV:</label>
+                <input class="form-control" type="file" name="csvFile" id="csvFile" accept=".csv" required>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Importar</button>
-            </form>
-            <div id="result" class="mt-3"></div>
-        </div>
-
-        <script>
-            document.getElementById('importForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const formData = new FormData(this);
-
-                fetch('./modulos/cadastrar/action/produtos/importar_produtos.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        const resultDiv = document.getElementById('result');
-                        if (data.status === 'success') {
-                            resultDiv.innerHTML = '<div class="alert alert-success">Produtos importados com sucesso!</div>';
-                        } else if (data.error) {
-                            resultDiv.innerHTML = `<div class="alert alert-danger">Erro ao importar Produtos: ${data.error}</div>`;
-                        }
-                    })
-                    .catch(error => {
-                        document.getElementById('result').innerHTML = `<div class="alert alert-danger">Erro ao importar Produtos: ${error.message}</div>`;
-                    });
-            });
-        </script>
+            <button type="submit" class="btn btn-primary">Importar</button>
+        </form>
+        <div id="result" class="mt-3"></div>
     </div>
+
+    <script>
+        document.getElementById('importForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('./modulos/cadastrar/action/produtos/importar_produtos.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    if (data.status === 'success') {
+                        resultDiv.innerHTML = '<div class="alert alert-success">Produtos importados com sucesso!</div>';
+                    } else if (data.error) {
+                        resultDiv.innerHTML = `<div class="alert alert-danger">Erro ao importar Produtos: ${data.error}</div>`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = `<div class="alert alert-danger">Erro ao importar Produtos: ${error.message}</div>`;
+                });
+        });
+    </script>
+</div>
 </div>
 
 <?php
@@ -254,72 +252,102 @@ if (!empty($produtosImportados)) {
     }
 }
 
-$limite = isset($_GET['limite']) ? intval($_GET['limite']) : 30; // 30 por padrão
-$paginaAtual = isset($_GET['p']) ? intval($_GET['p']) : 1;
+$filtroTipo = $_GET['tipoProduto'] ?? 'todos';
+$filtroEmpresaId = $_GET['filtro_empresa_id'] ?? '';
 
-$totalRegistros = count($todosProdutos);
-$totalPaginas = ceil($totalRegistros / $limite);
+$produtosFiltrados = array_filter($todosProdutos, function ($produto) use ($filtroTipo, $filtroEmpresaId) {
+    if (
+        $filtroTipo !== 'todos' && $filtroTipo !== '' &&
+        strtolower($produto['tipo'] ?? '') !== strtolower($filtroTipo)
+    ) return false;
 
-$offset = ($paginaAtual - 1) * $limite; // primeiro elemento
-$produtosPaginados = array_slice($todosProdutos, $offset, $limite);
+    if ($filtroEmpresaId !== '' && strtolower($produto['empresa_id'] ?? '') !== strtolower($filtroEmpresaId)) return false;
+
+    return true;
+});
+
+// Usa 'p' em vez de 'page' para não conflitar com rotas principais do sistema
+$p = max(1, intval($_GET['p'] ?? 1));
+
+// Captura o limite da URL, ou usa 30 como padrão
+$limitePorPagina = isset($_GET['limite']) ? max(1, intval($_GET['limite'])) : 30;
+
+$totalProdutos = count($produtosFiltrados);
+$totalPaginas = ceil($totalProdutos / $limitePorPagina);
+if ($p > $totalPaginas && $totalPaginas > 0) $p = $totalPaginas;
+
+$offset = ($p - 1) * $limitePorPagina;
+$produtosPaginados = array_slice($produtosFiltrados, $offset, $limitePorPagina);
+
+// Helper para gerar URL da paginação sem perder os filtros e rotas atuais
+function gerarUrlPaginacao($novaPagina)
+{
+    $params = $_GET;
+    $params['p'] = $novaPagina;
+    unset($params['modulo']);
+    unset($params['submodulo']);
+    return '?' . http_build_query($params);
+}
 ?>
 
 <div class="container py-5">
-
     <h1 class="mb-4 text-center">Lista de Produtos</h1>
     <!-- Formulário para selecionar tipo de produto e empresa lado a lado -->
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <select id="tipoProduto" class="form-select">
-                <option value="todos">Todos os Produtos</option>
-                <option value="cadastrados">Produtos Cadastrados</option>
-                <option value="importados">Produtos Importados</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <select class="form-select" name="filtro_empresa_id" id="filtro_empresa_id">
-                <option value="">-- Selecione a Empresa --</option>
-                <?php
-                $empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
-                if (file_exists($empresasPath)) {
-                    $empresas = json_decode(file_get_contents($empresasPath), true);
-                    foreach ($empresas as $empresa) {
-                        echo "<option value=\"{$empresa['id']}\">{$empresa['razaoSocial']}</option>";
+    <form id="formFiltroProdutos" method="GET" action="">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <select id="tipoProduto" name="tipoProduto" class="form-select">
+                    <option value="todos" <?= $filtroTipo === 'todos' ? 'selected' : '' ?>>Todos os Produtos</option>
+                    <option value="cadastrado" <?= $filtroTipo === 'cadastrado' ? 'selected' : '' ?>>Produtos Cadastrados</option>
+                    <option value="importado" <?= $filtroTipo === 'importado' ? 'selected' : '' ?>>Produtos Importados</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" name="filtro_empresa_id" id="filtro_empresa_id">
+                    <option value="">-- Selecione a Empresa --</option>
+                    <?php
+                    $empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
+                    if (file_exists($empresasPath)) {
+                        $empresas = json_decode(file_get_contents($empresasPath), true);
+                        foreach ($empresas as $empresa) {
+                            $selected = ($filtroEmpresaId == $empresa['id']) ? 'selected' : '';
+                            echo "<option value=\"{$empresa['id']}\" $selected>{$empresa['razaoSocial']}</option>";
+                        }
                     }
-                }
-                ?>
-            </select>
+                    ?>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select name="limite" id="seletorLimiteProdutos" class="form-select" style="width: 100px">
+                    <option value="15" <?= $limitePorPagina == 15 ? 'selected' : '' ?>>15</option>
+                    <option value="30" <?= $limitePorPagina == 30 ? 'selected' : '' ?>>30</option>
+                    <option value="50" <?= $limitePorPagina == 50 ? 'selected' : '' ?>>50</option>
+                    <option value="75" <?= $limitePorPagina == 75 ? 'selected' : '' ?>>75</option>
+                    <option value="100" <?= $limitePorPagina == 100 ? 'selected' : '' ?>>100</option>
+                </select>
+            </div>
         </div>
-        <div class="col-md-4">
-            <select name="seletorLimite" id="seletorLimite" class="form-select form-select-sm" style="width: 100px">
-                <option value="15" <?= $limite == 15 ? 'selected' : '' ?>>15</option>
-                <option value="30" <?= $limite == 30 ? 'selected' : '' ?>>30</option>
-                <option value="50" <?= $limite == 50 ? 'selected' : '' ?>>50</option>
-                <option value="75" <?= $limite == 75 ? 'selected' : '' ?>>75</option>
-                <option value="100" <?= $limite == 100 ? 'selected' : '' ?>>100</option>
-            </select>
-        </div>
-    </div>
+    </form>
 
-    <?php if (empty($produtosCadastrados) && empty($produtosImportados)): ?>
-        <div class="alert alert-warning text-center">Nenhum produto encontrado.</div>
-    <?php else: ?>
-        <div class="table-responsive shadow-sm rounded mb-3">
-            <table class="table table-striped table-hover table-bordered align-middle mb-0 text-center">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Item</th>
-                        <th>Descrição</th>
-                        <th>UM</th>
-                        <th>Preço Venda</th>
-                        <th>NCM</th>
-                        <th>Peso Líquido</th>
-                        <th>Valor Total</th>
-                        <th>Empresa</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <div class="table-responsive shadow-sm rounded mb-3">
+        <table class="table table-hover table-bordered align-middle mb-0 text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Item</th>
+                    <th>Descrição</th>
+                    <th>UM</th>
+                    <th>Preço Venda</th>
+                    <th>NCM</th>
+                    <th>Peso Líquido</th>
+                    <th>Valor Total</th>
+                    <th>Empresa</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($produtosFiltrados)): ?>
+                    <div class="alert alert-info text-mute text-center">Nenhum produto encontrado.</div>
+                <?php else: ?>
                     <?php foreach ($produtosPaginados as $produto): ?>
                         <tr class="<?= $produto['tipo'] === 'cadastrado' ? 'produto-cadastrado' : 'produto-importado' ?>"
                             data-empresa="<?= htmlspecialchars($produto['empresa_id']) ?>">
@@ -355,31 +383,32 @@ $produtosPaginados = array_slice($todosProdutos, $offset, $limite);
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                </tbody>
-            </table>
-            <nav>
-                <ul class="pagination justify-content-center mt-4">
-                    <!-- Botão Anterior -->
-                    <li class="page-item <?= ($paginaAtual <= 1) ? 'disabled' : '' ?>">
-                        <a class="page-link link-paginacao" href="?p=<?= max(1, $paginaAtual - 1) ?>&limite=<?= $limite ?>">Anterior</a>
-                    </li>
+            </tbody>
+        </table>
+        <!-- Navegação de Paginação -->
+        <nav>
+            <ul class="pagination justify-content-center mt-4">
+                <!-- Botão Anterior -->
+                <li class="page-item <?= ($p <= 1) ? 'disabled' : '' ?>">
+                    <a class="page-link link-paginacao" href="<?= gerarUrlPaginacao($p - 1) ?>">Anterior</a>
+                </li>
 
-                    <?php
+                <?php
                     $adjacents = 2; // Define a "janela" de botões (ex: 2 pra esquerda, 2 pra direita)
-                    $inicioLoop = max(1, $paginaAtual - $adjacents);
-                    $fimLoop = min($totalPaginas, $paginaAtual + $adjacents);
-                    
+                    $inicioLoop = max(1, $p - $adjacents);
+                    $fimLoop = min($totalPaginas, $p + $adjacents);
+
                     // Ajuste fino para sempre mostrar o mesmo tamanho de bloco se estiver no comecinho ou finalzinho
-                    if ($paginaAtual <= $adjacents) {
+                    if ($p <= $adjacents) {
                         $fimLoop = min($totalPaginas, 1 + ($adjacents * 2));
                     }
-                    if ($paginaAtual > $totalPaginas - $adjacents) {
+                    if ($p > $totalPaginas - $adjacents) {
                         $inicioLoop = max(1, $totalPaginas - ($adjacents * 2));
                     }
 
                     // Se a janela não começar no 1, mostra o 1 e os 3 pontinhos...
                     if ($inicioLoop > 1) {
-                        echo '<li class="page-item"><a class="page-link link-paginacao" href="?p=1&limite=' . $limite . '">1</a></li>';
+                        echo '<li class="page-item"><a class="page-link link-paginacao" href="' . gerarUrlPaginacao(1) . '">' . 1 . '</a></li>';
                         if ($inicioLoop > 2) {
                             echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                         }
@@ -387,108 +416,98 @@ $produtosPaginados = array_slice($todosProdutos, $offset, $limite);
 
                     // Laço de repetição só para a "janela" visível
                     for ($i = $inicioLoop; $i <= $fimLoop; $i++):
-                    ?>
-                        <li class="page-item <?= $i == $paginaAtual ? 'active' : '' ?>">
-                            <a class="page-link link-paginacao" href="?p=<?= $i ?>&limite=<?= $limite ?>">
-                                <?= $i ?>
-                            </a>
-                        </li>
-                    <?php endfor; ?>
+                ?>
+                    <li class="page-item <?= $i == $p ? 'active' : '' ?>">
+                        <a class="page-link link-paginacao" href="<?= gerarUrlPaginacao($i) ?>">
+                            <?= $i ?>
+                        </a>
+                    </li>
+                <?php endfor; ?>
 
-                    <?php
+                <?php
                     // Se a janela não terminar na última página, mostra os 3 pontinhos... e a última página
                     if ($fimLoop < $totalPaginas) {
                         if ($fimLoop < $totalPaginas - 1) {
                             echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                         }
-                        echo '<li class="page-item"><a class="page-link link-paginacao" href="?p=' . $totalPaginas . '&limite=' . $limite . '">' . $totalPaginas . '</a></li>';
+                        echo '<li class="page-item"><a class="page-link link-paginacao" href="' . gerarUrlPaginacao($totalPaginas) . '">' . $totalPaginas . '</a></li>';
                     }
-                    ?>
+                ?>
 
-                    <!-- Botão Próximo -->
-                    <li class="page-item <?= ($paginaAtual >= $totalPaginas) ? 'disabled' : '' ?>">
-                        <a class="page-link link-paginacao" href="?p=<?= min($totalPaginas, $paginaAtual + 1) ?>&limite=<?= $limite ?>">Próxima</a>
-                    </li>
-                </ul>
-                
-                <div class="text-center text-muted small mb-4">
-                    Exibindo página <?= $paginaAtual ?> de <?= $totalPaginas ?> (Total: <?= $totalRegistros ?> produtos)
-                </div>
-            </nav>
-        </div>
-    <?php endif; ?>
+                <!-- Botão Próximo -->
+                <li class="page-item <?= ($p >= $totalPaginas) ? 'disabled' : '' ?>">
+                    <a class="page-link link-paginacao" href="<?= gerarUrlPaginacao($p + 1) ?>">Próxima</a>
+                </li>
+            </ul>
+
+            <div class="text-center text-muted small mb-4">
+                Exibindo página <?= $p ?> de <?= $totalPaginas ?> (Total: <?= $totalProdutos ?> produtos)
+            </div>
+        </nav>
+    </div>
+<?php endif; ?>
 </div>
 
 <!-- JavaScript para filtragem sem recarregar a página -->
 <script>
-    function recarregarTabela(queryString) {
-        const contentDiv = document.getElementById("modulo-content");
-        const url = `carregar_modulo.php?modulo=cadastrar&submodulo=produtos&${queryString}`;
+    (function() {
+        window.recarregarTabelaProdutos = function(queryString) {
+            const contentDiv = document.getElementById("modulo-content");
+            if (!contentDiv) return;
 
-        fetch(url)
-            .then(response => response.text())
-            .then(html => {
-                const tempDiv = document.createElement("div");
-                tempDiv.innerHTML = html;
-                
-                const scripts = tempDiv.querySelectorAll("script");
-                scripts.forEach(s => s.remove());
-                
-                contentDiv.innerHTML = tempDiv.innerHTML;
-                
-                scripts.forEach(oldScript => {
-                    const newScript = document.createElement("script");
-                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                    newScript.textContent = oldScript.textContent;
-                    document.body.appendChild(newScript);
-                });
-            })
-            .catch(error => console.error("Erro ao carregar paginação:", error));
-    }
-    // Escuta a mudança na caixinha de limites (15, 30, 50)
-    document.getElementById('seletorLimite').addEventListener('change', function() {
-        const novoLimite = this.value;
-        // Quando muda o limite, voltamos para a página 1 por garantia
-        recarregarTabela(`p=1&limite=${novoLimite}`);
-    });
+            const url = `carregar_modulo.php?modulo=cadastrar&submodulo=produtos&${queryString}`;
 
-    // Escuta os cliques nos números da página
-    document.querySelectorAll('.link-paginacao').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parametros = this.getAttribute('href').split('?')[1];
-            recarregarTabela(parametros);
-        });
-    });
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = html;
 
-    function aplicarFiltrosProdutos() {
-        const tipoProdutoSelect = document.getElementById('tipoProduto');
-        const empresaSelect = document.getElementById('filtro_empresa_id');
+                    const scripts = [...tempDiv.querySelectorAll("script")];
+                    scripts.forEach(s => s.remove());
 
-        const tipoSelecionado = tipoProdutoSelect.value;
-        const empresaSelecionada = empresaSelect.value;
+                    contentDiv.innerHTML = tempDiv.innerHTML;
 
-        const linhas = document.querySelectorAll('tr[data-empresa]');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement("script");
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.textContent = oldScript.textContent;
+                        document.body.appendChild(newScript);
+                    });
+                })
+                .catch(error => console.error("Erro ao carregar paginação:", error));
+        };
 
-        linhas.forEach(function(linha) {
-            const classe = linha.classList.contains('produto-cadastrado') ? 'cadastrados' :
-                linha.classList.contains('produto-importado') ? 'importados' :
-                '';
-            const empresaId = linha.getAttribute('data-empresa');
-
-            const exibirTipo = (tipoSelecionado === 'todos') || (classe === tipoSelecionado);
-            const exibirEmpresa = (empresaSelecionada === '') || (empresaId === empresaSelecionada);
-
-            linha.style.display = (exibirTipo && exibirEmpresa) ? '' : 'none';
-        });
-    }
-
-    // Associa os eventos
-    document.addEventListener('change', function(e) {
-        if (e.target && (e.target.id === 'tipoProduto' || e.target.id === 'filtro_empresa_id')) {
-            aplicarFiltrosProdutos();
+        // Event delegation no document para os links de paginação
+        if (window._produtoPaginacaoHandler) {
+            document.removeEventListener('click', window._produtoPaginacaoHandler);
         }
-    });
+        window._produtoPaginacaoHandler = function(e) {
+            const link = e.target.closest('.link-paginacao');
+            if (!link) return;
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href && href.includes('?')) {
+                window.recarregarTabelaProdutos(href.split('?')[1]);
+            }
+        };
+        document.addEventListener('click', window._produtoPaginacaoHandler);
+
+        // Formulário de filtro — sempre resetando p=1 ao filtrar
+        const _formProdutos = document.getElementById('formFiltroProdutos');
+        if (_formProdutos) {
+            // Ouvir o evento de 'change' em qualquer select dentro do form
+            const selects = _formProdutos.querySelectorAll('select');
+            selects.forEach(select => {
+                select.addEventListener('change', function(e) {
+                    e.preventDefault();
+                    const params = new URLSearchParams(new FormData(_formProdutos));
+                    params.set('p', '1'); // volta pra página 1 ao aplicar filtro
+                    window.recarregarTabelaProdutos(params.toString());
+                });
+            });
+        }
+    })();
 
     // ⚠️ Chame `aplicarFiltrosProdutos()` manualmente após carregar dinamicamente os elementos,
     // por exemplo, após um fetch/ajax ou append via JS.

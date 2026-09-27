@@ -63,7 +63,7 @@ if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] === UPLOAD_ERR_OK) 
         exit();
     }
 
-    registrarLog($usuario, 'cadastrar', 'produtos', 'importar', "Importou o(s) produto(s)");
+    registrarLog($usuario, 'cadastrar', 'produtos', 'importar', "Importou produtos");
     echo json_encode(['status' => 'success', 'message' => 'produtos importados com sucesso.']);
 } else {
     echo json_encode(['status' => 'error', 'error' => 'Nenhum arquivo CSV foi enviado ou ocorreu um erro no upload.']);

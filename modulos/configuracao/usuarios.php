@@ -157,7 +157,7 @@ if (file_exists($arquivo)) {
 
 <div class="container mt-4">
     <h2 class="mb-4">Lista de Usuários</h2>
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -266,10 +266,6 @@ document.body.addEventListener("submit", function (event) {
         });
     }
 });
-
-
-
-
 
 function carregarModulosExistentes(callback) {
     fetch('./modulos/configuracao/action/listar_modulos.php')

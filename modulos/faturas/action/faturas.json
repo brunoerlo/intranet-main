@@ -27708,5 +27708,335 @@
         "unidadeMedida": "UN",
         "quantidade": "30",
         "preco": "22.34"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 600.300",
+        "descricao": "ABRACADEIRA 2 BRAZMIX",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "2.17"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 600.400",
+        "descricao": "ABRACADEIRA 2.1\/2 BRAZMIX",
+        "unidadeMedida": "UN",
+        "quantidade": "75",
+        "preco": "2.25"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 600.500",
+        "descricao": "ABRACADEIRA 3 BRAZMIX",
+        "unidadeMedida": "UN",
+        "quantidade": "250",
+        "preco": "2.25"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 600.600",
+        "descricao": "ABRACADEIRA 4 BRAZMIX",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "2.49"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 140.021",
+        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
+        "unidadeMedida": "UN",
+        "quantidade": "12",
+        "preco": "115.35"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 113.005",
+        "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
+        "unidadeMedida": "UN",
+        "quantidade": "40",
+        "preco": "168.13"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 622.005",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "246.17"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "unidadeMedida": "UN",
+        "quantidade": "35",
+        "preco": "242.56"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 621.306",
+        "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
+        "unidadeMedida": "UN",
+        "quantidade": "12",
+        "preco": "344.29"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "308.01"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 632.100",
+        "descricao": "CAVALETE BD 5 (2 ROL 6309) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "236.24"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 632.400",
+        "descricao": "CAVALETE BD 6 (3 ROL 6310) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "7",
+        "preco": "299.17"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 632.500",
+        "descricao": "CAVALETE BD 8 (3 ROL 6310) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "300.32"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 107.001",
+        "descricao": "CORREIA LAMINADA 8 LONAS PAN-100 2",
+        "unidadeMedida": "MT",
+        "quantidade": "500",
+        "preco": "10.53"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 127.010",
+        "descricao": "DISCO BORRACHA 3 E 4 D.E 270MM D.I 80MM",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "10.92"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 127.020",
+        "descricao": "DISCO BORRACHA 6 E 8 D.E 370MM D.I 80MM",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "15.20"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 621.105",
+        "descricao": "DISCO PROT CAV BD 6.1\/2 FUNDIDO",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "17.84"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 112.001",
+        "descricao": "EIXO CAV BD 5 (44x544 MM) 2 ROL 6309",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "40.23"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 112.003",
+        "descricao": "EIXO CAV BD 6 (44x560 MM) 3 ROL 6310",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "47.24"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 112.004",
+        "descricao": "EIXO CAV BD 8 (44x590 MM) 3 ROL 6310",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "48.45"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 628.101",
+        "descricao": "FLANGE AP GAXETA 5 COM ROSCA COMPL",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "23.39"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 628.201",
+        "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA COMPL",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "24.01"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 117.000",
+        "descricao": "GRAXEIRA BICO RETO 1\/8 R GAS",
+        "unidadeMedida": "UN",
+        "quantidade": "200",
+        "preco": "0.42"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 140.066 MI",
+        "descricao": "JUNTA MOTOR MWM X10 6 CIL SABO 80279",
+        "unidadeMedida": "JG",
+        "quantidade": "10",
+        "preco": "202.86"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 140.170 MI",
+        "descricao": "JUNTA MOTOR MWM 4.10 TCA 80277 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "5",
+        "preco": "149.33"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 140.064 MI",
+        "descricao": "JUNTA MOTOR MWM 229\/6 80105 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "5",
+        "preco": "98.61"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 140.063 MI",
+        "descricao": "JUNTA MOTOR MWM 229\/4  80108 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "20",
+        "preco": "73.26"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 140.062 MI",
+        "descricao": "JUNTA MOTOR MWM 229\/3  80120 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "10",
+        "preco": "78.89"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 124.014",
+        "descricao": "MARTELO MOINHO BM-3",
+        "unidadeMedida": "PR",
+        "quantidade": "75",
+        "preco": "41.98"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 124.016",
+        "descricao": "MARTELO MOINHO BMH-8 (JG C\/ 4 UN)",
+        "unidadeMedida": "JG",
+        "quantidade": "30",
+        "preco": "189.95"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 138.001",
+        "descricao": "MEIOES COLORIDOS PROFISSIONAL TAM39 A 42",
+        "unidadeMedida": "PR",
+        "quantidade": "1254",
+        "preco": "3.34"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 124.001",
+        "descricao": "MOINHO TRITURADOR MOD BM-3",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "3104.74"
+    },
+    {
+        "nomeFatura": "FAT 0450\/2026",
+        "notaFiscal": "NF 913",
+        "txDolar": "5.0912",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "35",
+        "preco": "137.03"
     }
 ]

@@ -92,7 +92,7 @@ if (file_exists($empresasPath)) {
     if (file_exists($arquivo)) {
         $servicos = json_decode(file_get_contents($arquivo), true);
         if (!empty($servicos)) {
-            echo '<table class="table table-striped mt-3">';
+            echo '<table class="table mt-3">';
             echo '<thead><tr><th>Empresa ID</th><th>Nome</th><th>Descrição</th><th>Preço</th><th>Ações</th></tr></thead><tbody>';
             foreach ($servicos as $servico) {
                 $moeda = $empresasMoeda[$servico['empresa_id']] ?? 'R$';

@@ -124,7 +124,7 @@ ksort($tabela);
 
     <!-- Tabela dinâmica -->
     <div class="table-responsive shadow-sm rounded mb-3">
-        <table class="table table-striped table-hover table-bordered align-middle mb-0">
+        <table class="table table-hover table-bordered align-middle text-center mb-0">
             <thead class="table-dark">
                 <tr id="tr-thead">
                     <th class="sortable">Código</th>
@@ -343,7 +343,7 @@ ksort($tabela);
                 });
             })
 
-            let html = '<div class="table-responsive shadow-sm rounded mb-3"><table class="table table-sm table-bordered">';
+            let html = '<div class="table-responsive shadow-sm rounded mb-3"><table class="table table-sm table-bordered text-center">';
             html += '<thead class="table-light"><tr><th>Código</th><th>Descrição</th><th>Quantidade</th><th>Ações</th></tr></thead><tbody>';
 
 

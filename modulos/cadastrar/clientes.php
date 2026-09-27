@@ -203,6 +203,7 @@
                         if (data.success) {
                             alert('Cliente cadastrado com sucesso!');
                             document.getElementById('formCadastroCliente').reset();
+                            location.reload();
                         } else {
                             alert('Erro ao cadastrar cliente: ' + data.error);
                         }
@@ -214,86 +215,9 @@
             });
         </script>
     </div>
-</div>
 
-<?php
-// Carrega os dados do JSON principal
-$clientesJson = file_get_contents(__DIR__ . '/action/clientes/clientes.json');
-$clientes = json_decode($clientesJson, true);
+    <!-- IMPORTAR -->
 
-// Carrega os dados importados de outro JSON
-$clientesImportadosJson = file_get_contents(__DIR__ . '/action/clientes/clientes_cadastrados.json');
-$clientesImportados = json_decode($clientesImportadosJson, true);
-
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo 'Erro ao decodificar clientes.json: ' . json_last_error_msg();
-}
-
-function formatarCpfCnpj($valor)
-{
-    $valor = preg_replace('/\D/', '', $valor);
-
-    if (strlen($valor) === 11) {
-        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $valor);
-    } elseif (strlen($valor) === 14) {
-        return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "$1.$2.$3/$4-$5", $valor);
-    } else {
-        return $valor;
-    }
-}
-function mostrar($tiposPermitidos, $tipoAtual)
-{
-    return in_array($tipoAtual, $tiposPermitidos) ? '' : 'style="display: none;"';
-}
-
-$todosClientes = [];
-
-if (!empty($clientes) && !empty($clientesImportados)) $todosClientes = array_merge($clientes, $clientesImportados);
-elseif (empty($clientes)) $todosClientes = $clientesImportados;
-elseif (empty($clientesImportados)) $todosClientes = $clientes;
-
-if (!empty($todosClientes)) {
-    foreach ($todosClientes as $c) {
-        $todosClientes = [
-            "tipo"              => $c['tipo']               ?? '-',
-            "cpf"               => $c['cpf']                ?? '-',
-            "nomeCompleto"      => $c['nomeCompleto']       ?? '-',
-            "cnpj"              => $c['cnpj']               ?? '-',
-            "razaoSocial"       => $c['razaoSocial']        ?? '-',
-            "inscricaoEstadual" => $c['inscricaoEstadual']  ?? '-',
-            "suframa"           => $c['suframa']            ?? '-',
-            "pessoaContao"      => $c['pessoaContato']      ?? '-',
-            "nomeImportador"    => $c['nomeImportador']     ?? '-',
-            "docImportador"     => $c['docImportador']      ?? '-',
-            "enderecoExterior"  => $c['enderecoExterior']   ?? '-',
-            "pais"              => $c['pais']               ?? '-',
-            "portoAeroporto"    => $c['portoOuAeroporto']   ?? '-',
-            "contatoAduaneiro"  => $c['contatoAduaneiro']   ?? '-',
-            "rua"               => $c['rua']                ?? '-',
-            "bairro"            => $c['bairro']             ?? '-',
-            "cidade"            => $c['cidade']             ?? '-',
-            "estado"            => $c['estado']             ?? '-',
-            "cep"               => $c['cep']                ?? '-',
-            "telefone"          => $c['telefone']           ?? '-',
-            "email"             => $c['email']              ?? '-'
-        ];
-    }
-}
-
-$limite = isset($_GET['limite']) ? intval($_GET['limite']) : 30; // 30 por padrão
-$paginaAtual = isset($_GET['p']) ? intval($_GET['p']) : 1;
-
-$totalRegistros = count($todosClientes);
-$totalPaginas = ceil($totalRegistros / $limite);
-
-$offset = ($paginaAtual - 1) * $limite; // primeiro elemento
-$produtosPaginados = array_slice($todosClientes, $offset, $limite);
-
-?>
-
-<!-- IMPORTAR -->
-
-<div class="container-fluid mt-5">
     <div class="collapse" id="collapseImportaCliente">
         <div class="card card-box">
             <h2>Importar Clientes</h2>
@@ -308,6 +232,7 @@ $produtosPaginados = array_slice($todosClientes, $offset, $limite);
         </div>
     </div>
 </div>
+
 
 <script>
     document.getElementById('importForm').addEventListener('submit', function(event) {
@@ -334,207 +259,314 @@ $produtosPaginados = array_slice($todosClientes, $offset, $limite);
     });
 </script>
 
-<div class="container mt-4" id="listagem-clientes">
-    <h2>Listagem de Clientes</h2>
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <label for="filtro-clientes" class="form-label">Mostrar:</label>
-            <select class="form-select w-auto d-inline-block" id="filtro-clientes">
-                <option value="todos">Todos os clientes</option>
-                <option value="importado">Cadastrados</option>
-                <option value="cadastrado" selected>Importados</option>
-            </select>
+<?php
+// Carrega os dados do JSON principal
+$clientesJson = file_get_contents(__DIR__ . '/action/clientes/clientes_cadastrados.json');
+$clientes = json_decode($clientesJson, true);
+
+// Carrega os dados importados de outro JSON
+$clientesImportadosJson = file_get_contents(__DIR__ . '/action/clientes/clientes.json');
+$clientesImportados = json_decode($clientesImportadosJson, true);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo 'Erro ao decodificar clientes.json: ' . json_last_error_msg();
+}
+
+function formatarCpfCnpj($valor)
+{
+    $valor = preg_replace('/\D/', '', $valor);
+
+    if (strlen($valor) === 11) {
+        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $valor);
+    } elseif (strlen($valor) === 14) {
+        return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "$1.$2.$3/$4-$5", $valor);
+    } else {
+        return $valor;
+    }
+}
+function mostrar($tiposPermitidos, $tipoAtual)
+{
+    return in_array($tipoAtual, $tiposPermitidos) ? '' : 'style="display: none;"';
+}
+
+$todosClientes = [];
+
+if (!empty($clientesImportados)) {
+    foreach ($clientesImportados as $c) {
+        $todosClientes[] = [
+            "tipo"              => $c['tipo']               ?? '-',
+            "origem"            => 'importado',
+            "cpf"               => $c['cpf']                ?? '-',
+            "nomeCompleto"      => $c['nomeCompleto']       ?? '-',
+            "cnpj"              => $c['cnpj']               ?? '-',
+            "razaoSocial"       => $c['razaoSocial']        ?? '-',
+            "inscricaoEstadual" => $c['inscricaoEstadual']  ?? '-',
+            "suframa"           => $c['suframa']            ?? '-',
+            "pessoaContato"     => $c['pessoaContato']      ?? '-',
+            "nomeImportador"    => $c['nomeImportador']     ?? '-',
+            "docImportador"     => $c['docImportador']      ?? '-',
+            "enderecoExterior"  => $c['enderecoExterior']   ?? '-',
+            "pais"              => $c['pais']               ?? '-',
+            "portoAeroporto"    => $c['portoOuAeroporto']   ?? '-',
+            "contatoAduaneiro"  => $c['contatoAduaneiro']   ?? '-',
+            "rua"               => $c['rua']                ?? '-',
+            "bairro"            => $c['bairro']             ?? '-',
+            "cidade"            => $c['cidade']             ?? '-',
+            "estado"            => $c['estado']             ?? '-',
+            "cep"               => $c['cep']                ?? '-',
+            "telefone"          => $c['telefone']           ?? '-',
+            "email"             => $c['email']              ?? '-',
+            "Codigo Cliente"    => $c['Codigo Cliente']
+        ];
+    }
+}
+
+if (!empty($clientes)) {
+    foreach ($clientes as $c) {
+        $todosClientes[] = [
+            "tipo"              => $c['tipo']               ?? '-',
+            "origem"            => 'cadastrado',
+            "cpf"               => $c['cpf']                ?? '-',
+            "nomeCompleto"      => $c['nomeCompleto']       ?? '-',
+            "cnpj"              => $c['cnpj']               ?? '-',
+            "razaoSocial"       => $c['razaoSocial']        ?? '-',
+            "inscricaoEstadual" => $c['inscricaoEstadual']  ?? '-',
+            "suframa"           => $c['suframa']            ?? '-',
+            "pessoaContato"     => $c['pessoaContato']      ?? '-',
+            "nomeImportador"    => $c['nomeImportador']     ?? '-',
+            "docImportador"     => $c['docImportador']      ?? '-',
+            "enderecoExterior"  => $c['enderecoExterior']   ?? '-',
+            "pais"              => $c['pais']               ?? '-',
+            "portoAeroporto"    => $c['portoOuAeroporto']   ?? '-',
+            "contatoAduaneiro"  => $c['contatoAduaneiro']   ?? '-',
+            "rua"               => $c['rua']                ?? '-',
+            "bairro"            => $c['bairro']             ?? '-',
+            "cidade"            => $c['cidade']             ?? '-',
+            "estado"            => $c['estado']             ?? '-',
+            "cep"               => $c['cep']                ?? '-',
+            "telefone"          => $c['telefone']           ?? '-',
+            "email"             => $c['email']              ?? '-',
+            "Codigo Cliente"    => $c['Codigo Cliente']
+        ];
+    }
+}
+
+$filtroOrigem = $_GET['origem'] ?? 'todos';
+
+$clientesFiltrados = array_filter($todosClientes, function ($clientes) use ($filtroOrigem) {
+    if (
+        $filtroOrigem !== '' && $filtroOrigem !== 'todos' &&
+        strtolower($clientes['origem'] ?? '') !== strtolower($filtroOrigem)
+    )
+        return false;
+
+    return true;
+});
+
+$p = max(1, intval($_GET['p'] ?? 1));
+$limitePorPagina = isset($_GET['limite']) ? max(1, intval($_GET['limite'])) : 30;
+
+$totalClientes = count($clientesFiltrados);
+$totalPaginas = ceil($totalClientes / $limitePorPagina);
+if ($p > $totalPaginas && $totalPaginas > 0) $p = $totalPaginas;
+
+$offset = ($p - 1) * $limitePorPagina; // primeiro elemento
+$clientesPaginados = array_slice($clientesFiltrados, $offset, $limitePorPagina);
+
+// Helper para gerar URL da paginação sem perder os filtros e rotas atuais
+function gerarUrlPaginacao($novaPagina)
+{
+    $params = $_GET;
+    $params['p'] = $novaPagina;
+    unset($params['modulo']);
+    unset($params['submodulo']);
+    return '?' . http_build_query($params);
+}
+?>
+
+<div class="container py-5" id="listagem-clientes">
+    <h1 class="mb-4 text-center">Lista de Clientes</h1>
+    <form id="formFiltroClientes" method="GET" action="">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <select name="origem" class="form-select" id="filtro-clientes">
+                    <option value="todos" <?= $filtroOrigem === 'todos' ? 'selected' : '' ?> selected>Todos os clientes</option>
+                    <option value="cadastrado" <?= $filtroOrigem === 'cadastrado' ? 'selected' : '' ?>>Cadastrados</option>
+                    <option value="importado" <?= $filtroOrigem === 'importado' ? 'selected' : '' ?>>Importados</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select name="limite" id="seletorLimiteClientes" class="form-select" style="width: 100px">
+                    <option value="15" <?= $limitePorPagina == 15 ? 'selected' : '' ?>>15</option>
+                    <option value="30" <?= $limitePorPagina == 30 ? 'selected' : '' ?>>30</option>
+                    <option value="50" <?= $limitePorPagina == 50 ? 'selected' : '' ?>>50</option>
+                    <option value="75" <?= $limitePorPagina == 75 ? 'selected' : '' ?>>75</option>
+                    <option value="100" <?= $limitePorPagina == 100 ? 'selected' : '' ?>>100</option>
+                </select>
+            </div>
         </div>
-        <div class="col-md-4">
-            <select name="seletorLimite" id="seletorLimite" class="form-select form-select-sm" style="width: 100px">
-                <option value="15" <?= $limite == 15 ? 'selected' : '' ?>>15</option>
-                <option value="30" <?= $limite == 30 ? 'selected' : '' ?>>30</option>
-                <option value="50" <?= $limite == 50 ? 'selected' : '' ?>>50</option>
-                <option value="75" <?= $limite == 75 ? 'selected' : '' ?>>75</option>
-                <option value="100" <?= $limite == 100 ? 'selected' : '' ?>>100</option>
-            </select>
-        </div>
-    </div>
-        <div class="table-responsive shadow-sm rounded mb-4">
-            <table class="table table-striped table-hover table-bordered align-middle mb-0" id="tabela-clientes">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="sortable" style="text-align: center;">Nome ou Razão Social</th>
-                        <th style="width: 150px !important; text-align: center;">CPF ou CNPJ</th>
-                        <th style="text-align: center;">Endereço</th>
-                        <th style="text-align: center;">Telefone</th>
-                        <th style="text-align: center;">E-mail</th>
-                        <th style="width: 50px; text-align: center;">Ações</th>
+    </form>
+    <div class="table-responsive shadow-sm rounded mb-4">
+        <table class="table table-hover table-bordered align-middle mb-0" id="tabela-clientes">
+            <thead class="table-dark">
+                <tr>
+                    <th class="sortable" style="text-align: center;">Nome ou Razão Social</th>
+                    <th style="width: 150px !important; text-align: center;">CPF ou CNPJ</th>
+                    <th style="text-align: center;">Endereço</th>
+                    <th style="text-align: center;">Telefone</th>
+                    <th style="text-align: center;">E-mail</th>
+                    <th style="width: 50px; text-align: center;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($clientesPaginados as $cliente):
+                    $nome = $cliente["tipo"] === "cpf" ? $cliente["nomeCompleto"] : ($cliente["tipo"] === "cnpj" ? $cliente["razaoSocial"] : $cliente["nomeImportador"]);
+                    $cpfCnpj = $cliente["tipo"] === "cpf" ? $cliente["cpf"] : ($cliente["tipo"] === "cnpj" ? $cliente["cnpj"] : $cliente["docImportador"]);
+                    $endereco = $cliente["tipo"] === "exterior" ? $cliente["enderecoExterior"] . ' - ' . $cliente["pais"] : $cliente["rua"] . ' - ' . $cliente["bairro"] . ' - ' . $cliente["cidade"] . '/' . $cliente["estado"] . ' - ' . $cliente["cep"];
+                    $telefone = $cliente["telefone"];
+                    $email = $cliente["email"];
+                    $clienteJson = htmlspecialchars(json_encode($cliente), ENT_QUOTES, 'UTF-8');
+                ?>
+                    <tr data-json="<?= $clienteJson ?>" class="cliente-<?=$cliente['origem']?>">
+                        <td class="copy-container">
+                            <?= trim($nome ?? '') ?>
+                            <span class="badge bg-primary ms-1"><?=ucfirst($cliente['origem'])?></span>
+                        </td>
+                        <td class="copy-container">
+                            <?= formatarCpfCnpj(trim($cpfCnpj ?? '')) ?>
+                        </td>
+                        <td class="copy-container">
+                            <?= trim($endereco ?? '') ?>
+                        </td>
+                        <td class="copy-container">
+                            <?= trim($telefone ?? '') ?>
+                        </td>
+                        <td class="copy-container">
+                            <?= trim($email ?? '') ?>
+                        </td>
+                        <td class="action-buttons">
+                            <div class="d-inline-flex gap-1">
+                                <button class="btn btn-warning btn-sm edit-cad-btn">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm delete-btn" data-id="<?= trim($cliente['Codigo Cliente'] ?? '') ?>">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- Primeiramente, renderiza os clientes importados -->
-                    <?php foreach ($clientesImportados as $clienteImportado):
-                        $nome = $clienteImportado["tipo"] === "cpf" ? $clienteImportado["nomeCompleto"] : $clienteImportado["razaoSocial"];
-                        $cpfCnpj = $clienteImportado["tipo"] === "cpf" ? $clienteImportado["cpf"] : $clienteImportado["cnpj"];
-                        $endereco = $clienteImportado["rua"] . ' - ' . $clienteImportado["bairro"] . ' - ' . $clienteImportado["cidade"] . '/' . $clienteImportado["estado"] . ' - ' . $clienteImportado["cep"];
-                        $telefone = $clienteImportado["telefone"];
-                        $email = $clienteImportado["email"];
-                        $clienteJsonImportado = htmlspecialchars(json_encode($clienteImportado), ENT_QUOTES, 'UTF-8');
+                    <?php
+                    $tipo = $cliente['tipo'];
                     ?>
-                        <tr data-json="<?= $clienteJsonImportado ?>" class="table-warning cliente-importado">
-                            <td class="small-text copy-container">
-                                <?= trim($nome) ?>
-                                <span class="badge bg-secondary ms-1">Cadastrado</span>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= formatarCpfCnpj($cpfCnpj) ?>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= $endereco ?>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= $telefone ?>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= $email ?>
-                            </td>
-                            <td class="action-buttons text-center">
-                                <div class="d-inline-flex gap-1">
-                                    <button class="btn btn-warning btn-sm edit-cad-btn">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-id="<?= htmlspecialchars($clienteImportado['Codigo Cliente'] ?? '') ?>">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+
+                    <tr class="edit-row" style="display: none;">
+                        <td colspan="6">
+                            <form class="edit-form">
+                                <input type="hidden" name="Codigo Cliente" value="<?= htmlspecialchars($cliente['Codigo Cliente'] ?? '') ?>">
+                                <input type="hidden" name="tipo" value="<?= $tipo ?>">
+
+                                <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>CPF:</label><input type="text" name="cpf" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>CNPJ:</label><input type="text" name="cnpj" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>Nome Completo:</label><input type="text" name="nomeCompleto" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Razão Social:</label><input type="text" name="razaoSocial" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Inscrição Estadual:</label><input type="text" name="inscricaoEstadual" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Suframa:</label><input type="text" name="suframa" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Pessoa de Contato:</label><input type="text" name="pessoaContato" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Nome do Importador:</label><input type="text" name="nomeImportador" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Documento do Importador:</label><input type="text" name="docImportador" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Endereço Exterior:</label><input type="text" name="enderecoExterior" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>País:</label><input type="text" name="pais" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Porto ou Aeroporto:</label><input type="text" name="portoOuAeroporto" class="form-control"></div>
+                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Contato Aduaneiro:</label><input type="text" name="contatoAduaneiro" class="form-control"></div>
+
+                                <!-- Campos comuns para todos os tipos -->
+                                <div class="mb-2"><label>Rua:</label><input type="text" name="rua" class="form-control"></div>
+                                <div class="mb-2"><label>Bairro:</label><input type="text" name="bairro" class="form-control"></div>
+                                <div class="mb-2"><label>Cidade:</label><input type="text" name="cidade" class="form-control"></div>
+                                <div class="mb-2"><label>Estado:</label><input type="text" name="estado" class="form-control"></div>
+                                <div class="mb-2"><label>CEP:</label><input type="text" name="cep" class="form-control"></div>
+                                <div class="mb-2"><label>Telefone:</label><input type="text" name="telefone" class="form-control"></div>
+                                <div class="mb-2"><label>E-mail:</label><input type="email" name="email" class="form-control"></div>
+
+                                <div class="mb-2">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button type="button" class="btn btn-secondary cancel-btn">Cancelar</button>
                                 </div>
-                            </td>
-                        </tr>
-                        <?php
-                        $tipo = $clienteImportado["tipo"];
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <!-- Navegação de Paginação -->
+        <nav>
+            <ul class="pagination justify-content-center mt-4">
+                <!-- Botão Anterior -->
+                <li class="page-item <?= ($p <= 1) ? 'disabled' : '' ?>">
+                    <a class="page-link link-paginacao" href="<?= gerarUrlPaginacao($p - 1) ?>">Anterior</a>
+                </li>
 
-                        ?>
+                <?php
+                $adjacents = 2; // Define a "janela" de botões (ex: 2 pra esquerda, 2 pra direita)
+                $inicioLoop = max(1, $p - $adjacents);
+                $fimLoop = min($totalPaginas, $p + $adjacents);
 
-                        <tr class="edit-row" style="display: none;">
-                            <td colspan="6">
-                                <form class="edit-form">
-                                    <input type="hidden" name="Codigo Cliente" value="<?= htmlspecialchars($clienteImportado['Codigo Cliente'] ?? '') ?>">
-                                    <input type="hidden" name="tipo" value="<?= $tipo ?>">
+                // Ajuste fino para sempre mostrar o mesmo tamanho de bloco se estiver no comecinho ou finalzinho
+                if ($p <= $adjacents) {
+                    $fimLoop = min($totalPaginas, 1 + ($adjacents * 2));
+                }
+                if ($p > $totalPaginas - $adjacents) {
+                    $inicioLoop = max(1, $totalPaginas - ($adjacents * 2));
+                }
 
-                                    <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>CPF:</label><input type="text" name="cpf" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>CNPJ:</label><input type="text" name="cnpj" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>Nome Completo:</label><input type="text" name="nomeCompleto" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Razão Social:</label><input type="text" name="razaoSocial" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Inscrição Estadual:</label><input type="text" name="inscricaoEstadual" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Suframa:</label><input type="text" name="suframa" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Pessoa de Contato:</label><input type="text" name="pessoaContato" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Nome do Importador:</label><input type="text" name="nomeImportador" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Documento do Importador:</label><input type="text" name="docImportador" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Endereço Exterior:</label><input type="text" name="enderecoExterior" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>País:</label><input type="text" name="pais" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Porto ou Aeroporto:</label><input type="text" name="portoOuAeroporto" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Contato Aduaneiro:</label><input type="text" name="contatoAduaneiro" class="form-control"></div>
+                // Se a janela não começar no 1, mostra o 1 e os 3 pontinhos...
+                if ($inicioLoop > 1) {
+                    echo '<li class="page-item"><a class="page-link link-paginacao" href="' . gerarUrlPaginacao(1) . '">' . 1 . '</a></li>';
+                    if ($inicioLoop > 2) {
+                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                    }
+                }
 
-                                    <!-- Campos comuns para todos os tipos -->
-                                    <div class="mb-2"><label>Rua:</label><input type="text" name="rua" class="form-control"></div>
-                                    <div class="mb-2"><label>Bairro:</label><input type="text" name="bairro" class="form-control"></div>
-                                    <div class="mb-2"><label>Cidade:</label><input type="text" name="cidade" class="form-control"></div>
-                                    <div class="mb-2"><label>Estado:</label><input type="text" name="estado" class="form-control"></div>
-                                    <div class="mb-2"><label>CEP:</label><input type="text" name="cep" class="form-control"></div>
-                                    <div class="mb-2"><label>Telefone:</label><input type="text" name="telefone" class="form-control"></div>
-                                    <div class="mb-2"><label>E-mail:</label><input type="email" name="email" class="form-control"></div>
+                // Laço de repetição só para a "janela" visível
+                for ($i = $inicioLoop; $i <= $fimLoop; $i++):
+                ?>
+                    <li class="page-item <?= $i == $p ? 'active' : '' ?>">
+                        <a class="page-link link-paginacao" href="<?= gerarUrlPaginacao($i) ?>">
+                            <?= $i ?>
+                        </a>
+                    </li>
+                <?php endfor; ?>
 
-                                    <div class="mb-2">
-                                        <button type="submit" class="btn btn-primary">Salvar</button>
-                                        <button type="button" class="btn btn-secondary cancel-btn">Cancelar</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
+                <?php
+                // Se a janela não terminar na última página, mostra os 3 pontinhos... e a última página
+                if ($fimLoop < $totalPaginas) {
+                    if ($fimLoop < $totalPaginas - 1) {
+                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                    }
+                    echo '<li class="page-item"><a class="page-link link-paginacao" href="' . gerarUrlPaginacao($totalPaginas) . '">' . $totalPaginas . '</a></li>';
+                }
+                ?>
 
-                    <?php endforeach; ?>
-                    <!-- Depois, renderiza os clientes normais -->
-                    <?php foreach ($clientes as $cliente):
-                        $nome = $cliente["tipo"] === "cpf" ? $cliente["nomeCompleto"] : ($cliente["tipo"] === "cnpj" ? $cliente["razaoSocial"] : $cliente["nomeImportador"]);
-                        $cpfCnpj = $cliente["tipo"] === "cpf" ? $cliente["cpf"] : ($cliente["tipo"] === "cnpj" ? $cliente["cnpj"] : $cliente["docImportador"]);
-                        $endereco = $cliente["tipo"] === "exterior" ? $cliente["enderecoExterior"] . ' - ' . $cliente["pais"] : $cliente["rua"] . ' - ' . $cliente["bairro"] . ' - ' . $cliente["cidade"] . '/' . $cliente["estado"] . ' - ' . $cliente["cep"];
-                        $telefone = $cliente["telefone"];
-                        $email = $cliente["email"];
-                        $clienteJson = htmlspecialchars(json_encode($cliente), ENT_QUOTES, 'UTF-8');
-                    ?>
-                        <tr data-json="<?= $clienteJson ?>" class="cliente-cadastrado">
-                            <td class="small-text copy-container">
-                                <?= trim($nome ?? '') ?>
-                                <span class="badge bg-primary ms-1">Importado</span>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= formatarCpfCnpj(trim($cpfCnpj ?? '')) ?>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= trim($endereco ?? '') ?>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= trim($telefone ?? '') ?>
-                            </td>
-                            <td class="small-text copy-container">
-                                <?= trim($email ?? '') ?>
-                            </td>
-                            <td class="action-buttons">
-                                <div class="d-inline-flex gap-1">
-                                    <button class="btn btn-warning btn-sm edit-cad-btn">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-id="<?= trim($cliente['Codigo Cliente'] ?? '') ?>">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
-                        $tipo = $cliente["tipo"];
-                        ?>
+                <!-- Botão Próximo -->
+                <li class="page-item <?= ($p >= $totalPaginas) ? 'disabled' : '' ?>">
+                    <a class="page-link link-paginacao" href="<?= gerarUrlPaginacao($p + 1) ?>">Próxima</a>
+                </li>
+            </ul>
 
-                        <tr class="edit-row" style="display: none;">
-                            <td colspan="6">
-                                <form class="edit-form">
-                                    <input type="hidden" name="Codigo Cliente" value="<?= htmlspecialchars($cliente['Codigo Cliente'] ?? '') ?>">
-                                    <input type="hidden" name="tipo" value="<?= $tipo ?>">
-
-                                    <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>CPF:</label><input type="text" name="cpf" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>CNPJ:</label><input type="text" name="cnpj" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>Nome Completo:</label><input type="text" name="nomeCompleto" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Razão Social:</label><input type="text" name="razaoSocial" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Inscrição Estadual:</label><input type="text" name="inscricaoEstadual" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Suframa:</label><input type="text" name="suframa" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Pessoa de Contato:</label><input type="text" name="pessoaContato" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Nome do Importador:</label><input type="text" name="nomeImportador" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Documento do Importador:</label><input type="text" name="docImportador" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Endereço Exterior:</label><input type="text" name="enderecoExterior" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>País:</label><input type="text" name="pais" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Porto ou Aeroporto:</label><input type="text" name="portoOuAeroporto" class="form-control"></div>
-                                    <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Contato Aduaneiro:</label><input type="text" name="contatoAduaneiro" class="form-control"></div>
-
-                                    <!-- Campos comuns para todos os tipos -->
-                                    <div class="mb-2"><label>Rua:</label><input type="text" name="rua" class="form-control"></div>
-                                    <div class="mb-2"><label>Bairro:</label><input type="text" name="bairro" class="form-control"></div>
-                                    <div class="mb-2"><label>Cidade:</label><input type="text" name="cidade" class="form-control"></div>
-                                    <div class="mb-2"><label>Estado:</label><input type="text" name="estado" class="form-control"></div>
-                                    <div class="mb-2"><label>CEP:</label><input type="text" name="cep" class="form-control"></div>
-                                    <div class="mb-2"><label>Telefone:</label><input type="text" name="telefone" class="form-control"></div>
-                                    <div class="mb-2"><label>E-mail:</label><input type="email" name="email" class="form-control"></div>
-
-                                    <div class="mb-2">
-                                        <button type="submit" class="btn btn-primary">Salvar</button>
-                                        <button type="button" class="btn btn-secondary cancel-btn">Cancelar</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+            <div class="text-center text-muted small mb-4">
+                Exibindo página <?= $p ?> de <?= $totalPaginas ?> (Total: <?= $totalClientes ?> clientes)
+            </div>
+        </nav>
     </div>
+</div>
 
-    <script>
-        function recarregarTabela(queryString) {
+<script>
+    (function() {
+        window.recarregarTabelaClientes = function(queryString) {
             const contentDiv = document.getElementById("modulo-content");
-            const url = `carregar_modulo.php?modulo=cadastrar&submodulo=produtos&${queryString}`;
+            if (!contentDiv) return;
+
+            const url = `carregar_modulo.php?modulo=cadastrar&submodulo=clientes&${queryString}`;
 
             fetch(url)
                 .then(response => response.text())
@@ -542,7 +574,7 @@ $produtosPaginados = array_slice($todosClientes, $offset, $limite);
                     const tempDiv = document.createElement("div");
                     tempDiv.innerHTML = html;
 
-                    const scripts = tempDiv.querySelectorAll("script");
+                    const scripts = [...tempDiv.querySelectorAll("script")];
                     scripts.forEach(s => s.remove());
 
                     contentDiv.innerHTML = tempDiv.innerHTML;
@@ -555,266 +587,247 @@ $produtosPaginados = array_slice($todosClientes, $offset, $limite);
                     });
                 })
                 .catch(error => console.error("Erro ao carregar paginação:", error));
+        };
+
+        // Event delegation no document para os links de paginação
+        if (window._clientesPaginacaoHandler) {
+            document.removeEventListener('click', window._clientesPaginacaoHandler);
         }
-        // Escuta a mudança na caixinha de limites (15, 30, 50)
-        document.getElementById('seletorLimite').addEventListener('change', function() {
-            const novoLimite = this.value;
-            // Quando muda o limite, voltamos para a página 1 por garantia
-            recarregarTabela(`p=1&limite=${novoLimite}`);
-        });
-
-        // Escuta os cliques nos números da página
-        document.querySelectorAll('.link-paginacao').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const parametros = this.getAttribute('href').split('?')[1];
-                recarregarTabela(parametros);
-            });
-        });
-
-        function aplicarFiltroClientes(valorSelecionado) {
-            const linhasImportadas = document.querySelectorAll('.cliente-importado');
-            const linhasCadastradas = document.querySelectorAll('.cliente-cadastrado');
-
-            if (valorSelecionado === 'todos') {
-                linhasImportadas.forEach(l => l.style.display = '');
-                linhasCadastradas.forEach(l => l.style.display = '');
-            } else if (valorSelecionado === 'importado') {
-                linhasImportadas.forEach(l => l.style.display = '');
-                linhasCadastradas.forEach(l => l.style.display = 'none');
-            } else if (valorSelecionado === 'cadastrado') {
-                linhasImportadas.forEach(l => l.style.display = 'none');
-                linhasCadastradas.forEach(l => l.style.display = '');
+        window._clientesPaginacaoHandler = function(e) {
+            const link = e.target.closest('.link-paginacao');
+            if (!link) return;
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href && href.includes('?')) {
+                window.recarregarTabelaClientes(href.split('?')[1]);
             }
-        }
+        };
+        document.addEventListener('click', window._clientesPaginacaoHandler);
 
-        // Espera o select existir e aplica o filtro
-        function inicializarFiltroClientes() {
-            const filtro = document.getElementById('filtro-clientes');
-            if (filtro) {
-                filtro.addEventListener('change', function() {
-                    aplicarFiltroClientes(this.value);
+        // Formulário de filtro — sempre resetando p=1 ao filtrar
+        const _formClientes = document.getElementById('formFiltroClientes');
+        if (_formClientes) {
+            // Ouvir o evento de 'change' em qualquer select dentro do form
+            const selects = _formClientes.querySelectorAll('select');
+            selects.forEach(select => {
+                select.addEventListener('change', function(e) {
+                    e.preventDefault();
+                    const params = new URLSearchParams(new FormData(_formClientes));
+                    params.set('p', '1'); // volta pra página 1 ao aplicar filtro
+                    window.recarregarTabelaClientes(params.toString());
                 });
+            });
+        }
+    })();
 
-                // Aplica filtro inicial (cadastrados por padrão)
-                aplicarFiltroClientes(filtro.value);
-            } else {
-                // Tenta de novo se o elemento ainda não estiver no DOM
-                setTimeout(inicializarFiltroClientes, 100); // tenta a cada 100ms
-            }
+    if (typeof ordemCrescente === 'undefined') {
+        var ordemCrescente = true;
+    }
+    document.querySelector('th.sortable').addEventListener('click', () => {
+        const tbody = document.querySelector('#tabela-clientes tbody');
+        const allRows = Array.from(tbody.querySelectorAll('tr'));
+
+        const rowPairs = [];
+        for (let i = 0; i < allRows.length; i += 2) {
+            rowPairs.push([allRows[i], allRows[i + 1]]);
         }
 
-        // Inicia o filtro manualmente
-        inicializarFiltroClientes();
-
-        if (typeof ordemCrescente === 'undefined') {
-            var ordemCrescente = true;
-        }
-        document.querySelector('th.sortable').addEventListener('click', () => {
-            const tbody = document.querySelector('#tabela-clientes tbody');
-            const allRows = Array.from(tbody.querySelectorAll('tr'));
-
-            const rowPairs = [];
-            for (let i = 0; i < allRows.length; i += 2) {
-                rowPairs.push([allRows[i], allRows[i + 1]]);
-            }
-
-            rowPairs.sort((a, b) => {
-                const nomeA = a[0].children[0].textContent.trim().toLowerCase();
-                const nomeB = b[0].children[0].textContent.trim().toLowerCase();
-                return ordemCrescente ? nomeA.localeCompare(nomeB) : nomeB.localeCompare(nomeA);
-            });
-
-            tbody.innerHTML = '';
-            rowPairs.forEach(pair => {
-                tbody.appendChild(pair[0]);
-                tbody.appendChild(pair[1]);
-            });
-
-            ordemCrescente = !ordemCrescente;
+        rowPairs.sort((a, b) => {
+            const nomeA = a[0].children[0].textContent.trim().toLowerCase();
+            const nomeB = b[0].children[0].textContent.trim().toLowerCase();
+            return ordemCrescente ? nomeA.localeCompare(nomeB) : nomeB.localeCompare(nomeA);
         });
 
-        // DELETE
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const clienteId = this.getAttribute('data-id');
-                if (confirm("Tem certeza que deseja excluir este cliente?")) {
-                    fetch('./modulos/cadastrar/action/clientes/deleteCliente.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                id: clienteId
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert('Cliente excluído com sucesso!');
-                                location.reload();
-                            } else {
-                                alert('Erro ao excluir o cliente: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erro:', error);
-                            alert('Ocorreu um erro ao tentar excluir o cliente.');
-                        });
-                }
-            });
+        tbody.innerHTML = '';
+        rowPairs.forEach(pair => {
+            tbody.appendChild(pair[0]);
+            tbody.appendChild(pair[1]);
         });
 
+        ordemCrescente = !ordemCrescente;
+    });
 
-        // EDITAR CLIENTE CADASTRADO
-        document.querySelectorAll('.edit-cad-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const row = this.closest('tr'); // linha com os dados
-                const editRow = row.nextElementSibling; // linha com o formulário de edição
-
-                if (editRow && editRow.classList.contains('edit-row')) {
-                    const form = editRow.querySelector('.edit-form');
-                    if (!form) return;
-
-                    // Pega os dados do atributo data-json da linha
-                    const jsonData = JSON.parse(row.getAttribute('data-json'));
-
-                    // Preenche dinamicamente todos os campos do formulário com os dados do JSON
-                    Object.keys(jsonData).forEach(key => {
-                        const input = form.elements[key];
-                        if (input) {
-                            input.value = jsonData[key] || '';
-                        }
-                    });
-
-                    // Exibe a linha do formulário
-                    editRow.style.display = 'table-row';
-                }
-            });
-        });
-
-        // CANCELAR EDIÇÃO
-        document.querySelectorAll('.cancel-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const editRow = this.closest('.edit-row');
-                editRow.style.display = 'none';
-            });
-        });
-
-        // SALVAR EDIÇÃO
-        document.querySelectorAll('.edit-form').forEach(form => {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-                fetch('./modulos/cadastrar/action/clientes/updateCliente.php', {
+    // DELETE
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const clienteId = this.getAttribute('data-id');
+            if (confirm("Tem certeza que deseja excluir este cliente?")) {
+                fetch('./modulos/cadastrar/action/clientes/deleteCliente.php', {
                         method: 'POST',
-                        body: formData
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: clienteId
+                        })
                     })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Cliente atualizado com sucesso!');
+                            alert('Cliente excluído com sucesso!');
                             location.reload();
                         } else {
-                            alert('Erro ao atualizar o cliente: ' + data.message);
+                            alert('Erro ao excluir o cliente: ' + data.message);
                         }
                     })
                     .catch(error => {
                         console.error('Erro:', error);
-                        alert('Ocorreu um erro ao tentar atualizar o cliente.');
+                        alert('Ocorreu um erro ao tentar excluir o cliente.');
                     });
-            });
-        });
-        document.addEventListener("click", function(e) {
-            const td = e.target.closest("td.copy-container");
-            if (td && td.closest("#tabela-clientes")) {
-                const text = td.innerText.trim();
-
-                // Copia para a área de transferência
-                const tempInput = document.createElement("input");
-                tempInput.value = text;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand("copy");
-                document.body.removeChild(tempInput);
-
-                // Cria o tooltip
-                const tooltip = document.createElement("div");
-                tooltip.innerText = "Copiado!";
-                tooltip.style.position = "absolute";
-                tooltip.style.background = "#000";
-                tooltip.style.color = "#fff";
-                tooltip.style.padding = "4px 8px";
-                tooltip.style.borderRadius = "4px";
-                tooltip.style.fontSize = "12px";
-                tooltip.style.zIndex = "9999";
-                tooltip.style.pointerEvents = "none";
-                tooltip.style.opacity = "0";
-                tooltip.style.transition = "opacity 0.3s ease";
-
-                document.body.appendChild(tooltip);
-
-                // Posição do tooltip (acima do td clicado)
-                const rect = td.getBoundingClientRect();
-                tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-                tooltip.style.top = `${rect.top + window.scrollY - 30}px`;
-
-                // Mostra e depois remove
-                requestAnimationFrame(() => {
-                    tooltip.style.opacity = "1";
-                });
-
-                setTimeout(() => {
-                    tooltip.style.opacity = "0";
-                    setTimeout(() => {
-                        tooltip.remove();
-                    }, 300);
-                }, 1200);
             }
         });
-    </script>
+    });
 
-    <style>
-        .small-text {
-            font-size: 10px;
-        }
 
-        .table th {
-            padding: 0.3rem;
-            vertical-align: middle;
-            text-align: center;
-        }
+    // EDITAR CLIENTE CADASTRADO
+    document.querySelectorAll('.edit-cad-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr'); // linha com os dados
+            const editRow = row.nextElementSibling; // linha com o formulário de edição
 
-        .action-buttons .btn {
-            padding: 0.2rem 0.4rem;
-        }
+            if (editRow && editRow.classList.contains('edit-row')) {
+                const form = editRow.querySelector('.edit-form');
+                if (!form) return;
 
-        .d-inline-flex.gap-1>* {
-            margin-right: 2px;
-        }
+                // Pega os dados do atributo data-json da linha
+                const jsonData = JSON.parse(row.getAttribute('data-json'));
 
-        .copy-container {
-            position: relative;
-            cursor: pointer;
-        }
+                // Preenche dinamicamente todos os campos do formulário com os dados do JSON
+                Object.keys(jsonData).forEach(key => {
+                    const input = form.elements[key];
+                    if (input) {
+                        input.value = jsonData[key] || '';
+                    }
+                });
 
-        .copy-icon {
-            margin-left: 5px;
-            color: #666;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
+                // Exibe a linha do formulário
+                editRow.style.display = 'table-row';
+            }
+        });
+    });
 
-        .copy-icon:hover {
-            color: #000;
-        }
+    // CANCELAR EDIÇÃO
+    document.querySelectorAll('.cancel-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const editRow = this.closest('.edit-row');
+            editRow.style.display = 'none';
+        });
+    });
 
-        th.sortable {
-            cursor: pointer;
-            user-select: none;
-        }
+    // SALVAR EDIÇÃO
+    document.querySelectorAll('.edit-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('./modulos/cadastrar/action/clientes/updateCliente.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Cliente atualizado com sucesso!');
+                        location.reload();
+                    } else {
+                        alert('Erro ao atualizar o cliente: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Ocorreu um erro ao tentar atualizar o cliente.');
+                });
+        });
+    });
+    document.addEventListener("click", function(e) {
+        const td = e.target.closest("td.copy-container");
+        if (td && td.closest("#tabela-clientes")) {
+            const text = td.innerText.trim();
 
-        label {
-            text-align: left
+            // Copia para a área de transferência
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            // Cria o tooltip
+            const tooltip = document.createElement("div");
+            tooltip.innerText = "Copiado!";
+            tooltip.style.position = "absolute";
+            tooltip.style.background = "#000";
+            tooltip.style.color = "#fff";
+            tooltip.style.padding = "4px 8px";
+            tooltip.style.borderRadius = "4px";
+            tooltip.style.fontSize = "12px";
+            tooltip.style.zIndex = "9999";
+            tooltip.style.pointerEvents = "none";
+            tooltip.style.opacity = "0";
+            tooltip.style.transition = "opacity 0.3s ease";
+
+            document.body.appendChild(tooltip);
+
+            // Posição do tooltip (acima do td clicado)
+            const rect = td.getBoundingClientRect();
+            tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+            tooltip.style.top = `${rect.top + window.scrollY - 30}px`;
+
+            // Mostra e depois remove
+            requestAnimationFrame(() => {
+                tooltip.style.opacity = "1";
+            });
+
+            setTimeout(() => {
+                tooltip.style.opacity = "0";
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 300);
+            }, 1200);
         }
-    </style>
+    });
+</script>
+
+<style>
+    .small-text {
+        font-size: 10px;
+    }
+
+    .table th {
+        padding: 0.3rem;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .action-buttons .btn {
+        padding: 0.2rem 0.4rem;
+    }
+
+    .d-inline-flex.gap-1>* {
+        margin-right: 2px;
+    }
+
+    .copy-container {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .copy-icon {
+        margin-left: 5px;
+        color: #666;
+        font-size: 0.8rem;
+        cursor: pointer;
+    }
+
+    .copy-icon:hover {
+        color: #000;
+    }
+
+    th.sortable {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    label {
+        text-align: left
+    }
+</style>

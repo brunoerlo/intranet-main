@@ -6,11 +6,9 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     $faturas = [];
 }
 
-$nomes = array_column($faturas, 'nomeFatura');
-$noRepeat = array_unique($nomes);
 ?>
 <div class="container-fluid mt-4">
-    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportar" aria-expanded="false" aria-controls="collapseImportar">
+    <button class="btn btn-success mb-3" id="btn-nova-importacao" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportar" aria-expanded="false" aria-controls="collapseImportar">
         <i class="fa-solid fa-plus"></i> Nova Importação
     </button>
     <div class="collapse" id="collapseImportar">
@@ -63,8 +61,8 @@ $noRepeat = array_unique($nomes);
         });
     </script>
 
-    <div class="table-responsive shadow-sm rounded mb-4">
-        <table class="table table-striped table-hover table-bordered align-middle mb-0" style="max-width: 700px; text-align: center;">
+    <div class="table-responsive shadow-sm rounded mb-4" id="main-table-container">
+        <table class="table table-hover table-bordered align-middle mb-0" id="tabela-faturas-unicas" style="max-width: 700px; text-align: center;">
             <thead class="table-dark">
                 <tr id="th-thead">
                     <th class="sortable" style="width: 120px;">Fatura</th>
@@ -85,7 +83,9 @@ $noRepeat = array_unique($nomes);
                     }
                 }
 
-                foreach ($faturasUnicas as $fatura): ?>
+                sort($faturasUnicas);
+
+                foreach (array_reverse($faturasUnicas) as $fatura): ?>
                     <tr class=" linha-fatura-unica">
                         <td class="clicavel"><?= htmlspecialchars($fatura['nomeFatura']) ?></td>
                         <td><?= htmlspecialchars($fatura['notaFiscal'] ?? '') ?></td>
@@ -106,7 +106,8 @@ $noRepeat = array_unique($nomes);
     <div class="modal fade" id="modalProdutosFatura" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header align-items-center">
+                    <img src="logo-black.png" class="print-logo" style="display: none; width: 150px; margin-right: 20px;" alt="Logo" />
                     <h5 class="modal-title">Produtos da fatura: <span id="modalNomeFatura"></span></h5>
                     <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir" style="margin-left: auto;">
                         🖨️ Imprimir
@@ -114,14 +115,14 @@ $noRepeat = array_unique($nomes);
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
-                <div class="modal-body" id="show-print">
-                    <table class="table table-striped table-hover table-bordered align-middle mb-0">
+                <div class="modal-body">
+                    <table class="table table-hover table-bordered align-middle text-center mb-0" id="show-print">
                         <thead class="table-dark">
                             <tr>
                                 <th style="width: 120px;" class="sortable">Código</th>
                                 <th class="sortable">Descrição</th>
                                 <th>UN</th>
-                                <th>Quantidade</th>
+                                <th>QTD</th>
                                 <th>Preço</th>
                             </tr>
                         </thead>
@@ -157,12 +158,13 @@ $noRepeat = array_unique($nomes);
 
         @media print {
 
-            /* Esconde o sidebar e a navbar */
+            /* Esconde o sidebar, navbar e os elementos da página de fundo */
             #sidebar,
             nav.navbar,
             #loading,
-            #tabela-faturas-unicas,
-            .container.mt-4 {
+            #main-table-container,
+            #btn-nova-importacao,
+            #collapseImportar {
                 display: none !important;
             }
 
@@ -203,9 +205,16 @@ $noRepeat = array_unique($nomes);
                 box-shadow: none !important;
             }
 
-            /* Esconde header do modal e botões na impressão */
-            .modal-header {
+            /* Esconde apenas os botões do modal na impressão */
+            .modal-header .btn {
                 display: none !important;
+            }
+            .modal-header {
+                border-bottom: none !important;
+                padding-bottom: 0 !important;
+            }
+            .print-logo {
+                display: block !important;
             }
 
             /* Tabela flui naturalmente entre páginas */
@@ -225,13 +234,6 @@ $noRepeat = array_unique($nomes);
 
             #show-print thead {
                 display: table-header-group !important;
-            }
-
-            /* Logo para impressão */
-            #image {
-                display: block !important;
-                position: static !important;
-                margin-bottom: 10px;
             }
         }
     </style>

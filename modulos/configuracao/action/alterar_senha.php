@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require_once dirname(__DIR__, 3) . '/logger.php';   
 
 session_start();
-$usuario = isset($_SESSION["usuario"]["nome"]) ? $_SESSION["usuario"]["nome"] : "Sistema (via token)";
+$usuario = $_SESSION["usuario"]["nome"];
 
 $usersFile = './users.json';
 $tokensFile = './tokens.json';
