@@ -4,10 +4,10 @@ header('Content-Type: application/json');
 
 $codigo = $_GET['codigo'] ?? '';
 
-$faturasJson = file_get_contents(__DIR__ . '/../../cadastrar/action/produtos/produtos.json');
-$faturas = json_decode($faturasJson, true);
+$produdosJson = file_get_contents(__DIR__ . '/../../cadastrar/action/produtos/produtos.json');
+$produdos = json_decode($produdosJson, true);
 
-foreach ($faturas as $produto) {
+foreach ($produdos as $produto) {
     if ($produto['Item'] == $codigo) {
         echo json_encode([
             'encontrado' => true,

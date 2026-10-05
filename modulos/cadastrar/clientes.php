@@ -9,6 +9,7 @@
             <i class="fa-solid fa-plus"></i> Importar Cliente
         </button>
     </div>
+
     <div class="collapse" id="collapseCadastroCliente">
         <div class="card card-body">
             <h4>NOVO CLIENTE</h4>
@@ -127,137 +128,29 @@
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                 </div>
-
-
                 <div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
             </form>
         </div>
-
-
-        <script>
-            document.getElementById('tipo').addEventListener('change', function() {
-                const tipo = this.value;
-
-                // Oculta todos os grupos inicialmente
-                document.querySelectorAll('.tipo-grupo').forEach(div => div.classList.add('d-none'));
-                document.getElementById('enderecoCampos').classList.add('d-none');
-                document.getElementById('camposContato').classList.add('d-none');
-
-                // Desativa todos os campos
-                document.querySelectorAll('#formCadastroCliente input, #formCadastroCliente textarea, #formCadastroCliente select').forEach(el => {
-                    if (el.id !== 'tipo') el.required = false;
-                });
-
-                if (tipo === 'cpf') {
-                    document.getElementById('grupo-cpf').classList.remove('d-none');
-                    document.getElementById('enderecoCampos').classList.remove('d-none');
-                    document.getElementById('camposContato').classList.remove('d-none');
-                    document.getElementById('cpf').required = true;
-                    document.getElementById('nomeCompleto').required = true;
-                } else if (tipo === 'cnpj') {
-                    document.getElementById('grupo-cnpj').classList.remove('d-none');
-                    document.getElementById('enderecoCampos').classList.remove('d-none');
-                    document.getElementById('camposContato').classList.remove('d-none');
-                    ['cnpj', 'razaoSocial', 'inscricaoEstadual', 'pessoaContato'].forEach(id => {
-                        document.getElementById(id).required = true;
-                    });
-                } else if (tipo === 'exterior') {
-                    document.getElementById('grupo-exterior').classList.remove('d-none');
-                    document.getElementById('camposContato').classList.remove('d-none');
-                    ['nomeImportador', 'docImportador', 'enderecoExterior', 'pais'].forEach(id => {
-                        document.getElementById(id).required = true;
-                    });
-                }
-
-                // Campos comuns
-                if (tipo) {
-                    document.getElementById('telefone').required = true;
-                    document.getElementById('email').required = true;
-                }
-            });
-
-            document.getElementById('formCadastroCliente').addEventListener('submit', function(event) {
-                event.preventDefault(); // Evita o envio tradicional do formulário
-
-                // Coleta os dados do formulário
-                const formData = new FormData(this);
-
-                // Converte os dados do FormData para um objeto simples
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
-                });
-
-                // Envia os dados via AJAX
-                fetch('./modulos/cadastrar/action/clientes/cadastrarCliente.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Cliente cadastrado com sucesso!');
-                            document.getElementById('formCadastroCliente').reset();
-                            location.reload();
-                        } else {
-                            alert('Erro ao cadastrar cliente: ' + data.error);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Ocorreu um erro ao cadastrar o cliente.');
-                    });
-            });
-        </script>
-    </div>
-
-    <!-- IMPORTAR -->
-
-    <div class="collapse" id="collapseImportaCliente">
-        <div class="card card-box">
-            <h2>Importar Clientes</h2>
-            <form id="importForm" class="mt-4" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="csvFile" class="form-label">Escolha o arquivo CSV:</label>
-                    <input class="form-control" type="file" name="csvFile" id="csvFile" accept=".csv" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Importar</button>
-            </form>
-            <div id="result" class="mt-3"></div>
-        </div>
     </div>
 </div>
 
+<!-- IMPORTAR -->
 
-<script>
-    document.getElementById('importForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-
-        fetch('./modulos/cadastrar/action/clientes/importar_clientes.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultDiv = document.getElementById('result');
-                if (data.status === 'success') {
-                    resultDiv.innerHTML = '<div class="alert alert-success">Clientes importados com sucesso!</div>';
-                } else if (data.error) {
-                    resultDiv.innerHTML = `<div class="alert alert-danger">Erro ao importar clientes: ${data.error}</div>`;
-                }
-            })
-            .catch(error => {
-                document.getElementById('result').innerHTML = `<div class="alert alert-danger">Erro ao importar clientes: ${error.message}</div>`;
-            });
-    });
-</script>
+<div class="collapse" id="collapseImportaCliente">
+    <div class="card card-body">
+        <h2>Importar Clientes</h2>
+        <form id="importFormClientes" class="mt-4" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="csvFile" class="form-label">Escolha o arquivo CSV:</label>
+                <input class="form-control" type="file" name="csvFile" id="csvFile" accept=".csv" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Importar</button>
+        </form>
+        <div id="result" class="mt-3"></div>
+    </div>
+</div>
 
 <?php
 // Carrega os dados do JSON principal
@@ -283,10 +176,6 @@ function formatarCpfCnpj($valor)
     } else {
         return $valor;
     }
-}
-function mostrar($tiposPermitidos, $tipoAtual)
-{
-    return in_array($tipoAtual, $tiposPermitidos) ? '' : 'style="display: none;"';
 }
 
 $todosClientes = [];
@@ -352,13 +241,24 @@ if (!empty($clientes)) {
 }
 
 $filtroOrigem = $_GET['origem'] ?? 'todos';
+$termoBusca = $_GET['termo_busca'] ?? '';
 
-$clientesFiltrados = array_filter($todosClientes, function ($clientes) use ($filtroOrigem) {
+$clientesFiltrados = array_filter($todosClientes, function ($clientes) use ($filtroOrigem, $termoBusca) {
     if (
         $filtroOrigem !== '' && $filtroOrigem !== 'todos' &&
         strtolower($clientes['origem'] ?? '') !== strtolower($filtroOrigem)
-    )
-        return false;
+    ) return false;
+
+    $tipo = $clientes['tipo'];
+
+    if ($termoBusca !== '') {
+        if ($tipo === 'cpf') {$descricao = $clientes['nomeCompleto']; $codigo = $clientes['cpf']; }
+        elseif ($tipo === 'cnpj') {$descricao = $clientes['razaoSocial']; $codigo = $clientes['cnpj']; }
+        elseif ($tipo === 'exterior') {$descricao = $clientes['nomeImportador']; $codigo = $clientes['docImportador']; }
+        
+        if (stripos($codigo, $termoBusca) === false && stripos($descricao, $termoBusca) === false)
+            return false;
+    }
 
     return true;
 });
@@ -384,38 +284,56 @@ function gerarUrlPaginacao($novaPagina)
 }
 ?>
 
-<div class="container py-5" id="listagem-clientes">
+<div class="container py-3" id="listagem-clientes">
     <h1 class="mb-4 text-center">Lista de Clientes</h1>
-    <form id="formFiltroClientes" method="GET" action="">
-        <div class="row mb-4">
+    <form id="formFiltroClientes" method="GET" action="" class="bg-white p-3 rounded shadow-sm mb-4 border">
+        <div class="row g-3 align-items-center">
             <div class="col-md-4">
-                <select name="origem" class="form-select" id="filtro-clientes">
-                    <option value="todos" <?= $filtroOrigem === 'todos' ? 'selected' : '' ?> selected>Todos os clientes</option>
-                    <option value="cadastrado" <?= $filtroOrigem === 'cadastrado' ? 'selected' : '' ?>>Cadastrados</option>
-                    <option value="importado" <?= $filtroOrigem === 'importado' ? 'selected' : '' ?>>Importados</option>
-                </select>
+                <div class="form-floating">
+                    <select name="origem" class="form-select" id="filtro-origem">
+                        <option value="todos" <?= $filtroOrigem === 'todos' ? 'selected' : '' ?>>Todos os Clientes</option>
+                        <option value="cadastrado" <?= $filtroOrigem === 'cadastrado' ? 'selected' : '' ?>>Cadastrados</option>
+                        <option value="importado" <?= $filtroOrigem === 'importado' ? 'selected' : '' ?>>Importados</option>
+                    </select>
+                    <label for="filtro-origem"><i class="fa-solid fa-users text-primary"></i> Origem</label>
+                </div>
             </div>
             <div class="col-md-4">
-                <select name="limite" id="seletorLimiteClientes" class="form-select" style="width: 100px">
-                    <option value="15" <?= $limitePorPagina == 15 ? 'selected' : '' ?>>15</option>
-                    <option value="30" <?= $limitePorPagina == 30 ? 'selected' : '' ?>>30</option>
-                    <option value="50" <?= $limitePorPagina == 50 ? 'selected' : '' ?>>50</option>
-                    <option value="75" <?= $limitePorPagina == 75 ? 'selected' : '' ?>>75</option>
-                    <option value="100" <?= $limitePorPagina == 100 ? 'selected' : '' ?>>100</option>
-                </select>
+                <div class="form-floating">
+                    <select name="limite" id="seletorLimiteClientes" class="form-select">
+                        <option value="15" <?= $limitePorPagina == 15 ? 'selected' : '' ?>>15 itens</option>
+                        <option value="30" <?= $limitePorPagina == 30 ? 'selected' : '' ?>>30 itens</option>
+                        <option value="50" <?= $limitePorPagina == 50 ? 'selected' : '' ?>>50 itens</option>
+                        <option value="75" <?= $limitePorPagina == 75 ? 'selected' : '' ?>>75 itens</option>
+                        <option value="100" <?= $limitePorPagina == 100 ? 'selected' : '' ?>>100 itens</option>
+                    </select>
+                    <label for="seletorLimiteClientes"><i class="fa-solid fa-list text-primary"></i> Exibição</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex gap-2 h-100">
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" class="form-control" id="filtro-clientes" name="termo_busca" placeholder="Pesquisar..." style="height: 58px;">
+                        <label for="filtro-clientes"><i class="fa-solid fa-magnifying-glass text-muted"></i> Buscar cliente</label>
+                    </div>
+                    <button class="btn btn-success d-flex flex-column align-items-center justify-content-center px-3" id="btn-exportar-clientes" title="Exportar CSV Clientes" style="height: 58px;" type="button">
+                        <i class="fa-solid fa-file-csv fs-5 mb-1"></i>
+                        <span style="font-size: 0.75rem; font-weight: 600;">Exportar</span>
+                    </button>
+                </div>
             </div>
         </div>
     </form>
     <div class="table-responsive shadow-sm rounded mb-4">
-        <table class="table table-hover table-bordered align-middle mb-0" id="tabela-clientes">
+        <table class="table table-hover table-bordered align-middle mb-0 text-center" id="tabela-clientes">
             <thead class="table-dark">
-                <tr>
-                    <th class="sortable" style="text-align: center;">Nome ou Razão Social</th>
-                    <th style="width: 150px !important; text-align: center;">CPF ou CNPJ</th>
-                    <th style="text-align: center;">Endereço</th>
-                    <th style="text-align: center;">Telefone</th>
-                    <th style="text-align: center;">E-mail</th>
-                    <th style="width: 50px; text-align: center;">Ações</th>
+                <tr id="th-thead-clientes">
+                    <th class="sortable">Nome ou Razão Social</th>
+                    <th class="sortable" style="width: 150px !important;">CPF ou CNPJ</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th style="width: 50px">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -427,12 +345,11 @@ function gerarUrlPaginacao($novaPagina)
                     $email = $cliente["email"];
                     $clienteJson = htmlspecialchars(json_encode($cliente), ENT_QUOTES, 'UTF-8');
                 ?>
-                    <tr data-json="<?= $clienteJson ?>" class="cliente-<?=$cliente['origem']?>">
+                    <tr data-json="<?= $clienteJson ?>" class="cliente-<?= $cliente['origem'] ?>">
                         <td class="copy-container">
                             <?= trim($nome ?? '') ?>
-                            <span class="badge bg-primary ms-1"><?=ucfirst($cliente['origem'])?></span>
                         </td>
-                        <td class="copy-container">
+                        <td class="copy-container" style="width: 170px;">
                             <?= formatarCpfCnpj(trim($cpfCnpj ?? '')) ?>
                         </td>
                         <td class="copy-container">
@@ -461,36 +378,101 @@ function gerarUrlPaginacao($novaPagina)
 
                     <tr class="edit-row" style="display: none;">
                         <td colspan="6">
-                            <form class="edit-form">
+                            <form class="edit-form-cad-clientes p-2">
                                 <input type="hidden" name="Codigo Cliente" value="<?= htmlspecialchars($cliente['Codigo Cliente'] ?? '') ?>">
                                 <input type="hidden" name="tipo" value="<?= $tipo ?>">
 
-                                <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>CPF:</label><input type="text" name="cpf" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>CNPJ:</label><input type="text" name="cnpj" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['cpf'], $tipo) ?>><label>Nome Completo:</label><input type="text" name="nomeCompleto" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Razão Social:</label><input type="text" name="razaoSocial" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Inscrição Estadual:</label><input type="text" name="inscricaoEstadual" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Suframa:</label><input type="text" name="suframa" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['cnpj'], $tipo) ?>><label>Pessoa de Contato:</label><input type="text" name="pessoaContato" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Nome do Importador:</label><input type="text" name="nomeImportador" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Documento do Importador:</label><input type="text" name="docImportador" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Endereço Exterior:</label><input type="text" name="enderecoExterior" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>País:</label><input type="text" name="pais" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Porto ou Aeroporto:</label><input type="text" name="portoOuAeroporto" class="form-control"></div>
-                                <div class="mb-2" <?= mostrar(['exterior'], $tipo) ?>><label>Contato Aduaneiro:</label><input type="text" name="contatoAduaneiro" class="form-control"></div>
-
-                                <!-- Campos comuns para todos os tipos -->
-                                <div class="mb-2"><label>Rua:</label><input type="text" name="rua" class="form-control"></div>
-                                <div class="mb-2"><label>Bairro:</label><input type="text" name="bairro" class="form-control"></div>
-                                <div class="mb-2"><label>Cidade:</label><input type="text" name="cidade" class="form-control"></div>
-                                <div class="mb-2"><label>Estado:</label><input type="text" name="estado" class="form-control"></div>
-                                <div class="mb-2"><label>CEP:</label><input type="text" name="cep" class="form-control"></div>
-                                <div class="mb-2"><label>Telefone:</label><input type="text" name="telefone" class="form-control"></div>
-                                <div class="mb-2"><label>E-mail:</label><input type="email" name="email" class="form-control"></div>
-
-                                <div class="mb-2">
-                                    <button type="submit" class="btn btn-primary">Salvar</button>
-                                    <button type="button" class="btn btn-secondary cancel-btn">Cancelar</button>
+                                <div class="row g-2 mb-2 text-start">
+                                    <?php if ($tipo === 'cnpj'): ?>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">CNPJ</label>
+                                            <input type="text" class="form-control form-control-sm" name="cnpj" value="<?= htmlspecialchars($cliente['cnpj']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Razão Social</label>
+                                            <input type="text" class="form-control form-control-sm" name="razaoSocial" value="<?= htmlspecialchars($cliente['razaoSocial']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Inscrição Estadual</label>
+                                            <input type="text" class="form-control form-control-sm" name="inscricaoEstadual" value="<?= htmlspecialchars($cliente['inscricaoEstadual']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Suframa</label>
+                                            <input type="text" class="form-control form-control-sm" name="suframa" value="<?= htmlspecialchars($cliente['suframa']) ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Pessoa de Contato</label>
+                                            <input type="text" class="form-control form-control-sm" name="pessoaContato" value="<?= htmlspecialchars($cliente['pessoaContato']) ?>" required>
+                                        </div>
+                                    <?php elseif ($tipo === 'cpf'): ?>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">CPF</label>
+                                            <input type="text" class="form-control form-control-sm" name="cpf" value="<?= htmlspecialchars($cliente['cpf']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Nome Completo</label>
+                                            <input type="text" class="form-control form-control-sm" name="nomeCompleto" value="<?= htmlspecialchars($cliente['nomeCompleto']) ?>" required>
+                                        </div>
+                                    <?php elseif ($tipo === 'exterior'): ?>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Nome do Importador</label>
+                                            <input type="text" class="form-control form-control-sm" name="nomeImportador" value="<?= htmlspecialchars($cliente['nomeImportador']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Documento do Importador</label>
+                                            <input type="text" class="form-control form-control-sm" name="docImportador" value="<?= htmlspecialchars($cliente['docImportador']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Endereço Exterior</label>
+                                            <input type="text" class="form-control form-control-sm" name="enderecoExterior" value="<?= htmlspecialchars($cliente['enderecoExterior']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">País</label>
+                                            <input type="text" class="form-control form-control-sm" name="pais" value="<?= htmlspecialchars($cliente['pais']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Porto ou Aeroporto</label>
+                                            <input type="text" class="form-control form-control-sm" name="portoOuAeroporto" value="<?= htmlspecialchars($cliente['portoOuAeroporto']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Contato Aduaneiro</label>
+                                            <input type="text" class="form-control form-control-sm" name="contatoAduaneiro" value="<?= htmlspecialchars($cliente['contatoAduaneiro']) ?>">
+                                        </div>
+                                    <?php endif;
+                                    if ($tipo !== 'exterior'): ?>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Rua</label>
+                                            <input type="text" class="form-control form-control-sm" name="rua" value="<?= htmlspecialchars($cliente['rua']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Bairro</label>
+                                            <input type="text" class="form-control form-control-sm" name="bairro" value="<?= htmlspecialchars($cliente['bairro']) ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Cidade</label>
+                                            <input type="text" class="form-control form-control-sm" name="cidade" value="<?= htmlspecialchars($cliente['cidade']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Estado</label>
+                                            <input type="text" class="form-control form-control-sm" name="estado" value="<?= htmlspecialchars($cliente['estado']) ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">CEP</label>
+                                            <input type="text" class="form-control form-control-sm" name="cep" value="<?= htmlspecialchars($cliente['cep']) ?>" required>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="col-md-4">
+                                        <label class="form-label mb-0 small">Telefone</label>
+                                        <input type="text" class="form-control form-control-sm" name="telefone" value="<?= htmlspecialchars($cliente['telefone']) ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label mb-0 small">Email</label>
+                                        <input type="email" class="form-control form-control-sm" name="email" value="<?= htmlspecialchars($cliente['email']) ?>" required>
+                                    </div>
+                                    <div class="col-auto ms-auto align-self-end pb-1">
+                                        <button type="submit" class="btn btn-sm btn-success me-1" title="Salvar"><i class="fa-solid fa-check"></i> Salvar</button>
+                                        <button type="button" class="btn btn-sm btn-secondary cancel-btn" title="Cancelar"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+                                    </div>
                                 </div>
                             </form>
                         </td>
@@ -560,233 +542,6 @@ function gerarUrlPaginacao($novaPagina)
     </div>
 </div>
 
-<script>
-    (function() {
-        window.recarregarTabelaClientes = function(queryString) {
-            const contentDiv = document.getElementById("modulo-content");
-            if (!contentDiv) return;
-
-            const url = `carregar_modulo.php?modulo=cadastrar&submodulo=clientes&${queryString}`;
-
-            fetch(url)
-                .then(response => response.text())
-                .then(html => {
-                    const tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = html;
-
-                    const scripts = [...tempDiv.querySelectorAll("script")];
-                    scripts.forEach(s => s.remove());
-
-                    contentDiv.innerHTML = tempDiv.innerHTML;
-
-                    scripts.forEach(oldScript => {
-                        const newScript = document.createElement("script");
-                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                        newScript.textContent = oldScript.textContent;
-                        document.body.appendChild(newScript);
-                    });
-                })
-                .catch(error => console.error("Erro ao carregar paginação:", error));
-        };
-
-        // Event delegation no document para os links de paginação
-        if (window._clientesPaginacaoHandler) {
-            document.removeEventListener('click', window._clientesPaginacaoHandler);
-        }
-        window._clientesPaginacaoHandler = function(e) {
-            const link = e.target.closest('.link-paginacao');
-            if (!link) return;
-            e.preventDefault();
-            const href = link.getAttribute('href');
-            if (href && href.includes('?')) {
-                window.recarregarTabelaClientes(href.split('?')[1]);
-            }
-        };
-        document.addEventListener('click', window._clientesPaginacaoHandler);
-
-        // Formulário de filtro — sempre resetando p=1 ao filtrar
-        const _formClientes = document.getElementById('formFiltroClientes');
-        if (_formClientes) {
-            // Ouvir o evento de 'change' em qualquer select dentro do form
-            const selects = _formClientes.querySelectorAll('select');
-            selects.forEach(select => {
-                select.addEventListener('change', function(e) {
-                    e.preventDefault();
-                    const params = new URLSearchParams(new FormData(_formClientes));
-                    params.set('p', '1'); // volta pra página 1 ao aplicar filtro
-                    window.recarregarTabelaClientes(params.toString());
-                });
-            });
-        }
-    })();
-
-    if (typeof ordemCrescente === 'undefined') {
-        var ordemCrescente = true;
-    }
-    document.querySelector('th.sortable').addEventListener('click', () => {
-        const tbody = document.querySelector('#tabela-clientes tbody');
-        const allRows = Array.from(tbody.querySelectorAll('tr'));
-
-        const rowPairs = [];
-        for (let i = 0; i < allRows.length; i += 2) {
-            rowPairs.push([allRows[i], allRows[i + 1]]);
-        }
-
-        rowPairs.sort((a, b) => {
-            const nomeA = a[0].children[0].textContent.trim().toLowerCase();
-            const nomeB = b[0].children[0].textContent.trim().toLowerCase();
-            return ordemCrescente ? nomeA.localeCompare(nomeB) : nomeB.localeCompare(nomeA);
-        });
-
-        tbody.innerHTML = '';
-        rowPairs.forEach(pair => {
-            tbody.appendChild(pair[0]);
-            tbody.appendChild(pair[1]);
-        });
-
-        ordemCrescente = !ordemCrescente;
-    });
-
-    // DELETE
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const clienteId = this.getAttribute('data-id');
-            if (confirm("Tem certeza que deseja excluir este cliente?")) {
-                fetch('./modulos/cadastrar/action/clientes/deleteCliente.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: clienteId
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Cliente excluído com sucesso!');
-                            location.reload();
-                        } else {
-                            alert('Erro ao excluir o cliente: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Ocorreu um erro ao tentar excluir o cliente.');
-                    });
-            }
-        });
-    });
-
-
-    // EDITAR CLIENTE CADASTRADO
-    document.querySelectorAll('.edit-cad-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const row = this.closest('tr'); // linha com os dados
-            const editRow = row.nextElementSibling; // linha com o formulário de edição
-
-            if (editRow && editRow.classList.contains('edit-row')) {
-                const form = editRow.querySelector('.edit-form');
-                if (!form) return;
-
-                // Pega os dados do atributo data-json da linha
-                const jsonData = JSON.parse(row.getAttribute('data-json'));
-
-                // Preenche dinamicamente todos os campos do formulário com os dados do JSON
-                Object.keys(jsonData).forEach(key => {
-                    const input = form.elements[key];
-                    if (input) {
-                        input.value = jsonData[key] || '';
-                    }
-                });
-
-                // Exibe a linha do formulário
-                editRow.style.display = 'table-row';
-            }
-        });
-    });
-
-    // CANCELAR EDIÇÃO
-    document.querySelectorAll('.cancel-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const editRow = this.closest('.edit-row');
-            editRow.style.display = 'none';
-        });
-    });
-
-    // SALVAR EDIÇÃO
-    document.querySelectorAll('.edit-form').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('./modulos/cadastrar/action/clientes/updateCliente.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Cliente atualizado com sucesso!');
-                        location.reload();
-                    } else {
-                        alert('Erro ao atualizar o cliente: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Ocorreu um erro ao tentar atualizar o cliente.');
-                });
-        });
-    });
-    document.addEventListener("click", function(e) {
-        const td = e.target.closest("td.copy-container");
-        if (td && td.closest("#tabela-clientes")) {
-            const text = td.innerText.trim();
-
-            // Copia para a área de transferência
-            const tempInput = document.createElement("input");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
-            // Cria o tooltip
-            const tooltip = document.createElement("div");
-            tooltip.innerText = "Copiado!";
-            tooltip.style.position = "absolute";
-            tooltip.style.background = "#000";
-            tooltip.style.color = "#fff";
-            tooltip.style.padding = "4px 8px";
-            tooltip.style.borderRadius = "4px";
-            tooltip.style.fontSize = "12px";
-            tooltip.style.zIndex = "9999";
-            tooltip.style.pointerEvents = "none";
-            tooltip.style.opacity = "0";
-            tooltip.style.transition = "opacity 0.3s ease";
-
-            document.body.appendChild(tooltip);
-
-            // Posição do tooltip (acima do td clicado)
-            const rect = td.getBoundingClientRect();
-            tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-            tooltip.style.top = `${rect.top + window.scrollY - 30}px`;
-
-            // Mostra e depois remove
-            requestAnimationFrame(() => {
-                tooltip.style.opacity = "1";
-            });
-
-            setTimeout(() => {
-                tooltip.style.opacity = "0";
-                setTimeout(() => {
-                    tooltip.remove();
-                }, 300);
-            }, 1200);
-        }
-    });
-</script>
-
 <style>
     .small-text {
         font-size: 10px;
@@ -831,3 +586,9 @@ function gerarUrlPaginacao($novaPagina)
         text-align: left
     }
 </style>
+
+<script>
+    window.planilhaClientes = <?= json_encode(array_values($clientesFiltrados)) ?>
+</script>
+
+<script src="js/cadastrar/clientes.js"></script>

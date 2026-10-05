@@ -1,35 +1,11 @@
 [
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.501",
-        "descricao": "APERTA GAXETA 5",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a689dd5a11333.66035759"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 620.503",
         "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
         "quantidade": "5",
         "Codigo estoque": "cli_6a689dea6f84d7.32124160"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.514",
-        "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a689e01328786.36713158"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 621.107",
-        "descricao": "TAMPA ROLAMENTO 6 - 8 DIN 140MM",
-        "quantidade": "26",
-        "Codigo estoque": "cli_6a689e11019236.64790655"
     },
     {
         "nome": "sobra",
@@ -44,14 +20,6 @@
         "descricao": "FLANGE AP GAXETA 3 E 4",
         "quantidade": "15",
         "Codigo estoque": "cli_6a6c9eae99ac58.15943109"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.514",
-        "descricao": "FLANGE AP GAXETA 5 COM ROSCA",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a6c9f4d25f747.23131717"
     },
     {
         "nome": "sobra",
@@ -83,30 +51,6 @@
         "Codigo estoque": "cli_6a70875db49e36.44980797"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 612.303",
-        "descricao": "MANGOTE ALUMINIO BJ",
-        "quantidade": "165",
-        "Codigo estoque": "cli_6a71cf893f93e7.11181058"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 612.302",
-        "descricao": "NIPLE ALUMINIO BJ 3",
-        "quantidade": "90",
-        "Codigo estoque": "cli_6a71cf96afb2a1.08475413"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 612.002",
-        "descricao": "NIPLE ALUMINIO BJ 2.1\/2",
-        "quantidade": "75",
-        "Codigo estoque": "cli_6a71cfa1dcc731.48664190"
-    },
-    {
         "nome": "sobra",
         "codigo": "BM 620.001",
         "descricao": "APERTA GAXETA 3 E 4",
@@ -128,14 +72,6 @@
         "Codigo estoque": "cli_6a7332134eb3a9.13357530"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 113.006",
-        "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
-        "quantidade": "432",
-        "Codigo estoque": "cli_6a734d6e8f4085.56625246"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 113.012",
@@ -152,28 +88,12 @@
         "Codigo estoque": "cli_6a734d8e594c14.16817107"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 120.095",
-        "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
-        "quantidade": "90",
-        "Codigo estoque": "cli_6a747e347bd1b4.31650757"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 120.095",
         "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
         "quantidade": "90",
         "Codigo estoque": "cli_6a747e413b1780.22316048"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 120.092",
-        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
-        "quantidade": "90",
-        "Codigo estoque": "cli_6a747e4c777ba7.19206449"
     },
     {
         "nome": "452",
@@ -184,28 +104,12 @@
         "Codigo estoque": "cli_6a747e59affd37.07780668"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 120.202",
-        "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM TRSMA 150PSI",
-        "quantidade": "6",
-        "Codigo estoque": "cli_6a747e657e2956.41922275"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 120.202",
         "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM TRSMA 150PSI",
         "quantidade": "6",
         "Codigo estoque": "cli_6a747e6f903ce4.49916689"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 120.093",
-        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
-        "quantidade": "6",
-        "Codigo estoque": "cli_6a747e7954e2a9.19241561"
     },
     {
         "nome": "452",
@@ -222,30 +126,6 @@
         "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM TRSMA 150PSI",
         "quantidade": "30",
         "Codigo estoque": "cli_6a747e94297c66.97090095"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 132.000",
-        "descricao": "ROLAMENTO 6208 Z 2L GBR\/BLK (CX IND)",
-        "quantidade": "40",
-        "Codigo estoque": "cli_6a7480f679f9c8.60684466"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 132.001",
-        "descricao": "ROLAMENTO 6309 Z 2L GBR\/BLK (CX IND)",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a7481143921b7.83811447"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 132.002",
-        "descricao": "ROLAMENTO 6310 Z 2L GBR\/BLK (CX IND)",
-        "quantidade": "39",
-        "Codigo estoque": "cli_6a7481f7b43f09.21962845"
     },
     {
         "nome": "452",
@@ -272,14 +152,6 @@
         "Codigo estoque": "cli_6a7483c54cf242.33519437"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 113.005",
-        "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
-        "quantidade": "35",
-        "Codigo estoque": "cli_6a7c73c46fa8a1.02188630"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 113.046",
@@ -304,30 +176,6 @@
         "Codigo estoque": "cli_6a7c75823d4a49.72978460"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 621.104",
-        "descricao": "CAVALETE BD 6 E 8 (3 ROL 6310)",
-        "quantidade": "13",
-        "Codigo estoque": "cli_6a7c763e8092b5.44305341"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 124.033",
-        "descricao": "BARRA GRELHA BMX-3 375x38x10x1MM",
-        "quantidade": "1568",
-        "Codigo estoque": "cli_6a7c76c9d09347.96936180"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 124.004",
-        "descricao": "BARRA GRELHA BMX-2 295x32x8x0,6MM",
-        "quantidade": "300",
-        "Codigo estoque": "cli_6a7c76d3969961.76959728"
-    },
-    {
         "nome": "453",
         "cliente": "JOHIL",
         "codigo": "BM 621.326",
@@ -336,44 +184,12 @@
         "Codigo estoque": "cli_6a7c8434137cf9.02059142"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.001",
-        "descricao": "APERTA GAXETA 3 E 4",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a831b1caa9cb3.99804585"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 621.101",
-        "descricao": "APERTA GAXETA 6 - 8",
-        "quantidade": "13",
-        "Codigo estoque": "cli_6a831c857449d0.05168828"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 622.003",
-        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
-        "quantidade": "40",
-        "Codigo estoque": "cli_6a8444698fdde3.55284833"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 622.003",
         "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
         "quantidade": "10",
         "Codigo estoque": "cli_6a8444845383a9.52359845"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.004",
-        "descricao": "CAVALETE BD 3 E 4",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a844894c7a742.73354466"
     },
     {
         "nome": "452",
@@ -398,14 +214,6 @@
         "descricao": "CARCACA BD 10 DISC FUND B FIXO",
         "quantidade": "20",
         "Codigo estoque": "cli_6a8456f6cc0ac8.18517287"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.303",
-        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
-        "quantidade": "30",
-        "Codigo estoque": "cli_6a845807d065f4.29132154"
     },
     {
         "nome": "452",
@@ -440,14 +248,6 @@
         "Codigo estoque": "cli_6a845e7004e7e9.02687433"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 621.111",
-        "descricao": "FLANGE AP GAXETA 6 E 8 COM ROSCA",
-        "quantidade": "13",
-        "Codigo estoque": "cli_6a8460a3185006.33086382"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 116.005",
@@ -462,38 +262,6 @@
         "descricao": "MEIOES COLORIDOS PROFISSIONAL TAM39 A 42",
         "quantidade": "1800",
         "Codigo estoque": "cli_6a8461f97445b8.15886546"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.007",
-        "descricao": "TAMPA ROLAMENTO 3 E 4",
-        "quantidade": "40",
-        "Codigo estoque": "cli_6a84625e37eda2.95498640"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 620.507",
-        "descricao": "TAMPA ROLAMENTO 5 DIN 130MM",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a84635593f6d3.25891483"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 135.000",
-        "descricao": "TUBO PEBD 5.80 MT 4x6.0MM (0,075 m³)",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a846acfb0f559.91729696"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 135.004",
-        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6a846b045f8c00.91871945"
     },
     {
         "nome": "455",
@@ -832,28 +600,12 @@
         "Codigo estoque": "cli_6a85a1b5354a15.08175790"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 616.300",
-        "descricao": "BOMBA ALTA PRESSAO 4x3 ROTOR FECHADO",
-        "quantidade": "2",
-        "Codigo estoque": "cli_6a95b793e78833.10700042"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 616.300",
         "descricao": "BOMBA ALTA PRESSAO 4x3 ROTOR FECHADO",
         "quantidade": "2",
         "Codigo estoque": "cli_6a95b79bacd640.29904834"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 616.900",
-        "descricao": "BOMBA ALTA PRESSAO 6x4 ROTOR FECHADO",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a95b7ba060674.45381691"
     },
     {
         "nome": "452",
@@ -864,28 +616,12 @@
         "Codigo estoque": "cli_6a95b7c62426d8.60534453"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 617.300",
-        "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a95b7e9026b69.41246953"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 617.300",
         "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
         "quantidade": "5",
         "Codigo estoque": "cli_6a95b7f5981407.62682880"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 140.021",
-        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
-        "quantidade": "12",
-        "Codigo estoque": "cli_6a95b84183d1e9.50912060"
     },
     {
         "nome": "452",
@@ -912,14 +648,6 @@
         "Codigo estoque": "cli_6a96c727a0f7b7.90675065"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 125.028",
-        "descricao": "NIPLE COM ROSCA VALVULA PE 10",
-        "quantidade": "2",
-        "Codigo estoque": "cli_6a96cbad58a033.42139148"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 125.028",
@@ -936,14 +664,6 @@
         "Codigo estoque": "cli_6a96cbfc88a925.18609380"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 125.011",
-        "descricao": "NIPLE COM ROSCA VALVULA PE 6",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a96cc6a160628.05119028"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 125.011",
@@ -952,28 +672,12 @@
         "Codigo estoque": "cli_6a96cc79e744c4.33857655"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 125.012",
-        "descricao": "NIPLE COM ROSCA VALVULA PE 8",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a96cc9a6bbaf0.91830472"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 125.012",
         "descricao": "NIPLE COM ROSCA VALVULA PE 8",
         "quantidade": "10",
         "Codigo estoque": "cli_6a96cca2233512.81617225"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 612.304",
-        "descricao": "PONTEIRA BICO JATO 1",
-        "quantidade": 165,
-        "Codigo estoque": "cli_6a96ccda55c839.62761742"
     },
     {
         "nome": "452",
@@ -1056,14 +760,6 @@
         "Codigo estoque": "cli_6a96d05540fce8.31231156"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 137.016",
-        "descricao": "VALVULA PE 10",
-        "quantidade": "2",
-        "Codigo estoque": "cli_6a96d32a1d4284.08552192"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 137.016",
@@ -1080,28 +776,12 @@
         "Codigo estoque": "cli_6a96d353e653e9.18392536"
     },
     {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 137.008",
-        "descricao": "VALVULA PE 6",
-        "quantidade": "5",
-        "Codigo estoque": "cli_6a96d36a83b476.68395748"
-    },
-    {
         "nome": "452",
         "cliente": "JOHIL",
         "codigo": "BM 137.008",
         "descricao": "VALVULA PE 6",
         "quantidade": "10",
         "Codigo estoque": "cli_6a96d3752e0727.71440890"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 137.009",
-        "descricao": "VALVULA PE 8",
-        "quantidade": "10",
-        "Codigo estoque": "cli_6a96d38b7c4fe1.52304079"
     },
     {
         "nome": "452",
@@ -1326,14 +1006,6 @@
         "descricao": "ROTOR 8x4 RT HP130x25,4 D300x12,7 MM",
         "quantidade": "2",
         "Codigo estoque": "cli_6ab123574adc87.54059015"
-    },
-    {
-        "nome": "451",
-        "cliente": "JOHIL",
-        "codigo": "BM 135.010",
-        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
-        "quantidade": "20",
-        "Codigo estoque": "cli_6ab125a9d52241.51239986"
     },
     {
         "nome": "002",

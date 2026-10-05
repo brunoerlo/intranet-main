@@ -203,6 +203,7 @@ if (isset($_FILES['pdfFile']) && $_FILES['pdfFile']['error'] === UPLOAD_ERR_OK) 
         $mensagem = count($produtos) . ' produtos importados com sucesso.';
         if ($removidoQuadro > 0 || $removidoEstoque > 0) {
             $mensagem .= " ({$removidoQuadro} item(ns) removido(s) do quadro, {$removidoEstoque} do estoque)";
+            registrarLog('Sistema', 'faturas', 'lista', 'importar', $mensagem);
         } elseif (empty($numeroFaturaRaw)) {
             $mensagem .= ' Aviso: não foi possível identificar o número da fatura no CSV, nada foi removido do quadro/estoque.';
         }

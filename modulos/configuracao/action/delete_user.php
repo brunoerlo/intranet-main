@@ -30,13 +30,31 @@ foreach ($usuarios as $user) {
     }
 }
 
+$deveExcluirDefinitivo = false;
+
+foreach ($usuarios as &$user) { // & permite modificar a variavel original (ponteiro)
+    if ($user['id'] === $idParaExcluir) {
+        $itemDeletado = $user;
+        if($user['role'] === 'admin') {
+            $user['status'] = 'quarentena';
+            $user['dataExclusao'] = time() + 30;//(30 * 86400); //86400 = 24h * 60min * 60s
+        } else {
+            $deveExcluirDefinitivo = true;
+        }
+        break;
+    }
+}
+unset($user); //boa pratica apos &
+
 // Filtra os usuários para remover o que tem o ID fornecido
-$usuariosFiltrados = array_filter($usuarios, function ($user) use ($idParaExcluir) {
-    return $user['id'] !== $idParaExcluir;
-});
+if ($deveExcluirDefinitivo) {
+    $usuarios = array_filter($usuarios, function ($user) use ($idParaExcluir) {
+        return $user['id'] !== $idParaExcluir;
+    });
+}
 
 // Salva novamente o JSON atualizado
-if (file_put_contents($arquivo, json_encode(array_values($usuariosFiltrados), JSON_PRETTY_PRINT))) {
+if (file_put_contents($arquivo, json_encode(array_values($usuarios), JSON_PRETTY_PRINT))) {
     registrarLog($usuario, 'configuracao', 'usuario', 'excluir', "Excluiu o usuario {$itemDeletado['nome']}");
     echo json_encode(["status" => "success", "message" => "Usuário excluído com sucesso"]);
 } else {

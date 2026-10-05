@@ -16,10 +16,9 @@ if (file_exists($empresasPath)) {
         $empresasMoeda[$empresa['id']] = $empresa['moeda'] ?? 'R$'; // padrão R$ se não tiver definido
     }
 }
-
 ?>
 
-<div class="container mt-4">
+<div class="container-fluid mt-4">
     <div class="d-flex gap-2 mb-3">
         <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCadastroProduto" aria-expanded="false" aria-controls="collapseCadastroProduto">
             <i class="fa-solid fa-plus"></i> Novo Produto
@@ -31,7 +30,7 @@ if (file_exists($empresasPath)) {
 
     <div class="collapse" id="collapseCadastroProduto">
         <div class="card card-body">
-            <h2 class="mb-4">Cadastro de Novo Produto</h2>
+            <h2 class="mb-3">Cadastro de Novo Produto</h2>
             <form id="formProduto" action="modulos/cadastrar/action/produtos/cadastrar_produto.php" method="POST" enctype="multipart/form-data">
                 <!-- todo conteúdo do seu formulário aqui, intacto -->
                 <!-- exemplo: -->
@@ -49,23 +48,23 @@ if (file_exists($empresasPath)) {
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="Item" class="form-label">Código (BM xxx.xxx)</label>
-                    <input type="text" class="form-control" id="Item" name="Item" pattern="BM\s\d{3}\.\d{3}" placeholder="BM 123.456" required>
+                    <label for="codigo" class="form-label">Código (BM xxx.xxx)</label>
+                    <input type="text" class="form-control" id="codigo" name="codigo" pattern="BM\s\d{3}\.\d{3}" placeholder="BM 123.456" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="Descricao" class="form-label">Descrição (Português)</label>
-                    <input type="text" class="form-control" id="descricao_pt" name="descricao_pt" required>
+                    <label for="descricao" class="form-label">Descrição (Português)</label>
+                    <input type="text" class="form-control" id="descricao" name="descricao" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="Descricao Complementar" class="form-label">Descrição Complementar</label>
-                    <input type="text" class="form-control" id="Descricao Complementar" name="Descricao Complementar" required>
+                    <label for="descComp" class="form-label">Descrição Complementar</label>
+                    <input type="text" class="form-control" id="descComp" name="descComp">
                 </div>
 
                 <div class="mb-3">
-                    <label for="UM" class="form-label">Unidade de Comercialização</label>
-                    <select class="form-select" id="UM" name="UM" required>
+                    <label for="unidade" class="form-label">Unidade de Comercialização</label>
+                    <select class="form-select" id="unidade" name="unidade" required>
                         <option value="">Selecione</option>
                         <option value="UN">UN</option>
                         <option value="KG">KG</option>
@@ -83,25 +82,24 @@ if (file_exists($empresasPath)) {
                 </div>
 
                 <div class="mb-3">
-                    <label for="Preco Venda" class="form-label">Preço de Venda (R$ ou US$)</label>
-                    <input type="text" class="form-control" id="Preco Venda" name="Preco Venda">
+                    <label for="preco" class="form-label">Preço de Venda (R$ ou US$)</label>
+                    <input type="text" class="form-control" id="preco" name="preco">
                 </div>
 
                 <div class="mb-3">
-                    <label for="NCM" class="form-label">NCM</label>
-                    <input type="text" class="form-control" id="NCM" name="NCM" required>
+                    <label for="ncm" class="form-label">NCM</label>
+                    <input type="text" class="form-control" id="ncm" name="ncm" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="Peso Liquido" class="form-label">Peso Líquido (kg)</label>
-                    <input type="number" class="form-control" step="0.01" id="Peso Liquido" name="Peso Liquido">
+                    <label for="peso" class="form-label">Peso Líquido (kg)</label>
+                    <input type="number" class="form-control" step="0.01" id="peso" name="peso">
                 </div>
-
+                <!--
                 <div class="mb-3">
                     <label for="Vlr Total" class="form-label">Valor Total (R$ ou US$)</label>
                     <input type="text" class="form-control" id="Vlr Total" name="Vlr Total">
                 </div>
-                <!--
                 <div class="mb-3">
                     <label for="imagem" class="form-label">Imagem do Produto</label>
                     <input class="form-control" type="file" id="imagem" name="imagem" accept="image/*">
@@ -113,35 +111,12 @@ if (file_exists($empresasPath)) {
     </div>
 </div>
 
-<script>
-    document.getElementById('formProduto').addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita o envio padrão
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(result => {
-                alert(result); // Você pode substituir por um modal ou mensagem no DOM
-                form.reset(); // Limpa o formulário
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro ao cadastrar o produto.');
-            });
-    });
-</script>
-
 <!-- Importar -->
 
 <div class="collapse" id="collapseImportarProduto">
     <div class="card card-body">
         <h2>Importar Produtos</h2>
-        <form id="importForm" class="mt-4" enctype="multipart/form-data">
+        <form id="importFormProdutos" class="mt-4" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="empresa_id" class="form-label">Selecione a Empresa:</label>
                 <select class="form-select" name="empresa_id" id="empresa_id" required>
@@ -167,32 +142,6 @@ if (file_exists($empresasPath)) {
         </form>
         <div id="result" class="mt-3"></div>
     </div>
-
-    <script>
-        document.getElementById('importForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(this);
-
-            fetch('./modulos/cadastrar/action/produtos/importar_produtos.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const resultDiv = document.getElementById('result');
-                    if (data.status === 'success') {
-                        resultDiv.innerHTML = '<div class="alert alert-success">Produtos importados com sucesso!</div>';
-                    } else if (data.error) {
-                        resultDiv.innerHTML = `<div class="alert alert-danger">Erro ao importar Produtos: ${data.error}</div>`;
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('result').innerHTML = `<div class="alert alert-danger">Erro ao importar Produtos: ${error.message}</div>`;
-                });
-        });
-    </script>
-</div>
 </div>
 
 <?php
@@ -223,7 +172,7 @@ if (!empty($produtosCadastrados)) {
         $todosProdutos[] = [
             'tipo'       => 'cadastrado',
             'codigo'     => $p['codigo']        ?? '-',
-            'descricao'  => $p['descricao_pt']  ?? '-',
+            'descricao'  => $p['descricao']  ?? '-',
             'descComp'   => '',
             'unidade'    => $p['unidade']       ?? '-',
             'preco'      => $p['preco']         ?? '-',
@@ -244,7 +193,7 @@ if (!empty($produtosImportados)) {
             'descComp'   => $p['Descricao Complementar'] ?? '-',
             'unidade'    => $p['UM']          ?? '-',
             'preco'      => $p['Preco Venda'] ?? '-',
-            'ncm'        => $p['NCM']         ?? '-',
+            'ncm'        => $p['N.C.M.']         ?? '-',
             'peso'       => $p['peso']        ?? '-',
             'empresa_id' => $p['empresa_id']  ?? '-',
             'imagem'     => $p['imagem']      ?? '',
@@ -254,12 +203,20 @@ if (!empty($produtosImportados)) {
 
 $filtroTipo = $_GET['tipoProduto'] ?? 'todos';
 $filtroEmpresaId = $_GET['filtro_empresa_id'] ?? '';
+$termoBusca = $_GET['termo_busca'] ?? '';
 
-$produtosFiltrados = array_filter($todosProdutos, function ($produto) use ($filtroTipo, $filtroEmpresaId) {
+$produtosFiltrados = array_filter($todosProdutos, function ($produto) use ($filtroTipo, $filtroEmpresaId, $termoBusca) {
     if (
         $filtroTipo !== 'todos' && $filtroTipo !== '' &&
         strtolower($produto['tipo'] ?? '') !== strtolower($filtroTipo)
     ) return false;
+
+    if ($termoBusca !== '') {
+        $codigo = $produto['codigo'] ?? '';
+        $descricao = $produto['descricao'] ?? '';
+        if (stripos($codigo, $termoBusca) === false && stripos($descricao, $termoBusca) === false)
+            return false;
+    }
 
     if ($filtroEmpresaId !== '' && strtolower($produto['empresa_id'] ?? '') !== strtolower($filtroEmpresaId)) return false;
 
@@ -290,56 +247,76 @@ function gerarUrlPaginacao($novaPagina)
 }
 ?>
 
-<div class="container py-5">
+<div class="container py-3">
     <h1 class="mb-4 text-center">Lista de Produtos</h1>
     <!-- Formulário para selecionar tipo de produto e empresa lado a lado -->
-    <form id="formFiltroProdutos" method="GET" action="">
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <select id="tipoProduto" name="tipoProduto" class="form-select">
-                    <option value="todos" <?= $filtroTipo === 'todos' ? 'selected' : '' ?>>Todos os Produtos</option>
-                    <option value="cadastrado" <?= $filtroTipo === 'cadastrado' ? 'selected' : '' ?>>Produtos Cadastrados</option>
-                    <option value="importado" <?= $filtroTipo === 'importado' ? 'selected' : '' ?>>Produtos Importados</option>
-                </select>
+    <form id="formFiltroProdutos" method="GET" action="" class="bg-white p-3 rounded shadow-sm mb-4 border">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <select id="tipoProduto" name="tipoProduto" class="form-select">
+                        <option value="todos" <?= $filtroTipo === 'todos' ? 'selected' : '' ?>>Todos os Produtos</option>
+                        <option value="cadastrado" <?= $filtroTipo === 'cadastrado' ? 'selected' : '' ?>>Cadastrados</option>
+                        <option value="importado" <?= $filtroTipo === 'importado' ? 'selected' : '' ?>>Importados</option>
+                    </select>
+                    <label for="tipoProduto"><i class="fa-solid fa-filter text-primary"></i> Tipo</label>
+                </div>
             </div>
-            <div class="col-md-4">
-                <select class="form-select" name="filtro_empresa_id" id="filtro_empresa_id">
-                    <option value="">-- Selecione a Empresa --</option>
-                    <?php
-                    $empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
-                    if (file_exists($empresasPath)) {
-                        $empresas = json_decode(file_get_contents($empresasPath), true);
-                        foreach ($empresas as $empresa) {
-                            $selected = ($filtroEmpresaId == $empresa['id']) ? 'selected' : '';
-                            echo "<option value=\"{$empresa['id']}\" $selected>{$empresa['razaoSocial']}</option>";
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <select class="form-select" name="filtro_empresa_id" id="filtro_empresa_id">
+                        <option value="">Todas as Empresas</option>
+                        <?php
+                        $empresasPath = __DIR__ . '/../configuracao/action/empresas.json';
+                        if (file_exists($empresasPath)) {
+                            $empresas = json_decode(file_get_contents($empresasPath), true);
+                            foreach ($empresas as $empresa) {
+                                $selected = ($filtroEmpresaId == $empresa['id']) ? 'selected' : '';
+                                echo "<option value=\"{$empresa['id']}\" $selected>{$empresa['razaoSocial']}</option>";
+                            }
                         }
-                    }
-                    ?>
-                </select>
+                        ?>
+                    </select>
+                    <label for="filtro_empresa_id"><i class="fa-solid fa-building text-primary"></i> Empresa</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-floating">
+                    <select name="limite" id="seletorLimiteProdutos" class="form-select">
+                        <option value="15" <?= $limitePorPagina == 15 ? 'selected' : '' ?>>15 itens</option>
+                        <option value="30" <?= $limitePorPagina == 30 ? 'selected' : '' ?>>30 itens</option>
+                        <option value="50" <?= $limitePorPagina == 50 ? 'selected' : '' ?>>50 itens</option>
+                        <option value="75" <?= $limitePorPagina == 75 ? 'selected' : '' ?>>75 itens</option>
+                        <option value="100" <?= $limitePorPagina == 100 ? 'selected' : '' ?>>100 itens</option>
+                    </select>
+                    <label for="seletorLimiteProdutos"><i class="fa-solid fa-list text-primary"></i> Exibição</label>
+                </div>
             </div>
             <div class="col-md-4">
-                <select name="limite" id="seletorLimiteProdutos" class="form-select" style="width: 100px">
-                    <option value="15" <?= $limitePorPagina == 15 ? 'selected' : '' ?>>15</option>
-                    <option value="30" <?= $limitePorPagina == 30 ? 'selected' : '' ?>>30</option>
-                    <option value="50" <?= $limitePorPagina == 50 ? 'selected' : '' ?>>50</option>
-                    <option value="75" <?= $limitePorPagina == 75 ? 'selected' : '' ?>>75</option>
-                    <option value="100" <?= $limitePorPagina == 100 ? 'selected' : '' ?>>100</option>
-                </select>
+                <div class="d-flex gap-2 h-100">
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" class="form-control" id="filtro-produtos" name="termo_busca" placeholder="Pesquisar..." style="height: 58px;">
+                        <label for="filtro-produtos"><i class="fa-solid fa-magnifying-glass text-muted"></i> Buscar produto</label>
+                    </div>
+                    <button class="btn btn-success d-flex flex-column align-items-center justify-content-center px-3" id="btn-exportar-produtos" title="Exportar CSV Produtos" style="height: 58px;" type="button">
+                        <i class="fa-solid fa-file-csv fs-5 mb-1"></i>
+                        <span style="font-size: 0.75rem; font-weight: 600;">Exportar</span>
+                    </button>
+                </div>
             </div>
         </div>
     </form>
 
-    <div class="table-responsive shadow-sm rounded mb-3">
+    <div class="table-responsive shadow-sm rounded mb-2">
         <table class="table table-hover table-bordered align-middle mb-0 text-center">
             <thead class="table-dark">
                 <tr>
-                    <th>Item</th>
-                    <th>Descrição</th>
+                    <th style="width: 110px;" class="sortable">Item</th>
+                    <th class="sortable">Descrição</th>
                     <th>UM</th>
-                    <th>Preço Venda</th>
+                    <th style="width: 115px;">Preço Venda</th>
                     <th>NCM</th>
-                    <th>Peso Líquido</th>
-                    <th>Valor Total</th>
+                    <th style="width: 115px;">Peso Líquido</th>
                     <th>Empresa</th>
                     <th>Ações</th>
                 </tr>
@@ -367,8 +344,9 @@ function gerarUrlPaginacao($novaPagina)
                             <td><?= htmlspecialchars($produto['ncm']) ?></td>
                             <td><?= htmlspecialchars($produto['peso']) ?></td>
 
-                            <!-- Coluna de Valor Total e Empresa que você já tinha -->
+                            <!-- Coluna de Valor Total e Empresa que você já tinha 
                             <td><?= htmlspecialchars(($empresasMoeda[$produto['empresa_id']] ?? '') . ' ' . $produto['preco']) ?></td>
+                            -->
                             <td><?= htmlspecialchars($empresasRazao[$produto['empresa_id']] ?? '-') ?></td>
 
                             <td class="action-buttons text-center">
@@ -380,6 +358,76 @@ function gerarUrlPaginacao($novaPagina)
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
+                            </td>
+                        </tr>
+                        <tr class="edit-row" style="display: none;">
+                            <td colspan="9">
+                                <form class="edit-form-cad-produtos p-2">
+                                    <input type="hidden" name="item" value="<?= htmlspecialchars($produto['codigo'] ?? '') ?>">
+
+                                    <div class="row g-2 mb-2 text-start">
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Descrição</label>
+                                            <input type="text" class="form-control form-control-sm" name="descricao" value="<?= htmlspecialchars($produto['descricao']) ?>" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 small">Descrição Complementar</label>
+                                            <input type="text" class="form-control form-control-sm" name="descComp" value="<?= htmlspecialchars($produto['descComp']) ?>">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 small">Empresa</label>
+                                            <select class="form-select form-select-sm" name="empresa_id" required>
+                                                <option value="">-- Selecione --</option>
+                                                <?php
+                                                if (!empty($empresas)) {
+                                                    foreach ($empresas as $empresa) {
+                                                        $selected = ($produto['empresa_id'] == $empresa['id']) ? 'selected' : '';
+                                                        echo "<option value=\"{$empresa['id']}\" $selected>{$empresa['razaoSocial']}</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="form-label mb-0 small">UM</label>
+                                            <select class="form-select form-select-sm" name="unidade" required>
+                                                <?php $selected = $produto['unidade']; ?>
+                                                <option value="<?= $selected ?>"><?= $selected ?></option>
+                                                <option value="UN">UN</option>
+                                                <option value="KG">KG</option>
+                                                <option value="MT">MT</option>
+                                                <option value="JG">JG</option>
+                                                <option value="GL">GL</option>
+                                                <option value="TO">TO</option>
+                                                <option value="RL">RL</option>
+                                                <option value="M2">M2</option>
+                                                <option value="PR">PR</option>
+                                                <option value="PC">PC</option>
+                                                <option value="FD">FD</option>
+                                                <option value="CJ">CJ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-2 align-items-end text-start">
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 small">Preço de Venda</label>
+                                            <input type="text" class="form-control form-control-sm" name="preco" value="<?= htmlspecialchars($produto['preco']) ?>">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 small">NCM</label>
+                                            <input type="text" class="form-control form-control-sm" name="ncm" value="<?= htmlspecialchars($produto['ncm']) ?>" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 small">Peso Líquido</label>
+                                            <input type="text" class="form-control form-control-sm" name="peso" value="<?= htmlspecialchars($produto['peso']) ?>">
+                                        </div>
+                                        <div class="col-md-3 text-end pb-1">
+                                            <button type="submit" class="btn btn-sm btn-success me-1" title="Salvar"><i class="fa-solid fa-check"></i> Salvar</button>
+                                            <button type="button" class="btn btn-sm btn-secondary cancel-btn" title="Cancelar"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -448,165 +496,15 @@ function gerarUrlPaginacao($novaPagina)
 <?php endif; ?>
 </div>
 
-<!-- JavaScript para filtragem sem recarregar a página -->
+<style>
+    th.sortable {
+        cursor: pointer;
+        user-select: none;
+    }
+</style>
+
 <script>
-    (function() {
-        window.recarregarTabelaProdutos = function(queryString) {
-            const contentDiv = document.getElementById("modulo-content");
-            if (!contentDiv) return;
-
-            const url = `carregar_modulo.php?modulo=cadastrar&submodulo=produtos&${queryString}`;
-
-            fetch(url)
-                .then(response => response.text())
-                .then(html => {
-                    const tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = html;
-
-                    const scripts = [...tempDiv.querySelectorAll("script")];
-                    scripts.forEach(s => s.remove());
-
-                    contentDiv.innerHTML = tempDiv.innerHTML;
-
-                    scripts.forEach(oldScript => {
-                        const newScript = document.createElement("script");
-                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                        newScript.textContent = oldScript.textContent;
-                        document.body.appendChild(newScript);
-                    });
-                })
-                .catch(error => console.error("Erro ao carregar paginação:", error));
-        };
-
-        // Event delegation no document para os links de paginação
-        if (window._produtoPaginacaoHandler) {
-            document.removeEventListener('click', window._produtoPaginacaoHandler);
-        }
-        window._produtoPaginacaoHandler = function(e) {
-            const link = e.target.closest('.link-paginacao');
-            if (!link) return;
-            e.preventDefault();
-            const href = link.getAttribute('href');
-            if (href && href.includes('?')) {
-                window.recarregarTabelaProdutos(href.split('?')[1]);
-            }
-        };
-        document.addEventListener('click', window._produtoPaginacaoHandler);
-
-        // Formulário de filtro — sempre resetando p=1 ao filtrar
-        const _formProdutos = document.getElementById('formFiltroProdutos');
-        if (_formProdutos) {
-            // Ouvir o evento de 'change' em qualquer select dentro do form
-            const selects = _formProdutos.querySelectorAll('select');
-            selects.forEach(select => {
-                select.addEventListener('change', function(e) {
-                    e.preventDefault();
-                    const params = new URLSearchParams(new FormData(_formProdutos));
-                    params.set('p', '1'); // volta pra página 1 ao aplicar filtro
-                    window.recarregarTabelaProdutos(params.toString());
-                });
-            });
-        }
-    })();
-
-    // ⚠️ Chame `aplicarFiltrosProdutos()` manualmente após carregar dinamicamente os elementos,
-    // por exemplo, após um fetch/ajax ou append via JS.
-
-    // EDITAR
-    document.querySelectorAll('.edit-cad-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const row = this.closest('tr');
-            const editRow = row.nextElementSibling;
-
-            if (editRow && editRow.classList.contains('edit-row')) {
-                const form = editRow.querySelector('.edit-form-cad');
-                if (!form) return;
-
-                // Alterna a exibição da linha de edição
-                if (editRow.style.display === 'none' || editRow.style.display === '') {
-                    // Pega os dados do atributo data-json da linha
-                    const jsonData = JSON.parse(row.getAttribute('data-json'));
-
-                    // Preenche os campos do formulário
-                    if (form.elements['id']) form.elements['id'].value = jsonData['id'] || '';
-                    if (form.elements['nomeFatura']) form.elements['nomeFatura'].value = jsonData['nomeFatura'] || '';
-                    if (form.elements['cliente']) form.elements['cliente'].value = jsonData['cliente'] || '';
-                    if (form.elements['nomeConsolidado']) form.elements['nomeConsolidado'].value = jsonData['nomeConsolidado'] || '';
-                    if (form.elements['data']) form.elements['data'].value = jsonData['data'] || '';
-                    if (form.elements['ctr']) form.elements['ctr'].value = jsonData['ctr'] || '';
-                    if (form.elements['porto']) form.elements['porto'].value = jsonData['porto'] || '';
-                    if (form.elements['booking']) form.elements['booking'].value = jsonData['booking'] || '';
-
-                    editRow.style.display = 'table-row';
-                } else {
-                    editRow.style.display = 'none';
-                }
-            }
-        });
-    });
-
-    // CANCELAR EDIÇÃO
-    document.querySelectorAll('.cancel-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const editRow = this.closest('.edit-row');
-            if (editRow) {
-                editRow.style.display = 'none';
-            }
-        });
-    });
-
-    // SALVAR EDIÇÃO
-    document.querySelectorAll('.edit-form-cad').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('./modulos/cadastrar/action/produtos/updateProduto.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Atualizado com sucesso!');
-                        location.reload();
-                    } else {
-                        alert('Erro ao atualizar produto: ' + (data.message || data.error || 'Erro desconhecido'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Ocorreu um erro ao tentar atualizar o produto.');
-                });
-        });
-    });
-
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const faturaId = this.getAttribute('data-id');
-            if (confirm("Tem certeza que deseja excluir este produto?")) {
-                fetch('./modulos/cadastrar/action/produtos/deleteProduto.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: faturaId
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Produto excluído com sucesso!');
-                            location.reload();
-                        } else {
-                            alert('Erro ao excluir produto: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Ocorreu um erro ao tentar excluir o produto.');
-                    });
-            }
-        });
-    })
+    window.planilhaProdutos = <?= json_encode(array_values($produtosFiltrados)) ?>
 </script>
+
+<script src="js/cadastrar/produtos.js"></script>

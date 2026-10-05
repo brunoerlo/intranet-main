@@ -2,24 +2,29 @@
 
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
         }
+
         .wrapper {
             display: flex;
             height: 100vh;
         }
+
         .sidebar {
             width: 0%;
             background: #fff;
         }
+
         .login-container {
             width: 100%;
             background: #000;
@@ -27,6 +32,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .login-form {
             background: #222;
             padding: 30px;
@@ -35,9 +41,11 @@
             width: 100%;
             max-width: 400px;
         }
+
         .login-form input {
             margin-bottom: 15px;
         }
+
         .text-link {
             color: #0d6efd;
             cursor: pointer;
@@ -45,6 +53,7 @@
             text-align: center;
             margin-top: 10px;
         }
+
         .text-link:hover {
             text-decoration: underline;
         }
@@ -53,6 +62,7 @@
     <meta name="robots" content="noindex, nofollow">
 
 </head>
+
 <body>
     <div class="wrapper">
         <div class="sidebar"></div>
@@ -60,11 +70,15 @@
 
             <!-- Formulário de Login -->
             <form class="login-form" id="login-form" method="POST" action="./modulos/configuracao/action/login.php">
-                <h2 class="text-center mb-4"><img src="logo.png"/></h2>
-                
+                <h2 class="text-center mb-4"><img src="logo.png" /></h2>
+
                 <?php if (isset($_SESSION['login_erro'])): ?>
                     <div class="alert alert-danger"><?= $_SESSION['login_erro'] ?></div>
                     <?php unset($_SESSION['login_erro']); ?>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['msg']) && $_GET['msg'] === 'sessao_expirada'): ?>
+                    <div class="alert alert-warning text-center">Sua sessão expirou por inatividade. Faça login novamente.</div>
                 <?php endif; ?>
 
                 <div class="mb-3">
@@ -100,56 +114,9 @@
         </div>
     </div>
 
-    <script>
-        function mostrarRecuperacao() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('recuperacao-form').style.display = 'block';
-        }
-
-        function mostrarLogin() {
-            document.getElementById('recuperacao-form').style.display = 'none';
-            document.getElementById('login-form').style.display = 'block';
-        }
-
-        $(document).ready(function () {
-            $("#recuperacao-form").submit(function (e) {
-                e.preventDefault(); // Impede o envio tradicional do formulário
-
-                let email = $("#recuperacao-email").val();
-                let btn = $("#recuperacao-btn");
-                let msgBox = $("#recuperacao-mensagem");
-
-                btn.prop("disabled", true).text("Enviando...");
-
-                $.ajax({
-                    url: "./modulos/configuracao/action/recuperar_senha.php",
-                    type: "POST",
-                    data: { email: email },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.status === "success") {
-                            msgBox.removeClass("alert-danger").addClass("alert-success")
-                                .text("Se o e-mail estiver cadastrado, um link de recuperação foi enviado. Verifique sua caixa de entrada.")
-                                .fadeIn();
-                        } else {
-                            msgBox.removeClass("alert-success").addClass("alert-danger")
-                                .text("Erro ao enviar o e-mail. Tente novamente.")
-                                .fadeIn();
-                        }
-                    },
-                    error: function () {
-                        msgBox.removeClass("alert-success").addClass("alert-danger")
-                            .text("Erro ao conectar ao servidor. Tente novamente mais tarde.")
-                            .fadeIn();
-                    },
-                    complete: function () {
-                        btn.prop("disabled", false).text("Enviar redefinição");
-                    }
-                });
-            });
-        });
-    </script>
-<!-- Inclua o script do reCAPTCHA -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="js/principal/login.js"></script>
+    <!-- Inclua o script do reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
+
 </html>

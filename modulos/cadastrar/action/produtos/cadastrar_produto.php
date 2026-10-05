@@ -10,7 +10,7 @@ session_start();
 $usuario = $_SESSION["usuario"]["nome"];
 
 // Validação de campos obrigatórios (incluindo empresa_id)
-$campos = ['empresa_id', 'codigo', 'descricao_pt', 'descricao_en', 'descricao_es', 'unidade', 'ncm'];
+$campos = ['empresa_id', 'codigo', 'descricao', 'unidade', 'ncm'];
 foreach ($campos as $campo) {
     if (empty($_POST[$campo])) {
         die("Erro: campo '$campo' é obrigatório.");
@@ -21,15 +21,14 @@ foreach ($campos as $campo) {
 $produto = [
     'empresa_id'   => limpar($_POST['empresa_id']),
     'codigo'       => limpar($_POST['codigo']),
-    'descricao_pt' => limpar($_POST['descricao_pt']),
-    'descricao_en' => limpar($_POST['descricao_en']),
-    'descricao_es' => limpar($_POST['descricao_es']),
+    'descricao'    => limpar($_POST['descricao']),
+    'descComp'     => limpar($_POST['descComp']) ?? '-',
     'unidade'      => limpar($_POST['unidade']),
     'ncm'          => limpar($_POST['ncm']),
     'peso'         => floatval($_POST['peso']) ?? '-',
     'preco'        => limpar($_POST['preco']) ?? '-',
 ];
-
+/*
 // Tratamento da imagem
 if (!isset($_FILES['imagem']) || $_FILES['imagem']['error'] !== UPLOAD_ERR_OK) {
     die("Erro ao enviar a imagem.");
@@ -54,7 +53,7 @@ if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $caminhoImagem)) {
 }
 
 $produto['imagem'] = $caminhoImagem;
-
+*/
 // Caminho do arquivo JSON
 $jsonPath = __DIR__ . '/produto_cadastrado.json';
 
@@ -70,7 +69,7 @@ $produtos[] = $produto;
 
 // Salva de volta no JSON
 if (file_put_contents($jsonPath, json_encode($produtos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-    registrarLog($usuario, 'cadastrar', 'produtos', 'cadastrar', "Cadastrou o produto {$produto['descricao_pt']}");
+    registrarLog($usuario, 'cadastrar', 'produtos', 'cadastrar', "Cadastrou o produto {$produto['descricao']}");
     echo "Produto cadastrado com sucesso!";
 } else {
     echo "Erro ao salvar os dados no arquivo JSON.";

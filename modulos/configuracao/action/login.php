@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once dirname(__DIR__, 3) . '/logger.php';   
+require_once dirname(__DIR__, 3) . '/logger.php';
 
 $arquivo = __DIR__ . '/users.json';
 
@@ -29,10 +29,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (file_exists($arquivo)) {
         $usuarios = json_decode(file_get_contents($arquivo), true);
-        
-        foreach ($usuarios as $user) {
+
+        foreach ($usuarios as &$user) {
             if ($user["email"] === $email && password_verify($senha, $user["senha"])) {
-                // Define os módulos de acesso com base no papel do usuário
+                if (isset($user['status']) && $user['status'] === 'quarentena') {
+                    if (time() > $user['dataExclusao']) {
+                        $idParaExcluir = $user['id'];
+                        $usuarios = array_filter($usuarios, function ($user) use ($idParaExcluir) {
+                            return $user['id'] !== $idParaExcluir;
+                            });
+                            file_put_contents($arquivo, json_encode(array_values($usuarios), JSON_PRETTY_PRINT));
+                            
+                        $_SESSION['login_erro'] = "Sua conta foi excluída definitivamente!";
+                        header("Location: ../../../login.php");
+                        exit();
+                    } else {
+                        unset($user['status']);
+                        unset($user['dataExclusao']);
+
+
+                        file_put_contents($arquivo, json_encode(array_values($usuarios), JSON_PRETTY_PRINT));
+                    }
+                }
                 $modulos = ($user["role"] === "admin") ? ["todos"] : ($user["modulos"] ?? []);
 
                 $_SESSION["usuario"] = [
@@ -42,15 +60,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "role" => $user["role"],
                     "modulos" => $modulos
                 ];
+
                 registrarLog($user['nome'], 'configuracao', 'login', 'entrar', "Fez Login");
                 header("Location: ../../../index.php");
                 exit();
             }
         }
-    }
+        unset($user); // Boa prática após usar o &
 
-    $_SESSION["login_erro"] = "E-mail ou senha inválidos.";
-    header("Location: ../../../login.php");
-    exit();
+        $_SESSION["login_erro"] = "E-mail ou senha inválidos.";
+        header("Location: ../../../login.php");
+        exit();
+    }
 }
-?>

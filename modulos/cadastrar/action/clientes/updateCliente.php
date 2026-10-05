@@ -49,7 +49,7 @@ if ($codigoCliente) {
 
     if ($clienteImportadoEncontrado) {
         if (file_put_contents($clientesImportadosPath, json_encode($clientesImportados, JSON_PRETTY_PRINT))) {
-            $nomeLog = $itemEditado['tipo'] === 'cpf' ? $itemEditado['nomeCompleto'] : ($itemEditado['tipo'] === 'cnpj' ? $itemEditado['razaoSocial'] : $itemEditado['nomeImportador']);
+            $nomeLog = $itemEditado['origem'] === 'cpf' ? $itemEditado['nomeCompleto'] : ($itemEditado['origem'] === 'cnpj' ? $itemEditado['razaoSocial'] : $itemEditado['nomeImportador']);
             registrarLog($usuario, 'cadastrar', 'clientes', 'editar', "Editou o cliente {$nomeLog}");
             echo json_encode(['success' => true, 'message' => 'Cliente importado atualizado.']);
         } else {
@@ -82,7 +82,7 @@ if ($codigoCliente) {
 
     if ($clienteCadastradoEncontrado) {
         if (file_put_contents($clientesCadastradosPath, json_encode($clientesCadastrados, JSON_PRETTY_PRINT))) {
-            $nomeLog = $itemEditado['tipo'] === 'cpf' ? $itemEditado['nomeCompleto'] : ($itemEditado['tipo'] === 'cnpj' ? $itemEditado['razaoSocial'] : $itemEditado['nomeImportador']);
+            $nomeLog = $itemEditado['origem'] === 'cpf' ? $itemEditado['nomeCompleto'] : ($itemEditado['origem'] === 'cnpj' ? $itemEditado['razaoSocial'] : $itemEditado['nomeImportador']);
             registrarLog($usuario, 'cadastrar', 'clientes', 'editar', "Editou o cliente {$nomeLog}");
             echo json_encode(['success' => true, 'message' => 'Cliente cadastrado atualizado.']);
         } else {

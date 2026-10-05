@@ -26,6 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user['email'] = $input['email'];
             $user['role'] = $input['role'];
             
+            if (!empty($input['senha'])) {
+                $user['senha'] = password_hash($input['senha'], PASSWORD_DEFAULT);
+            }
+            
             if ($user['role'] === 'user' && isset($input['modulos'])) {
                 $user['modulos'] = array_values(array_unique($input['modulos']));
             } else {
