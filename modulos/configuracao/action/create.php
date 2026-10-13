@@ -2,11 +2,20 @@
 header('Content-Type: application/json');
 
 require_once dirname(__DIR__, 3) . '/logger.php';   
+require_once dirname(__DIR__, 3) . '/validador.php';   
 
 session_start();
 $usuario = $_SESSION["usuario"]["nome"];
 
 $data = $_POST;
+
+$cnpjLimpo = preg_replace('/\D/', '', $data['cnpj'] ?? '');
+if (!validarCNPJ($cnpjLimpo)) {
+    http_response_code(400);
+    echo json_encode(['status' => 'erro', 'mensagem' => 'CNPJ inválido. Por favor, digite um número existente.']);
+    exit;
+}
+$data['cnpj'] = $cnpjLimpo;
 
 $arquivo = __DIR__ . '/empresas.json';
 $empresas = file_exists($arquivo) ? json_decode(file_get_contents($arquivo), true) : [];

@@ -84,11 +84,12 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                 <div class="modal-header align-items-center">
                     <img src="logo-black.png" class="print-logo" style="display: none; width: 150px; margin-right: 20px;" alt="Logo" />
                     <h5 class="modal-title">Produtos da fatura: <span id="modalNomeFatura"></span></h5>
-                    <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir" style="margin-left: auto;">
-                        🖨️ Imprimir
-                    </button>
-
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    <div class="d-flex align-items-center gap-2 ms-auto">
+                        <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir">
+                            🖨️ Imprimir
+                        </button>
+                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <table class="table table-hover table-bordered align-middle text-center mb-0" id="show-print">
@@ -182,7 +183,8 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         }
 
         /* Esconde apenas os botões do modal na impressão */
-        .modal-header .btn {
+        .modal-header .btn,
+        .modal-header .btn-close {
             display: none !important;
         }
 

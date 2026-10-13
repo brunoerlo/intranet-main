@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 $file_path = __DIR__ . '/clientes_cadastrados.json';
 
 require_once dirname(__DIR__, 4) . '/logger.php';
+require_once dirname(__DIR__, 4) . '/validador.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -16,6 +17,23 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 // Verifica se os dados foram recebidos corretamente
 if (isset($data['tipo']) && isset($data['email']) && isset($data['telefone'])) {
+    // Validação matemática do documento
+    if ($data['tipo'] === 'cpf') {
+        $cpfLimpo = preg_replace('/\D/', '', $data['cpf'] ?? '');
+        if (!validarCPF($cpfLimpo)) {
+            echo json_encode(['success' => false, 'error' => 'CPF inválido. Por favor, digite um número existente.']);
+            exit;
+        }
+        $data['cpf'] = $cpfLimpo;
+    } elseif ($data['tipo'] === 'cnpj') {
+        $cnpjLimpo = preg_replace('/\D/', '', $data['cnpj'] ?? '');
+        if (!validarCNPJ($cnpjLimpo)) {
+            echo json_encode(['success' => false, 'error' => 'CNPJ inválido. Por favor, digite um número existente.']);
+            exit;
+        }
+        $data['cnpj'] = $cnpjLimpo;
+    }
+
     // Gera um ID único para o cliente
     $data['Codigo Cliente'] = uniqid('cli_', true); // Ex: cli_66147087a7f79.15609252
 

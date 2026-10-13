@@ -52,6 +52,27 @@ document.getElementById('formCadastroCliente').addEventListener('submit', functi
         data[key] = value;
     });
 
+    // Validação matemática do documento
+    if (data.tipo === 'cpf') {
+        const inputCpf = document.getElementById('cpf');
+        if (typeof validarCPF === 'function' && !validarCPF(data.cpf)) {
+            inputCpf.classList.add('is-invalid');
+            inputCpf.classList.remove('is-valid');
+            alert('CPF inválido. Por favor, verifique o número digitado.');
+            inputCpf.focus();
+            return;
+        }
+    } else if (data.tipo === 'cnpj') {
+        const inputCnpj = document.getElementById('cnpj');
+        if (typeof validarCNPJ === 'function' && !validarCNPJ(data.cnpj)) {
+            inputCnpj.classList.add('is-invalid');
+            inputCnpj.classList.remove('is-valid');
+            alert('CNPJ inválido. Por favor, verifique o número digitado.');
+            inputCnpj.focus();
+            return;
+        }
+    }
+
     // Envia os dados via AJAX
     fetch('./modulos/cadastrar/action/clientes/cadastrarCliente.php', {
         method: 'POST',
@@ -65,6 +86,7 @@ document.getElementById('formCadastroCliente').addEventListener('submit', functi
             if (data.success) {
                 alert('Cliente cadastrado com sucesso!');
                 document.getElementById('formCadastroCliente').reset();
+                document.querySelectorAll('#formCadastroCliente input').forEach(el => el.classList.remove('is-valid', 'is-invalid'));
                 location.reload();
             } else {
                 alert('Erro ao cadastrar cliente: ' + data.error);
@@ -75,6 +97,40 @@ document.getElementById('formCadastroCliente').addEventListener('submit', functi
             alert('Ocorreu um erro ao cadastrar o cliente.');
         });
 });
+
+const campoCep = document.getElementById('cep');
+const campoRua = document.getElementById('rua');
+const campoBairro = document.getElementById('bairro');
+const campoCidade = document.getElementById('cidade');
+const campoEstado = document.getElementById('estado');
+
+campoCep.addEventListener('blur', async function () {
+    const cep = this.value.trim();
+    const limpaCep = cep.replace(/\D/g, '');
+    if (!limpaCep) {
+        campoRua.value = '';
+        campoBairro.value = '';
+        campoCidade.value = '';
+        campoEstado.value = '';
+        return;
+    }
+    try {
+        const procura = await fetch(`https://viacep.com.br/ws/${limpaCep}/json/`);
+        const dados = await procura.json();
+
+        if (dados.erro) {
+            alert('Cep não encontrado');
+            return;
+        }
+        campoRua.value = dados.logradouro;
+        campoBairro.value = dados.bairro;
+        campoCidade.value = dados.localidade;
+        campoEstado.value = dados.uf;
+    } catch (erro) {
+        console.error("Erro ao buscar o CEP:", erro);
+    }
+});
+
 
 // IMPORTAR
 
@@ -243,28 +299,121 @@ document.querySelectorAll('.cancel-btn').forEach(button => {
 });
 
 // SALVAR EDIÇÃO
-document.querySelectorAll('.edit-form-cad-clientes').forEach(form => {
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        fetch('./modulos/cadastrar/action/clientes/updateCliente.php', {
-            method: 'POST',
-            body: formData
+document.addEventListener('submit', function (event) {
+    const form = event.target.closest('.edit-form-cad-clientes');
+    if (!form) return;
+
+    event.preventDefault();
+
+    const inputCpf = form.querySelector('input[name="cpf"]');
+    if (inputCpf && typeof validarCPF === 'function' && !validarCPF(inputCpf.value)) {
+        inputCpf.classList.add('is-invalid');
+        inputCpf.classList.remove('is-valid');
+        alert('CPF inválido. Por favor, verifique o número digitado.');
+        inputCpf.focus();
+        return;
+    }
+
+    const inputCnpj = form.querySelector('input[name="cnpj"]');
+    if (inputCnpj && typeof validarCNPJ === 'function' && !validarCNPJ(inputCnpj.value)) {
+        inputCnpj.classList.add('is-invalid');
+        inputCnpj.classList.remove('is-valid');
+        alert('CNPJ inválido. Por favor, verifique o número digitado.');
+        inputCnpj.focus();
+        return;
+    }
+
+    const formData = new FormData(form);
+    fetch('./modulos/cadastrar/action/clientes/updateCliente.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Atualizado com sucesso!');
+                location.reload();
+            } else {
+                alert('Erro ao atualizar cliente: ' + (data.message || data.error || 'Erro desconhecido'));
+            }
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Atualizado com sucesso!');
-                    location.reload();
-                } else {
-                    alert('Erro ao atualizar cliente: ' + (data.message || data.error || 'Erro desconhecido'));
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro ao tentar atualizar o cliente.');
-            });
-    });
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Ocorreu um erro ao tentar atualizar o cliente.');
+        });
+});
+
+// MÁSCARA E VALIDAÇÃO EM TEMPO REAL PARA CPF E CNPJ
+document.addEventListener('input', function (e) {
+    const target = e.target;
+    if (!target) return;
+
+    if (target.id === 'cpf' || target.classList.contains('input-cpf') || target.name === 'cpf') {
+        if (typeof mascaraCPF === 'function') {
+            target.value = mascaraCPF(target.value);
+        }
+        const limpo = target.value.replace(/\D/g, '');
+        if (limpo.length === 11) {
+            if (typeof validarCPF === 'function' && validarCPF(limpo)) {
+                target.classList.remove('is-invalid');
+                target.classList.add('is-valid');
+            } else {
+                target.classList.add('is-invalid');
+                target.classList.remove('is-valid');
+            }
+        } else {
+            target.classList.remove('is-valid', 'is-invalid');
+        }
+    } else if (target.id === 'cnpj' || target.classList.contains('input-cnpj') || target.name === 'cnpj') {
+        if (typeof mascaraCNPJ === 'function') {
+            target.value = mascaraCNPJ(target.value);
+        }
+        const limpo = target.value.replace(/\D/g, '');
+        if (limpo.length === 14) {
+            if (typeof validarCNPJ === 'function' && validarCNPJ(limpo)) {
+                target.classList.remove('is-invalid');
+                target.classList.add('is-valid');
+            } else {
+                target.classList.add('is-invalid');
+                target.classList.remove('is-valid');
+            }
+        } else {
+            target.classList.remove('is-valid', 'is-invalid');
+        }
+    }
+});
+
+document.addEventListener('focusout', function (e) {
+    const target = e.target;
+    if (!target) return;
+
+    if (target.id === 'cpf' || target.classList.contains('input-cpf') || target.name === 'cpf') {
+        const limpo = target.value.replace(/\D/g, '');
+        if (limpo.length > 0) {
+            if (typeof validarCPF === 'function' && validarCPF(limpo)) {
+                target.classList.remove('is-invalid');
+                target.classList.add('is-valid');
+            } else {
+                target.classList.add('is-invalid');
+                target.classList.remove('is-valid');
+            }
+        } else {
+            target.classList.remove('is-valid', 'is-invalid');
+        }
+    } else if (target.id === 'cnpj' || target.classList.contains('input-cnpj') || target.name === 'cnpj') {
+        const limpo = target.value.replace(/\D/g, '');
+        if (limpo.length > 0) {
+            if (typeof validarCNPJ === 'function' && validarCNPJ(limpo)) {
+                target.classList.remove('is-invalid');
+                target.classList.add('is-valid');
+            } else {
+                target.classList.add('is-invalid');
+                target.classList.remove('is-valid');
+            }
+        } else {
+            target.classList.remove('is-valid', 'is-invalid');
+        }
+    }
 });
 
 document.addEventListener("click", function (e) {

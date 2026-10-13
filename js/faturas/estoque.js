@@ -8,7 +8,6 @@ campoCodigo.addEventListener('blur', async function () {
         campoDescricao.value = '';
         return;
     }
-
     try {
         const response = await fetch(`./modulos/faturas/action/buscarProduto.php?codigo=  BM ${encodeURIComponent(codigo)}`);
         const produto = await response.json();

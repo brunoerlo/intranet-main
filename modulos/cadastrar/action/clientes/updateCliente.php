@@ -4,6 +4,7 @@ $clientesImportadosPath = __DIR__ . '/clientes.json';
 $clientesCadastradosPath = __DIR__ . '/clientes_cadastrados.json';
 
 require_once dirname(__DIR__, 4) . '/logger.php';   
+require_once dirname(__DIR__, 4) . '/validador.php';   
 
 session_start();
 $usuario = $_SESSION["usuario"]["nome"];
@@ -22,6 +23,25 @@ $clientesCadastrados = json_decode(file_get_contents($clientesCadastradosPath), 
 if (!isset($_POST['Codigo_Cliente'])) {
     echo json_encode(['success' => false, 'message' => 'Código do cliente não especificado.']);
     exit;
+}
+
+// Validação matemática do documento em caso de alteração
+if (isset($_POST['cpf']) && (($_POST['tipo'] ?? '') === 'cpf' || !empty($_POST['cpf']))) {
+    $cpfLimpo = preg_replace('/\D/', '', $_POST['cpf']);
+    if (!validarCPF($cpfLimpo)) {
+        echo json_encode(['success' => false, 'message' => 'CPF inválido. Por favor, digite um número existente.']);
+        exit;
+    }
+    $_POST['cpf'] = $cpfLimpo;
+}
+
+if (isset($_POST['cnpj']) && (($_POST['tipo'] ?? '') === 'cnpj' || !empty($_POST['cnpj']))) {
+    $cnpjLimpo = preg_replace('/\D/', '', $_POST['cnpj']);
+    if (!validarCNPJ($cnpjLimpo)) {
+        echo json_encode(['success' => false, 'message' => 'CNPJ inválido. Por favor, digite um número existente.']);
+        exit;
+    }
+    $_POST['cnpj'] = $cnpjLimpo;
 }
 
 $codigoCliente = $_POST['Codigo_Cliente'];

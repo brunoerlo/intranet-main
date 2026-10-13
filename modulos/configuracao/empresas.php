@@ -12,7 +12,8 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">CNPJ</label>
-                <input type="text" name="cnpj" class="form-control" required>
+                <input type="text" name="cnpj" class="form-control input-cnpj" maxlength="18" placeholder="00.000.000/0000-00" required>
+                <div class="invalid-feedback">CNPJ inválido. Verifique o número digitado.</div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Telefone</label>
@@ -61,4 +62,5 @@
     <tbody></tbody>
 </table>
 
+<script src="js/principal/validador-documentos.js"></script>
 <script src="js/configuracao/empresas.js"></script>

@@ -31,7 +31,8 @@
                 <div id="grupo-cpf" class="tipo-grupo d-none">
                     <div class="mb-3">
                         <label for="cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" required>
+                        <input type="text" class="form-control input-cpf" id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" required>
+                        <div class="invalid-feedback">CPF inválido. Verifique o número digitado.</div>
                     </div>
                     <div class="mb-3">
                         <label for="nomeCompleto" class="form-label">Nome Completo</label>
@@ -43,7 +44,8 @@
                 <div id="grupo-cnpj" class="tipo-grupo d-none">
                     <div class="mb-3">
                         <label for="cnpj" class="form-label">CNPJ</label>
-                        <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+                        <input type="text" class="form-control input-cnpj" id="cnpj" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" required>
+                        <div class="invalid-feedback">CNPJ inválido. Verifique o número digitado.</div>
                     </div>
                     <div class="mb-3">
                         <label for="razaoSocial" class="form-label">Nome ou Razão Social</label>
@@ -95,24 +97,28 @@
                 <!-- Campos comuns (exceto exterior que tem endereço diferente) -->
                 <div id="enderecoCampos" class="d-none">
                     <div class="mb-3">
+                        <label for="cep" class="form-label">CEP</label>
+                        <input type="text" class="form-control" id="cep" name="cep" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="rua" class="form-label">Rua</label>
-                        <input type="text" class="form-control" id="rua" name="rua" required>
+                        <input type="text" class="form-control" id="rua" name="rua" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="bairro" class="form-label">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" name="bairro" required>
+                        <input type="text" class="form-control" id="bairro" name="bairro" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="cidade" class="form-label">Cidade</label>
-                        <input type="text" class="form-control" id="cidade" name="cidade" required>
+                        <input type="text" class="form-control" id="cidade" name="cidade" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado</label>
-                        <input type="text" class="form-control" id="estado" name="estado" required>
+                        <input type="text" class="form-control" id="estado" name="estado" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="cep" class="form-label">CEP</label>
-                        <input type="text" class="form-control" id="cep" name="cep" required>
+                        <label for="numero" class="form-label">Número</label>
+                        <input type="text" class="form-control" id="numero" name="numero" required>
                     </div>
                 </div>
 
@@ -165,18 +171,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     echo 'Erro ao decodificar clientes.json: ' . json_last_error_msg();
 }
 
-function formatarCpfCnpj($valor)
-{
-    $valor = preg_replace('/\D/', '', $valor);
-
-    if (strlen($valor) === 11) {
-        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $valor);
-    } elseif (strlen($valor) === 14) {
-        return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "$1.$2.$3/$4-$5", $valor);
-    } else {
-        return $valor;
-    }
-}
+require_once dirname(__DIR__, 2) . '/validador.php';
 
 $todosClientes = [];
 
@@ -386,7 +381,8 @@ function gerarUrlPaginacao($novaPagina)
                                     <?php if ($tipo === 'cnpj'): ?>
                                         <div class="col-md-4">
                                             <label class="form-label mb-0 small">CNPJ</label>
-                                            <input type="text" class="form-control form-control-sm" name="cnpj" value="<?= htmlspecialchars($cliente['cnpj']) ?>" required>
+                                            <input type="text" class="form-control form-control-sm input-cnpj" name="cnpj" value="<?= htmlspecialchars(formatarCpfCnpj($cliente['cnpj'])) ?>" maxlength="18" placeholder="00.000.000/0000-00" required>
+                                            <div class="invalid-feedback">CNPJ inválido. Verifique o número digitado.</div>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label mb-0 small">Razão Social</label>
@@ -407,7 +403,8 @@ function gerarUrlPaginacao($novaPagina)
                                     <?php elseif ($tipo === 'cpf'): ?>
                                         <div class="col-md-4">
                                             <label class="form-label mb-0 small">CPF</label>
-                                            <input type="text" class="form-control form-control-sm" name="cpf" value="<?= htmlspecialchars($cliente['cpf']) ?>" required>
+                                            <input type="text" class="form-control form-control-sm input-cpf" name="cpf" value="<?= htmlspecialchars(formatarCpfCnpj($cliente['cpf'])) ?>" maxlength="14" placeholder="000.000.000-00" required>
+                                            <div class="invalid-feedback">CPF inválido. Verifique o número digitado.</div>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label mb-0 small">Nome Completo</label>
@@ -591,4 +588,5 @@ function gerarUrlPaginacao($novaPagina)
     window.planilhaClientes = <?= json_encode(array_values($clientesFiltrados)) ?>
 </script>
 
+<script src="js/principal/validador-documentos.js"></script>
 <script src="js/cadastrar/clientes.js"></script>

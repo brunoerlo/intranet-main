@@ -2,7 +2,7 @@
 session_start();
 
 // Versão do Sistema
-define('APP_VERSION', '2.4.0');
+define('APP_VERSION', '2.5.0');
 
 // Tempo limite de inatividade em segundos (ex: 1800 para 30 minutos)
 $timeout_duration = 1800;
@@ -193,6 +193,7 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
         </div>
     </div>
 
+    <script src="js/principal/validador-documentos.js"></script>
     <script src="js/principal/scriptIndex.js"></script>
     <!-- Bootstrap 5 Bundle JS (inclui Popper para Collapse, Modais, Dropdowns, etc.) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
