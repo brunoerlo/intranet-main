@@ -403,6 +403,8 @@ document.getElementById('tr-thead').closest('thead').addEventListener('click', f
     // Limpar indicadores de todas as colunas da mesma tabela
     headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
         otherTh.dataset.order = 'none';
+        otherTh.querySelectorAll('.sort-arrow').forEach(el => el.remove());
+        otherTh.textContent = otherTh.textContent.replace(/\s*[▲▼↕]\s*$/g, '').trim();
     });
 
     // Definir nova direção (indicador visual controlado via CSS)

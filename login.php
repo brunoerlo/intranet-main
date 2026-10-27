@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+session_start();
+$versionData = file_exists(__DIR__ . '/version.json')
+    ? json_decode(file_get_contents(__DIR__ . '/version.json'), true)
+    : null;
+$versaoLogin = $versionData['versao'] ?? '2.5.0';
+?>
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -81,6 +87,10 @@
                     <div class="alert alert-warning text-center">Sua sessão expirou por inatividade. Faça login novamente.</div>
                 <?php endif; ?>
 
+                <?php if (isset($_GET['msg']) && $_GET['msg'] === 'versao_atualizada'): ?>
+                    <div class="alert alert-info text-center">O sistema foi atualizado para uma nova versão. Faça login novamente para continuar.</div>
+                <?php endif; ?>
+
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" required>
@@ -114,7 +124,7 @@
         </div>
     </div>
 
-    <script src="js/principal/login.js"></script>
+    <script src="js/principal/login.js?v=<?= htmlspecialchars($versaoLogin) ?>"></script>
     <!-- Inclua o script do reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>

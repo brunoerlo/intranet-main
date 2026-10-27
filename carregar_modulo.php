@@ -6,6 +6,17 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
+clearstatcache(true, __DIR__ . '/version.json');
+$versionData = file_exists(__DIR__ . '/version.json')
+    ? json_decode(file_get_contents(__DIR__ . '/version.json'), true)
+    : null;
+$versaoAtual = isset($versionData['versao']) ? trim((string)$versionData['versao']) : '2.5.0';
+
+if (!isset($_SESSION['app_version']) || $_SESSION['app_version'] !== $versaoAtual) {
+    echo "<script>window.location.href='logout.php?motivo=atualizacao';</script>";
+    exit();
+}
+
 $timeout_duration = 1800; // 30 minutos
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout_duration)) {
     session_unset();

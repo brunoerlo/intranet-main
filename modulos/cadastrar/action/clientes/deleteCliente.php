@@ -48,7 +48,8 @@ $clientesFiltradosImportados = array_filter($clientesImportados, function ($clie
 
 if (count($clientesFiltradosImportados) < count($clientesImportados)) {
     if (file_put_contents($clientesImportadosPath, json_encode(array_values($clientesFiltradosImportados), JSON_PRETTY_PRINT))) {
-        registrarLog($usuario, 'cadastrar', 'clientes', 'deletar', "Deletou o cliente {$itemDeletado['nomeCompleto']}");
+        $nomeDeletado = ($itemDeletado['tipo'] ?? '') === 'cpf' ? $itemDeletado['nomeCompleto'] : (($itemDeletado['tipo'] ?? '') === 'cnpj' ? $itemDeletado['razaoSocial'] : ($itemDeletado['nomeImportador'] ?? ''));
+        registrarLog($usuario, 'cadastrar', 'clientes', 'deletar', "Deletou o cliente {$nomeDeletado}");
         echo json_encode(['success' => true, 'message' => 'Cliente deletado dos importados.']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Erro ao salvar clientes importados.']);
@@ -73,7 +74,8 @@ $clientesFiltradosCadastrados = array_filter($clientesCadastrados, function ($cl
 
 if (count($clientesFiltradosCadastrados) < count($clientesCadastrados)) {
     if (file_put_contents($clientesCadastradosPath, json_encode(array_values($clientesFiltradosCadastrados), JSON_PRETTY_PRINT))) {
-        registrarLog($usuario, 'cadastrar', 'clientes', 'deletar', "Deletou o cliente {$itemDeletado['nomeCompleto']}");
+        $nomeDeletado = ($itemDeletado['tipo'] ?? '') === 'cpf' ? $itemDeletado['nomeCompleto'] : (($itemDeletado['tipo'] ?? '') === 'cnpj' ? $itemDeletado['razaoSocial'] : ($itemDeletado['nomeImportador'] ?? ''));
+        registrarLog($usuario, 'cadastrar', 'clientes', 'deletar', "Deletou o cliente {$nomeDeletado}");
         echo json_encode(['success' => true, 'message' => 'Cliente deletado dos cadastrados.']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Erro ao salvar clientes cadastrados.']);

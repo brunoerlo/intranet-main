@@ -264,6 +264,24 @@ $clientesFiltrados = array_filter($todosClientes, function ($clientes) use ($fil
     return true;
 });
 
+$colunaOrdem = $_GET['ordem'] ?? 'nome';
+$direcaoOrdem = $_GET['direcao'] ?? 'asc';
+usort($clientesFiltrados, function ($a, $b) use ($colunaOrdem, $direcaoOrdem) {
+    if ($colunaOrdem === 'documento') { 
+        $docA = $a['tipo'] === 'cpf' ? $a['cpf'] : ($a['tipo'] === 'cnpj' ? $a['cnpj'] : $a['docImportador']);
+        $docB = $b['tipo'] === 'cpf' ? $b['cpf'] : ($b['tipo'] === 'cnpj' ? $b['cnpj'] : $b['docImportador']);
+
+        $elementA = preg_replace('/\D/', '', (string) $docA);
+        $elementB = preg_replace('/\D/', '', (string) $docB);
+    } else {
+        $elementA = $a['tipo'] === 'cpf' ? $a['nomeCompleto'] : ($a['tipo'] === 'cnpj' ? $a['razaoSocial'] : $a['nomeImportador']);
+
+        $elementB = $b['tipo'] === 'cpf' ? $b['nomeCompleto'] : ($b['tipo'] === 'cnpj' ? $b['razaoSocial'] :  $b['nomeImportador']);
+    }
+    $comparacao = strnatcasecmp((string)trim($elementA), (string)trim($elementB));
+    return strtolower((string) $direcaoOrdem) === 'desc' ? -$comparacao : $comparacao;
+});
+
 $p = max(1, intval($_GET['p'] ?? 1));
 $limitePorPagina = isset($_GET['limite']) ? max(1, intval($_GET['limite'])) : 30;
 
@@ -288,6 +306,8 @@ function gerarUrlPaginacao($novaPagina)
 <div class="container py-3" id="listagem-clientes">
     <h1 class="mb-4 text-center">Lista de Clientes</h1>
     <form id="formFiltroClientes" method="GET" action="" class="bg-white p-3 rounded shadow-sm mb-4 border">
+        <input type="hidden" name="ordem" value="<?= htmlspecialchars($colunaOrdem) ?>">
+        <input type="hidden" name="direcao" value="<?= htmlspecialchars($direcaoOrdem) ?>">
         <div class="row g-3 align-items-center">
             <div class="col-md-4">
                 <div class="form-floating">
@@ -314,7 +334,7 @@ function gerarUrlPaginacao($novaPagina)
             <div class="col-md-4">
                 <div class="d-flex gap-2 h-100">
                     <div class="form-floating flex-grow-1">
-                        <input type="text" class="form-control" id="filtro-clientes" name="termo_busca" placeholder="Pesquisar..." style="height: 58px;">
+                        <input type="text" class="form-control" id="filtro-clientes" name="termo_busca" value="<?= htmlspecialchars($termoBusca) ?>" placeholder="Pesquisar..." style="height: 58px;">
                         <label for="filtro-clientes"><i class="fa-solid fa-magnifying-glass text-muted"></i> Buscar cliente</label>
                     </div>
                     <button class="btn btn-success d-flex flex-column align-items-center justify-content-center px-3" id="btn-exportar-clientes" title="Exportar CSV Clientes" style="height: 58px;" type="button">
@@ -329,8 +349,8 @@ function gerarUrlPaginacao($novaPagina)
         <table class="table table-hover table-bordered align-middle mb-0 text-center" id="tabela-clientes">
             <thead class="table-dark">
                 <tr id="th-thead-clientes">
-                    <th class="sortable">Nome ou Razão Social</th>
-                    <th class="sortable" style="width: 150px !important;">CPF ou CNPJ</th>
+                    <th class="sortable" data-coluna="nome" data-order="<?= $colunaOrdem === 'nome' ? htmlspecialchars($direcaoOrdem) : 'none' ?>">Nome ou Razão Social</th>
+                    <th class="sortable" data-coluna="documento" data-order="<?= $colunaOrdem === 'documento' ? htmlspecialchars($direcaoOrdem) : 'none' ?>" style="width: 150px !important;">CPF ou CNPJ</th>
                     <th>Endereço</th>
                     <th>Telefone</th>
                     <th>E-mail</th>

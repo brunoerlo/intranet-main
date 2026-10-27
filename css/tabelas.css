@@ -19,7 +19,7 @@
 /* Tabela */
 .table {
     --bs-table-hover-bg: rgba(13, 110, 253, 0.06);
-    font-size: 0.875rem;
+    font-size: 0.79rem;
     color: #212529;
     vertical-align: middle;
     border-color: #dee2e6;
@@ -37,7 +37,7 @@
     background-color: #212529;
     color: #ffffff;
     border-color: #373b3e;
-    font-size: 0.75rem;
+    font-size: 0.83rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;

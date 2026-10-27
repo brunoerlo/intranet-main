@@ -73,8 +73,8 @@ document.querySelectorAll('.linha-fatura-unica').forEach(function (linhaFatura) 
             itensDaFatura.forEach(function (item) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                        <td class="sortable">${item.codigo ?? ''}</td>
-                        <td class="sortable">${item.descricao ?? ''}</td>
+                        <td>${item.codigo ?? ''}</td>
+                        <td>${item.descricao ?? ''}</td>
                         <td>${item.unidadeMedida ?? ''}</td>
                         <td>${item.quantidade ?? ''}</td>
                         <td>${item.preco ?? ''}</td>
@@ -146,6 +146,8 @@ function ordenacaoAlfabetica(tabela) {
         // Limpar indicadores de todas as colunas da mesma tabela
         headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
             otherTh.dataset.order = 'none';
+            otherTh.querySelectorAll('.sort-arrow').forEach(el => el.remove());
+            otherTh.textContent = otherTh.textContent.replace(/\s*[▲▼↕]\s*$/g, '').trim();
         });
 
         // Definir nova direção (indicador visual controlado via CSS)

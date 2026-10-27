@@ -28328,5 +28328,535 @@
         "unidadeMedida": "UN",
         "quantidade": "2",
         "preco": "322.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 124.004",
+        "descricao": "BARRA GRELHA BMX-2 295x32x8x0,6MM",
+        "unidadeMedida": "UN",
+        "quantidade": "200",
+        "preco": "3.63"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 124.033",
+        "descricao": "BARRA GRELHA BMX-3 375x38x10x1MM",
+        "unidadeMedida": "UN",
+        "quantidade": "1568",
+        "preco": "6.63"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 140.021",
+        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
+        "unidadeMedida": "UN",
+        "quantidade": "12",
+        "preco": "115.35"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 616.300",
+        "descricao": "BOMBA ALTA PRESSAO 4x3 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "299.92"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 616.900",
+        "descricao": "BOMBA ALTA PRESSAO 6x4 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "475.84"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 617.300",
+        "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "533.51"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 113.046",
+        "descricao": "CADINHO REDONDO NR 05 CERAMICA",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "22.73"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 113.047",
+        "descricao": "CADINHO REDONDO NR 06 CERAMICA",
+        "unidadeMedida": "UN",
+        "quantidade": "100",
+        "preco": "23.88"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 620.503",
+        "descricao": "CARCACA BD 5.1\/2  (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "107.85"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "242.56"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 622.005",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO BOR(BFX)",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "246.17"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 621.303",
+        "descricao": "CARCACA BD 8 DISCO FUND (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "308.01"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 621.306",
+        "descricao": "CARCACA BD 8 P\/ DISCO BORR(B FIX)",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "344.29"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 109.000",
+        "descricao": "DUREPOXI 100 GRS 48UN\/CX",
+        "unidadeMedida": "UN",
+        "quantidade": "576",
+        "preco": "2.57"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 116.005",
+        "descricao": "GAXETA ALGODAO GRAFITADA QD 5\/8 CX 10 KG",
+        "unidadeMedida": "KG",
+        "quantidade": "300",
+        "preco": "8.65"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 140.066 MI",
+        "descricao": "JUNTA MOTOR MWM X10 6 CIL SABO 80279",
+        "unidadeMedida": "JG",
+        "quantidade": "20",
+        "preco": "202.86"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 140.170 MI",
+        "descricao": "JUNTA MOTOR MWM 4.10 TCA 80277 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "5",
+        "preco": "149.33"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 140.064 MI",
+        "descricao": "JUNTA MOTOR MWM 229\/6 80105 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "10",
+        "preco": "98.61"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 140.063 MI",
+        "descricao": "JUNTA MOTOR MWM 229\/4  80108 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "20",
+        "preco": "73.26"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 140.062 MI",
+        "descricao": "JUNTA MOTOR MWM 229\/3  80120 - SPALL",
+        "unidadeMedida": "JG",
+        "quantidade": "5",
+        "preco": "78.89"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 120.095",
+        "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
+        "unidadeMedida": "MT",
+        "quantidade": "90",
+        "preco": "22.54"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 120.092",
+        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
+        "unidadeMedida": "MT",
+        "quantidade": "90",
+        "preco": "25.20"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 120.202",
+        "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM 150PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "6",
+        "preco": "146.48"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 120.093",
+        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM 150PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "6",
+        "preco": "247.16"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 124.086",
+        "descricao": "MANOMETRO 2,5 BAR 1\/4X1\/2BSP VISOR 62MM",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "37.99"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 124.123",
+        "descricao": "MANOMETRO 3,5 BAR 1\/4X1\/2BSP VISOR 62MM",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "37.99"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 138.001",
+        "descricao": "MEIOES COLORIDOS PROFISSIONAL TAM39 A 42",
+        "unidadeMedida": "PR",
+        "quantidade": "1800",
+        "preco": "3.34"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 125.010",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 5",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "12.34"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 125.011",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 6",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "15.89"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 125.012",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 8",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "61.33"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 125.028",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 10",
+        "unidadeMedida": "UN",
+        "quantidade": "3",
+        "preco": "87.59"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 131.008",
+        "descricao": "REDUCAO VINCADA 3x2.1\/2",
+        "unidadeMedida": "UN",
+        "quantidade": "70",
+        "preco": "7.55"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 131.009",
+        "descricao": "REDUCAO VINCADA 4x3",
+        "unidadeMedida": "UN",
+        "quantidade": "40",
+        "preco": "9.08"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 131.010",
+        "descricao": "REDUCAO VINCADA 5x4",
+        "unidadeMedida": "UN",
+        "quantidade": "40",
+        "preco": "13.44"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 131.019",
+        "descricao": "REDUCAO VINCADA 6x4",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "15.33"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 131.011",
+        "descricao": "REDUCAO VINCADA 6x5",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "16.42"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 131.012",
+        "descricao": "REDUCAO VINCADA 8x6",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "30.78"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 113.012",
+        "descricao": "RILHEIRA 4 DIV 50 GR\/100 GR\/250 GR\/500 G",
+        "unidadeMedida": "UN",
+        "quantidade": "26",
+        "preco": "106.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 113.013",
+        "descricao": "SUPORTE PARA CADINHO NR 05",
+        "unidadeMedida": "UN",
+        "quantidade": "50",
+        "preco": "20.92"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 113.050",
+        "descricao": "SUPORTE PARA CADINHO REDONDO NR 05",
+        "unidadeMedida": "UN",
+        "quantidade": "25",
+        "preco": "18.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 113.049",
+        "descricao": "SUPORTE PARA CADINHO REDONDO NR 06",
+        "unidadeMedida": "UN",
+        "quantidade": "25",
+        "preco": "18.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.101",
+        "descricao": "UNIAO Y VINCADA 3x2.1\/2x2.1\/2",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "13.67"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.103",
+        "descricao": "UNIAO Y VINCADA 3x3x3",
+        "unidadeMedida": "UN",
+        "quantidade": "15",
+        "preco": "15.82"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.106",
+        "descricao": "UNIAO Y VINCADA 4x3x3",
+        "unidadeMedida": "UN",
+        "quantidade": "25",
+        "preco": "18.69"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.105",
+        "descricao": "UNIAO Y VINCADA 4x4x4",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "19.05"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.131",
+        "descricao": "UNIAO Y VINC 6x3x3",
+        "unidadeMedida": "UN",
+        "quantidade": "15",
+        "preco": "25.10"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.123",
+        "descricao": "UNIAO Y VINC 6x4x4",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "25.36"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 136.134",
+        "descricao": "UNIAO Y VINC 6X6X6",
+        "unidadeMedida": "UN",
+        "quantidade": "15",
+        "preco": "27.61"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 137.007",
+        "descricao": "VALVULA PE 5",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "52.62"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 137.008",
+        "descricao": "VALVULA PE 6",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "69.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 137.009",
+        "descricao": "VALVULA PE 8",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "219.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 137.016",
+        "descricao": "VALVULA PE 10",
+        "unidadeMedida": "UN",
+        "quantidade": "3",
+        "preco": "322.00"
+    },
+    {
+        "nomeFatura": "FAT 0452\/2026",
+        "notaFiscal": "NF 918",
+        "txDolar": "5.0435",
+        "codigo": "BM 130.004",
+        "descricao": "CALENDARIO 20X44 CM 4x0 CORES C\/ILHOS",
+        "unidadeMedida": "UN",
+        "quantidade": "1000",
+        "preco": "0.39"
     }
 ]

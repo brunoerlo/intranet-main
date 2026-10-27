@@ -53,6 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
                 $modulos = ($user["role"] === "admin") ? ["todos"] : ($user["modulos"] ?? []);
 
+                $versionFile = dirname(__DIR__, 3) . '/version.json';
+                clearstatcache(true, $versionFile);
+                $versionData = file_exists($versionFile) ? json_decode(file_get_contents($versionFile), true) : null;
+                $_SESSION["app_version"] = isset($versionData['versao']) ? trim((string)$versionData['versao']) : '2.5.0';
+
                 $_SESSION["usuario"] = [
                     "id" => $user["id"],
                     "nome" => $user["nome"],

@@ -1,8 +1,21 @@
 <?php
 session_start();
 
-// Versão do Sistema
-define('APP_VERSION', '2.5.0');
+// Versão do Sistema (lida diretamente do version.json)
+clearstatcache(true, __DIR__ . '/version.json');
+$versionData = file_exists(__DIR__ . '/version.json')
+    ? json_decode(file_get_contents(__DIR__ . '/version.json'), true)
+    : null;
+define('APP_VERSION', isset($versionData['versao']) ? trim((string)$versionData['versao']) : '2.5.0');
+
+// Endpoint leve para checagem de versão em background (sem renovar inatividade e sem bloqueio de .json)
+if (isset($_GET['check_version'])) {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    header('Pragma: no-cache');
+    echo json_encode(['versao' => APP_VERSION]);
+    exit();
+}
 
 // Tempo limite de inatividade em segundos (ex: 1800 para 30 minutos)
 $timeout_duration = 1800;
@@ -21,6 +34,12 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
+// Verifica se a versão do sistema mudou desde o login (força logout no F5)
+if (!isset($_SESSION['app_version']) || $_SESSION['app_version'] !== APP_VERSION) {
+    header("Location: logout.php?motivo=atualizacao");
+    exit();
+}
+
 // Obtém os módulos permitidos ao usuário
 $usuario = $_SESSION["usuario"];
 $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulos"];
@@ -35,7 +54,7 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/tabelas.css">
+    <link rel="stylesheet" href="css/tabelas.css?v=<?= APP_VERSION ?>">
 
     <style>
         body {
@@ -194,8 +213,9 @@ $modulosPermitidos = ($usuario["role"] === "admin") ? "todos" : $usuario["modulo
         </div>
     </div>
 
-    <script src="js/principal/validador-documentos.js"></script>
-    <script src="js/principal/scriptIndex.js"></script>
+    <script>window.APP_VERSION = <?= json_encode(APP_VERSION) ?>;</script>
+    <script src="js/principal/validador-documentos.js?v=<?= APP_VERSION ?>"></script>
+    <script src="js/principal/scriptIndex.js?v=<?= APP_VERSION . '.' . @filemtime(__DIR__ . '/js/principal/scriptIndex.js') ?>"></script>
     <!-- Bootstrap 5 Bundle JS (inclui Popper para Collapse, Modais, Dropdowns, etc.) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Coloque antes de qualquer script que usa jQuery -->

@@ -90,8 +90,8 @@
         data.itens.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td class="sortable text-center col-codigo">${item.codigo}</td>
-                <td class="sortable col-descricao">${item.descricao}</td>
+                <td class="text-center col-codigo">${item.codigo}</td>
+                <td class="col-descricao">${item.descricao}</td>
                 <td class="text-center col-un">${item.unidade}</td>
                 <td class="text-center fw-semibold col-qtd">${item.quantidade}</td>
                 <td class="text-start col-unitario">US$ ${item.unitario}</td>
@@ -180,6 +180,8 @@
 
             headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
                 otherTh.dataset.order = 'none';
+                otherTh.querySelectorAll('.sort-arrow').forEach(el => el.remove());
+                otherTh.textContent = otherTh.textContent.replace(/\s*[▲▼↕]\s*$/g, '').trim();
             });
 
             // Definir nova direção (indicador visual controlado via CSS)

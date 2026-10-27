@@ -46,7 +46,7 @@ document.getElementById('importFormProdutos').addEventListener('submit', functio
         });
 });
 
-const btnCadastrarProduto = document.getElementById('botaoCadastrarProduto');
+var btnCadastrarProduto = document.getElementById('botaoCadastrarProduto');
 if (btnCadastrarProduto) {
     btnCadastrarProduto.addEventListener('click', function () {
         // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
@@ -60,7 +60,7 @@ if (btnCadastrarProduto) {
     });
 }
 
-const btnImportarProduto = document.getElementById('botaoImportarProduto');
+var btnImportarProduto = document.getElementById('botaoImportarProduto');
 if (btnImportarProduto) {
     btnImportarProduto.addEventListener('click', function () {
         if (this.style.backgroundColor === 'grey') {
@@ -238,63 +238,29 @@ document.querySelectorAll('.delete-btn').forEach(button => {
     });
 })
 
-document.querySelectorAll('th.sortable').forEach(th => {
-    // Ignora th que pertencem à tabela do quadro
-    if (th.closest('table')?.querySelector('#tr-thead')) return;
+if (window._produtosSortHandler) {
+    document.removeEventListener('click', window._produtosSortHandler);
+}
+window._produtosSortHandler = function (e) {
+    const th = e.target.closest('th.sortable');
+    if (!th) return;
+    if (th.closest('table')?.querySelector('#tr-thead') || th.closest('#tabela-clientes')) return;
 
-    th.dataset.order = 'none';
+    const coluna = th.dataset.coluna || 'descricao';
+    const currentOrder = th.dataset.order || 'none';
+    const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
 
-    th.addEventListener('click', function () {
-        const table = this.closest('table');
-        const tbody = table.querySelector('tbody');
-        const headerRow = this.parentElement;
-        const colIndex = Array.from(headerRow.children).indexOf(this);
+    const formProdutos = document.getElementById('formFiltroProdutos');
+    if (!formProdutos) return;
+    const params = new URLSearchParams(new FormData(formProdutos));
 
-        // PEGA AS LINHAS EM PARES (Linha do Produto + Linha de Edição)
-        const rowPairs = Array.from(tbody.querySelectorAll('tr:not(.edit-row)')).map(row => {
-            return {
-                mainRow: row,
-                editRow: row.nextElementSibling && row.nextElementSibling.classList.contains('edit-row') ? row.nextElementSibling : null
-            };
-        });
+    params.set('ordem', coluna);
+    params.set('direcao', newOrder);
+    params.set('p', '1');
 
-        const currentOrder = this.dataset.order;
-        const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
-
-        // Limpar indicadores
-        headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
-            otherTh.dataset.order = 'none';
-        });
-
-        // Definir nova direção (indicador visual controlado via CSS)
-        this.dataset.order = newOrder;
-
-        // ORDENA OS PARES
-        rowPairs.sort((a, b) => {
-            const cellA = (a.mainRow.children[colIndex]?.textContent || '').trim().toLowerCase();
-            const cellB = (b.mainRow.children[colIndex]?.textContent || '').trim().toLowerCase();
-
-            const numA = parseFloat(cellA.replace(',', '.'));
-            const numB = parseFloat(cellB.replace(',', '.'));
-
-            if (!isNaN(numA) && !isNaN(numB)) {
-                return newOrder === 'asc' ? numA - numB : numB - numA;
-            }
-
-            return newOrder === 'asc' ?
-                cellA.localeCompare(cellB, 'pt-BR') :
-                cellB.localeCompare(cellA, 'pt-BR');
-        });
-
-        // REINSERE OS PARES JUNTOS NO HTML
-        rowPairs.forEach(pair => {
-            tbody.appendChild(pair.mainRow);
-            if (pair.editRow) {
-                tbody.appendChild(pair.editRow);
-            }
-        });
-    });
-});
+    window.recarregarTabelaProdutos(params.toString());
+};
+document.addEventListener('click', window._produtosSortHandler);
 
 // EXPORTAR
 var btnExportarProdutos = document.getElementById('btn-exportar-produtos');

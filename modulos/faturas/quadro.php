@@ -491,6 +491,6 @@ $noRepeat = array_unique($codigo);
     window.historicoFaturas =  <?= json_encode($faturasHistorico) ?>
 </script>
 
-<script src="js/faturas/quadro.js"></script>
+<script src="js/faturas/quadro.js?v=<?= htmlspecialchars($versaoAtual ?? '2.5.2') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>

@@ -3,40 +3,30 @@
         "nomeFatura": "003",
         "cliente": "CAMILO",
         "nomeConsolidado": "-",
-        "data": "03\/11\/2026",
-        "ctr": "40'",
-        "porto": "ITJ",
-        "booking": "-",
-        "id": 4
-    },
-    {
-        "nomeFatura": "452",
-        "cliente": "JOHIL",
-        "nomeConsolidado": "MWM SP-0474\/26",
-        "data": "21\/10\/2026",
+        "data": "11\/11\/2026",
         "ctr": "40'",
         "porto": "IMBITUBA",
-        "booking": "SSZ1860996",
-        "id": 7
+        "booking": "SSZ1870568",
+        "id": 4
     },
     {
         "nomeFatura": "453",
         "cliente": "JOHIL",
-        "nomeConsolidado": "",
+        "nomeConsolidado": "TRAMONTINA S",
         "data": "03\/11\/2026",
-        "ctr": "20'",
+        "ctr": "40'",
         "porto": "ITJ",
-        "booking": "SAOG56896800",
+        "booking": "SAOG56433900",
         "id": 8
     },
     {
         "nomeFatura": "455",
         "cliente": "JOHIL",
         "nomeConsolidado": "",
-        "data": "NOV S4",
-        "ctr": "40'",
+        "data": "03\/11\/2026",
+        "ctr": "20'",
         "porto": "ITJ",
-        "booking": "-",
+        "booking": "SAOG56896800",
         "id": 9
     },
     {
@@ -58,16 +48,5 @@
         "porto": "ITJ",
         "booking": "-",
         "id": 11
-    },
-    {
-        "nomeFatura": "460",
-        "cliente": "JOHIL",
-        "nomeConsolidado": "",
-        "data": "NOV S3",
-        "ctr": "20'",
-        "porto": "NVT",
-        "booking": "LA0514839",
-        "consolidado": false,
-        "id": 12
     }
 ]

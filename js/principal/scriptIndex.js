@@ -87,11 +87,20 @@ function carregarSubmodulo(modulo, submodulo) {
 
             contentDiv.innerHTML = tempDiv.innerHTML;
 
+            // Remove scripts de submódulos injetados anteriormente
+            document.querySelectorAll("script[data-submodulo-script]").forEach(s => s.remove());
+
             scripts.forEach(oldScript => {
                 const newScript = document.createElement("script");
-                Array.from(oldScript.attributes).forEach(attr =>
-                    newScript.setAttribute(attr.name, attr.value)
-                );
+                Array.from(oldScript.attributes).forEach(attr => {
+                    let val = attr.value;
+                    if (attr.name === "src" && val && !/^(https?:)?\/\//i.test(val) && !/[?&]v=/.test(val)) {
+                        const ver = window.APP_VERSION || Date.now();
+                        val += (val.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(ver);
+                    }
+                    newScript.setAttribute(attr.name, val);
+                });
+                newScript.setAttribute("data-submodulo-script", "1");
                 newScript.textContent = oldScript.textContent;
                 document.body.appendChild(newScript); // Executa fora do contentDiv
             });
@@ -132,23 +141,33 @@ document.addEventListener("DOMContentLoaded", function () {
     carregarPorHash();
 });
 
-// RECARREGAR COM VERSÃO DISTINTA
-// Script de verificação de versão para dar reload automático
+// RECARREGAR E DESLOGAR COM VERSÃO DISTINTA
+// Script de verificação de versão para notificar e deslogar após deploy
 (function () {
-    const VERSION_URL = '/version.json';
-    const CHECK_INTERVAL = 5 * 60 * 1000; // 5 minutos
+    const VERSION_URL = 'index.php?check_version=1';
+    const CHECK_INTERVAL = 5 * 1000; // 5 segundos
+    const COUNTDOWN_SECONDS = 15;
 
-    let currentVersion = null;
+    let currentVersion = window.APP_VERSION ? String(window.APP_VERSION).trim() : null;
     let pollTimer = null;
+    let noticeShown = false;
+
+    function forceUpdateLogout() {
+        window.location.href = 'logout.php?motivo=atualizacao';
+    }
 
     async function fetchVersion() {
         try {
-            const res = await fetch(VERSION_URL, {
-                cache: 'no-store'
+            const res = await fetch(`${VERSION_URL}&t=${Date.now()}`, {
+                cache: 'no-store',
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
             });
             if (!res.ok) return null;
             const data = await res.json();
-            return data.versao;
+            return data.versao ? String(data.versao).trim() : null;
         } catch (e) {
             console.warn('Falha ao checar versão:', e);
             return null;
@@ -156,39 +175,73 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function checkForUpdate() {
+        if (noticeShown) return;
+
         const latest = await fetchVersion();
         if (!latest) return;
 
         if (currentVersion === null) {
-            // primeira checagem, só define a baseline
             currentVersion = latest;
             return;
         }
 
-        if (latest !== currentVersion) {
-            showUpdateNotice();
-            stopPolling(); // não precisa continuar checando depois de detectar
+        if (latest !== String(currentVersion).trim()) {
+            noticeShown = true;
+            stopPolling();
+            showUpdateNotice(latest);
         }
     }
 
-    function showUpdateNotice() {
-        // PODERIA SER UM locaton.reload()
+    function showUpdateNotice(newVersion) {
+        let remaining = COUNTDOWN_SECONDS;
+
         const toast = document.createElement('div');
+        toast.id = 'update-version-toast';
         toast.style.cssText = `
-      position: fixed; bottom: 20px; right: 20px; z-index: 9999;
-      background: #212529; color: #fff; padding: 12px 20px;
-      border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.3);
-      font-family: sans-serif; font-size: 14px; cursor: pointer;
-    `;
-        toast.innerHTML = '🔄 Nova versão disponível. Clique para atualizar.';
-        toast.onclick = () => location.reload();
+            position: fixed; bottom: 24px; right: 24px; z-index: 99999;
+            background: #212529; color: #fff; padding: 16px 22px;
+            border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.45);
+            border-left: 5px solid #0dcaf0;
+            font-family: sans-serif; font-size: 14px; cursor: pointer;
+            max-width: 360px; line-height: 1.45;
+        `;
+
+        const renderContent = () => {
+            toast.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 4px; color: #0dcaf0;">
+                    Nova versão disponível (v${newVersion})
+                </div>
+                <div>
+                    Você será desconectado em <strong>${remaining}s</strong> para aplicar a atualização.
+                </div>
+                <div style="margin-top: 8px; font-size: 12px; text-decoration: underline; opacity: 0.9;">
+                    Clique aqui para atualizar e fazer login agora
+                </div>
+            `;
+        };
+
+        renderContent();
+        toast.onclick = () => forceUpdateLogout();
         document.body.appendChild(toast);
+
+        const countdownTimer = setInterval(() => {
+            remaining -= 1;
+            if (remaining <= 0) {
+                clearInterval(countdownTimer);
+                renderContent();
+                forceUpdateLogout();
+            } else {
+                renderContent();
+            }
+        }, 1000);
     }
 
     function startPolling() {
-        if (pollTimer) return;
+        if (noticeShown) return;
         checkForUpdate(); // checa imediatamente ao iniciar/retomar
-        pollTimer = setInterval(checkForUpdate, CHECK_INTERVAL);
+        if (!pollTimer) {
+            pollTimer = setInterval(checkForUpdate, CHECK_INTERVAL);
+        }
     }
 
     function stopPolling() {
@@ -206,6 +259,22 @@ document.addEventListener("DOMContentLoaded", function () {
             startPolling();
         }
     });
+
+    // Checa imediatamente quando a janela do navegador ganha foco (ex: Alt+Tab)
+    window.addEventListener('focus', () => {
+        if (!noticeShown) {
+            checkForUpdate();
+        }
+    });
+
+    // Expõe globalmente caso outro ponto do sistema queira acionar a notificação
+    window.triggerVersionUpdateNotice = function (newVersion) {
+        if (!noticeShown) {
+            noticeShown = true;
+            stopPolling();
+            showUpdateNotice(newVersion || 'nova');
+        }
+    };
 
     // inicia ao carregar a página
     startPolling();

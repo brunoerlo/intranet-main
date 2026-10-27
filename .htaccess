@@ -7,10 +7,10 @@ DirectoryIndex index.php
 </FilesMatch>
 
 # Exceção: libera version.json para checagem de atualização 
-<Files "version.json">
+<FilesMatch "^version\.json$">
     Order Allow,Deny
     Allow from all
-</Files>
+</FilesMatch>
 
 <IfModule mod_autoindex.c>
     Options -Indexes

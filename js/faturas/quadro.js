@@ -168,6 +168,8 @@ if (trThead) {
             // Limpar indicadores de todas as colunas da mesma tabela
             headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
                 otherTh.dataset.order = 'none';
+                otherTh.querySelectorAll('.sort-arrow').forEach(el => el.remove());
+                otherTh.textContent = otherTh.textContent.replace(/\s*[▲▼↕]\s*$/g, '').trim();
             });
 
             // Definir nova direção (indicador visual controlado via CSS)
@@ -360,6 +362,8 @@ document.querySelectorAll('th.sortable').forEach(th => {
         // Limpar indicadores de todas as colunas da mesma tabela
         headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
             otherTh.dataset.order = 'none';
+            otherTh.querySelectorAll('.sort-arrow').forEach(el => el.remove());
+            otherTh.textContent = otherTh.textContent.replace(/\s*[▲▼↕]\s*$/g, '').trim();
         });
 
         // Definir nova direção (indicador visual controlado via CSS)

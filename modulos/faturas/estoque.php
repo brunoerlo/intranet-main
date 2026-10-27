@@ -224,4 +224,4 @@ ksort($tabela);
     window.todosItensEstoque = <?= json_encode($estoque) ?>;
 </script>
 
-<script src="js/faturas/estoque.js"></script>
+<script src="js/faturas/estoque.js?v=<?= htmlspecialchars($versaoAtual ?? '2.5.2') ?>"></script>

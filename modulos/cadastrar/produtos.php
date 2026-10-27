@@ -172,14 +172,14 @@ if (!empty($produtosCadastrados)) {
         $todosProdutos[] = [
             'tipo'       => 'cadastrado',
             'codigo'     => $p['codigo']        ?? '-',
-            'descricao'  => $p['descricao']  ?? '-',
+            'descricao'  => $p['descricao']     ?? '-',
             'descComp'   => '',
             'unidade'    => $p['unidade']       ?? '-',
             'preco'      => $p['preco']         ?? '-',
             'ncm'        => $p['ncm']           ?? '-',
             'peso'       => $p['peso']          ?? '-',
             'empresa_id' => $p['empresa_id']    ?? '-',
-            'imagem'     => $p['imagem']        ?? '',
+            'imagem'     => $p['imagem']        ?? ''
         ];
     }
 }
@@ -188,15 +188,15 @@ if (!empty($produtosImportados)) {
     foreach ($produtosImportados as $p) {
         $todosProdutos[] = [
             'tipo'       => 'importado',
-            'codigo'     => $p['Item']        ?? '-',
-            'descricao'  => $p['Descricao']   ?? '-',
+            'codigo'     => $p['Item']                   ?? '-',
+            'descricao'  => $p['Descricao']              ?? '-',
             'descComp'   => $p['Descricao Complementar'] ?? '-',
-            'unidade'    => $p['UM']          ?? '-',
-            'preco'      => $p['Preco Venda'] ?? '-',
-            'ncm'        => $p['N.C.M.']         ?? '-',
-            'peso'       => $p['peso']        ?? '-',
-            'empresa_id' => $p['empresa_id']  ?? '-',
-            'imagem'     => $p['imagem']      ?? '',
+            'unidade'    => $p['UM']                     ?? '-',
+            'preco'      => $p['Preco Venda']            ?? '-',
+            'ncm'        => $p['N.C.M.']                 ?? '-',
+            'peso'       => $p['peso']                   ?? '-',
+            'empresa_id' => $p['empresa_id']             ?? '-',
+            'imagem'     => $p['imagem']                 ?? ''
         ];
     }
 }
@@ -223,6 +223,22 @@ $produtosFiltrados = array_filter($todosProdutos, function ($produto) use ($filt
 
     return true;
 });
+
+$colunaOrdem = $_GET['ordem'] ?? 'descricao';
+$direcaoOrdem = $_GET['direcao'] ?? 'asc';
+usort($produtosFiltrados, function ($a, $b) use ($colunaOrdem, $direcaoOrdem) {
+    if ($colunaOrdem === 'codigo') {
+        $elementA = $a['codigo'] ?? '';
+        $elementB = $b['codigo'] ?? '';
+    } else {
+        $elementA = $a['descricao'] ?? '';
+        $elementB = $b['descricao'] ?? '';
+    }
+    
+    $comparacao = strnatcasecmp((string)trim($elementA), (string)trim($elementB));
+    return strtolower((string) $direcaoOrdem) === 'desc' ? -$comparacao : $comparacao;
+});
+
 
 // Usa 'p' em vez de 'page' para não conflitar com rotas principais do sistema
 $p = max(1, intval($_GET['p'] ?? 1));
@@ -252,6 +268,8 @@ function gerarUrlPaginacao($novaPagina)
     <h1 class="mb-4 text-center">Lista de Produtos</h1>
     <!-- Formulário para selecionar tipo de produto e empresa lado a lado -->
     <form id="formFiltroProdutos" method="GET" action="" class="bg-white p-3 rounded shadow-sm mb-4 border">
+        <input type="hidden" name="ordem" value="<?= htmlspecialchars($colunaOrdem) ?>">
+        <input type="hidden" name="direcao" value="<?= htmlspecialchars($direcaoOrdem) ?>">
         <div class="row g-3 align-items-center">
             <div class="col-md-3">
                 <div class="form-floating">
@@ -296,7 +314,7 @@ function gerarUrlPaginacao($novaPagina)
             <div class="col-md-4">
                 <div class="d-flex gap-2 h-100">
                     <div class="form-floating flex-grow-1">
-                        <input type="text" class="form-control" id="filtro-produtos" name="termo_busca" placeholder="Pesquisar..." style="height: 58px;">
+                        <input type="text" class="form-control" id="filtro-produtos" name="termo_busca" value="<?= htmlspecialchars($termoBusca) ?>" placeholder="Pesquisar..." style="height: 58px;">
                         <label for="filtro-produtos"><i class="fa-solid fa-magnifying-glass text-muted"></i> Buscar produto</label>
                     </div>
                     <button class="btn btn-success d-flex flex-column align-items-center justify-content-center px-3" id="btn-exportar-produtos" title="Exportar CSV Produtos" style="height: 58px;" type="button">
@@ -312,8 +330,8 @@ function gerarUrlPaginacao($novaPagina)
         <table class="table table-hover table-bordered align-middle mb-0 text-center">
             <thead class="table-dark">
                 <tr>
-                    <th style="width: 110px;" class="sortable">Item</th>
-                    <th class="sortable">Descrição</th>
+                    <th style="width: 110px;" class="sortable" data-coluna="codigo" data-order="<?= $colunaOrdem === 'codigo' ? htmlspecialchars($direcaoOrdem) : 'none' ?>">Item</th>
+                    <th class="sortable" data-coluna="descricao" data-order="<?= $colunaOrdem === 'descricao' ? htmlspecialchars($direcaoOrdem) : 'none' ?>">Descrição</th>
                     <th>UM</th>
                     <th style="width: 115px;">Preço Venda</th>
                     <th>NCM</th>

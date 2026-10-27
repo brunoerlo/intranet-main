@@ -268,4 +268,4 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     window.listagemFaturas = <?= json_encode($faturas) ?>;
 </script>
 
-<script src="js/faturas/faturas.js"></script>
+<script src="js/faturas/faturas.js?v=<?= htmlspecialchars($versaoAtual ?? '2.5.2') ?>"></script>

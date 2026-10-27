@@ -24,7 +24,7 @@
                             <i class="fa-solid fa-file-csv"></i> Exportar
                         </button>
                         <button class="btn btn-outline-secondary" id="btn-print" title="Imprimir">
-                            🖨️ Imprimir
+                            <i class="fa-solid fa-print me-1"></i> Imprimir
                         </button>
                         <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Fechar"></button>
                     </div>
@@ -220,4 +220,4 @@
     }
 </style>
 
-<script src="js/faturas/orcamento.js"></script>
+<script src="js/faturas/orcamento.js?v=<?= htmlspecialchars($versaoAtual ?? '2.5.2') ?>"></script>

@@ -98,11 +98,11 @@ document.getElementById('formCadastroCliente').addEventListener('submit', functi
         });
 });
 
-const campoCep = document.getElementById('cep');
-const campoRua = document.getElementById('rua');
-const campoBairro = document.getElementById('bairro');
-const campoCidade = document.getElementById('cidade');
-const campoEstado = document.getElementById('estado');
+var campoCep = document.getElementById('cep');
+var campoRua = document.getElementById('rua');
+var campoBairro = document.getElementById('bairro');
+var campoCidade = document.getElementById('cidade');
+var campoEstado = document.getElementById('estado');
 
 campoCep.addEventListener('blur', async function () {
     const cep = this.value.trim();
@@ -157,7 +157,7 @@ document.getElementById('importFormClientes').addEventListener('submit', functio
         });
 });
 
-const btnCadastrarCliente = document.getElementById('botaoCadastrarCliente');
+var btnCadastrarCliente = document.getElementById('botaoCadastrarCliente');
 if (btnCadastrarCliente) {
     btnCadastrarCliente.addEventListener('click', function () {
         // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
@@ -171,7 +171,7 @@ if (btnCadastrarCliente) {
     });
 }
 
-const btnImportarCliente = document.getElementById('botaoImportarCliente');
+var btnImportarCliente = document.getElementById('botaoImportarCliente');
 if (btnImportarCliente) {
     btnImportarCliente.addEventListener('click', function () {
         if (this.style.backgroundColor === 'grey') {
@@ -491,63 +491,27 @@ document.addEventListener("click", function (e) {
     }
 });
 
-document.getElementById('th-thead-clientes').closest('thead').addEventListener('click', function (e) {
-    const th = e.target.closest('th.sortable');
+if (window._clientesSortHandler) {
+    document.removeEventListener('click', window._clientesSortHandler);
+}
+window._clientesSortHandler = function (e) {
+    const th = e.target.closest('#th-thead-clientes th.sortable');
     if (!th) return;
 
-    const table = th.closest('table');
-    const tbody = table.querySelector('tbody');
-    const headerRow = th.parentElement;
-    const colIndex = Array.from(headerRow.children).indexOf(th);
-
-    // Pegar as linhas principais e pareá-las com suas respectivas linhas de edição
-    const rowPairs = Array.from(tbody.querySelectorAll('tr:not(.edit-row)')).map(row => {
-        return {
-            mainRow: row,
-            editRow: row.nextElementSibling && row.nextElementSibling.classList.contains('edit-row') ? row.nextElementSibling : null
-        };
-    });
-
-    // Determinar direção: none→asc, asc→desc, desc→asc
+    const coluna = th.dataset.coluna || 'nome';
     const currentOrder = th.dataset.order || 'none';
     const newOrder = (currentOrder === 'asc') ? 'desc' : 'asc';
 
-    // Limpar indicadores de todas as colunas da mesma tabela
-    headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
-        otherTh.dataset.order = 'none';
-    });
+    const formClientes = document.getElementById('formFiltroClientes');
+    const params = new URLSearchParams(formClientes ? new FormData(formClientes) : '');
 
-    // Definir nova direção (indicador visual controlado via CSS)
-    th.dataset.order = newOrder;
-    // Ordenar os pares de linhas pela coluna clicada
-    rowPairs.sort((a, b) => {
-        let cellA = (a.mainRow.children[colIndex]?.textContent || '').trim().toLowerCase();
-        let cellB = (b.mainRow.children[colIndex]?.textContent || '').trim().toLowerCase();
+    params.set('ordem', coluna);
+    params.set('direcao', newOrder);
+    params.set('p', '1');
 
-        // Se for a coluna de CPF ou CNPJ (índice 1), remove a pontuação para comparar apenas os números
-        if (colIndex === 1) {
-            cellA = cellA.replace(/\D/g, '');
-            cellB = cellB.replace(/\D/g, '');
-        }
-
-        // Usar localeCompare com numeric: true resolve a ordenação natural de números e letras juntos
-        return newOrder === 'asc' ?
-            cellA.localeCompare(cellB, 'pt-BR', {
-                numeric: true
-            }) :
-            cellB.localeCompare(cellA, 'pt-BR', {
-                numeric: true
-            });
-    });
-
-    // Reinserir as linhas ordenadas mantendo o par junto
-    rowPairs.forEach(pair => {
-        tbody.appendChild(pair.mainRow);
-        if (pair.editRow) {
-            tbody.appendChild(pair.editRow);
-        }
-    });
-});
+    window.recarregarTabelaClientes(params.toString());
+};
+document.addEventListener('click', window._clientesSortHandler);
 
 // EXPORTAR
 var btnExportarClientes = document.getElementById('btn-exportar-clientes');
