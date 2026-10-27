@@ -56,7 +56,7 @@ ksort($tabela);
 ?>
 <!-- Formulário -->
 <div class="container-fluid mt-4">
-    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstoque" aria-expanded="false" aria-controls="collapseEstoque">
+    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstoque" aria-expanded="false" aria-controls="collapseEstoque" id="botaoCadastrarEstoque">
         <i class="fa-solid fa-plus"></i> Novo Estoque
     </button>
     <div class="collapse" id="collapseEstoque">

@@ -168,16 +168,10 @@ if (trThead) {
             // Limpar indicadores de todas as colunas da mesma tabela
             headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
                 otherTh.dataset.order = 'none';
-                const seta = otherTh.querySelector('.sort-arrow');
-                if (seta) seta.remove();
             });
 
-            // Definir nova direção e indicador visual
+            // Definir nova direção (indicador visual controlado via CSS)
             th.dataset.order = newOrder;
-            const setaSpan = document.createElement('span');
-            setaSpan.className = 'sort-arrow';
-            setaSpan.textContent = (newOrder === 'asc') ? ' ▲' : ' ▼';
-            th.appendChild(setaSpan);
 
             // Função para criar um "peso" numérico para ordenação
             function obterValorOrdenacao(str) {
@@ -366,11 +360,10 @@ document.querySelectorAll('th.sortable').forEach(th => {
         // Limpar indicadores de todas as colunas da mesma tabela
         headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
             otherTh.dataset.order = 'none';
-            otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
         });
 
+        // Definir nova direção (indicador visual controlado via CSS)
         this.dataset.order = newOrder;
-        this.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
 
         rows.sort((a, b) => {
             const cellA = (a.children[colIndex]?.textContent || '').trim().toLowerCase();

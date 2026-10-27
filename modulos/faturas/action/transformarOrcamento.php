@@ -113,6 +113,11 @@ foreach ($lines as $line) {
         continue;
     }
 
+    if (preg_match('/Continua\s+na\s+Pr[oó]xima\s+P[aá]gina/iu', $trimmed)) {
+        $inTable = false;
+        continue;
+    }
+
     if (preg_match('/TOTAL\s+DO\s+ORCAMENTO[\.\s]*:\s*R?\\$\s*([\d\.,]+)/iu', $trimmed, $m)) {
         $totalOrcamento = trim($m[1]);
         $inTable = false;
@@ -123,7 +128,7 @@ foreach ($lines as $line) {
     if (preg_match('/^\s*([A-Za-z0-9\.\s\/-]+?)\s+(\d+(?:,\d{2})?)\s*([A-Z]{2,4})\s+(.+?)\s+([\d\.]+(?:,\d{2}))\s+([\d\.]+(?:,\d{2}))(?:\s+(\d+(?:,\d{2})?%))?\s*$/u', $line, $m)) {
         $itens[] = [
             'codigo'     => trim($m[1]),
-            'quantidade' => trim($m[2]),
+            'quantidade' => (int)trim($m[2]),
             'unidade'    => trim($m[3]),
             'descricao'  => trim($m[4]),
             'unitario'   => trim($m[5]),
@@ -132,10 +137,7 @@ foreach ($lines as $line) {
         continue;
     }
 
-    // Linha de continuação de descrição
-    if ($inTable && !empty($itens) && !preg_match('/\d+,\d{2}/', $trimmed) && !preg_match('/Total|Peso|OBSERV/i', $trimmed)) {
-        $itens[count($itens) - 1]['descricao'] .= ' ' . $trimmed;
-    }
+    // Continuação de descrição desabilitada para manter a descrição concisa igual à produção
 }
 
 if (empty($itens)) {

@@ -20,10 +20,10 @@ if (file_exists($empresasPath)) {
 
 <div class="container-fluid mt-4">
     <div class="d-flex gap-2 mb-3">
-        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCadastroProduto" aria-expanded="false" aria-controls="collapseCadastroProduto">
+        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCadastroProduto" aria-expanded="false" aria-controls="collapseCadastroProduto" id="botaoCadastrarProduto">
             <i class="fa-solid fa-plus"></i> Novo Produto
         </button>
-        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportarProduto" aria-expanded="false" aria-controls="collapseImportarProduto">
+        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportarProduto" aria-expanded="false" aria-controls="collapseImportarProduto" id="botaoImportarProduto">
             <i class="fa-solid fa-plus"></i> Importar Produto
         </button>
     </div>
@@ -201,6 +201,7 @@ if (!empty($produtosImportados)) {
     }
 }
 
+sort($todosProdutos);
 $filtroTipo = $_GET['tipoProduto'] ?? 'todos';
 $filtroEmpresaId = $_GET['filtro_empresa_id'] ?? '';
 $termoBusca = $_GET['termo_busca'] ?? '';

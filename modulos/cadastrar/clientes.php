@@ -2,10 +2,10 @@
 
 <div class="container-fluid mt-4">
     <div class="d-flex gap-2 mb-3">
-        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCadastroCliente" aria-expanded="false" aria-controls="collapseEstoque">
+        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCadastroCliente" aria-expanded="false" aria-controls="collapseEstoque" id="botaoCadastrarCliente">
             <i class="fa-solid fa-plus"></i> Novo Cliente
         </button>
-        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportaCliente" aria-expanded="false" aria-controls="collapseEstoque">
+        <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportaCliente" aria-expanded="false" aria-controls="collapseEstoque" id="botaoImportarCliente">
             <i class="fa-solid fa-plus"></i> Importar Cliente
         </button>
     </div>
@@ -91,7 +91,6 @@
                         <label for="contatoAduaneiro" class="form-label">Contato Aduaneiro</label>
                         <input type="text" class="form-control" id="contatoAduaneiro" name="contatoAduaneiro" required>
                     </div>
-
                 </div>
 
                 <!-- Campos comuns (exceto exterior que tem endereço diferente) -->
@@ -247,10 +246,17 @@ $clientesFiltrados = array_filter($todosClientes, function ($clientes) use ($fil
     $tipo = $clientes['tipo'];
 
     if ($termoBusca !== '') {
-        if ($tipo === 'cpf') {$descricao = $clientes['nomeCompleto']; $codigo = $clientes['cpf']; }
-        elseif ($tipo === 'cnpj') {$descricao = $clientes['razaoSocial']; $codigo = $clientes['cnpj']; }
-        elseif ($tipo === 'exterior') {$descricao = $clientes['nomeImportador']; $codigo = $clientes['docImportador']; }
-        
+        if ($tipo === 'cpf') {
+            $descricao = $clientes['nomeCompleto'];
+            $codigo = $clientes['cpf'];
+        } elseif ($tipo === 'cnpj') {
+            $descricao = $clientes['razaoSocial'];
+            $codigo = $clientes['cnpj'];
+        } elseif ($tipo === 'exterior') {
+            $descricao = $clientes['nomeImportador'];
+            $codigo = $clientes['docImportador'];
+        }
+
         if (stripos($codigo, $termoBusca) === false && stripos($descricao, $termoBusca) === false)
             return false;
     }
@@ -544,11 +550,6 @@ function gerarUrlPaginacao($novaPagina)
         font-size: 10px;
     }
 
-    .table th {
-        padding: 0.3rem;
-        vertical-align: middle;
-        text-align: center;
-    }
 
     .action-buttons .btn {
         padding: 0.2rem 0.4rem;

@@ -23,14 +23,7 @@
             method: 'POST',
             body: formData
         })
-            .then(async res => {
-                const text = await res.text();
-                try {
-                    return JSON.parse(text);
-                } catch (e) {
-                    throw new Error(text.trim() || `Falha no servidor (código ${res.status})`);
-                }
-            })
+            .then(res => res.json())
             .then(data => {
                 btnSubmit.disabled = false;
                 btnSubmit.textContent = 'Processar';
@@ -101,15 +94,15 @@
                 <td class="sortable col-descricao">${item.descricao}</td>
                 <td class="text-center col-un">${item.unidade}</td>
                 <td class="text-center fw-semibold col-qtd">${item.quantidade}</td>
-                <td class="text-end col-unitario">R$ ${item.unitario}</td>
-                <td class="text-end col-total">R$ ${item.total}</td>
+                <td class="text-start col-unitario">US$ ${item.unitario}</td>
+                <td class="text-start col-total">US$ ${item.total}</td>
             `;
             tbody.appendChild(tr);
         });
 
         const totalEl = document.getElementById('modalTotalOrcamento');
         if (totalEl) {
-            totalEl.textContent = `R$ ${data.totalGeral || '0,00'}`;
+            totalEl.textContent = `US$ ${data.totalGeral || '0,00'}`;
         }
     }
 
@@ -187,11 +180,10 @@
 
             headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
                 otherTh.dataset.order = 'none';
-                otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
             });
 
+            // Definir nova direção (indicador visual controlado via CSS)
             th.dataset.order = newOrder;
-            th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
 
             rows.sort((a, b) => {
                 const cellA = (a.children[colIndex]?.textContent || '').trim();

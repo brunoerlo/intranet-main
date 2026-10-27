@@ -51,8 +51,8 @@
             <thead class="table-dark">
         <tr>
             <th>Razão Social</th>
-            <th>CNPJ</th>
-            <th>Endereço</th>
+            <th style="width: 150px;">CNPJ</th>
+            <th style="width: 270px;">Endereço</th>
             <th>Telefone</th>
             <th>E-mail</th>
             <th>Moeda</th>
@@ -61,6 +61,7 @@
     </thead>
     <tbody></tbody>
 </table>
+</div>
 
 <script src="js/principal/validador-documentos.js"></script>
 <script src="js/configuracao/empresas.js"></script>

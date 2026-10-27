@@ -75,8 +75,9 @@ $usuarios = array_filter($usuarios, function ($user) use (&$teveExclusao) {
 
 <div class="container mt-4">
     <h2 class="mb-4">Lista de Usuários</h2>
-    <table class="table">
-        <thead>
+    <div class="table-responsive shadow-sm rounded mb-3">
+    <table class="table table-hover table-bordered align-middle mb-0">
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Status</th>
@@ -88,7 +89,7 @@ $usuarios = array_filter($usuarios, function ($user) use (&$teveExclusao) {
         <tbody>
             <?php if (!empty($usuarios)): ?>
                 <?php foreach ($usuarios as $user): ?>
-                    <tr data-id="<?= htmlspecialchars($user['id']) ?>">
+                    <tr class="text-center" data-id="<?= htmlspecialchars($user['id']) ?>">
                         <td><?= htmlspecialchars($user['id']) ?></td>
                         <td>
                             <?php if ($user['status'] === 'quarentena'): ?>
@@ -108,7 +109,7 @@ $usuarios = array_filter($usuarios, function ($user) use (&$teveExclusao) {
                         </td>
                     </tr>
                     <tr class="collapse-row" id="collapse-<?= htmlspecialchars($user['id']) ?>" style="display: none;">
-                        <td colspan="4">
+                        <td colspan="5">
                         <form class="edit-form">
                             <input type="hidden" name="id" value="<?= htmlspecialchars($user['id']) ?>">
                             <div class="mb-3">
@@ -150,11 +151,12 @@ $usuarios = array_filter($usuarios, function ($user) use (&$teveExclusao) {
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="4" class="text-center">Nenhum usuário cadastrado.</td>
+                    <td colspan="5" class="text-center text-muted">Nenhum usuário cadastrado.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
 </div>
 
 <script src="js/configuracao/usuarios.js"></script>

@@ -28038,5 +28038,295 @@
         "unidadeMedida": "UN",
         "quantidade": "35",
         "preco": "137.03"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 124.004",
+        "descricao": "BARRA GRELHA BMX-2 295x32x8x0,6MM",
+        "unidadeMedida": "UN",
+        "quantidade": "300",
+        "preco": "3.63"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 124.033",
+        "descricao": "BARRA GRELHA BMX-3 375x38x10x1MM",
+        "unidadeMedida": "UN",
+        "quantidade": "1568",
+        "preco": "6.63"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 612.000",
+        "descricao": "BICO JATO 2.1\/2x1,00 (NIPLE x PONTEIRA)",
+        "unidadeMedida": "UN",
+        "quantidade": "75",
+        "preco": "29.30"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 612.300",
+        "descricao": "BICO JATO 3,00x1,00 (NIPLE x PONTEIRA)",
+        "unidadeMedida": "UN",
+        "quantidade": "90",
+        "preco": "33.25"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 140.021",
+        "descricao": "BOMBA ANAUGER 900 5G 120 VOLTZ 60HZ",
+        "unidadeMedida": "UN",
+        "quantidade": "12",
+        "preco": "115.35"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 616.300",
+        "descricao": "BOMBA ALTA PRESSAO 4x3 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "299.92"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 616.900",
+        "descricao": "BOMBA ALTA PRESSAO 6x4 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "475.84"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 617.300",
+        "descricao": "BOMBA ALTA PRESSAO 8x6 ROTOR FECHADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "533.51"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 113.005",
+        "descricao": "CADINHO S\/REG S\/MANG C\/COPO MET E CONEX",
+        "unidadeMedida": "UN",
+        "quantidade": "35",
+        "preco": "168.13"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 113.006",
+        "descricao": "CADINHO NR 05 CX C\/36UN (ARGILA)",
+        "unidadeMedida": "UN",
+        "quantidade": "432",
+        "preco": "5.23"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 620.303",
+        "descricao": "CARCACA BD 4 DIAMANTE 500 (BC FIXO)",
+        "unidadeMedida": "UN",
+        "quantidade": "30",
+        "preco": "98.45"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 622.003",
+        "descricao": "CARCACA BD 6.1\/2 DIAM 500 DISCO FUND BFX",
+        "unidadeMedida": "UN",
+        "quantidade": "40",
+        "preco": "242.56"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 632.000",
+        "descricao": "CAVALETE BD 3 E 4 MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "142.55"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 632.100",
+        "descricao": "CAVALETE BD 5 (2 ROL 6309) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "236.24"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 632.400",
+        "descricao": "CAVALETE BD 6 (3 ROL 6310) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "8",
+        "preco": "289.20"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 632.500",
+        "descricao": "CAVALETE BD 8 (3 ROL 6310) MONTADO",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "290.37"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 120.095",
+        "descricao": "MANGUEIRA B PRETO 2.1\/2(3Lx7MM)TRA100PSI",
+        "unidadeMedida": "MT",
+        "quantidade": "90",
+        "preco": "22.54"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 120.092",
+        "descricao": "MANGUEIRA B PRETO3(3Lx7MM)TRA100PSI",
+        "unidadeMedida": "MT",
+        "quantidade": "90",
+        "preco": "25.20"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 120.202",
+        "descricao": "MANGUEIRA SUCCAO 6x4Lx16MM 150PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "6",
+        "preco": "146.48"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 120.093",
+        "descricao": "MANGUEIRA SUCCAO 8x6Lx19MM 150PSI - 2MT",
+        "unidadeMedida": "MT",
+        "quantidade": "6",
+        "preco": "247.16"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 125.011",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 6",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "15.89"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 125.012",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 8",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "61.33"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 125.028",
+        "descricao": "NIPLE COM ROSCA VALVULA PE 10",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "87.59"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 135.000",
+        "descricao": "TUBO PEBD 5.80 MT 4x6.0MM (0,075 m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "36.90"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 135.004",
+        "descricao": "TUBO PEBD 5.80 MT 6x12.0MM (0,21m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "106.69"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 135.010",
+        "descricao": "TUBO PEBD 5.80 MT 8x12.0MM ( 0,30m³)",
+        "unidadeMedida": "UN",
+        "quantidade": "20",
+        "preco": "137.03"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 137.008",
+        "descricao": "VALVULA PE 6",
+        "unidadeMedida": "UN",
+        "quantidade": "5",
+        "preco": "69.00"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 137.009",
+        "descricao": "VALVULA PE 8",
+        "unidadeMedida": "UN",
+        "quantidade": "10",
+        "preco": "219.00"
+    },
+    {
+        "nomeFatura": "FAT 0451\/2026",
+        "notaFiscal": "NF 916",
+        "txDolar": "5.1803",
+        "codigo": "BM 137.016",
+        "descricao": "VALVULA PE 10",
+        "unidadeMedida": "UN",
+        "quantidade": "2",
+        "preco": "322.00"
     }
 ]

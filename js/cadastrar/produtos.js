@@ -46,6 +46,33 @@ document.getElementById('importFormProdutos').addEventListener('submit', functio
         });
 });
 
+const btnCadastrarProduto = document.getElementById('botaoCadastrarProduto');
+if (btnCadastrarProduto) {
+    btnCadastrarProduto.addEventListener('click', function () {
+        // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
+        if (this.style.backgroundColor === 'grey') {
+            this.style.backgroundColor = '';
+            this.style.borderColor = '';
+        } else {
+            this.style.backgroundColor = 'grey';
+            this.style.borderColor = 'grey';
+        }
+    });
+}
+
+const btnImportarProduto = document.getElementById('botaoImportarProduto');
+if (btnImportarProduto) {
+    btnImportarProduto.addEventListener('click', function () {
+        if (this.style.backgroundColor === 'grey') {
+            this.style.backgroundColor = '';
+            this.style.borderColor = '';
+        } else {
+            this.style.backgroundColor = 'grey';
+            this.style.borderColor = 'grey';
+        }
+    });
+}
+
 // LISTAGEM DA TABELA
 
 (function () {
@@ -237,11 +264,10 @@ document.querySelectorAll('th.sortable').forEach(th => {
         // Limpar indicadores
         headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
             otherTh.dataset.order = 'none';
-            otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
         });
 
+        // Definir nova direção (indicador visual controlado via CSS)
         this.dataset.order = newOrder;
-        this.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
 
         // ORDENA OS PARES
         rowPairs.sort((a, b) => {

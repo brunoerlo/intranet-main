@@ -1,0 +1,119 @@
+/* =========================================================
+   PADRÃO DE TABELAS DO SISTEMA
+   Aplicado a todas as tabelas Bootstrap (.table) carregadas
+   na intranet. Estilos de impressão ficam em cada módulo.
+   ========================================================= */
+
+/* Contêiner da tabela */
+.table-responsive {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.table-responsive > .table {
+    margin-bottom: 0;
+}
+
+/* Tabela */
+.table {
+    --bs-table-hover-bg: rgba(13, 110, 253, 0.06);
+    font-size: 0.875rem;
+    color: #212529;
+    vertical-align: middle;
+    border-color: #dee2e6;
+}
+
+.table > :not(caption) > * > * {
+    padding: 0.4rem 0.65rem;
+    vertical-align: middle;
+}
+
+/* Cabeçalho escuro padrão */
+.table > thead > tr > th {
+    --bs-table-bg: #212529;
+    --bs-table-color: #ffffff;
+    background-color: #212529;
+    color: #ffffff;
+    border-color: #373b3e;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-align: center;
+    white-space: nowrap;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+}
+
+/* Rodapé (totais) */
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+    --bs-table-bg: #f8f9fa;
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Colunas ordenáveis com indicador */
+.table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.table th.sortable::after {
+    content: "\2195";
+    /* ↕ */
+    display: inline-block;
+    margin-left: 0.35rem;
+    font-size: 0.8em;
+    opacity: 0.45;
+}
+
+.table th.sortable[data-order="asc"]::after {
+    content: "\25B2";
+    /* ▲ */
+    opacity: 0.9;
+}
+
+.table th.sortable[data-order="desc"]::after {
+    content: "\25BC";
+    /* ▼ */
+    opacity: 0.9;
+}
+
+.table th.sortable:hover {
+    background-color: #2c3136;
+}
+
+/* Botões de ação dentro das tabelas */
+.table td .btn-sm,
+.table td.action-buttons .btn {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.table td .badge {
+    font-weight: 500;
+}
+
+/* Linha de "nenhum registro" */
+.table td.text-muted[colspan] {
+    padding: 1rem;
+    font-style: italic;
+}
+
+/* Impressão: o contêiner não deve gerar borda/sombra extra */
+@media print {
+    .table-responsive {
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+    }
+
+    .table th.sortable::after {
+        display: none !important;
+    }
+}

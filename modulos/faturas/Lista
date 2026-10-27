@@ -182,12 +182,10 @@ $noRepeat = array_unique($codigo);
             // Limpar indicadores de todas as colunas da mesma tabela
             headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
                 otherTh.dataset.order = 'none';
-                otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
             });
 
-            // Definir nova direção e indicador visual
+            // Definir nova direção (indicador visual controlado via CSS)
             this.dataset.order = newOrder;
-            this.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
 
             // Ordenar as linhas pela coluna clicada
             rows.sort((a, b) => {

@@ -34,11 +34,11 @@
                         <thead class="table-dark text-center text-nowrap">
                             <tr>
                                 <th style="width: 95px;" class="sortable col-codigo">Código</th>
-                                <th class="sortable col-descricao text-start">Descrição</th>
+                                <th class="sortable col-descricao text-center">Descrição</th>
                                 <th style="width: 45px;" class="col-un">UN</th>
                                 <th style="width: 55px;" class="col-qtd">QTD</th>
-                                <th style="width: 105px;" class="col-unitario text-end">Preço Unit.</th>
-                                <th style="width: 110px;" class="col-total text-end">Preço Total</th>
+                                <th style="width: 105px;" class="col-unitario text-center">Preço Unit.</th>
+                                <th style="width: 110px;" class="col-total text-center">Preço Total</th>
                             </tr>
                         </thead>
                         <tbody id="modalProdutosBody">
@@ -47,7 +47,7 @@
                         <tfoot class="table-light">
                             <tr>
                                 <th colspan="5" class="text-end fw-normal text-muted">Preço Total:</th>
-                                <th class="text-end fw-normal col-total" id="modalTotalOrcamento">R$ 0,00</th>
+                                <th class="text-start fw-normal col-total" id="modalTotalOrcamento">US$ 0,00</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -58,21 +58,6 @@
 </div>
 
 <style>
-    #show-print {
-        font-size: 0.875rem;
-    }
-
-    #show-print th,
-    #show-print td {
-        padding: 0.45rem 0.65rem;
-        vertical-align: middle;
-    }
-
-    #show-print thead th {
-        text-align: center;
-        white-space: nowrap;
-    }
-
     #show-print .col-codigo,
     #show-print .col-un,
     #show-print .col-qtd,
@@ -88,7 +73,14 @@
 
     @page {
         size: auto;
-        margin: 0; /* Remove cabeçalho e rodapé do navegador (data, título da página, URL, paginação) */
+        /* Margens idênticas em todas as páginas; a inferior reserva espaço para a contagem de páginas */
+        margin: 8mm 5mm 14mm 5mm;
+
+        @bottom-center {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 9pt;
+            color: #6c757d;
+        }
     }
 
     @media print {
@@ -113,7 +105,7 @@
             min-height: 0 !important;
             max-height: none !important;
             margin: 0 !important;
-            padding: 8mm 5mm !important;
+            padding: 0 !important;
             overflow: visible !important;
             background: #ffffff !important;
         }
@@ -179,7 +171,7 @@
         #show-print {
             overflow: visible !important;
             width: 100% !important;
-            font-size: 0.8125rem !important;
+            font-size: calc(0.8125rem - 1pt) !important;
             border-collapse: collapse !important;
             border: 1px solid #dee2e6 !important;
             margin-bottom: 0 !important;
@@ -189,7 +181,7 @@
 
         #show-print th,
         #show-print td {
-            padding: 0.35rem 0.5rem !important;
+            padding: 0.08rem 0.5rem !important;
             vertical-align: middle !important;
             border: 1px solid #dee2e6 !important;
             white-space: nowrap !important;
@@ -207,6 +199,10 @@
             border: 1px solid #373b3e !important;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+        }
+
+        #show-print tfoot {
+            display: table-row-group !important;
         }
 
         #show-print tfoot th {

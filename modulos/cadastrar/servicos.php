@@ -92,8 +92,8 @@ if (file_exists($empresasPath)) {
     if (file_exists($arquivo)) {
         $servicos = json_decode(file_get_contents($arquivo), true);
         if (!empty($servicos)) {
-            echo '<table class="table mt-3">';
-            echo '<thead><tr><th>Empresa ID</th><th>Nome</th><th>Descrição</th><th>Preço</th><th>Ações</th></tr></thead><tbody>';
+            echo '<div class="table-responsive shadow-sm rounded mt-3 mb-3"><table class="table table-hover table-bordered align-middle mb-0 text-center">';
+            echo '<thead class="table-dark"><tr><th>Empresa ID</th><th>Nome</th><th>Descrição</th><th>Preço</th><th>Ações</th></tr></thead><tbody>';
             foreach ($servicos as $servico) {
                 $moeda = $empresasMoeda[$servico['empresa_id']] ?? 'R$';
                 $razao = $empresasRazao[$servico['empresa_id']] ?? 'Empresa não encontrada';
@@ -105,7 +105,7 @@ if (file_exists($empresasPath)) {
                 echo '<td><button class="btn btn-danger btn-sm" onclick="excluirServico(\'' . $servico['id'] . '\')">Excluir</button></td>';
                 echo '</tr>';
             }
-            echo '</tbody></table>';
+            echo '</tbody></table></div>';
         } else {
             echo '<p class="text-muted mt-3">Nenhum serviço cadastrado ainda.</p>';
         }

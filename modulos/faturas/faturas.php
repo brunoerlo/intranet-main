@@ -8,7 +8,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 ?>
 <div class="container-fluid mt-4">
-    <button class="btn btn-success mb-3" id="btn-nova-importacao" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportar" aria-expanded="false" aria-controls="collapseImportar">
+    <button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportar" aria-expanded="false" aria-controls="collapseImportar" id="botaoImportarFatura">
         <i class="fa-solid fa-plus"></i> Nova Importação
     </button>
     <div class="collapse" id="collapseImportar">
@@ -36,8 +36,8 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     </div>
 </div>
 
-    <div class="table-responsive shadow-sm rounded mb-4" id="main-table-container">
-        <table class="table table-hover table-bordered align-middle mb-0" id="tabela-faturas-unicas" style="max-width: 700px; text-align: center;">
+    <div class="table-responsive shadow-sm rounded mb-4" id="main-table-container" style="max-width: 700px;">
+        <table class="table table-hover table-bordered align-middle mb-0" id="tabela-faturas-unicas" style="text-align: center;">
             <thead class="table-dark">
                 <tr id="th-thead-faturas">
                     <th class="sortable" style="width: 120px;">Fatura</th>
@@ -118,13 +118,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     }
 
     #tabela-faturas-unicas {
-        width: 600px;
-    }
-
-    .table th {
-        padding: 0.3rem;
-        vertical-align: middle;
-        text-align: center;
+        width: 100%;
     }
 
     th.sortable,
@@ -133,20 +127,47 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         user-select: none;
     }
 
+    @page {
+        size: auto;
+        /* Margens idênticas em todas as páginas; a inferior reserva espaço para a contagem de páginas */
+        margin: 8mm 5mm 14mm 5mm;
+
+        @bottom-center {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 9pt;
+            color: #6c757d;
+        }
+    }
+
     @media print {
 
-        /* Esconde o sidebar, navbar e os elementos da página de fundo */
+        /* Esconde o sidebar, navbar, botões e elementos de fundo */
         #sidebar,
         nav.navbar,
         #loading,
         #main-table-container,
-        #btn-nova-importacao,
-        #collapseImportar {
+        #botaoImportarFatura,
+        #collapseImportar,
+        .modal-backdrop,
+        .modal-header .btn,
+        .modal-header .btn-close {
             display: none !important;
         }
 
-        /* Cadeia de ancestrais do modal: tudo precisa ser visível e sem overflow */
-        body,
+        /* Reseta html e body para evitar página fantasma e espaçar o conteúdo do papel */
+        html,
+        body {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            background: #ffffff !important;
+        }
+
+        /* Ancestrais sem margens e paddings residuais */
+        .container-fluid,
         .content,
         #modulo-content {
             display: block !important;
@@ -154,66 +175,91 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             position: static !important;
             overflow: visible !important;
             height: auto !important;
+            min-height: 0 !important;
             width: 100% !important;
             margin: 0 !important;
             padding: 0 !important;
         }
 
-        /* Modal visível e no fluxo normal */
+        /* Modal no fluxo normal */
         #modalProdutosFatura {
             display: block !important;
             position: static !important;
             overflow: visible !important;
             opacity: 1 !important;
-        }
-
-        .modal-backdrop {
-            display: none !important;
-        }
-
-        .modal-dialog {
-            max-width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
             margin: 0 !important;
             padding: 0 !important;
         }
 
+        .modal-dialog,
         .modal-content {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
             border: none !important;
             box-shadow: none !important;
-        }
-
-        /* Esconde apenas os botões do modal na impressão */
-        .modal-header .btn,
-        .modal-header .btn-close {
-            display: none !important;
+            height: auto !important;
+            min-height: 0 !important;
         }
 
         .modal-header {
-            border-bottom: none !important;
-            padding-bottom: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            border-bottom: 1px solid #dee2e6 !important;
+            padding: 0 0 8px 0 !important;
+            margin-bottom: 12px !important;
+        }
+
+        .modal-body {
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: visible !important;
         }
 
         .print-logo {
             display: block !important;
         }
 
-        /* Tabela flui naturalmente entre páginas */
+        /* Tabela exatamente nos mesmos moldes do modal, sem quebras de linha */
         #show-print {
             overflow: visible !important;
-        }
-
-        #show-print table {
             width: 100% !important;
-            page-break-inside: auto !important;
+            font-size: calc(0.8125rem - 1pt) !important;
+            border-collapse: collapse !important;
+            border: 1px solid #dee2e6 !important;
+            margin-bottom: 0 !important;
+            page-break-after: avoid !important;
+            break-after: avoid !important;
         }
 
-        #show-print tr {
-            page-break-inside: avoid !important;
-            page-break-after: auto !important;
+        #show-print th,
+        #show-print td {
+            padding: 0.08rem 0.5rem !important;
+            vertical-align: middle !important;
+            border: 1px solid #dee2e6 !important;
+            white-space: nowrap !important;
         }
 
         #show-print thead {
             display: table-header-group !important;
+        }
+
+        #show-print thead th {
+            background-color: #212529 !important;
+            color: #ffffff !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            border: 1px solid #373b3e !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        #show-print tr {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }
     }
 </style>

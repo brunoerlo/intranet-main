@@ -24,6 +24,20 @@ document.getElementById('importForm').addEventListener('submit', function (event
         });
 });
 
+const btnImportarFatura = document.getElementById('botaoImportarFatura');
+if (btnImportarFatura) {
+    btnImportarFatura.addEventListener('click', function () {
+        // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
+        if (this.style.backgroundColor === 'grey') {
+            this.style.backgroundColor = '';
+            this.style.borderColor = '';
+        } else {
+            this.style.backgroundColor = 'grey';
+            this.style.borderColor = 'grey';
+        }
+    });
+}
+
 // LISTAGEM
 // Todos os itens de faturas já vêm do PHP, prontos pra filtrar no JS
 const todosOsItensFaturas = window.listagemFaturas;
@@ -132,12 +146,10 @@ function ordenacaoAlfabetica(tabela) {
         // Limpar indicadores de todas as colunas da mesma tabela
         headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
             otherTh.dataset.order = 'none';
-            otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
         });
 
-        // Definir nova direção e indicador visual
+        // Definir nova direção (indicador visual controlado via CSS)
         th.dataset.order = newOrder;
-        th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
 
         // Ordenar as linhas pela coluna clicada
         rows.sort((a, b) => {

@@ -157,6 +157,33 @@ document.getElementById('importFormClientes').addEventListener('submit', functio
         });
 });
 
+const btnCadastrarCliente = document.getElementById('botaoCadastrarCliente');
+if (btnCadastrarCliente) {
+    btnCadastrarCliente.addEventListener('click', function () {
+        // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
+        if (this.style.backgroundColor === 'grey') {
+            this.style.backgroundColor = '';
+            this.style.borderColor = '';
+        } else {
+            this.style.backgroundColor = 'grey';
+            this.style.borderColor = 'grey';
+        }
+    });
+}
+
+const btnImportarCliente = document.getElementById('botaoImportarCliente');
+if (btnImportarCliente) {
+    btnImportarCliente.addEventListener('click', function () {
+        if (this.style.backgroundColor === 'grey') {
+            this.style.backgroundColor = '';
+            this.style.borderColor = '';
+        } else {
+            this.style.backgroundColor = 'grey';
+            this.style.borderColor = 'grey';
+        }
+    });
+}
+
 // LISTAGEM DA TABELA
 
 (function () {
@@ -488,13 +515,10 @@ document.getElementById('th-thead-clientes').closest('thead').addEventListener('
     // Limpar indicadores de todas as colunas da mesma tabela
     headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
         otherTh.dataset.order = 'none';
-        otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
     });
 
-    // Definir nova direção e indicador visual
+    // Definir nova direção (indicador visual controlado via CSS)
     th.dataset.order = newOrder;
-    th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
-
     // Ordenar os pares de linhas pela coluna clicada
     rowPairs.sort((a, b) => {
         let cellA = (a.mainRow.children[colIndex]?.textContent || '').trim().toLowerCase();

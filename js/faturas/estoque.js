@@ -1,4 +1,18 @@
-//FORMULÁRIO DE CADASTRO
+const btnCadastrarEstoque = document.getElementById('botaoCadastrarEstoque');
+if (btnCadastrarEstoque) {
+    btnCadastrarEstoque.addEventListener('click', function () {
+        // Verifica se a cor atual é cinza. Se for, tira a cor (voltando para o verde padrão do Bootstrap).
+        if (this.style.backgroundColor === 'grey') {
+            this.style.backgroundColor = '';
+            this.style.borderColor = '';
+        } else {
+            this.style.backgroundColor = 'grey';
+            this.style.borderColor = 'grey';
+        }
+    });
+}
+
+// FORMULÁRIO DE CADASTRO
 const campoCodigo = document.getElementById('codigo');
 const campoDescricao = document.getElementById('descricao');
 
@@ -118,8 +132,8 @@ function editarFatura(fatura) {
             });
         })
 
-        let html = '<div class="table-responsive shadow-sm rounded mb-3"><table class="table table-sm table-bordered text-center">';
-        html += '<thead class="table-light"><tr><th>Código</th><th>Descrição</th><th>Quantidade</th><th>Ações</th></tr></thead><tbody>';
+        let html = '<div class="table-responsive shadow-sm rounded mb-3"><table class="table table-hover table-bordered align-middle text-center mb-0">';
+        html += '<thead class="table-dark"><tr><th>Código</th><th>Descrição</th><th>Quantidade</th><th>Ações</th></tr></thead><tbody>';
 
 
         itensFatura.forEach(item => {
@@ -389,12 +403,10 @@ document.getElementById('tr-thead').closest('thead').addEventListener('click', f
     // Limpar indicadores de todas as colunas da mesma tabela
     headerRow.querySelectorAll('th.sortable').forEach(otherTh => {
         otherTh.dataset.order = 'none';
-        otherTh.textContent = otherTh.textContent.replace(/ [▲▼]$/, '');
     });
 
-    // Definir nova direção e indicador visual
+    // Definir nova direção (indicador visual controlado via CSS)
     th.dataset.order = newOrder;
-    th.textContent += (newOrder === 'asc') ? ' ▲' : ' ▼';
 
     // Ordenar as linhas pela coluna clicada
     rows.sort((a, b) => {

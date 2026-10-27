@@ -43,7 +43,7 @@ $noRepeat = array_unique($codigo);
 <!-- Formulario -->
 <div class="container-fluid mt-4">
 
-    <div class="d-flex gap-2 mb-3">
+    <div class="d-flex gap-2 mb-3" id="quadro-botoes">
         <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuadro" aria-expanded="false" aria-controls="collapseQuadro" id="botaoCadastro">
             <i class="fa-solid fa-plus"></i> Novo Cadastro
         </button>
@@ -55,7 +55,7 @@ $noRepeat = array_unique($codigo);
     <div class="collapse mb-4" id="collapseFaturas">
         <div class="card card-body shadow-sm">
             <h4 class="mb-3">CONSULTA HISTÓRICO DE FATURAS</h4>
-            <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px;">
+            <div class="d-flex justify-content-between align-items-center mb-3" id="historico-acoes" style="max-width: 700px;">
                 <!-- Filtro -->
                 <input type="text" class="form-control" id="filtro-faturas"
                     style="width: 400px;" placeholder="Pesquisar por código ou descrição...">
@@ -72,6 +72,12 @@ $noRepeat = array_unique($codigo);
             </div>
             <!-- Tabela de Produtos -->
             <div id="mostrar-impressao">
+
+                <!-- Cabeçalho exibido somente na impressão -->
+                <div class="print-header align-items-center" style="display: none;">
+                    <img src="logo-black.png" class="print-logo" style="display: none; width: 150px; margin-right: 20px;" alt="Logo" />
+                    <h5 class="m-0">Histórico de Faturas</h5>
+                </div>
 
                 <div class="table-responsive shadow-sm rounded mb-4" style="max-width: 700px;">
                     <table class="table table-hover table-bordered align-middle mb-0 pesquisa" id="tabela-produtos">
@@ -197,7 +203,7 @@ $noRepeat = array_unique($codigo);
     </div>
 </div>
 
-<div class="table-responsive shadow-sm rounded mb-3">
+<div class="table-responsive shadow-sm rounded mb-3" id="quadro-table-container">
     <table class="table table-hover table-bordered align-middle mb-0">
         <thead class="table-dark">
             <tr id="tr-thead" style="text-align: center;">
@@ -260,13 +266,13 @@ $noRepeat = array_unique($codigo);
                         <form class="edit-form-cad">
                             <input type="hidden" name="id" value="<?= htmlspecialchars($q['id'] ?? '') ?>">
                             <div class="row g-2 align-items-center">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <label class="form-label mb-0 small">Fatura</label>
-                                    <input type="text" class="form-control" name="nomeFatura" value="<?= htmlspecialchars($nomeFatura) ?>">
+                                    <input type="text" class="form-control form-control-sm" name="nomeFatura" value="<?= htmlspecialchars($nomeFatura) ?>">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label mb-0 small">Cliente</label>
-                                    <input type="text" class="form-control" name="cliente" value="<?= htmlspecialchars($cliente) ?>">
+                                    <input type="text" class="form-control form-control-sm" name="cliente" value="<?= htmlspecialchars($cliente) ?>">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label mb-0 small">Consolidado</label>
@@ -289,7 +295,7 @@ $noRepeat = array_unique($codigo);
                                     <label class="form-label mb-0 small">Porto</label>
                                     <input type="text" class="form-control form-control-sm" name="porto" value="<?= htmlspecialchars($porto) ?>" required>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <label class="form-label mb-0 small">Booking</label>
                                     <input type="text" class="form-control form-control-sm" name="booking" value="<?= htmlspecialchars($booking) ?>" required>
                                 </div>
@@ -336,18 +342,13 @@ $noRepeat = array_unique($codigo);
 
     #tabela-faturas,
     #tabela-produtos {
-        width: 700px;
+        width: 100%;
     }
 
     .descricao {
         width: 350px;
     }
 
-    .table th {
-        padding: 0.3rem;
-        vertical-align: middle;
-        text-align: center;
-    }
 
     .action-buttons .btn {
         padding: 0.2rem 0.4rem;
@@ -368,31 +369,120 @@ $noRepeat = array_unique($codigo);
         user-select: none;
     }
 
+    @page {
+        size: auto;
+        /* Margens idênticas em todas as páginas; a inferior reserva espaço para a contagem de páginas */
+        margin: 8mm 5mm 14mm 5mm;
+
+        @bottom-center {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 9pt;
+            color: #6c757d;
+        }
+    }
+
     @media print {
-        body * {
-            visibility: hidden;
+
+        /* Esconde o sidebar, navbar, botões e elementos de fundo */
+        #sidebar,
+        nav.navbar,
+        #loading,
+        #quadro-botoes,
+        #collapseQuadro,
+        #quadro-table-container,
+        #historico-acoes,
+        #collapseFaturas h4,
+        #sem-resultados {
+            display: none !important;
         }
 
-        #image,
-        #image * {
-            visibility: visible;
+        /* Reseta html e body para evitar página fantasma e espaçar o conteúdo do papel */
+        html,
+        body {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            background: #ffffff !important;
         }
 
-        #mostrar-impressao,
-        #mostrar-impressao * {
-            visibility: visible;
+        /* Ancestrais sem margens e paddings residuais */
+        .container-fluid,
+        .content,
+        #modulo-content,
+        #collapseFaturas,
+        #collapseFaturas .card {
+            display: block !important;
+            visibility: visible !important;
+            position: static !important;
+            overflow: visible !important;
+            height: auto !important;
+            min-height: 0 !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
         }
 
-        #image {
-            position: absolute;
-            left: 0;
-            top: 0;
+        /* Cabeçalho com logo, nos mesmos moldes do modal de saldos */
+        #mostrar-impressao .print-header {
+            display: flex !important;
+            align-items: center !important;
+            border-bottom: 1px solid #dee2e6 !important;
+            padding: 0 0 8px 0 !important;
+            margin-bottom: 12px !important;
         }
 
-        #mostrar-impressao {
-            position: absolute;
-            left: 0;
-            top: 50px;
+        .print-logo {
+            display: block !important;
+        }
+
+        #mostrar-impressao .table-responsive {
+            max-width: 100% !important;
+            overflow: visible !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            margin-bottom: 12px !important;
+        }
+
+        /* Tabelas compactas, sem quebras de linha */
+        #mostrar-impressao table {
+            overflow: visible !important;
+            width: 100% !important;
+            font-size: calc(0.8125rem - 1pt) !important;
+            border-collapse: collapse !important;
+            border: 1px solid #dee2e6 !important;
+            margin-bottom: 0 !important;
+        }
+
+        #mostrar-impressao th,
+        #mostrar-impressao td {
+            padding: 0.08rem 0.5rem !important;
+            vertical-align: middle !important;
+            border: 1px solid #dee2e6 !important;
+            white-space: nowrap !important;
+        }
+
+        #mostrar-impressao thead {
+            display: table-header-group !important;
+        }
+
+        #mostrar-impressao thead th {
+            background-color: #212529 !important;
+            color: #ffffff !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            border: 1px solid #373b3e !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        #mostrar-impressao tr {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
         }
     }
 </style>
